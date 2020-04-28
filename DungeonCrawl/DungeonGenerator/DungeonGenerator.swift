@@ -6,11 +6,10 @@
 //  Copyright © 2020 Bayou Games. All rights reserved.
 //
 
-import CoreGraphics
 import Foundation
 
 protocol DungeonGenerating {
-    func generate(size: CGSize) -> DungeonModel
+    func generate(size: TileSize) -> DungeonModel
 }
 
 class DungeonGenerator: DungeonGenerating {
@@ -20,16 +19,16 @@ class DungeonGenerator: DungeonGenerating {
     var tiles = [[Tile]]()
     var rooms = [RoomModel]()
     
-    func generate(size: CGSize) -> DungeonModel {
+    func generate(size: TileSize) -> DungeonModel {
         tiles = emptyTiles(size: size)
         rooms = [RoomModel]()
         addRooms()
         return DungeonModel(size: size, tiles: tiles, rooms: rooms)
     }
     
-    private func emptyTiles(size: CGSize) -> [[Tile]] {
-        return [[Tile]](repeating: [Tile](repeating: .empty, count: Int(size.height)),
-                        count: Int(size.width))
+    private func emptyTiles(size: TileSize) -> [[Tile]] {
+        return [[Tile]](repeating: [Tile](repeating: .empty, count: size.height),
+                        count: size.width)
     }
     
     private func addRooms() {
@@ -42,7 +41,7 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func createRoom() -> RoomModel {
-        let bounds = CGRect(x: 0, y: 0, width: 8, height: 6)
+        let bounds = TileRect(x: 0, y: 0, width: 8, height: 6)
         return RoomModel(bounds: bounds)
     }
     
@@ -60,10 +59,10 @@ class DungeonGenerator: DungeonGenerating {
         fillTiles(at: room.bounds, with: .floor)
     }
     
-    private func fillTiles(at bounds: CGRect, with tile: Tile) {
-        for x in Int(bounds.origin.x) ..< Int(bounds.origin.x) + Int(bounds.size.width) {
-            let range = Int(bounds.origin.y) ..< Int(bounds.origin.y) + Int(bounds.size.height)
-            tiles[x].replaceSubrange(range, with: repeatElement(tile, count: Int(bounds.size.height)))
+    private func fillTiles(at bounds: TileRect, with tile: Tile) {
+        for x in bounds.origin.x ..< bounds.origin.x + bounds.size.width {
+            let range = bounds.origin.y ..< bounds.origin.y + bounds.size.height
+            tiles[x].replaceSubrange(range, with: repeatElement(tile, count: bounds.size.height))
         }
     }
 }
