@@ -13,9 +13,15 @@ import XCTest
 class DungeonGeneratorTests: XCTestCase {
 
     func testGenerate() {
+        // Arrange
+        let size = CGSize(width: 100, height: 100)
         let sut = DungeonGenerator()
-        let _ = sut.generate()
-        XCTAssert(true)
+        
+        // Act
+        let dungeon = sut.generate(size: size)
+        
+        // Assert
+        XCTAssertEqual(dungeon.size, size)
     }
 
 }

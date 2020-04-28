@@ -6,7 +6,9 @@
 //  Copyright © 2020 Bayou Games. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 struct DungeonModel {
+    let size: CGSize
 }

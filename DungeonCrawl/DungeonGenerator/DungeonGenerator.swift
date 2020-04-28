@@ -6,14 +6,15 @@
 //  Copyright © 2020 Bayou Games. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 protocol DungeonGenerating {
-    func generate() -> DungeonModel
+    func generate(size: CGSize) -> DungeonModel
 }
 
 class DungeonGenerator: DungeonGenerating {
-    func generate() -> DungeonModel {
-        return DungeonModel()
+    func generate(size: CGSize) -> DungeonModel {
+        return DungeonModel(size: size)
     }
 }
