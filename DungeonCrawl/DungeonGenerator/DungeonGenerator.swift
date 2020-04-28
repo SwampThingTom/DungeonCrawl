@@ -60,9 +60,9 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func fillTiles(at bounds: TileRect, with tile: Tile) {
-        for x in bounds.origin.x ..< bounds.origin.x + bounds.size.width {
-            let range = bounds.origin.y ..< bounds.origin.y + bounds.size.height
-            tiles[x].replaceSubrange(range, with: repeatElement(tile, count: bounds.size.height))
+        let filledTiles = repeatElement(tile, count: bounds.size.height)
+        for x in bounds.tileXRange {
+            tiles[x].replaceSubrange(bounds.tileYRange, with: filledTiles)
         }
     }
 }
