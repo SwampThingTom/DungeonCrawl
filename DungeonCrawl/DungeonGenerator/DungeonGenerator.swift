@@ -15,11 +15,14 @@ protocol DungeonGenerating {
 
 class DungeonGenerator: DungeonGenerating {
     func generate(size: CGSize) -> DungeonModel {
-        let tiles: [[Tile]] = .init(repeating: .init(repeating: .empty,
-                                                     count: Int(size.height)),
-                                    count: Int(size.width))
+        let tiles = emptyTiles(size: size)
         let rooms = addRooms()
         return DungeonModel(size: size, tiles: tiles, rooms: rooms)
+    }
+    
+    private func emptyTiles(size: CGSize) -> [[Tile]] {
+        return [[Tile]](repeating: [Tile](repeating: .empty, count: Int(size.height)),
+                        count: Int(size.width))
     }
     
     private func addRooms() -> [RoomModel] {
