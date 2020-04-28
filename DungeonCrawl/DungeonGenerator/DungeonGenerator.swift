@@ -22,7 +22,8 @@ class DungeonGenerator: DungeonGenerating {
     
     func generate(size: CGSize) -> DungeonModel {
         tiles = emptyTiles(size: size)
-        rooms = addRooms()
+        rooms = [RoomModel]()
+        addRooms()
         return DungeonModel(size: size, tiles: tiles, rooms: rooms)
     }
     
@@ -31,15 +32,13 @@ class DungeonGenerator: DungeonGenerating {
                         count: Int(size.width))
     }
     
-    private func addRooms() -> [RoomModel] {
-        var rooms = [RoomModel]()
+    private func addRooms() {
         for _ in 0 ..< roomAttempts {
             let room = createRoom()
-            if !overlaps(room: room, existing: rooms) {
-                rooms.append(room)
+            if !overlaps(room: room) {
+                add(room: room)
             }
         }
-        return rooms
     }
     
     private func createRoom() -> RoomModel {
@@ -47,12 +46,24 @@ class DungeonGenerator: DungeonGenerating {
         return RoomModel(bounds: bounds)
     }
     
-    private func overlaps(room newRoom: RoomModel, existing rooms: [RoomModel]) -> Bool {
+    private func overlaps(room: RoomModel) -> Bool {
         for existingRoom in rooms {
-            if newRoom.bounds.intersects(existingRoom.bounds) {
+            if room.bounds.intersects(existingRoom.bounds) {
                 return true
             }
         }
         return false
+    }
+    
+    private func add(room: RoomModel) {
+        rooms.append(room)
+        fillTiles(at: room.bounds, with: .floor)
+    }
+    
+    private func fillTiles(at bounds: CGRect, with tile: Tile) {
+        for x in Int(bounds.origin.x) ..< Int(bounds.origin.x) + Int(bounds.size.width) {
+            let range = Int(bounds.origin.y) ..< Int(bounds.origin.y) + Int(bounds.size.height)
+            tiles[x].replaceSubrange(range, with: repeatElement(tile, count: Int(bounds.size.height)))
+        }
     }
 }

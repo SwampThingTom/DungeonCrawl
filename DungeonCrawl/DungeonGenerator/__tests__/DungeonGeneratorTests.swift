@@ -27,6 +27,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertEqual(dungeon.tiles[0].count, Int(size.height))
         XCTAssertEqual(dungeon.rooms.count, Int(expectedRoomCount))
         XCTAssertFalse(roomsOverlap(dungeon.rooms))
+        XCTAssert(roomTilesAreFilled(dungeon))
     }
 
     func roomsOverlap(_ rooms: [RoomModel]) -> Bool {
@@ -40,5 +41,25 @@ class DungeonGeneratorTests: XCTestCase {
             }
         }
         return false
+    }
+    
+    func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {
+        for room in dungeon.rooms {
+            if !tilesMatch(dungeon.tiles, bounds: room.bounds, expected: .floor) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func tilesMatch(_ tiles: [[Tile]], bounds: CGRect, expected: Tile) -> Bool {
+        for x in Int(bounds.origin.x) ..< Int(bounds.origin.x) + Int(bounds.size.width) {
+            for y in Int(bounds.origin.y) ..< Int(bounds.origin.y) + Int(bounds.size.height) {
+                if tiles[x][y] != expected {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }

@@ -10,4 +10,5 @@ import Foundation
 
 enum Tile {
     case empty
+    case floor
 }
