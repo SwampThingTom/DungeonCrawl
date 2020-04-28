@@ -14,8 +14,8 @@ class DungeonGeneratorTests: XCTestCase {
 
     func testGenerate() {
         // Arrange
-        let size = CGSize(width: 200, height: 100)
-        let expectedRoomCount = 0
+        let size = CGSize(width: 320, height: 240)
+        let expectedRoomCount = 5
         let sut = DungeonGenerator()
         
         // Act

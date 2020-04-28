@@ -14,6 +14,9 @@ protocol DungeonGenerating {
 }
 
 class DungeonGenerator: DungeonGenerating {
+    
+    let roomAttempts = 5
+    
     func generate(size: CGSize) -> DungeonModel {
         let tiles = emptyTiles(size: size)
         let rooms = addRooms()
@@ -26,6 +29,11 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func addRooms() -> [RoomModel] {
-        return [RoomModel]()
+        return (0 ..< roomAttempts).map({ _ in createRoom() })
+    }
+    
+    private func createRoom() -> RoomModel {
+        let bounds = CGRect(x: 0, y: 0, width: 8, height: 6)
+        return RoomModel(bounds: bounds)
     }
 }
