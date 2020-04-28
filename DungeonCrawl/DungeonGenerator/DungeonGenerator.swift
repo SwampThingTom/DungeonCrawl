@@ -18,6 +18,11 @@ class DungeonGenerator: DungeonGenerating {
         let tiles: [[Tile]] = .init(repeating: .init(repeating: .empty,
                                                      count: Int(size.height)),
                                     count: Int(size.width))
-        return DungeonModel(size: size, tiles: tiles)
+        let rooms = addRooms()
+        return DungeonModel(size: size, tiles: tiles, rooms: rooms)
+    }
+    
+    private func addRooms() -> [RoomModel] {
+        return [RoomModel]()
     }
 }

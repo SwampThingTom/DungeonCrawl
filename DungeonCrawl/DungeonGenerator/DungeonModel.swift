@@ -12,4 +12,9 @@ import Foundation
 struct DungeonModel {
     let size: CGSize
     let tiles: [[Tile]]
+    let rooms: [RoomModel]
+}
+
+struct RoomModel {
+    let bounds: CGRect
 }

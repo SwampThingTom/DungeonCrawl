@@ -15,6 +15,7 @@ class DungeonGeneratorTests: XCTestCase {
     func testGenerate() {
         // Arrange
         let size = CGSize(width: 200, height: 100)
+        let expectedRoomCount = 0
         let sut = DungeonGenerator()
         
         // Act
@@ -24,6 +25,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertEqual(dungeon.size, size)
         XCTAssertEqual(dungeon.tiles.count, Int(size.width))
         XCTAssertEqual(dungeon.tiles[0].count, Int(size.height))
+        XCTAssertEqual(dungeon.rooms.count, Int(expectedRoomCount))
     }
 
 }
