@@ -15,7 +15,7 @@ class DungeonGeneratorTests: XCTestCase {
     func testGenerate() {
         // Arrange
         let size = CGSize(width: 320, height: 240)
-        let expectedRoomCount = 5
+        let expectedRoomCount = 1
         let sut = DungeonGenerator()
         
         // Act
@@ -26,6 +26,19 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertEqual(dungeon.tiles.count, Int(size.width))
         XCTAssertEqual(dungeon.tiles[0].count, Int(size.height))
         XCTAssertEqual(dungeon.rooms.count, Int(expectedRoomCount))
+        XCTAssertFalse(roomsOverlap(dungeon.rooms))
     }
 
+    func roomsOverlap(_ rooms: [RoomModel]) -> Bool {
+        for roomIndex in 0 ..< rooms.count - 1 {
+            let room = rooms[roomIndex]
+            for otherRoomIndex in roomIndex + 1 ..< rooms.count {
+                let otherRoom = rooms[otherRoomIndex]
+                if room.bounds.intersects(otherRoom.bounds) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }

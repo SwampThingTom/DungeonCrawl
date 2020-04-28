@@ -17,9 +17,12 @@ class DungeonGenerator: DungeonGenerating {
     
     let roomAttempts = 5
     
+    var tiles = [[Tile]]()
+    var rooms = [RoomModel]()
+    
     func generate(size: CGSize) -> DungeonModel {
-        let tiles = emptyTiles(size: size)
-        let rooms = addRooms()
+        tiles = emptyTiles(size: size)
+        rooms = addRooms()
         return DungeonModel(size: size, tiles: tiles, rooms: rooms)
     }
     
@@ -29,11 +32,27 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func addRooms() -> [RoomModel] {
-        return (0 ..< roomAttempts).map({ _ in createRoom() })
+        var rooms = [RoomModel]()
+        for _ in 0 ..< roomAttempts {
+            let room = createRoom()
+            if !overlaps(room: room, existing: rooms) {
+                rooms.append(room)
+            }
+        }
+        return rooms
     }
     
     private func createRoom() -> RoomModel {
         let bounds = CGRect(x: 0, y: 0, width: 8, height: 6)
         return RoomModel(bounds: bounds)
+    }
+    
+    private func overlaps(room newRoom: RoomModel, existing rooms: [RoomModel]) -> Bool {
+        for existingRoom in rooms {
+            if newRoom.bounds.intersects(existingRoom.bounds) {
+                return true
+            }
+        }
+        return false
     }
 }
