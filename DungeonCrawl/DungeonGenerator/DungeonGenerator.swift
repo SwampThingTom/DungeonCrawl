@@ -15,6 +15,9 @@ protocol DungeonGenerating {
 
 class DungeonGenerator: DungeonGenerating {
     func generate(size: CGSize) -> DungeonModel {
-        return DungeonModel(size: size)
+        let tiles: [[Tile]] = .init(repeating: .init(repeating: .empty,
+                                                     count: Int(size.height)),
+                                    count: Int(size.width))
+        return DungeonModel(size: size, tiles: tiles)
     }
 }

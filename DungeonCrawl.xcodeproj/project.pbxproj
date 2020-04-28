@@ -20,6 +20,7 @@
 		E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A2182457C157000ED955 /* DungeonGenerator.swift */; };
 		E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A21B2457C19F000ED955 /* DungeonGeneratorTests.swift */; };
 		E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A21D2457C39E000ED955 /* DungeonModel.swift */; };
+		E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A21F2457CBC4000ED955 /* Tile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E2B2A2182457C157000ED955 /* DungeonGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGenerator.swift; sourceTree = "<group>"; };
 		E2B2A21B2457C19F000ED955 /* DungeonGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGeneratorTests.swift; sourceTree = "<group>"; };
 		E2B2A21D2457C39E000ED955 /* DungeonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonModel.swift; sourceTree = "<group>"; };
+		E2B2A21F2457CBC4000ED955 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				E2B2A21A2457C186000ED955 /* __tests__ */,
 				E2B2A2182457C157000ED955 /* DungeonGenerator.swift */,
 				E2B2A21D2457C39E000ED955 /* DungeonModel.swift */,
+				E2B2A21F2457CBC4000ED955 /* Tile.swift */,
 			);
 			path = DungeonGenerator;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */,
 				E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */,
 				E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */,
+				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 			);
