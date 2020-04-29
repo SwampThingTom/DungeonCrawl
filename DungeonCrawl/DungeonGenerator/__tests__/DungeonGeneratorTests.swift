@@ -15,8 +15,9 @@ class DungeonGeneratorTests: XCTestCase {
     func testGenerate() {
         // Arrange
         let size = TileSize(width: 320, height: 240)
-        let expectedRoomCount = 1
-        let sut = DungeonGenerator()
+        let expectedRoomCount = 5
+        let randomNumberGenerator = SeededRandomNumberGenerator(seed: "testGenerate".data(using: .utf8)!)
+        let sut = DungeonGenerator(roomAttempts: 5, randomNumberGenerator: randomNumberGenerator)
         
         // Act
         let dungeon = sut.generate(size: size)

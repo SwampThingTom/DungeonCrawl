@@ -14,10 +14,22 @@ protocol DungeonGenerating {
 
 class DungeonGenerator: DungeonGenerating {
     
-    let roomAttempts = 5
+    private let roomAttempts: Int
+    private var randomNumberGenerator: AnyRandomNumberGenerator
     
     var tiles = [[Tile]]()
     var rooms = [RoomModel]()
+    
+    var size: TileSize {
+        guard tiles.count > 0 else { return TileSize(width: 0, height: 0) }
+        return TileSize(width: tiles.count, height: tiles[0].count)
+    }
+
+    init(roomAttempts: Int = 5,
+         randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
+        self.roomAttempts = roomAttempts
+        self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
+    }
     
     func generate(size: TileSize) -> DungeonModel {
         tiles = emptyTiles(size: size)
@@ -41,8 +53,16 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func createRoom() -> RoomModel {
-        let bounds = TileRect(x: 0, y: 0, width: 8, height: 6)
+        let bounds = randomTile(size: TileSize(width: 8, height: 6))
         return RoomModel(bounds: bounds)
+    }
+    
+    private func randomTile(size: TileSize) -> TileRect {
+        let maxWidth: Int = self.size.width - size.width
+        let maxHeight: Int = self.size.height - size.height
+        let x = Int.random(in: 0 ... maxWidth, using: &randomNumberGenerator)
+        let y = Int.random(in: 0 ... maxHeight, using: &randomNumberGenerator)
+        return TileRect(x: x, y: y, width: size.width, height: size.height)
     }
     
     private func overlaps(room: RoomModel) -> Bool {
