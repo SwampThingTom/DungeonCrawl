@@ -38,10 +38,29 @@ class DungeonGenerator: DungeonGenerating {
         return DungeonModel(size: size, tiles: tiles, rooms: rooms)
     }
     
+    /// MARK: Tiles
+    
     private func emptyTiles(size: TileSize) -> [[Tile]] {
         return [[Tile]](repeating: [Tile](repeating: .empty, count: size.height),
                         count: size.width)
     }
+    
+    private func fillTiles(at bounds: TileRect, with tile: Tile) {
+        let filledTiles = repeatElement(tile, count: bounds.size.height)
+        for x in bounds.tileXRange {
+            tiles[x].replaceSubrange(bounds.tileYRange, with: filledTiles)
+        }
+    }
+
+    private func randomRect(size: TileSize) -> TileRect {
+        let maxWidth: Int = self.size.width - size.width
+        let maxHeight: Int = self.size.height - size.height
+        let x = Int.random(in: 0 ... maxWidth, using: &randomNumberGenerator)
+        let y = Int.random(in: 0 ... maxHeight, using: &randomNumberGenerator)
+        return TileRect(x: x, y: y, width: size.width, height: size.height)
+    }
+
+    /// MARK: Rooms
     
     private func addRooms() {
         for _ in 0 ..< roomAttempts {
@@ -53,16 +72,8 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func createRoom() -> RoomModel {
-        let bounds = randomTile(size: TileSize(width: 8, height: 6))
+        let bounds = randomRect(size: TileSize(width: 8, height: 6))
         return RoomModel(bounds: bounds)
-    }
-    
-    private func randomTile(size: TileSize) -> TileRect {
-        let maxWidth: Int = self.size.width - size.width
-        let maxHeight: Int = self.size.height - size.height
-        let x = Int.random(in: 0 ... maxWidth, using: &randomNumberGenerator)
-        let y = Int.random(in: 0 ... maxHeight, using: &randomNumberGenerator)
-        return TileRect(x: x, y: y, width: size.width, height: size.height)
     }
     
     private func overlaps(room: RoomModel) -> Bool {
@@ -77,12 +88,5 @@ class DungeonGenerator: DungeonGenerating {
     private func add(room: RoomModel) {
         rooms.append(room)
         fillTiles(at: room.bounds, with: .floor)
-    }
-    
-    private func fillTiles(at bounds: TileRect, with tile: Tile) {
-        let filledTiles = repeatElement(tile, count: bounds.size.height)
-        for x in bounds.tileXRange {
-            tiles[x].replaceSubrange(bounds.tileYRange, with: filledTiles)
-        }
     }
 }
