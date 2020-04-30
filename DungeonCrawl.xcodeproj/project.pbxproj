@@ -24,6 +24,7 @@
 		E2B2A22224589E15000ED955 /* TileRect+CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A22124589E15000ED955 /* TileRect+CoreGraphics.swift */; };
 		E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */; };
 		E2B2A227245920C5000ED955 /* AnyRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A226245920C5000ED955 /* AnyRandomNumberGenerator.swift */; };
+		E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A2282459FE1E000ED955 /* Pathfinder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		E2B2A22124589E15000ED955 /* TileRect+CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TileRect+CoreGraphics.swift"; sourceTree = "<group>"; };
 		E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandomNumberGenerator.swift; sourceTree = "<group>"; };
 		E2B2A226245920C5000ED955 /* AnyRandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRandomNumberGenerator.swift; sourceTree = "<group>"; };
+		E2B2A2282459FE1E000ED955 /* Pathfinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B2A21B2457C19F000ED955 /* DungeonGeneratorTests.swift */,
+				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
 				E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */,
 			);
 			path = __tests__;
@@ -327,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E2B2A1F92457BCE8000ED955 /* DungeonCrawlTests.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
