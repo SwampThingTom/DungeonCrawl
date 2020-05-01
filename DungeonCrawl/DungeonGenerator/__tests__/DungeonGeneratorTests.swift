@@ -23,9 +23,7 @@ class DungeonGeneratorTests: XCTestCase {
         let dungeon = sut.generate(size: size)
         
         // Assert
-        XCTAssertEqual(dungeon.size, size)
-        XCTAssertEqual(dungeon.tiles.count, size.width)
-        XCTAssertEqual(dungeon.tiles[0].count, size.height)
+        XCTAssertEqual(dungeon.map.size, size)
         XCTAssertEqual(dungeon.rooms.count, expectedRoomCount)
         XCTAssertFalse(roomsOverlap(dungeon.rooms))
         XCTAssert(roomTilesAreFilled(dungeon))
@@ -49,17 +47,18 @@ class DungeonGeneratorTests: XCTestCase {
     
     func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {
         for room in dungeon.rooms {
-            if !tilesMatch(dungeon.tiles, bounds: room.bounds, expected: .floor) {
+            if !tilesMatch(dungeon.map, bounds: room.bounds, expected: .floor) {
                 return false
             }
         }
         return true
     }
     
-    func tilesMatch(_ tiles: [[Tile]], bounds: GridRect, expected: Tile) -> Bool {
-        for x in bounds.origin.x ..< bounds.origin.x + bounds.size.width {
-            for y in bounds.origin.y ..< bounds.origin.y + bounds.size.height {
-                if tiles[x][y] != expected {
+    func tilesMatch(_ map: DungeonMap, bounds: GridRect, expected: Tile) -> Bool {
+        for x in bounds.gridXRange {
+            for y in bounds.gridYRange {
+                let location = GridPoint(x: x, y: y)
+                if map.cell(location: location) != expected {
                     return false
                 }
             }

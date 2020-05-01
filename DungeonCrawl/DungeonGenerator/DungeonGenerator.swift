@@ -17,10 +17,10 @@ class DungeonGenerator: DungeonGenerating {
     private let roomAttempts: Int
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
-    var tiles = [[Tile]]()
-    var rooms = [RoomModel]()
+    private var tiles = [[Tile]]()
+    private var rooms = [RoomModel]()
     
-    var size: GridSize {
+    private var size: GridSize {
         guard tiles.count > 0 else { return GridSize(width: 0, height: 0) }
         return GridSize(width: tiles.count, height: tiles[0].count)
     }
@@ -36,7 +36,7 @@ class DungeonGenerator: DungeonGenerating {
         rooms = [RoomModel]()
         addRooms()
         generateMazes()
-        return DungeonModel(size: size, tiles: tiles, rooms: rooms)
+        return DungeonModel(map: DungeonMap(tiles: tiles), rooms: rooms)
     }
     
     /// MARK: Tiles
@@ -48,8 +48,8 @@ class DungeonGenerator: DungeonGenerating {
     
     private func fillTiles(at bounds: GridRect, with tile: Tile) {
         let filledTiles = repeatElement(tile, count: bounds.size.height)
-        for x in bounds.tileXRange {
-            tiles[x].replaceSubrange(bounds.tileYRange, with: filledTiles)
+        for x in bounds.gridXRange {
+            tiles[x].replaceSubrange(bounds.gridYRange, with: filledTiles)
         }
     }
     
