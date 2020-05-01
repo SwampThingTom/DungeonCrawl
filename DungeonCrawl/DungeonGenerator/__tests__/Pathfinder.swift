@@ -11,10 +11,10 @@
 class Pathfinder {
     
     private let adjacentNodes = [
-        AdjacentNode(offset: TilePoint(x: 0, y: -1), cost: 10),
-        AdjacentNode(offset: TilePoint(x: -1, y: 0), cost: 10),
-        AdjacentNode(offset: TilePoint(x: 1, y: 0), cost: 10),
-        AdjacentNode(offset: TilePoint(x: 0, y: 1), cost: 10)
+        AdjacentNode(offset: GridPoint(x: 0, y: -1), cost: 10),
+        AdjacentNode(offset: GridPoint(x: -1, y: 0), cost: 10),
+        AdjacentNode(offset: GridPoint(x: 1, y: 0), cost: 10),
+        AdjacentNode(offset: GridPoint(x: 0, y: 1), cost: 10)
     ]
     
     private let tiles: [[Tile]]
@@ -30,18 +30,18 @@ class Pathfinder {
 
     init(tiles: [[Tile]]) {
         self.tiles = tiles
-        let mapSize = TileSize(width: tiles.count, height: tiles[0].count)
+        let mapSize = GridSize(width: tiles.count, height: tiles[0].count)
         pathMap = PathNode.createNodeMap(size: mapSize)
     }
     
-    func findPath(from start: TilePoint, to end: TilePoint) -> [TilePoint] {
+    func findPath(from start: GridPoint, to end: GridPoint) -> [GridPoint] {
         guard let bestPathNode = findBestPath(from: start, to: end) else {
             return []
         }
         return bestPathNode.map { $0.tile }.reversed()
     }
     
-    private func findBestPath (from start: TilePoint, to end: TilePoint) -> PathNode? {
+    private func findBestPath (from start: GridPoint, to end: GridPoint) -> PathNode? {
         addToOpenList(node: pathMap[start.x][start.y])
         while !openList.isEmpty {
             let node = bestOpenNode
@@ -50,7 +50,7 @@ class Pathfinder {
             }
             
             for adjacent in adjacentNodes {
-                let adjacentTile = TilePoint(x: node.tile.x + adjacent.offset.x,
+                let adjacentTile = GridPoint(x: node.tile.x + adjacent.offset.x,
                                              y: node.tile.y + adjacent.offset.y)
                 if !tileIsOnMap(adjacentTile) || !tileIsMoveable(adjacentTile) {
                     continue
@@ -77,11 +77,11 @@ class Pathfinder {
         return nil
     }
 
-    private func tileIsOnMap(_ tile: TilePoint) -> Bool {
+    private func tileIsOnMap(_ tile: GridPoint) -> Bool {
         return 0 ..< mapWidth ~= tile.x && 0 ..< mapHeight ~= tile.y
     }
     
-    private func tileIsMoveable(_ tile: TilePoint) -> Bool {
+    private func tileIsMoveable(_ tile: GridPoint) -> Bool {
         let adjacentTileIsFree = tiles[tile.x][tile.y] == .floor
         return adjacentTileIsFree
     }
@@ -110,7 +110,7 @@ class Pathfinder {
 }
 
 struct AdjacentNode {
-    let offset: TilePoint
+    let offset: GridPoint
     let cost: Int
 }
 
@@ -122,7 +122,7 @@ enum NodeStatus {
 
 class PathNode: Equatable, Comparable {
     
-    let tile: TilePoint
+    let tile: GridPoint
     private(set) var status: NodeStatus = .unknown
     private(set) var previous: PathNode? = nil
     private(set) var costFromStart: Int = 0
@@ -140,17 +140,17 @@ class PathNode: Equatable, Comparable {
         status == .closed
     }
     
-    static func createNodeMap(size: TileSize) -> [[PathNode]] {
+    static func createNodeMap(size: GridSize) -> [[PathNode]] {
         let rowRange = [Int](0 ..< size.width)
         let columnRange = [Int](0 ..< size.height)
         return rowRange.map { x in
             columnRange.map { y in
-                PathNode(tile: TilePoint(x: x, y: y))
+                PathNode(tile: GridPoint(x: x, y: y))
             }
         }
     }
     
-    private init(tile: TilePoint) {
+    private init(tile: GridPoint) {
         self.tile = tile
     }
     

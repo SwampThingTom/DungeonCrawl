@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DungeonGenerating {
-    func generate(size: TileSize) -> DungeonModel
+    func generate(size: GridSize) -> DungeonModel
 }
 
 class DungeonGenerator: DungeonGenerating {
@@ -20,9 +20,9 @@ class DungeonGenerator: DungeonGenerating {
     var tiles = [[Tile]]()
     var rooms = [RoomModel]()
     
-    var size: TileSize {
-        guard tiles.count > 0 else { return TileSize(width: 0, height: 0) }
-        return TileSize(width: tiles.count, height: tiles[0].count)
+    var size: GridSize {
+        guard tiles.count > 0 else { return GridSize(width: 0, height: 0) }
+        return GridSize(width: tiles.count, height: tiles[0].count)
     }
 
     init(roomAttempts: Int = 5,
@@ -31,7 +31,7 @@ class DungeonGenerator: DungeonGenerating {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
     }
     
-    func generate(size: TileSize) -> DungeonModel {
+    func generate(size: GridSize) -> DungeonModel {
         tiles = emptyTiles(size: size)
         rooms = [RoomModel]()
         addRooms()
@@ -41,37 +41,37 @@ class DungeonGenerator: DungeonGenerating {
     
     /// MARK: Tiles
     
-    private func emptyTiles(size: TileSize) -> [[Tile]] {
+    private func emptyTiles(size: GridSize) -> [[Tile]] {
         return [[Tile]](repeating: [Tile](repeating: .empty, count: size.height),
                         count: size.width)
     }
     
-    private func fillTiles(at bounds: TileRect, with tile: Tile) {
+    private func fillTiles(at bounds: GridRect, with tile: Tile) {
         let filledTiles = repeatElement(tile, count: bounds.size.height)
         for x in bounds.tileXRange {
             tiles[x].replaceSubrange(bounds.tileYRange, with: filledTiles)
         }
     }
     
-    private func openTiles() -> [TilePoint] {
-        var openTiles = [TilePoint]()
+    private func openTiles() -> [GridPoint] {
+        var openTiles = [GridPoint]()
         for x in stride(from: 1, to: self.size.width, by: 2) {
             for y in stride(from: 1, to: self.size.height, by: 2) {
                 if tiles[x][y] == .empty {
-                    openTiles.append(TilePoint(x: x, y: y))
+                    openTiles.append(GridPoint(x: x, y: y))
                 }
             }
         }
         return openTiles
     }
 
-    private func randomRect(size: TileSize) -> TileRect {
+    private func randomRect(size: GridSize) -> GridRect {
         // ensure origins are at odd locations
         let maxX: Int = (self.size.width - size.width) / 2
         let maxY: Int = (self.size.height - size.height) / 2
         let x = Int.random(in: 0 ... maxX, using: &randomNumberGenerator) * 2 + 1
         let y = Int.random(in: 0 ... maxY, using: &randomNumberGenerator) * 2 + 1
-        return TileRect(x: x, y: y, width: size.width, height: size.height)
+        return GridRect(x: x, y: y, width: size.width, height: size.height)
     }
 
     /// MARK: Rooms
@@ -86,7 +86,7 @@ class DungeonGenerator: DungeonGenerating {
     }
     
     private func createRoom() -> RoomModel {
-        let bounds = randomRect(size: TileSize(width: 8, height: 6))
+        let bounds = randomRect(size: GridSize(width: 8, height: 6))
         return RoomModel(bounds: bounds)
     }
     
@@ -133,7 +133,7 @@ class DungeonGenerator: DungeonGenerating {
         }
     }
     
-    private func generateMaze(at startTile: TilePoint) {
+    private func generateMaze(at startTile: GridPoint) {
         carve(tile: startTile)
         var activeTiles = [startTile]
         repeat {
@@ -155,11 +155,11 @@ class DungeonGenerator: DungeonGenerating {
         } while !activeTiles.isEmpty
     }
     
-    private func directionsWithEmptyNeighbors(from tile: TilePoint) -> [Direction] {
+    private func directionsWithEmptyNeighbors(from tile: GridPoint) -> [Direction] {
         var directionsWithEmptyNeighbors = [Direction]()
         for direction in Direction.allCases {
             let (x, y) = direction.offsets
-            let neighborTile = TilePoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
+            let neighborTile = GridPoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
             let isNeighborOnMap = 0 ..< tiles.count ~= neighborTile.x && 0 ..< tiles[0].count ~= neighborTile.y
             if !isNeighborOnMap {
                 continue
@@ -172,15 +172,15 @@ class DungeonGenerator: DungeonGenerating {
         return directionsWithEmptyNeighbors
     }
     
-    private func neighboringTiles(for tile: TilePoint, heading: Direction) -> [TilePoint] {
+    private func neighboringTiles(for tile: GridPoint, heading: Direction) -> [GridPoint] {
         let (x, y) = heading.offsets
         return [
-            TilePoint(x: tile.x + x, y: tile.y + y),
-            TilePoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
+            GridPoint(x: tile.x + x, y: tile.y + y),
+            GridPoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
         ]
     }
     
-    private func carve(tile: TilePoint) {
+    private func carve(tile: GridPoint) {
         tiles[tile.x][tile.y] = .floor
     }
 }

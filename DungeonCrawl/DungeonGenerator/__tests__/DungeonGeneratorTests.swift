@@ -14,7 +14,7 @@ class DungeonGeneratorTests: XCTestCase {
 
     func testGenerate() {
         // Arrange
-        let size = TileSize(width: 320, height: 240)
+        let size = GridSize(width: 320, height: 240)
         let expectedRoomCount = 5
         let randomNumberGenerator = SeededRandomNumberGenerator(seed: "testGenerate".data(using: .utf8)!)
         let sut = DungeonGenerator(roomAttempts: 5, randomNumberGenerator: randomNumberGenerator)
@@ -56,7 +56,7 @@ class DungeonGeneratorTests: XCTestCase {
         return true
     }
     
-    func tilesMatch(_ tiles: [[Tile]], bounds: TileRect, expected: Tile) -> Bool {
+    func tilesMatch(_ tiles: [[Tile]], bounds: GridRect, expected: Tile) -> Bool {
         for x in bounds.origin.x ..< bounds.origin.x + bounds.size.width {
             for y in bounds.origin.y ..< bounds.origin.y + bounds.size.height {
                 if tiles[x][y] != expected {
@@ -77,18 +77,18 @@ class DungeonGeneratorTests: XCTestCase {
     //        return true
     //    }
 
-//    func findStartTile(_ dungeon: DungeonModel) -> TilePoint? {
+//    func findStartTile(_ dungeon: DungeonModel) -> GridPoint? {
 //        for x in 0 ..< dungeon.size.width {
 //            for y in 0 ..< dungeon.size.height {
 //                if dungeon.tiles[x][y] == .floor {
-//                    return TilePoint(x: x, y: y)
+//                    return GridPoint(x: x, y: y)
 //                }
 //            }
 //        }
 //        return nil
 //    }
     
-//    func pathExists(from start: TilePoint, to end: TilePoint, in dungeon: DungeonModel) -> Bool {
+//    func pathExists(from start: GridPoint, to end: GridPoint, in dungeon: DungeonModel) -> Bool {
 //        let pathfinder = Pathfinder(tiles: dungeon.tiles)
 //        return pathfinder.findPath(from: start, to: end).count > 0
 //    }

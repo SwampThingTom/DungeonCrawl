@@ -9,18 +9,18 @@
 import Foundation
 
 struct DungeonModel {
-    let size: TileSize
+    let size: GridSize
     let tiles: [[Tile]]
     let rooms: [RoomModel]
 }
 
 struct RoomModel {
-    let bounds: TileRect
+    let bounds: GridRect
 }
 
-struct TileRect: Equatable {
-    let origin: TilePoint
-    let size: TileSize
+struct GridRect: Equatable {
+    let origin: GridPoint
+    let size: GridSize
     
     var tileXRange: CountableRange<Int> {
         origin.x ..< origin.x + size.width
@@ -31,17 +31,17 @@ struct TileRect: Equatable {
     }
     
     init(x: Int, y: Int, width: Int, height: Int) {
-        origin = TilePoint(x: x, y: y)
-        size = TileSize(width: width, height: height)
+        origin = GridPoint(x: x, y: y)
+        size = GridSize(width: width, height: height)
     }
 }
 
-struct TilePoint: Equatable {
+struct GridPoint: Equatable {
     let x: Int
     let y: Int
 }
 
-struct TileSize: Equatable {
+struct GridSize: Equatable {
     let width: Int
     let height: Int
 }
