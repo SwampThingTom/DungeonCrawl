@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */; };
+		E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */; };
+		E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
 		E2B2A1E22457BCE4000ED955 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1E12457BCE4000ED955 /* Actions.sks */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeneratorTests.swift; sourceTree = "<group>"; };
+		E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGenerator.swift; sourceTree = "<group>"; };
+		E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGeneratorTests.swift; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B2A1DF2457BCE4000ED955 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 				E2B2A21D2457C39E000ED955 /* DungeonModel.swift */,
 				E2C8D08B245BB295005EE3D8 /* GridMap.swift */,
 				E2B2A22124589E15000ED955 /* GridRect+CoreGraphics.swift */,
+				E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */,
 				E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */,
 				E2B2A21F2457CBC4000ED955 /* Tile.swift */,
 			);
@@ -147,6 +152,7 @@
 				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
 				E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */,
 				E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */,
+				E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */,
 				E2B2A227245920C5000ED955 /* AnyRandomNumberGenerator.swift in Sources */,
 				E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */,
+				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
@@ -279,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */,
 				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
