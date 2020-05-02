@@ -18,9 +18,9 @@ struct SeededRandomNumberGenerator: RandomNumberGenerator {
     }
     
     mutating func next() -> UInt64 {
-        let msw: UInt64 = UInt64(clamping: source.nextInt())
-        let lsw: UInt64 = UInt64(clamping: source.nextInt())
-        return msw << 64 | lsw
+        let msw = UInt32(bitPattern: Int32(source.nextInt()))
+        let lsw = UInt32(bitPattern: Int32(source.nextInt()))
+        return UInt64(msw) << 32 | UInt64(lsw)
     }
     
     public mutating func next<T>() -> T where T : FixedWidthInteger, T : UnsignedInteger {
