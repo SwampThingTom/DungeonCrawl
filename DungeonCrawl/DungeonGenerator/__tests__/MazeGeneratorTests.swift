@@ -11,51 +11,60 @@
 import XCTest
 
 class MazeGeneratorTests: XCTestCase {
-
+    
     func testGenerate_emptyGrid() throws {
         // Arrange
         let gridSize = GridSize(width: 0, height: 0)
-        let mapSource = MockMapSource.emptyMap(size: gridSize)
+        var map: MutableGridMap = DungeonMap(size: gridSize)
         let sut = MazeGenerator()
         
         // Act
-        sut.generate(mapSource: mapSource)
+        sut.generate(map: &map)
         
         // Assert
-        XCTAssertEqual(mapSource.carvedTiles.count, 0)
-    }
-}
-
-struct MockMapSource: MazeMapSource {
-    
-    private var tiles: [[Tile]]
-    
-    var size: GridSize {
-        guard tiles.count > 0 else { return GridSize(width: 0, height: 0) }
-        return GridSize(width: tiles.count, height: tiles[0].count)
+        XCTAssert(true) // As long as sut did not crash, the test passes
     }
     
-    init(tiles: [[Tile]]) {
-        self.tiles = tiles
+    func testGenerate_tooSmallGrid() throws {
+        // Arrange
+        let gridSize = GridSize(width: 2, height: 2)
+        var map: MutableGridMap = DungeonMap(size: gridSize)
+        let sut = MazeGenerator()
+        
+        // Act
+        sut.generate(map: &map)
+        
+        // Assert
+        for x in 0 ..< map.size.width {
+            for y in 0 ..< map.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(map.cell(location: location), .empty)
+            }
+        }
     }
     
-    func cell(location: GridPoint) -> Tile? {
-        return nil
-    }
-    func openTiles() -> [GridPoint] {
-        return []
-    }
-    
-    var carvedTiles = [GridPoint]()
-    
-    mutating func carve(tile: GridPoint) {
-        carvedTiles.append(tile)
-    }
-}
-
-extension MockMapSource {
-    
-    static func emptyMap(size: GridSize) -> MockMapSource {
-        return MockMapSource(tiles: [])
+    func testGenerate_minimumMazeGrid() throws {
+        // Arrange
+        let gridSize = GridSize(width: 3, height: 3)
+        var map: MutableGridMap = DungeonMap(size: gridSize)
+        let sut = MazeGenerator()
+        let expectedTiles = [
+            [Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty]
+        ]
+        let expectedMap = DungeonMap(tiles: expectedTiles)
+        
+        // Act
+        sut.generate(map: &map)
+        
+        // Assert
+        for x in 0 ..< map.size.width {
+            for y in 0 ..< map.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(map.cell(location: location),
+                               expectedMap.cell(location: location))
+            }
+        }
     }
 }

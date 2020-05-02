@@ -8,17 +8,33 @@
 
 import Foundation
 
-protocol MazeMapSource: GridMap {
-    func openTiles() -> [GridPoint]
-    mutating func carve(tile: GridPoint)
-}
-
 protocol MazeGenerating {
-    func generate(mapSource: MazeMapSource)
+    func generate(map: inout MutableGridMap)
 }
 
 class MazeGenerator: MazeGenerating {
     
-    func generate(mapSource: MazeMapSource) {
+    func generate(map: inout MutableGridMap) {
+        while true {
+            let openTiles = openMapTiles(in: map)
+            if openTiles.isEmpty {
+                return
+            }
+            map.setCell(location: openTiles[0], tile: .floor)
+        }
     }
+    
+    private func openMapTiles(in map: GridMap) -> [GridPoint] {
+        var openTiles = [GridPoint]()
+        for x in stride(from: 1, to: map.size.width, by: 2) {
+            for y in stride(from: 1, to: map.size.height - 1, by: 2) {
+                let location = GridPoint(x: x, y: y)
+                if map.cell(location: location) == .empty {
+                    openTiles.append(location)
+                }
+            }
+        }
+        return openTiles
+    }
+
 }
