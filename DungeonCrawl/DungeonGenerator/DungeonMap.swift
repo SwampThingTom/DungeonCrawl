@@ -42,3 +42,17 @@ struct DungeonMap: GridMap {
                         count: size.width)
     }
 }
+
+extension DungeonMap: MutableGridMap {
+    
+    mutating func setCell(location: GridPoint, tile: Tile) {
+        tiles[location.x][location.y] = tile
+    }
+        
+    mutating func fillCells(at bounds: GridRect, with tile: Tile) {
+        let filledTiles = repeatElement(tile, count: bounds.size.height)
+        for x in bounds.gridXRange {
+            tiles[x].replaceSubrange(bounds.gridYRange, with: filledTiles)
+        }
+    }
+}

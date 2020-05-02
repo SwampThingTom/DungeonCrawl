@@ -16,8 +16,15 @@ protocol GridMap {
     var size: GridSize { get }
 
     /// The value of the cell at the given location.
-    /// Returns `nil` if the location is not within the grid
+    /// Returns `nil` if the location is not within the grid.
     func cell(location: GridPoint) -> Tile?
+}
+
+protocol MutableGridMap: GridMap {
+    
+    /// Updates the value of the cell at the given location.
+    /// If location is not within the grid, throws index out of range exception.
+    mutating func setCell(location: GridPoint, tile: Tile)
 }
 
 struct GridRect: Equatable {

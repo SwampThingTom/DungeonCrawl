@@ -162,4 +162,100 @@ class DungeonMapTests: XCTestCase {
         XCTAssertFalse(sut.isValid(location: invalidCell))
         XCTAssertNil(sut.cell(location: invalidCell))
     }
+    
+    func testSetCell() throws {
+        // Arrange
+        let size = GridSize(width: 10, height: 6)
+        var sut = DungeonMap.init(size: size)
+        let cellToSet = GridPoint(x: 0, y: 0)
+
+        // Act
+        sut.setCell(location: cellToSet, tile: .floor)
+
+        // Assert
+        XCTAssertEqual(sut.cell(location: cellToSet), .floor)
+    }
+    
+    func testFillCells() throws {
+        // Arrange
+        let size = GridSize(width: 10, height: 6)
+        var sut = DungeonMap.init(size: size)
+        let rect = GridRect(x: 2, y: 2, width: 3, height: 3)
+        let outsideRect1 = GridPoint(x: rect.origin.x + rect.size.width,
+                                     y: rect.origin.y + rect.size.height - 1)
+        let outsideRect2 = GridPoint(x: rect.origin.x + rect.size.width - 1,
+                                     y: rect.origin.y + rect.size.height)
+
+        // Act
+        sut.fillCells(at: rect, with: .floor)
+
+        // Assert
+        for x in rect.origin.x ..< rect.origin.x + rect.size.width {
+            for y in rect.origin.y ..< rect.origin.y + rect.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(sut.cell(location: location), .floor)
+            }
+        }
+        XCTAssertEqual(sut.cell(location: outsideRect1), .empty)
+        XCTAssertEqual(sut.cell(location: outsideRect2), .empty)
+    }
+
+    func testFillCells_empty() throws {
+        // Arrange
+        let size = GridSize(width: 10, height: 6)
+        var sut = DungeonMap.init(size: size)
+        let rect = GridRect(x: 0, y: 0, width: 0, height: 0)
+        let expected = DungeonMap.init(size: size)
+
+        // Act
+        sut.fillCells(at: rect, with: .floor)
+
+        // Assert
+        XCTAssertEqual(sut.size, expected.size)
+        for x in 0 ..< sut.size.width {
+            for y in 0 ..< sut.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(sut.cell(location: location), expected.cell(location: location))
+            }
+        }
+    }
+    
+    func testFillCells_emptyRow() throws {
+        // Arrange
+        let size = GridSize(width: 10, height: 6)
+        var sut = DungeonMap.init(size: size)
+        let rect = GridRect(x: 0, y: 0, width: 1, height: 0)
+        let expected = DungeonMap.init(size: size)
+
+        // Act
+        sut.fillCells(at: rect, with: .floor)
+
+        // Assert
+        XCTAssertEqual(sut.size, expected.size)
+        for x in 0 ..< sut.size.width {
+            for y in 0 ..< sut.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(sut.cell(location: location), expected.cell(location: location))
+            }
+        }
+    }
+    
+    func testFillCells_all() throws {
+        // Arrange
+        let size = GridSize(width: 10, height: 6)
+        var sut = DungeonMap.init(size: size)
+        let rect = GridRect(x: 0, y: 0, width: size.width, height: size.height)
+
+        // Act
+        sut.fillCells(at: rect, with: .floor)
+
+        // Assert
+        XCTAssertEqual(sut.size, size)
+        for x in 0 ..< sut.size.width {
+            for y in 0 ..< sut.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(sut.cell(location: location), .floor)
+            }
+        }
+    }
 }
