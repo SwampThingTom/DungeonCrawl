@@ -16,6 +16,7 @@ class DungeonGenerator: DungeonGenerating {
     
     private let roomAttempts: Int
     private var randomNumberGenerator: AnyRandomNumberGenerator
+    private let roomGenerator: RoomGenerator
     
     private var tiles = [[Tile]]()
     private var rooms = [RoomModel]()
@@ -29,12 +30,12 @@ class DungeonGenerator: DungeonGenerating {
          randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
         self.roomAttempts = roomAttempts
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
+        roomGenerator = RoomGenerator(randomNumberGenerator: self.randomNumberGenerator)
     }
     
     func generate(size: GridSize) -> DungeonModel {
         tiles = emptyTiles(size: size)
-        rooms = [RoomModel]()
-        addRooms()
+        generateRooms()
         generateMazes()
         return DungeonModel(map: DungeonMap(tiles: tiles), rooms: rooms)
     }
@@ -65,43 +66,17 @@ class DungeonGenerator: DungeonGenerating {
         return openTiles
     }
 
-    private func randomRect(size: GridSize) -> GridRect {
-        // ensure origins are at odd locations
-        let maxX: Int = (self.size.width - size.width) / 2
-        let maxY: Int = (self.size.height - size.height) / 2
-        let x = Int.random(in: 0 ... maxX, using: &randomNumberGenerator) * 2 + 1
-        let y = Int.random(in: 0 ... maxY, using: &randomNumberGenerator) * 2 + 1
-        return GridRect(x: x, y: y, width: size.width, height: size.height)
-    }
-
     /// MARK: Rooms
     
-    private func addRooms() {
-        for _ in 0 ..< roomAttempts {
-            let room = createRoom()
-            if !overlaps(room: room) {
-                add(room: room)
-            }
+    private func generateRooms() {
+        rooms = roomGenerator.generate(gridSize: size, attempts: roomAttempts)
+        addToTiles(rooms: rooms)
+    }
+    
+    private func addToTiles(rooms: [RoomModel]) {
+        for room in rooms {
+            fillTiles(at: room.bounds, with: .floor)
         }
-    }
-    
-    private func createRoom() -> RoomModel {
-        let bounds = randomRect(size: GridSize(width: 8, height: 6))
-        return RoomModel(bounds: bounds)
-    }
-    
-    private func overlaps(room: RoomModel) -> Bool {
-        for existingRoom in rooms {
-            if room.bounds.intersects(existingRoom.bounds) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    private func add(room: RoomModel) {
-        rooms.append(room)
-        fillTiles(at: room.bounds, with: .floor)
     }
     
     /// MARK: Maze

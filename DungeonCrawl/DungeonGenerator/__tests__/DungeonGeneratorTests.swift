@@ -14,35 +14,21 @@ class DungeonGeneratorTests: XCTestCase {
 
     func testGenerate() {
         // Arrange
-        let size = GridSize(width: 320, height: 240)
-        let expectedRoomCount = 5
-        let randomNumberGenerator = SeededRandomNumberGenerator(seed: "testGenerate".data(using: .utf8)!)
-        let sut = DungeonGenerator(roomAttempts: 5, randomNumberGenerator: randomNumberGenerator)
+        let size = GridSize(width: 100, height: 100)
+        let maxRooms = 5
+        let sut = DungeonGenerator(roomAttempts: maxRooms)
         
         // Act
         let dungeon = sut.generate(size: size)
         
         // Assert
         XCTAssertEqual(dungeon.map.size, size)
-        XCTAssertEqual(dungeon.rooms.count, expectedRoomCount)
-        XCTAssertFalse(roomsOverlap(dungeon.rooms))
+        XCTAssertGreaterThan(dungeon.rooms.count, 0)
+        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
         XCTAssert(roomTilesAreFilled(dungeon))
         
         // TODO: Add this test back when ready to verify this functionality
         // XCTAssert(allRoomsAreReachable(dungeon))
-    }
-
-    func roomsOverlap(_ rooms: [RoomModel]) -> Bool {
-        for roomIndex in 0 ..< rooms.count - 1 {
-            let room = rooms[roomIndex]
-            for otherRoomIndex in roomIndex + 1 ..< rooms.count {
-                let otherRoom = rooms[otherRoomIndex]
-                if room.bounds.intersects(otherRoom.bounds) {
-                    return true
-                }
-            }
-        }
-        return false
     }
     
     func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {
