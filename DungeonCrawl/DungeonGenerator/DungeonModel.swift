@@ -9,7 +9,7 @@
 import Foundation
 
 struct DungeonModel {
-    let map: DungeonMap
+    let map: GridMap
     let rooms: [RoomModel]
 }
 

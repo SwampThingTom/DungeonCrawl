@@ -40,7 +40,7 @@ class DungeonGeneratorTests: XCTestCase {
         return true
     }
     
-    func tilesMatch(_ map: DungeonMap, bounds: GridRect, expected: Tile) -> Bool {
+    func tilesMatch(_ map: GridMap, bounds: GridRect, expected: Tile) -> Bool {
         for x in bounds.gridXRange {
             for y in bounds.gridYRange {
                 let location = GridPoint(x: x, y: y)
