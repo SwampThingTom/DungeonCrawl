@@ -8,45 +8,27 @@
 
 import Foundation
 
-struct Regions {
-    var regionMap = Dictionary<GridPoint, Int>()
-    var count: Int { currentRegion }
-    
-    private var currentRegion = 0
-    
-    mutating func newRegion() {
-        currentRegion += 1
-    }
-    
-    mutating func add(_ location: GridPoint) {
-        regionMap[location] = currentRegion
-    }
-}
-
 protocol MazeGenerating {
-    func generate(map: inout MutableGridMap) -> Regions
+    func generate(map: inout MutableGridMap, regions: inout Regions)
 }
 
 class MazeGenerator: MazeGenerating {
     
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
-    var regions = Regions()
-    
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
     }
     
-    func generate(map: inout MutableGridMap) -> Regions {
-        regions = Regions()
+    func generate(map: inout MutableGridMap, regions: inout Regions) {
         while true {
             let openTiles = openMapTiles(map)
             if openTiles.isEmpty {
-                return regions
+                return
             }
             regions.newRegion()
             let startTile = openTiles.randomElement(using: &randomNumberGenerator)!
-            generateMaze(at: startTile, in: &map)
+            generateMaze(at: startTile, in: &map, regions: &regions)
         }
     }
     
@@ -63,8 +45,8 @@ class MazeGenerator: MazeGenerating {
         return openTiles
     }
     
-    private func generateMaze(at startTile: GridPoint, in map: inout MutableGridMap) {
-        carve(tile: startTile, in: &map)
+    private func generateMaze(at startTile: GridPoint, in map: inout MutableGridMap, regions: inout Regions) {
+        carve(tile: startTile, in: &map, regions: &regions)
         var activeTiles = [startTile]
         repeat {
             let tileIndex = Int.random(in: 0 ..< activeTiles.count, using: &randomNumberGenerator)
@@ -79,15 +61,15 @@ class MazeGenerator: MazeGenerating {
             // TODO: prefer last direction
             let direction = possibleDirections.randomElement(using: &randomNumberGenerator)!
             let tilesToCarve = neighboringTiles(for: tile, heading: direction)
-            carve(tile: tilesToCarve[0], in: &map)
-            carve(tile: tilesToCarve[1], in: &map)
+            carve(tile: tilesToCarve[0], in: &map, regions: &regions)
+            carve(tile: tilesToCarve[1], in: &map, regions: &regions)
             activeTiles.append(tilesToCarve[1])
         } while !activeTiles.isEmpty
     }
     
-    private func carve(tile: GridPoint, in map: inout MutableGridMap) {
+    private func carve(tile: GridPoint, in map: inout MutableGridMap, regions: inout Regions) {
         map.setCell(location: tile, tile: .floor)
-        regions.add(tile)
+        regions.add(cell: tile)
     }
     
     private enum Direction: CaseIterable {

@@ -20,6 +20,7 @@ class DungeonGenerator: DungeonGenerating {
     private let mazeGenerator: MazeGenerator
     
     private var map: MutableGridMap = DungeonMap()
+    private var regions = Regions()
     private var rooms = [RoomModel]()
 
     init(roomAttempts: Int = 5,
@@ -46,6 +47,7 @@ class DungeonGenerator: DungeonGenerating {
     
     private func addToTiles(rooms: [RoomModel]) {
         for room in rooms {
+            regions.add(rect: room.bounds)
             map.fillCells(at: room.bounds, with: .floor)
         }
     }
@@ -53,6 +55,6 @@ class DungeonGenerator: DungeonGenerating {
     /// MARK: Maze
     
     private func generateMazes() {
-        self.mazeGenerator.generate(map: &self.map)
+        mazeGenerator.generate(map: &map, regions: &regions)
     }
 }

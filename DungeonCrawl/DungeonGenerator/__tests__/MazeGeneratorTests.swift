@@ -16,10 +16,11 @@ class MazeGeneratorTests: XCTestCase {
         // Arrange
         let gridSize = GridSize(width: 0, height: 0)
         var map: MutableGridMap = DungeonMap(size: gridSize)
+        var regions = Regions()
         let sut = MazeGenerator()
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssertEqual(regions.count, 0)
@@ -29,6 +30,7 @@ class MazeGeneratorTests: XCTestCase {
         // Arrange
         let gridSize = GridSize(width: 2, height: 2)
         var map: MutableGridMap = DungeonMap(size: gridSize)
+        var regions = Regions()
         let sut = MazeGenerator()
         let expectedTiles = [
             [Tile.empty, Tile.empty],
@@ -37,7 +39,7 @@ class MazeGeneratorTests: XCTestCase {
         let expectedMap = DungeonMap(tiles: expectedTiles)
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
@@ -48,6 +50,7 @@ class MazeGeneratorTests: XCTestCase {
         // Arrange
         let gridSize = GridSize(width: 3, height: 3)
         var map: MutableGridMap = DungeonMap(size: gridSize)
+        var regions = Regions()
         let sut = MazeGenerator()
         let expectedTiles = [
             [Tile.empty, Tile.empty, Tile.empty],
@@ -57,7 +60,7 @@ class MazeGeneratorTests: XCTestCase {
         let expectedMap = DungeonMap(tiles: expectedTiles)
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
@@ -68,10 +71,11 @@ class MazeGeneratorTests: XCTestCase {
         // Arrange
         let gridSize = GridSize(width: 7, height: 7)
         var map: MutableGridMap = DungeonMap(size: gridSize)
+        var regions = Regions()
         let sut = MazeGenerator()
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssertEqual(floorTileCount(in: map), 17)
@@ -85,10 +89,11 @@ class MazeGeneratorTests: XCTestCase {
         var original = DungeonMap(size: gridSize)
         original.fillCells(at: GridRect(x: 1, y: 1, width: 5, height: 5), with: .floor)
         var map: MutableGridMap = original.copy()
+        var regions = Regions()
         let sut = MazeGenerator()
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: original))
@@ -110,10 +115,11 @@ class MazeGeneratorTests: XCTestCase {
             [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty]
         ]
         let expectedMap = DungeonMap(tiles: expectedTiles)
+        var regions = Regions()
         let sut = MazeGenerator()
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
@@ -157,10 +163,11 @@ class MazeGeneratorTests: XCTestCase {
             [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty]
         ]
         var map: MutableGridMap = DungeonMap(tiles: tiles)
+        var regions = Regions()
         let sut = MazeGenerator()
         
         // Act
-        let regions = sut.generate(map: &map)
+        sut.generate(map: &map, regions: &regions)
         
         // Assert
         XCTAssertEqual(regions.count, 2)
