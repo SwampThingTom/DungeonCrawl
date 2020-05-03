@@ -42,7 +42,7 @@ class MazeGeneratorTests: XCTestCase {
         sut.generate(map: &map, regions: &regions)
         
         // Assert
-        XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssert(map.isEqual(expectedMap))
         XCTAssertEqual(regions.count, 0)
     }
     
@@ -63,7 +63,7 @@ class MazeGeneratorTests: XCTestCase {
         sut.generate(map: &map, regions: &regions)
         
         // Assert
-        XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssert(map.isEqual(expectedMap))
         XCTAssertEqual(regions.count, 1)
     }
     
@@ -96,7 +96,7 @@ class MazeGeneratorTests: XCTestCase {
         sut.generate(map: &map, regions: &regions)
         
         // Assert
-        XCTAssert(mapsAreEqual(map: map, otherMap: original))
+        XCTAssert(map.isEqual(original))
         XCTAssertEqual(regions.count, 0)
     }
     
@@ -122,7 +122,7 @@ class MazeGeneratorTests: XCTestCase {
         sut.generate(map: &map, regions: &regions)
         
         // Assert
-        XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssert(map.isEqual(expectedMap))
         XCTAssertEqual(regions.count, 1)
     }
     
@@ -175,20 +175,6 @@ class MazeGeneratorTests: XCTestCase {
     
     /// MARK: - Test helpers
     
-    /// Indicates whether the given maps are the same.
-    func mapsAreEqual(map: GridMap, otherMap: GridMap) -> Bool {
-        guard map.size == otherMap.size else { return false }
-        for x in 0 ..< map.size.width {
-            for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) != otherMap.cell(location: location) {
-                    return false
-                }
-            }
-        }
-        return true
-    }
-
     /// The number of tiles in the map that are floor tiles.
     func floorTileCount(in map: GridMap) -> Int {
         var count = 0

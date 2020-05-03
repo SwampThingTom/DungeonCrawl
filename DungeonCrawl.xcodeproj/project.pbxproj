@@ -13,6 +13,7 @@
 		E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA16245DF878002A0F31 /* DungeonMapTests.swift */; };
 		E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA18245DF8D5002A0F31 /* DungeonMap.swift */; };
 		E292EA1D245EF149002A0F31 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA1C245EF149002A0F31 /* Regions.swift */; };
+		E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA22245F06D8002A0F31 /* GridMap+Equatable.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
 		E2B2A1E22457BCE4000ED955 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1E12457BCE4000ED955 /* Actions.sks */; };
@@ -50,6 +51,7 @@
 		E292EA16245DF878002A0F31 /* DungeonMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonMapTests.swift; sourceTree = "<group>"; };
 		E292EA18245DF8D5002A0F31 /* DungeonMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonMap.swift; sourceTree = "<group>"; };
 		E292EA1C245EF149002A0F31 /* Regions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regions.swift; sourceTree = "<group>"; };
+		E292EA22245F06D8002A0F31 /* GridMap+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridMap+Equatable.swift"; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B2A1DF2457BCE4000ED955 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -158,10 +160,11 @@
 			children = (
 				E2B2A21B2457C19F000ED955 /* DungeonGeneratorTests.swift */,
 				E292EA16245DF878002A0F31 /* DungeonMapTests.swift */,
+				E292EA22245F06D8002A0F31 /* GridMap+Equatable.swift */,
+				E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */,
 				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
 				E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */,
 				E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */,
-				E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
+				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
