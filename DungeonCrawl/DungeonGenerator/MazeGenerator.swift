@@ -60,7 +60,7 @@ class MazeGenerator: MazeGenerating {
             
             // TODO: prefer last direction
             let direction = possibleDirections.randomElement(using: &randomNumberGenerator)!
-            let tilesToCarve = neighboringTiles(for: tile, heading: direction)
+            let tilesToCarve = path(for: tile, heading: direction)
             carve(tile: tilesToCarve[0], in: &map, regions: &regions)
             carve(tile: tilesToCarve[1], in: &map, regions: &regions)
             activeTiles.append(tilesToCarve[1])
@@ -72,40 +72,18 @@ class MazeGenerator: MazeGenerating {
         regions.add(cell: tile)
     }
     
-    private enum Direction: CaseIterable {
-        case north
-        case east
-        case south
-        case west
-        
-        var offsets: (Int, Int) {
-            switch self {
-            case .north: return (0, -1)
-            case .east: return (1, 0)
-            case .south: return (0, 1)
-            case .west: return (-1, 0)
-            }
-        }
-    }
-    
     private func directionsWithEmptyNeighbors(from tile: GridPoint, in map: GridMap) -> [Direction] {
         var directionsWithEmptyNeighbors = [Direction]()
-        for direction in Direction.allCases {
-            let (x, y) = direction.offsets
-            let neighborCell = GridPoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
-            if !map.isValid(location: neighborCell) {
-                continue
+        for neighbor in map.neighboringCells(tile, distance: 2) {
+            if map.cell(location: neighbor.cell) == .empty {
+                directionsWithEmptyNeighbors.append(neighbor.direction)
             }
-            if map.cell(location: neighborCell) != .empty {
-                continue
-            }
-            directionsWithEmptyNeighbors.append(direction)
         }
         return directionsWithEmptyNeighbors
     }
     
-    private func neighboringTiles(for tile: GridPoint, heading: Direction) -> [GridPoint] {
-        let (x, y) = heading.offsets
+    private func path(for tile: GridPoint, heading: Direction) -> [GridPoint] {
+        let (x, y) = heading.gridOffset
         return [
             GridPoint(x: tile.x + x, y: tile.y + y),
             GridPoint(x: tile.x + 2 * x, y: tile.y + 2 * y)
