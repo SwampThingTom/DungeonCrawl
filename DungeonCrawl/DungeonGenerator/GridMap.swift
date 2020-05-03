@@ -14,6 +14,9 @@ protocol GridMap {
     
     /// The size of the grid.
     var size: GridSize { get }
+    
+    /// Indicates whether the given location is within the bounds of the grid.
+    func isValid(location: GridPoint) -> Bool
 
     /// The value of the cell at the given location.
     /// Returns `nil` if the location is not within the grid.
@@ -22,9 +25,13 @@ protocol GridMap {
 
 protocol MutableGridMap: GridMap {
     
-    /// Updates the value of the cell at the given location.
-    /// If location is not within the grid, throws index out of range exception.
+    /// Sets the value of the cell at the given location.
+    /// If location is not within the grid, throws fatal index out of range exception.
     mutating func setCell(location: GridPoint, tile: Tile)
+    
+    /// Sets the value of all of the cells in the givne bounds.
+    /// If locations are not within the grid, throws fatal index out of range exception.
+    mutating func fillCells(at bounds: GridRect, with tile: Tile)
 }
 
 struct GridRect: Equatable {

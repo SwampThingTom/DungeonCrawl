@@ -26,6 +26,10 @@ struct DungeonMap: GridMap {
         self.init(tiles: DungeonMap.emptyCells(size: size))
     }
     
+    func copy() -> DungeonMap {
+        return DungeonMap(tiles: tiles)
+    }
+    
     func isValid(location: GridPoint) -> Bool {
         return 0 ..< size.width ~= location.x && 0 ..< size.height ~= location.y
     }
