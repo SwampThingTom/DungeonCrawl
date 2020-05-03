@@ -8,24 +8,43 @@
 
 import Foundation
 
+struct Regions {
+    var regionMap = Dictionary<GridPoint, Int>()
+    var count: Int { currentRegion }
+    
+    private var currentRegion = 0
+    
+    mutating func newRegion() {
+        currentRegion += 1
+    }
+    
+    mutating func add(_ location: GridPoint) {
+        regionMap[location] = currentRegion
+    }
+}
+
 protocol MazeGenerating {
-    func generate(map: inout MutableGridMap)
+    func generate(map: inout MutableGridMap) -> Regions
 }
 
 class MazeGenerator: MazeGenerating {
     
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
+    var regions = Regions()
+    
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
     }
     
-    func generate(map: inout MutableGridMap) {
+    func generate(map: inout MutableGridMap) -> Regions {
+        regions = Regions()
         while true {
             let openTiles = openMapTiles(map)
             if openTiles.isEmpty {
-                return
+                return regions
             }
+            regions.newRegion()
             let startTile = openTiles.randomElement(using: &randomNumberGenerator)!
             generateMaze(at: startTile, in: &map)
         }
@@ -68,6 +87,7 @@ class MazeGenerator: MazeGenerating {
     
     private func carve(tile: GridPoint, in map: inout MutableGridMap) {
         map.setCell(location: tile, tile: .floor)
+        regions.add(tile)
     }
     
     private enum Direction: CaseIterable {

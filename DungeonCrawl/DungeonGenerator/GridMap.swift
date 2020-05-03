@@ -52,7 +52,7 @@ struct GridRect: Equatable {
     }
 }
 
-struct GridPoint: Equatable {
+struct GridPoint: Equatable, Hashable {
     let x: Int
     let y: Int
 }

@@ -19,10 +19,10 @@ class MazeGeneratorTests: XCTestCase {
         let sut = MazeGenerator()
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
-        XCTAssert(true) // As long as sut did not crash, the test passes
+        XCTAssertEqual(regions.count, 0)
     }
     
     func testGenerate_tooSmallGrid() throws {
@@ -30,17 +30,18 @@ class MazeGeneratorTests: XCTestCase {
         let gridSize = GridSize(width: 2, height: 2)
         var map: MutableGridMap = DungeonMap(size: gridSize)
         let sut = MazeGenerator()
+        let expectedTiles = [
+            [Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty]
+        ]
+        let expectedMap = DungeonMap(tiles: expectedTiles)
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
-        for x in 0 ..< map.size.width {
-            for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                XCTAssertEqual(map.cell(location: location), .empty)
-            }
-        }
+        XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssertEqual(regions.count, 0)
     }
     
     func testGenerate_minimumMazeGrid() throws {
@@ -56,10 +57,11 @@ class MazeGeneratorTests: XCTestCase {
         let expectedMap = DungeonMap(tiles: expectedTiles)
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssertEqual(regions.count, 1)
     }
     
     func testGenerate_availableCells() throws {
@@ -69,11 +71,12 @@ class MazeGeneratorTests: XCTestCase {
         let sut = MazeGenerator()
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
         XCTAssertEqual(floorTileCount(in: map), 17)
         XCTAssert(allFloorTilesConnected(in: &map))
+        XCTAssertEqual(regions.count, 1)
     }
     
     func testGenerate_noAvailableCells() throws {
@@ -85,10 +88,11 @@ class MazeGeneratorTests: XCTestCase {
         let sut = MazeGenerator()
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: original))
+        XCTAssertEqual(regions.count, 0)
     }
     
     func testGenerate_someAvailableCells() throws {
@@ -109,16 +113,64 @@ class MazeGeneratorTests: XCTestCase {
         let sut = MazeGenerator()
         
         // Act
-        sut.generate(map: &map)
+        let regions = sut.generate(map: &map)
         
         // Assert
         XCTAssert(mapsAreEqual(map: map, otherMap: expectedMap))
+        XCTAssertEqual(regions.count, 1)
+    }
+    
+    func testGenerate_multipleRegions() throws {
+        // Arrange
+        let tiles = [
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            
+            // Room
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+
+            // Region 1
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+
+            // Room
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            
+            // Region 2
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+
+            // Room
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+
+            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty]
+        ]
+        var map: MutableGridMap = DungeonMap(tiles: tiles)
+        let sut = MazeGenerator()
+        
+        // Act
+        let regions = sut.generate(map: &map)
+        
+        // Assert
+        XCTAssertEqual(regions.count, 2)
     }
     
     /// MARK: - Test helpers
     
     /// Indicates whether the given maps are the same.
     func mapsAreEqual(map: GridMap, otherMap: GridMap) -> Bool {
+        guard map.size == otherMap.size else { return false }
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
                 let location = GridPoint(x: x, y: y)
