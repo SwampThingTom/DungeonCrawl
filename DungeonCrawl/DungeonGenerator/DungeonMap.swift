@@ -9,13 +9,14 @@
 import Foundation
 
 struct DungeonMap: GridMap {
+    
     private var tiles: [[Tile]]
     
     var size: GridSize {
         guard tiles.count > 0 && tiles[0].count > 0 else {
             return GridSize(width: 0, height: 0)
         }
-        return GridSize(width: tiles.count, height: tiles[0].count)
+        return GridSize(width: tiles[0].count, height: tiles.count)
     }
     
     init(tiles: [[Tile]] = [[Tile]]()) {
@@ -38,25 +39,25 @@ struct DungeonMap: GridMap {
         guard isValid(location: location) else {
             return nil
         }
-        return tiles[location.x][location.y]
+        return tiles[location.y][location.x]
     }
-
+    
     private static func emptyCells(size: GridSize) -> [[Tile]] {
-        return [[Tile]](repeating: [Tile](repeating: .empty, count: size.height),
-                        count: size.width)
+        return [[Tile]](repeating: [Tile](repeating: .empty, count: size.width),
+                        count: size.height)
     }
 }
 
 extension DungeonMap: MutableGridMap {
     
     mutating func setCell(location: GridPoint, tile: Tile) {
-        tiles[location.x][location.y] = tile
+        tiles[location.y][location.x] = tile
     }
-        
+    
     mutating func fillCells(at bounds: GridRect, with tile: Tile) {
-        let filledTiles = repeatElement(tile, count: bounds.size.height)
-        for x in bounds.gridXRange {
-            tiles[x].replaceSubrange(bounds.gridYRange, with: filledTiles)
+        let filledTiles = repeatElement(tile, count: bounds.size.width)
+        for y in bounds.gridYRange {
+            tiles[y].replaceSubrange(bounds.gridXRange, with: filledTiles)
         }
     }
 }
