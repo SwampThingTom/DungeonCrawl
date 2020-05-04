@@ -11,10 +11,10 @@
 import XCTest
 
 class DungeonGeneratorTests: XCTestCase {
-
-    func testGenerate() {
+    
+    func testGenerate_smallMap() {
         // Arrange
-        let size = GridSize(width: 100, height: 100)
+        let size = GridSize(width: 19, height: 19)
         let maxRooms = 5
         let sut = DungeonGenerator(roomAttempts: maxRooms)
         
@@ -23,14 +23,27 @@ class DungeonGeneratorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(dungeon.map.size, size)
-        XCTAssertGreaterThan(dungeon.rooms.count, 0)
+        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 2)
         XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
-        XCTAssert(roomTilesAreFilled(dungeon))
-        
-        // TODO: Add this test back when ready to verify this functionality
-        // XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(allRoomsAreReachable(dungeon))
     }
     
+    func testGenerate_largeMap() {
+        // Arrange
+        let size = GridSize(width: 99, height: 99)
+        let maxRooms = 5
+        let sut = DungeonGenerator(roomAttempts: maxRooms)
+        
+        // Act
+        let dungeon = sut.generate(size: size)
+        
+        // Assert
+        XCTAssertEqual(dungeon.map.size, size)
+        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 4)
+        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
+        XCTAssert(allRoomsAreReachable(dungeon))
+    }
+
     func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {
         for room in dungeon.rooms {
             if !tilesMatch(dungeon.map, bounds: room.bounds, expected: .floor) {
@@ -51,30 +64,31 @@ class DungeonGeneratorTests: XCTestCase {
         }
         return true
     }
-        
-    //    func allRoomsAreReachable(_ dungeon: DungeonModel) -> Bool {
-    //        guard let startTile = findStartTile(dungeon) else { return false }
-    //        for room in dungeon.rooms {
-    //            if !pathExists(from: startTile, to: room.bounds.origin, in: dungeon) {
-    //                return false
-    //            }
-    //        }
-    //        return true
-    //    }
-
-//    func findStartTile(_ dungeon: DungeonModel) -> GridPoint? {
-//        for x in 0 ..< dungeon.size.width {
-//            for y in 0 ..< dungeon.size.height {
-//                if dungeon.tiles[x][y] == .floor {
-//                    return GridPoint(x: x, y: y)
-//                }
-//            }
-//        }
-//        return nil
-//    }
     
-//    func pathExists(from start: GridPoint, to end: GridPoint, in dungeon: DungeonModel) -> Bool {
-//        let pathfinder = Pathfinder(tiles: dungeon.tiles)
-//        return pathfinder.findPath(from: start, to: end).count > 0
-//    }
+    func allRoomsAreReachable(_ dungeon: DungeonModel) -> Bool {
+        guard let startTile = findStartTile(dungeon.map) else { return false }
+        for room in dungeon.rooms {
+            if !pathExists(from: startTile, to: room.bounds.origin, in: dungeon) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func findStartTile(_ map: GridMap) -> GridPoint? {
+        for x in 0 ..< map.size.width {
+            for y in 0 ..< map.size.height {
+                let location = GridPoint(x: x, y: y)
+                if map.cell(location: location) == .floor {
+                    return GridPoint(x: x, y: y)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func pathExists(from start: GridPoint, to end: GridPoint, in dungeon: DungeonModel) -> Bool {
+        let pathfinder = Pathfinder(map: dungeon.map)
+        return pathfinder.findPath(from: start, to: end).count > 0
+    }
 }

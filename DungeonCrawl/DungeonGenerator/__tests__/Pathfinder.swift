@@ -17,21 +17,12 @@ class Pathfinder {
         AdjacentNode(offset: GridPoint(x: 0, y: 1), cost: 10)
     ]
     
-    private let tiles: [[Tile]]
+    private let map: GridMap
     private let pathMap: [[PathNode]]
-    
-    private var mapWidth: Int {
-        return tiles.count
-    }
-    
-    private var mapHeight: Int {
-        return tiles.count > 0 ? tiles[0].count : 0
-    }
 
-    init(tiles: [[Tile]]) {
-        self.tiles = tiles
-        let mapSize = GridSize(width: tiles.count, height: tiles[0].count)
-        pathMap = PathNode.createNodeMap(size: mapSize)
+    init(map: GridMap) {
+        self.map = map
+        pathMap = PathNode.createNodeMap(size: map.size)
     }
     
     func findPath(from start: GridPoint, to end: GridPoint) -> [GridPoint] {
@@ -52,7 +43,7 @@ class Pathfinder {
             for adjacent in adjacentNodes {
                 let adjacentTile = GridPoint(x: node.tile.x + adjacent.offset.x,
                                              y: node.tile.y + adjacent.offset.y)
-                if !tileIsOnMap(adjacentTile) || !tileIsMoveable(adjacentTile) {
+                if !map.isValid(location: adjacentTile) || tileIsObstacle(adjacentTile) {
                     continue
                 }
                 
@@ -76,14 +67,9 @@ class Pathfinder {
         
         return nil
     }
-
-    private func tileIsOnMap(_ tile: GridPoint) -> Bool {
-        return 0 ..< mapWidth ~= tile.x && 0 ..< mapHeight ~= tile.y
-    }
     
-    private func tileIsMoveable(_ tile: GridPoint) -> Bool {
-        let adjacentTileIsFree = tiles[tile.x][tile.y] == .floor
-        return adjacentTileIsFree
+    private func tileIsObstacle(_ tile: GridPoint) -> Bool {
+        return map.cell(location: tile) == .empty
     }
 
     /// MARK: Open Nodes

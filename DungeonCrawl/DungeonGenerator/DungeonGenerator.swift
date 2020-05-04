@@ -18,6 +18,7 @@ class DungeonGenerator: DungeonGenerating {
     private var randomNumberGenerator: AnyRandomNumberGenerator
     private let roomGenerator: RoomGenerator
     private let mazeGenerator: MazeGenerator
+    private let regionConnector: RegionConnector
     
     private var map: MutableGridMap = DungeonMap()
     private var regions = Regions()
@@ -29,32 +30,39 @@ class DungeonGenerator: DungeonGenerating {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
         roomGenerator = RoomGenerator(randomNumberGenerator: randomNumberGenerator)
         mazeGenerator = MazeGenerator(randomNumberGenerator: randomNumberGenerator)
+        regionConnector = RegionConnector(randomNumberGenerator: randomNumberGenerator)
     }
     
     func generate(size: GridSize) -> DungeonModel {
         map = DungeonMap(size: size)
         generateRooms()
         generateMazes()
+        connectRegions()
         return DungeonModel(map: map, rooms: rooms)
     }
     
-    /// MARK: Rooms
+    // MARK: Rooms
     
     private func generateRooms() {
         rooms = roomGenerator.generate(gridSize: map.size, attempts: roomAttempts)
-        addToTiles(rooms: rooms)
+        addToMap(rooms: rooms)
     }
     
-    private func addToTiles(rooms: [RoomModel]) {
+    private func addToMap(rooms: [RoomModel]) {
         for room in rooms {
+            regions.newRegion()
             regions.add(rect: room.bounds)
             map.fillCells(at: room.bounds, with: .floor)
         }
     }
     
-    /// MARK: Maze
+    // MARK: Maze
     
     private func generateMazes() {
         mazeGenerator.generate(map: &map, regions: &regions)
+    }
+    
+    private func connectRegions() {
+        regionConnector.connect(regions: &regions, in: &map)
     }
 }
