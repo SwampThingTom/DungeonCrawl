@@ -9,7 +9,7 @@
 import Foundation
 
 enum Tile {
-    case empty
+    case wall
     case floor
     case door
 }
@@ -18,7 +18,7 @@ extension Tile {
     
     var description: String {
         switch self {
-        case .empty:
+        case .wall:
             return "*"
         case .floor:
             return "_"

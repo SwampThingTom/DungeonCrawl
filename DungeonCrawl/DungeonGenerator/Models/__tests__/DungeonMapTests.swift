@@ -25,7 +25,7 @@ class DungeonMapTests: XCTestCase {
         XCTAssertNil(sut.cell(location: GridPoint(x: 0, y: 0)))
     }
     
-    func testInit_tiles_emptyRow() throws {
+    func testInit_tiles_emptyColumn() throws {
         // Arrange
         let tiles = [[Tile]].init(arrayLiteral: [Tile]())
         
@@ -40,7 +40,7 @@ class DungeonMapTests: XCTestCase {
     
     func testInit_tiles_oneCell() throws {
         // Arrange
-        let tiles = [[Tile.empty]]
+        let tiles = [[Tile.wall]]
         let validCell = GridPoint(x: 0, y: 0)
         let invalidCell = GridPoint(x: 1, y: 1)
         
@@ -51,7 +51,7 @@ class DungeonMapTests: XCTestCase {
         XCTAssertEqual(sut.size, GridSize(width: 1, height: 1))
         
         XCTAssert(sut.isValid(location: validCell))
-        XCTAssertEqual(sut.cell(location: validCell), .empty)
+        XCTAssertEqual(sut.cell(location: validCell), .wall)
         
         XCTAssertFalse(sut.isValid(location: invalidCell))
         XCTAssertNil(sut.cell(location: invalidCell))
@@ -60,7 +60,7 @@ class DungeonMapTests: XCTestCase {
     func testInit_tiles_multipleCells() throws {
         // Arrange
         let size = GridSize(width: 11, height: 7)
-        let tiles = [[Tile]](repeating: [Tile](repeating: .empty, count: size.width),
+        let tiles = [[Tile]](repeating: [Tile](repeating: .wall, count: size.width),
                              count: size.height)
         let originCell = GridPoint(x: 0, y: 0)
         let boundaryCell = GridPoint(x: 9, y: 5)
@@ -73,10 +73,10 @@ class DungeonMapTests: XCTestCase {
         XCTAssertEqual(sut.size, size)
         
         XCTAssert(sut.isValid(location: originCell))
-        XCTAssertEqual(sut.cell(location: originCell), .empty)
+        XCTAssertEqual(sut.cell(location: originCell), .wall)
         
         XCTAssert(sut.isValid(location: boundaryCell))
-        XCTAssertEqual(sut.cell(location: boundaryCell), .empty)
+        XCTAssertEqual(sut.cell(location: boundaryCell), .wall)
 
         XCTAssertFalse(sut.isValid(location: invalidCell))
         XCTAssertNil(sut.cell(location: invalidCell))
@@ -134,7 +134,7 @@ class DungeonMapTests: XCTestCase {
         XCTAssertEqual(sut.size, GridSize(width: 1, height: 1))
         
         XCTAssert(sut.isValid(location: validCell))
-        XCTAssertEqual(sut.cell(location: validCell), .empty)
+        XCTAssertEqual(sut.cell(location: validCell), .wall)
         
         XCTAssertFalse(sut.isValid(location: invalidCell))
         XCTAssertNil(sut.cell(location: invalidCell))
@@ -154,10 +154,10 @@ class DungeonMapTests: XCTestCase {
         XCTAssertEqual(sut.size, size)
         
         XCTAssert(sut.isValid(location: originCell))
-        XCTAssertEqual(sut.cell(location: originCell), .empty)
+        XCTAssertEqual(sut.cell(location: originCell), .wall)
         
         XCTAssert(sut.isValid(location: boundaryCell))
-        XCTAssertEqual(sut.cell(location: boundaryCell), .empty)
+        XCTAssertEqual(sut.cell(location: boundaryCell), .wall)
 
         XCTAssertFalse(sut.isValid(location: invalidCell))
         XCTAssertNil(sut.cell(location: invalidCell))
@@ -196,8 +196,8 @@ class DungeonMapTests: XCTestCase {
                 XCTAssertEqual(sut.cell(location: location), .floor)
             }
         }
-        XCTAssertEqual(sut.cell(location: outsideRect1), .empty)
-        XCTAssertEqual(sut.cell(location: outsideRect2), .empty)
+        XCTAssertEqual(sut.cell(location: outsideRect1), .wall)
+        XCTAssertEqual(sut.cell(location: outsideRect2), .wall)
     }
 
     func testFillCells_empty() throws {

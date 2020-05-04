@@ -37,7 +37,7 @@ class MazeGenerator: MazeGenerating {
         for x in stride(from: 1, to: map.size.width, by: 2) {
             for y in stride(from: 1, to: map.size.height - 1, by: 2) {
                 let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) == .empty {
+                if map.cell(location: location) == .wall {
                     openTiles.append(location)
                 }
             }
@@ -75,7 +75,7 @@ class MazeGenerator: MazeGenerating {
     private func directionsWithEmptyNeighbors(from tile: GridPoint, in map: GridMap) -> [Direction] {
         var directionsWithEmptyNeighbors = [Direction]()
         for neighbor in map.neighboringCells(tile, distance: 2) {
-            if map.cell(location: neighbor.cell) == .empty {
+            if map.cell(location: neighbor.cell) == .wall {
                 directionsWithEmptyNeighbors.append(neighbor.direction)
             }
         }

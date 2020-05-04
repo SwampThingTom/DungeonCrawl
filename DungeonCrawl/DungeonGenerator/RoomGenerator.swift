@@ -17,7 +17,7 @@ class RoomGenerator: RoomGenerating {
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
     // Rooms should have odd widths and heights to allow for
-    // empty spaces between rooms and corridors.
+    // wall spaces between rooms and corridors.
     let roomSize = GridSize(width: 7, height: 5)
     
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {

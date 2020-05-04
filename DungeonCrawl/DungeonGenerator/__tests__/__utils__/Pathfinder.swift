@@ -69,7 +69,7 @@ class Pathfinder {
     }
     
     private func tileIsObstacle(_ tile: GridPoint) -> Bool {
-        return map.cell(location: tile) == .empty
+        return map.cell(location: tile) == .wall
     }
 
     /// MARK: Open Nodes

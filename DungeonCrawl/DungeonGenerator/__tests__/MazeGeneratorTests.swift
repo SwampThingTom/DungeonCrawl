@@ -33,7 +33,7 @@ class MazeGeneratorTests: XCTestCase {
         var regions = Regions()
         let sut = MazeGenerator()
         let expectedTiles = [
-            [Tile.empty]
+            [Tile.wall]
         ]
         let expectedMap = DungeonMap(tiles: expectedTiles)
         
@@ -52,9 +52,9 @@ class MazeGeneratorTests: XCTestCase {
         var regions = Regions()
         let sut = MazeGenerator()
         let expectedTiles = [
-            [Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty]
+            [Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall]
         ]
         let expectedMap = DungeonMap(tiles: expectedTiles)
         
@@ -105,13 +105,13 @@ class MazeGeneratorTests: XCTestCase {
         var map: MutableGridMap = DungeonMap(size: gridSize)
         map.fillCells(at: GridRect(x: 1, y: 1, width: 3, height: 3), with: .floor)
         let expectedTiles = [
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.empty, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.empty, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.empty, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty]
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.wall, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.wall, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.wall, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall]
         ]
         let expectedMap = DungeonMap(tiles: expectedTiles)
         var regions = Regions()
@@ -128,38 +128,38 @@ class MazeGeneratorTests: XCTestCase {
     func testGenerate_multipleRegions() throws {
         // Arrange
         let tiles = [
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
             
             // Room
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
 
             // Region 1
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
 
             // Room
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
             
             // Region 2
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall],
 
             // Room
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
-            [Tile.empty, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.empty],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
+            [Tile.wall, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.floor, Tile.wall],
 
-            [Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty, Tile.empty]
+            [Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall, Tile.wall]
         ]
         var map: MutableGridMap = DungeonMap(tiles: tiles)
         var regions = Regions()
@@ -190,18 +190,18 @@ class MazeGeneratorTests: XCTestCase {
     
     /// Indicates whether all all of the floor tiles are connected.
     /// * Picks an arbitrary floor cell
-    /// * Performs a flood fill to set all connected floor cells to empty
-    /// * Verifies that the resulting map has only empty cells
+    /// * Performs a flood fill to set all connected floor cells to walls
+    /// * Verifies that the resulting map has only wall cells
     func allFloorTilesConnected(in map: inout MutableGridMap) -> Bool {
         guard let startPoint = firstFloorTile(in: map) else { return true }
         floodFill(map: &map, start: startPoint)
-        return areAllTilesEmpty(in: map)
+        return areAllTilesWalls(in: map)
     }
     
     func floodFill(map: inout MutableGridMap, start: GridPoint) {
         var activeCells = [start]
         while let cell = activeCells.popLast() {
-            map.setCell(location: cell, tile: .empty)
+            map.setCell(location: cell, tile: .wall)
             for direction in Direction.allCases {
                 let (x, y) = direction.offsets
                 let neighbor = GridPoint(x: cell.x + x, y: cell.y + y)
@@ -212,12 +212,12 @@ class MazeGeneratorTests: XCTestCase {
         }
     }
     
-    /// Indicates whether all tiles are empty.
-    func areAllTilesEmpty(in map: GridMap) -> Bool {
+    /// Indicates whether all tiles are walls.
+    func areAllTilesWalls(in map: GridMap) -> Bool {
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
                 let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) != .empty {
+                if map.cell(location: location) != .wall {
                     return false
                 }
             }

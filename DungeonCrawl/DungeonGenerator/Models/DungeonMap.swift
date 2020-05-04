@@ -25,7 +25,7 @@ struct DungeonMap: GridMap {
     }
     
     init(size: GridSize) {
-        self.init(tiles: DungeonMap.emptyCells(size: size))
+        self.init(tiles: DungeonMap.wallCells(size: size))
     }
     
     func copy() -> DungeonMap {
@@ -43,8 +43,8 @@ struct DungeonMap: GridMap {
         return tiles[location.y][location.x]
     }
     
-    private static func emptyCells(size: GridSize) -> [[Tile]] {
-        return [[Tile]](repeating: [Tile](repeating: .empty, count: size.width),
+    private static func wallCells(size: GridSize) -> [[Tile]] {
+        return [[Tile]](repeating: [Tile](repeating: .wall, count: size.width),
                         count: size.height)
     }
 }

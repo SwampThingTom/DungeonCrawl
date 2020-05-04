@@ -44,7 +44,7 @@ private extension Regions {
     
     func cellsBordering(region: Int, in map: GridMap) -> [CellRegionPair] {
         var borderCells = [CellRegionPair]()
-        for location in map.emptyCells() {
+        for location in map.wallCells() {
             let neighborRegions = regionsConnectingCell(location: location, to: region, in: map)
             let locationBorderCells = neighborRegions.map { (cell: location, region: $0 ) }
             borderCells.append(contentsOf: locationBorderCells)
@@ -71,17 +71,17 @@ private extension Regions {
 
 private extension GridMap {
     
-    func emptyCells() -> [GridPoint] {
-        var emptyCells = [GridPoint]()
+    func wallCells() -> [GridPoint] {
+        var wallCells = [GridPoint]()
         // No need to test the outermost rows and columns.
         for x in 1 ..< self.size.width - 1 {
             for y in 1 ..< self.size.height - 1 {
                 let location = GridPoint(x: x, y: y)
-                if self.cell(location: location) == .empty {
-                    emptyCells.append(location)
+                if self.cell(location: location) == .wall {
+                    wallCells.append(location)
                 }
             }
         }
-        return emptyCells
+        return wallCells
     }
 }
