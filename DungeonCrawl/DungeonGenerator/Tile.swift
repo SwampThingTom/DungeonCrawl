@@ -13,3 +13,17 @@ enum Tile {
     case floor
     case door
 }
+
+extension Tile {
+    
+    var description: String {
+        switch self {
+        case .empty:
+            return "*"
+        case .floor:
+            return "_"
+        case .door:
+            return "+"
+        }
+    }
+}

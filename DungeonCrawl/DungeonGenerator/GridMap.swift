@@ -61,3 +61,18 @@ struct GridSize: Equatable {
     let width: Int
     let height: Int
 }
+
+extension GridMap {
+    
+    var description: String {
+        var description = String()
+        for x in 0 ..< size.width {
+            for y in 0 ..< size.height {
+                let tile = cell(location: GridPoint(x: x, y: y))
+                description += tile?.description ?? "?"
+            }
+            description += "\n"
+        }
+        return description
+    }
+}
