@@ -49,7 +49,7 @@ class DungeonGeneratorTests: XCTestCase {
     /// A map big enough for three rooms.
     func testGenerate_mediumMap() {
         // Arrange
-        let size = GridSize(width: 35, height: 35)
+        let size = GridSize(width: 39, height: 39)
         let maxRooms = 5
         let sut = DungeonGenerator(roomAttempts: maxRooms)
         
