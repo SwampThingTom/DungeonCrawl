@@ -12,9 +12,27 @@ import XCTest
 
 class DungeonGeneratorTests: XCTestCase {
     
+    /// A map big enough for a single room.
+    func testGenerate_tinyMap() {
+        // Arrange
+        let size = GridSize(width: 9, height: 9)
+        let maxRooms = 5
+        let sut = DungeonGenerator(roomAttempts: maxRooms)
+        
+        // Act
+        let dungeon = sut.generate(size: size)
+        
+        // Assert
+        XCTAssertEqual(dungeon.map.size, size)
+        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 1)
+        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
+        XCTAssert(allRoomsAreReachable(dungeon))
+    }
+    
+    /// A map big enough for two rooms.
     func testGenerate_smallMap() {
         // Arrange
-        let size = GridSize(width: 19, height: 19)
+        let size = GridSize(width: 25, height: 25)
         let maxRooms = 5
         let sut = DungeonGenerator(roomAttempts: maxRooms)
         
@@ -28,7 +46,42 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssert(allRoomsAreReachable(dungeon))
     }
     
+    /// A map big enough for three rooms.
+    func testGenerate_mediumMap() {
+        // Arrange
+        let size = GridSize(width: 35, height: 35)
+        let maxRooms = 5
+        let sut = DungeonGenerator(roomAttempts: maxRooms)
+        
+        // Act
+        let dungeon = sut.generate(size: size)
+        
+        // Assert
+        XCTAssertEqual(dungeon.map.size, size)
+        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 3)
+        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
+        XCTAssert(allRoomsAreReachable(dungeon))
+    }
+
+    /// A map big enough for 3 to 5 rooms.
     func testGenerate_largeMap() {
+        // Arrange
+        let size = GridSize(width: 61, height: 45)
+        let maxRooms = 5
+        let sut = DungeonGenerator(roomAttempts: maxRooms)
+        
+        // Act
+        let dungeon = sut.generate(size: size)
+        
+        // Assert
+        XCTAssertEqual(dungeon.map.size, size)
+        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 3)
+        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
+        XCTAssert(allRoomsAreReachable(dungeon))
+    }
+    
+    /// A very large map.
+    func testGenerate_veryLargeMap() {
         // Arrange
         let size = GridSize(width: 99, height: 99)
         let maxRooms = 5
