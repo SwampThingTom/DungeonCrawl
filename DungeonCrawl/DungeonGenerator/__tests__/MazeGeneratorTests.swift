@@ -28,13 +28,12 @@ class MazeGeneratorTests: XCTestCase {
     
     func testGenerate_tooSmallGrid() throws {
         // Arrange
-        let gridSize = GridSize(width: 2, height: 2)
+        let gridSize = GridSize(width: 1, height: 1)
         var map: MutableGridMap = DungeonMap(size: gridSize)
         var regions = Regions()
         let sut = MazeGenerator()
         let expectedTiles = [
-            [Tile.empty, Tile.empty],
-            [Tile.empty, Tile.empty]
+            [Tile.empty]
         ]
         let expectedMap = DungeonMap(tiles: expectedTiles)
         

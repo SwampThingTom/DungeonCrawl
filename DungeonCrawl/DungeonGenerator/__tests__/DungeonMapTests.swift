@@ -59,12 +59,12 @@ class DungeonMapTests: XCTestCase {
     
     func testInit_tiles_multipleCells() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
-        let tiles = [[Tile]](repeating: [Tile](repeating: .empty, count: size.height),
-                             count: size.width)
+        let size = GridSize(width: 11, height: 7)
+        let tiles = [[Tile]](repeating: [Tile](repeating: .empty, count: size.width),
+                             count: size.height)
         let originCell = GridPoint(x: 0, y: 0)
         let boundaryCell = GridPoint(x: 9, y: 5)
-        let invalidCell = GridPoint(x: 10, y: 6)
+        let invalidCell = GridPoint(x: 11, y: 7)
         
         // Act
         let sut = DungeonMap.init(tiles: tiles)
@@ -110,7 +110,7 @@ class DungeonMapTests: XCTestCase {
     
     func testInit_size_zeroWidth() throws {
         // Arrange
-        let size = GridSize(width: 1, height: 0)
+        let size = GridSize(width: 0, height: 1)
 
         // Act
         let sut = DungeonMap.init(size: size)
@@ -142,10 +142,10 @@ class DungeonMapTests: XCTestCase {
     
     func testInit_size_multipleCells() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         let originCell = GridPoint(x: 0, y: 0)
         let boundaryCell = GridPoint(x: 9, y: 5)
-        let invalidCell = GridPoint(x: 10, y: 6)
+        let invalidCell = GridPoint(x: 11, y: 7)
         
         // Act
         let sut = DungeonMap.init(size: size)
@@ -165,7 +165,7 @@ class DungeonMapTests: XCTestCase {
     
     func testSetCell() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         var sut = DungeonMap.init(size: size)
         let cellToSet = GridPoint(x: 0, y: 0)
 
@@ -178,7 +178,7 @@ class DungeonMapTests: XCTestCase {
     
     func testFillCells() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         var sut = DungeonMap.init(size: size)
         let rect = GridRect(x: 2, y: 2, width: 3, height: 3)
         let outsideRect1 = GridPoint(x: rect.origin.x + rect.size.width,
@@ -202,7 +202,7 @@ class DungeonMapTests: XCTestCase {
 
     func testFillCells_empty() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         var sut = DungeonMap.init(size: size)
         let rect = GridRect(x: 0, y: 0, width: 0, height: 0)
         let expected = DungeonMap.init(size: size)
@@ -222,7 +222,7 @@ class DungeonMapTests: XCTestCase {
     
     func testFillCells_emptyRow() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         var sut = DungeonMap.init(size: size)
         let rect = GridRect(x: 0, y: 0, width: 1, height: 0)
         let expected = DungeonMap.init(size: size)
@@ -242,7 +242,7 @@ class DungeonMapTests: XCTestCase {
     
     func testFillCells_all() throws {
         // Arrange
-        let size = GridSize(width: 10, height: 6)
+        let size = GridSize(width: 11, height: 7)
         var sut = DungeonMap.init(size: size)
         let rect = GridRect(x: 0, y: 0, width: size.width, height: size.height)
 
