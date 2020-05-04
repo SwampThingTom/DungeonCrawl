@@ -113,6 +113,7 @@
 		E292EA2724604C2C002A0F31 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E292EA28246080B0002A0F31 /* __tests__ */,
 				E292EA24245F2D1A002A0F31 /* Direction.swift */,
 				E292EA18245DF8D5002A0F31 /* DungeonMap.swift */,
 				E2B2A21D2457C39E000ED955 /* DungeonModel.swift */,
@@ -122,6 +123,14 @@
 				E2B2A21F2457CBC4000ED955 /* Tile.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E292EA28246080B0002A0F31 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E292EA16245DF878002A0F31 /* DungeonMapTests.swift */,
+			);
+			path = __tests__;
 			sourceTree = "<group>";
 		};
 		E2B2A1D12457BCE4000ED955 = {
@@ -186,7 +195,6 @@
 			children = (
 				E292EA2624604BF2002A0F31 /* __utils__ */,
 				E2B2A21B2457C19F000ED955 /* DungeonGeneratorTests.swift */,
-				E292EA16245DF878002A0F31 /* DungeonMapTests.swift */,
 				E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */,
 				E292EA20245F0525002A0F31 /* RegionConnectorTests.swift */,
 				E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */,

@@ -240,6 +240,26 @@ class DungeonMapTests: XCTestCase {
         }
     }
     
+    func testFillCells_emptyColumn() throws {
+        // Arrange
+        let size = GridSize(width: 11, height: 7)
+        var sut = DungeonMap.init(size: size)
+        let rect = GridRect(x: 0, y: 0, width: 0, height: 1)
+        let expected = DungeonMap.init(size: size)
+
+        // Act
+        sut.fillCells(at: rect, with: .floor)
+
+        // Assert
+        XCTAssertEqual(sut.size, expected.size)
+        for x in 0 ..< sut.size.width {
+            for y in 0 ..< sut.size.height {
+                let location = GridPoint(x: x, y: y)
+                XCTAssertEqual(sut.cell(location: location), expected.cell(location: location))
+            }
+        }
+    }
+
     func testFillCells_all() throws {
         // Arrange
         let size = GridSize(width: 11, height: 7)
