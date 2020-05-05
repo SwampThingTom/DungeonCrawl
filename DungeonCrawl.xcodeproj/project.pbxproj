@@ -23,7 +23,6 @@
 		E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA2B2460B36A002A0F31 /* DeadEndRemoverTests.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
-		E2B2A1E22457BCE4000ED955 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1E12457BCE4000ED955 /* Actions.sks */; };
 		E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1E32457BCE4000ED955 /* GameScene.swift */; };
 		E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1E52457BCE4000ED955 /* GameViewController.swift */; };
 		E2B2A1E92457BCE4000ED955 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1E72457BCE4000ED955 /* Main.storyboard */; };
@@ -71,7 +70,6 @@
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B2A1DF2457BCE4000ED955 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		E2B2A1E12457BCE4000ED955 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		E2B2A1E32457BCE4000ED955 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		E2B2A1E52457BCE4000ED955 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E2B2A1E82457BCE4000ED955 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
-				E2B2A1E12457BCE4000ED955 /* Actions.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
 				E2B2A1E52457BCE4000ED955 /* GameViewController.swift */,
 				E2B2A1E72457BCE4000ED955 /* Main.storyboard */,
@@ -336,7 +333,6 @@
 				E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */,
 				E2B2A1EB2457BCE8000ED955 /* Assets.xcassets in Resources */,
 				E2B2A1EE2457BCE8000ED955 /* LaunchScreen.storyboard in Resources */,
-				E2B2A1E22457BCE4000ED955 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
