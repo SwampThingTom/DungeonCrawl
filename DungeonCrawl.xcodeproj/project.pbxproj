@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		77833BCFBB41A67479A3C035 /* Pods_DungeonCrawl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */; };
 		89FCB22007F6FB73FA4C7918 /* Pods_DungeonCrawlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */; };
+		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
+		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */; };
 		E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */; };
 		E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */; };
@@ -55,6 +57,8 @@
 		92768E9600B71E15C1D571EC /* Pods-DungeonCrawlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.debug.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.debug.xcconfig"; sourceTree = "<group>"; };
 		935E634EBE517E61572844D5 /* Pods-DungeonCrawlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.release.xcconfig"; sourceTree = "<group>"; };
 		B167E8A2771D4CD9D27B946B /* Pods-DungeonCrawl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawl.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawl/Pods-DungeonCrawl.release.xcconfig"; sourceTree = "<group>"; };
+		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
+		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeneratorTests.swift; sourceTree = "<group>"; };
 		E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGenerator.swift; sourceTree = "<group>"; };
 		E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGeneratorTests.swift; sourceTree = "<group>"; };
@@ -132,6 +136,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E225E73D246185EF00F60E45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E225E73F2461862E00F60E45 /* Assets.xcassets */,
+				E225E73E2461862E00F60E45 /* DungeonTileSet.sks */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E292EA2624604BF2002A0F31 /* __utils__ */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
+				E225E73D246185EF00F60E45 /* Resources */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
@@ -329,9 +343,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */,
 				E2B2A1E92457BCE4000ED955 /* Main.storyboard in Resources */,
 				E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */,
 				E2B2A1EB2457BCE8000ED955 /* Assets.xcassets in Resources */,
+				E225E7412461862E00F60E45 /* Assets.xcassets in Resources */,
 				E2B2A1EE2457BCE8000ED955 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
