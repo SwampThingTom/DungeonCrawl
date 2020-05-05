@@ -11,10 +11,10 @@ import Foundation
 typealias DeadEnd = (cell: GridPoint, exit: Direction)
 
 protocol DeadEndRemoving {
-    mutating func removeDeadEnds(from map: inout MutableGridMap)
+    func removeDeadEnds(from map: inout MutableGridMap)
 }
 
-class DeadEndRemover {
+class DeadEndRemover: DeadEndRemoving {
     
     func removeDeadEnds(from map: inout MutableGridMap) {
         for deadEnd in findDeadEnds(in: map) {

@@ -24,9 +24,9 @@ class DungeonGeneratorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(dungeon.map.size, size)
-        XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 1)
-        XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
+        XCTAssertEqual(dungeon.rooms.count, 1)
         XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(dungeon.map.hasNoDeadEnds)
     }
     
     /// A map big enough for two rooms.
@@ -44,6 +44,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 2)
         XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
         XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(dungeon.map.hasNoDeadEnds)
     }
     
     /// A map big enough for three rooms.
@@ -61,6 +62,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 3)
         XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
         XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(dungeon.map.hasNoDeadEnds)
     }
 
     /// A map big enough for 3 to 5 rooms.
@@ -78,6 +80,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 3)
         XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
         XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(dungeon.map.hasNoDeadEnds)
     }
     
     /// A very large map.
@@ -95,6 +98,7 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(dungeon.rooms.count, 4)
         XCTAssertLessThanOrEqual(dungeon.rooms.count, maxRooms)
         XCTAssert(allRoomsAreReachable(dungeon))
+        XCTAssert(dungeon.map.hasNoDeadEnds)
     }
 
     func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {

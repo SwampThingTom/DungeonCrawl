@@ -16,9 +16,10 @@ class DungeonGenerator: DungeonGenerating {
     
     private let roomAttempts: Int
     private var randomNumberGenerator: AnyRandomNumberGenerator
-    private let roomGenerator: RoomGenerator
-    private let mazeGenerator: MazeGenerator
-    private let regionConnector: RegionConnector
+    private let roomGenerator: RoomGenerating
+    private let mazeGenerator: MazeGenerating
+    private let regionConnector: RegionConnecting
+    private let deadEndRemover: DeadEndRemoving
     
     private var map: MutableGridMap = DungeonMap()
     private var regions = Regions()
@@ -31,6 +32,7 @@ class DungeonGenerator: DungeonGenerating {
         roomGenerator = RoomGenerator(randomNumberGenerator: randomNumberGenerator)
         mazeGenerator = MazeGenerator(randomNumberGenerator: randomNumberGenerator)
         regionConnector = RegionConnector(randomNumberGenerator: randomNumberGenerator)
+        deadEndRemover = DeadEndRemover()
     }
     
     func generate(size: GridSize) -> DungeonModel {
@@ -38,6 +40,7 @@ class DungeonGenerator: DungeonGenerating {
         generateRooms()
         generateMazes()
         connectRegions()
+        removeDeadEnds()
         return DungeonModel(map: map, rooms: rooms)
     }
     
@@ -64,5 +67,9 @@ class DungeonGenerator: DungeonGenerating {
     
     private func connectRegions() {
         regionConnector.connect(regions: &regions, in: &map)
+    }
+    
+    private func removeDeadEnds() {
+        deadEndRemover.removeDeadEnds(from: &map)
     }
 }
