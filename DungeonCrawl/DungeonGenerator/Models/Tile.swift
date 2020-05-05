@@ -12,6 +12,14 @@ enum Tile {
     case wall
     case floor
     case door
+    
+    var isObstacle: Bool {
+        switch self {
+        case .wall: return true
+        case .floor: return false
+        case .door: return false
+        }
+    }
 }
 
 extension Tile {

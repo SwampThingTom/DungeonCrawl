@@ -31,13 +31,18 @@ typealias NeighborCell = (direction: Direction, cell: GridPoint)
 
 extension GridPoint {
     
+    /// The `GridPoint` of the cell in the given direction.
+    func neighbor(direction: Direction, distance: Int = 1) -> GridPoint {
+        return GridPoint(x: x + distance * direction.gridOffset.x,
+                         y: y + distance * direction.gridOffset.y)
+    }
+    
     /// The `GridPoint` in each of the four directions from the current cell.
     /// - Note: These may not all be valid cells on a particular `GridMap`.
     func neighbors(distance: Int = 1) -> [NeighborCell] {
         Direction.allCases.map { (
             direction: $0,
-            cell: GridPoint(x: x + distance * $0.gridOffset.x,
-                            y: y + distance * $0.gridOffset.y)
+            cell: neighbor(direction: $0, distance: distance)
         ) }
     }
 }
