@@ -66,8 +66,8 @@ extension GridMap {
     
     var description: String {
         var description = String()
-        for x in 0 ..< size.width {
-            for y in 0 ..< size.height {
+        for y in 0 ..< size.height {
+            for x in 0 ..< size.width {
                 let tile = cell(location: GridPoint(x: x, y: y))
                 description += tile?.description ?? "?"
             }

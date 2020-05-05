@@ -23,7 +23,7 @@ extension Tile {
         case .floor:
             return "_"
         case .door:
-            return "+"
+            return "$"
         }
     }
 }
