@@ -10,7 +10,7 @@
 
 import Foundation
 
-extension GridMap  {
+extension GridMap {
     
     func isEqual(_ map: GridMap) -> Bool {
         guard size == map.size else { return false }

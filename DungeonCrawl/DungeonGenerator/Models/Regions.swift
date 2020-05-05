@@ -13,7 +13,7 @@ import Foundation
 struct Regions {
     
     /// Map of cell locations to region.
-    var regionMap = Dictionary<GridCell, Int>()
+    var regionMap = [GridCell: Int]()
     
     /// The number of regions.
     var count: Int { activeRegions.count }

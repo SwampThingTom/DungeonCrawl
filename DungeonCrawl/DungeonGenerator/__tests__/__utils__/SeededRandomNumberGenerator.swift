@@ -23,11 +23,11 @@ struct SeededRandomNumberGenerator: RandomNumberGenerator {
         return UInt64(msw) << 32 | UInt64(lsw)
     }
     
-    public mutating func next<T>() -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    public mutating func next<T>() -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return T(next())
     }
     
-    public mutating func next<T>(upperBound: T) -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    public mutating func next<T>(upperBound: T) -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return T(next())
     }
 }

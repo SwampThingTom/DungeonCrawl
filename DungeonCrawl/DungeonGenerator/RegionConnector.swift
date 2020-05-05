@@ -30,7 +30,7 @@ class RegionConnector: RegionConnecting {
                 return
             }
             addConnection(location: connection.cell, to: &map)
-            // TODO: randomly add a second connector?
+            // LATER: randomly add a second connector?
             regions.merge(from: connection.region, to: 1)
         }
     }

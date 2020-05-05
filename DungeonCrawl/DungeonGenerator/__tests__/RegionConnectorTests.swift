@@ -16,28 +16,28 @@ class RegionGeneratorTests: XCTestCase {
         // Arrange
         var (regions, map) = emptyMap()
         let sut = RegionConnector()
-        let expectedMap = (map as! DungeonMap).copy()
+        let expectedMap = (map as? DungeonMap)?.copy()
         
         // Act
         sut.connect(regions: &regions, in: &map)
         
         // Assert
         XCTAssertEqual(regions.count, 0)
-        XCTAssert(map.isEqual(expectedMap))
+        XCTAssert(map.isEqual(expectedMap!))
     }
     
     func testGenerate_oneRegion() throws {
         // Arrange
         var (regions, map) = singleTileMap()
         let sut = RegionConnector()
-        let expectedMap = (map as! DungeonMap).copy()
+        let expectedMap = (map as? DungeonMap)?.copy()
         
         // Act
         sut.connect(regions: &regions, in: &map)
         
         // Assert
         XCTAssertEqual(regions.count, 1)
-        XCTAssert(map.isEqual(expectedMap))
+        XCTAssert(map.isEqual(expectedMap!))
     }
     
     func testGenerate_twoRegions() throws {
@@ -169,6 +169,7 @@ private func twoRegionMap() -> (Regions, MutableGridMap) {
 /// 12: `*********4*****4*`
 /// 13: `*444444444444444*`
 /// 14: `*****************`
+// swiftlint:disable function_body_length
 private func fiveRegionMap() -> (Regions, MutableGridMap) {
 
     let region1 = [
@@ -194,7 +195,7 @@ private func fiveRegionMap() -> (Regions, MutableGridMap) {
     let region3 = [
         "_______",
         "_______",
-        "_______",
+        "_______"
     ]
     
     let region4 = [

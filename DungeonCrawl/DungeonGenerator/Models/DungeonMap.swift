@@ -21,7 +21,8 @@ struct DungeonMap: GridMap {
     
     init(tiles: [[Tile]] = [[Tile]]()) {
         self.tiles = tiles
-        assert(size.height == 0 || (size.width % 2 == 1 && size.height % 2 == 1), "Width and height must be odd numbers.")
+        assert(size.height == 0 || (size.width % 2 == 1 && size.height % 2 == 1),
+               "Width and height must be odd numbers.")
     }
     
     init(size: GridSize) {

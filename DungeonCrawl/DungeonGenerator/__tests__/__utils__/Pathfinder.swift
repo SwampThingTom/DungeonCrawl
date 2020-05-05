@@ -72,7 +72,7 @@ class Pathfinder {
         return map.tile(at: cell)?.isObstacle ?? true
     }
 
-    /// MARK: Open Nodes
+    // MARK: Open Nodes
     
     private var openList = [PathNode]()
 
@@ -80,7 +80,7 @@ class Pathfinder {
         openList.sort()
         let node = openList.remove(at: 0)
         node.close()
-        return node;
+        return node
     }
     
     private func addToOpenList(node: PathNode) {
@@ -110,7 +110,7 @@ class PathNode: Equatable, Comparable {
     
     let cell: GridCell
     private(set) var status: NodeStatus = .unknown
-    private(set) var previous: PathNode? = nil
+    private(set) var previous: PathNode?
     private(set) var costFromStart: Int = 0
     private(set) var estimatedCostToDestination: Int = 0
 
@@ -149,7 +149,7 @@ class PathNode: Equatable, Comparable {
     }
 
     func update(previous: PathNode, costFromStart: Int) {
-        self.previous = previous;
+        self.previous = previous
         self.costFromStart = costFromStart
     }
     

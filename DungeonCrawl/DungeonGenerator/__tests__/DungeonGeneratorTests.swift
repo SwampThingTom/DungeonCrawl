@@ -107,7 +107,7 @@ class DungeonGeneratorTests: XCTestCase {
         
         self.measure {
             let sut = DungeonGenerator(roomAttempts: maxRooms)
-            let _ = sut.generate(size: size)
+            _ = sut.generate(size: size)
         }
     }
     

@@ -58,7 +58,7 @@ class MazeGenerator: MazeGenerating {
                 continue
             }
             
-            // TODO: prefer last direction
+            // LATER: prefer last direction
             let direction = possibleDirections.randomElement(using: &randomNumberGenerator)!
             let cellsToCarve = path(for: cell, heading: direction)
             carve(cell: cellsToCarve[0], in: &map, regions: &regions)

@@ -24,11 +24,11 @@ struct AnyRandomNumberGenerator: RandomNumberGenerator {
         return self.generator.next()
     }
     
-    public mutating func next<T>() -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    public mutating func next<T>() -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return self.generator.next()
     }
     
-    public mutating func next<T>(upperBound: T) -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    public mutating func next<T>(upperBound: T) -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return self.generator.next(upperBound: upperBound)
     }
 }

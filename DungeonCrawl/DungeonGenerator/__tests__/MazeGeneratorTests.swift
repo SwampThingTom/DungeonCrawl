@@ -172,7 +172,7 @@ class MazeGeneratorTests: XCTestCase {
         XCTAssertEqual(regions.count, 2)
     }
     
-    /// MARK: - Test helpers
+    // MARK: - Test helpers
     
     /// The number of tiles in the map that are floor tiles.
     func floorTileCount(in map: GridMap) -> Int {
