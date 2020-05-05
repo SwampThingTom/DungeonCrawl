@@ -100,7 +100,17 @@ class DungeonGeneratorTests: XCTestCase {
         XCTAssert(allRoomsAreReachable(dungeon))
         XCTAssert(dungeon.map.hasNoDeadEnds)
     }
-
+    
+    func testPerformance() throws {
+        let size = GridSize(width: 99, height: 99)
+        let maxRooms = 5
+        
+        self.measure {
+            let sut = DungeonGenerator(roomAttempts: maxRooms)
+            let _ = sut.generate(size: size)
+        }
+    }
+    
     func roomTilesAreFilled(_ dungeon: DungeonModel) -> Bool {
         for room in dungeon.rooms {
             if !tilesMatch(dungeon.map, bounds: room.bounds, expected: .floor) {
