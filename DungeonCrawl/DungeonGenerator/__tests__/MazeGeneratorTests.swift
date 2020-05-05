@@ -179,8 +179,8 @@ class MazeGeneratorTests: XCTestCase {
         var count = 0
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) == .floor {
+                let location = GridCell(x: x, y: y)
+                if map.tile(at: location) == .floor {
                     count += 1
                 }
             }
@@ -198,14 +198,14 @@ class MazeGeneratorTests: XCTestCase {
         return areAllTilesWalls(in: map)
     }
     
-    func floodFill(map: inout MutableGridMap, start: GridPoint) {
+    func floodFill(map: inout MutableGridMap, start: GridCell) {
         var activeCells = [start]
         while let cell = activeCells.popLast() {
-            map.setCell(location: cell, tile: .wall)
+            map.setTile(at: cell, tile: .wall)
             for direction in Direction.allCases {
                 let (x, y) = direction.offsets
-                let neighbor = GridPoint(x: cell.x + x, y: cell.y + y)
-                if map.cell(location: neighbor) == .floor {
+                let neighbor = GridCell(x: cell.x + x, y: cell.y + y)
+                if map.tile(at: neighbor) == .floor {
                     activeCells.append(neighbor)
                 }
             }
@@ -216,8 +216,8 @@ class MazeGeneratorTests: XCTestCase {
     func areAllTilesWalls(in map: GridMap) -> Bool {
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) != .wall {
+                let location = GridCell(x: x, y: y)
+                if map.tile(at: location) != .wall {
                     return false
                 }
             }
@@ -226,11 +226,11 @@ class MazeGeneratorTests: XCTestCase {
     }
     
     /// Returns the first found tile that is a floor tile.
-    func firstFloorTile(in map: GridMap) -> GridPoint? {
+    func firstFloorTile(in map: GridMap) -> GridCell? {
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) == .floor {
+                let location = GridCell(x: x, y: y)
+                if map.tile(at: location) == .floor {
                     return location
                 }
             }

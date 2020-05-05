@@ -54,8 +54,8 @@ extension GridMap {
     var hasNoDeadEnds: Bool {
         for x in 0 ..< size.width {
             for y in 0 ..< size.height {
-                let location = GridPoint(x: x, y: y)
-                guard cell(location: location) != .wall else {
+                let location = GridCell(x: x, y: y)
+                guard tile(at: location) != .wall else {
                     continue
                 }
                 if exitCount(for: location) == 1 {
@@ -66,10 +66,10 @@ extension GridMap {
         return true
     }
     
-    func exitCount(for location: GridPoint) -> Int {
+    func exitCount(for location: GridCell) -> Int {
         var exitCount = 0
         for neighbor in neighboringCells(location) {
-            guard let cell = cell(location: neighbor.cell) else {
+            guard let cell = tile(at: neighbor.cell) else {
                 continue
             }
             switch cell {
@@ -98,7 +98,7 @@ private func emptyMap() -> MutableGridMap {
 /// `***`
 private func singleTileMap() -> MutableGridMap {
     let mapBuilder = MockMapBuilder(size: GridSize(width: 3, height: 3))
-    mapBuilder.addTiles(origin: GridPoint(x: 1, y: 1), description: ["_"])
+    mapBuilder.addTiles(origin: GridCell(x: 1, y: 1), description: ["_"])
     return mapBuilder.build()
 }
 
@@ -140,7 +140,7 @@ private func fiveRegionMap() -> MutableGridMap {
     ]
     
     let mapBuilder = MockMapBuilder(size: GridSize(width: 17, height: 15))
-    mapBuilder.addTiles(origin: GridPoint(x: 1, y: 1), description: tiles)
+    mapBuilder.addTiles(origin: GridCell(x: 1, y: 1), description: tiles)
     return mapBuilder.build()
 }
 
@@ -152,18 +152,18 @@ private class MockMapBuilder {
         self.map = DungeonMap(size: size)
     }
     
-    func addTiles(origin: GridPoint, description gridStrings: [String]) {
+    func addTiles(origin: GridCell, description gridStrings: [String]) {
         for y in 0 ..< gridStrings.count {
             let gridString = gridStrings[y]
             var x = 0
             for index in gridString.indices {
                 if gridString[index] == "_" {
-                    let cell = GridPoint(x: origin.x + x, y: origin.y + y)
-                    map.setCell(location: cell, tile: .floor)
+                    let cell = GridCell(x: origin.x + x, y: origin.y + y)
+                    map.setTile(at: cell, tile: .floor)
                 }
                 if gridString[index] == "$" {
-                    let cell = GridPoint(x: origin.x + x, y: origin.y + y)
-                    map.setCell(location: cell, tile: .door)
+                    let cell = GridCell(x: origin.x + x, y: origin.y + y)
+                    map.setTile(at: cell, tile: .door)
                 }
                 x += 1
             }

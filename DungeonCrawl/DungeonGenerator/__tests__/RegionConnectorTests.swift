@@ -89,7 +89,7 @@ extension GridMap {
     func connector(in range: GridRect) -> Bool {
         for x in range.gridXRange {
             for y in range.gridYRange {
-                if cell(location: GridPoint(x: x, y: y)) == .door {
+                if tile(at: GridCell(x: x, y: y)) == .door {
                     return true
                 }
             }
@@ -120,7 +120,7 @@ private func emptyMap() -> (Regions, MutableGridMap) {
 /// `***`
 private func singleTileMap() -> (Regions, MutableGridMap) {
     let mapBuilder = MockMapBuilder(size: GridSize(width: 3, height: 3))
-    mapBuilder.addRegion(origin: GridPoint(x: 1, y: 1), description: ["_"])
+    mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: ["_"])
     return mapBuilder.build()
 }
 
@@ -145,8 +145,8 @@ private func twoRegionMap() -> (Regions, MutableGridMap) {
     ]
     
     let mapBuilder = MockMapBuilder(size: GridSize(width: 9, height: 5))
-    mapBuilder.addRegion(origin: GridPoint(x: 1, y: 1), description: region1)
-    mapBuilder.addRegion(origin: GridPoint(x: 5, y: 1), description: region2)
+    mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: region1)
+    mapBuilder.addRegion(origin: GridCell(x: 5, y: 1), description: region2)
     return mapBuilder.build()
 }
 
@@ -220,11 +220,11 @@ private func fiveRegionMap() -> (Regions, MutableGridMap) {
     ]
     
     let mapBuilder = MockMapBuilder(size: GridSize(width: 17, height: 15))
-    mapBuilder.addRegion(origin: GridPoint(x: 1, y: 1), description: region1)
-    mapBuilder.addRegion(origin: GridPoint(x: 7, y: 1), description: region2)
-    mapBuilder.addRegion(origin: GridPoint(x: 1, y: 9), description: region3)
-    mapBuilder.addRegion(origin: GridPoint(x: 1, y: 1), description: region4)
-    mapBuilder.addRegion(origin: GridPoint(x: 13, y: 7), description: region5)
+    mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: region1)
+    mapBuilder.addRegion(origin: GridCell(x: 7, y: 1), description: region2)
+    mapBuilder.addRegion(origin: GridCell(x: 1, y: 9), description: region3)
+    mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: region4)
+    mapBuilder.addRegion(origin: GridCell(x: 13, y: 7), description: region5)
     return mapBuilder.build()
 }
 
@@ -238,16 +238,16 @@ private class MockMapBuilder {
         self.regions = Regions()
     }
     
-    func addRegion(origin: GridPoint, description gridStrings: [String]) {
+    func addRegion(origin: GridCell, description gridStrings: [String]) {
         regions.newRegion()
         for y in 0 ..< gridStrings.count {
             let gridString = gridStrings[y]
             var x = 0
             for index in gridString.indices {
                 if gridString[index] == "_" {
-                    let cell = GridPoint(x: origin.x + x, y: origin.y + y)
+                    let cell = GridCell(x: origin.x + x, y: origin.y + y)
                     regions.add(cell: cell)
-                    map.setCell(location: cell, tile: .floor)
+                    map.setTile(at: cell, tile: .floor)
                 }
                 x += 1
             }

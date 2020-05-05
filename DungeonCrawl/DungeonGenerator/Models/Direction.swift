@@ -27,17 +27,17 @@ extension Direction {
     }
 }
 
-typealias NeighborCell = (direction: Direction, cell: GridPoint)
+typealias NeighborCell = (direction: Direction, cell: GridCell)
 
-extension GridPoint {
+extension GridCell {
     
-    /// The `GridPoint` of the cell in the given direction.
-    func neighbor(direction: Direction, distance: Int = 1) -> GridPoint {
-        return GridPoint(x: x + distance * direction.gridOffset.x,
+    /// The `GridCell` of the cell in the given direction.
+    func neighbor(direction: Direction, distance: Int = 1) -> GridCell {
+        return GridCell(x: x + distance * direction.gridOffset.x,
                          y: y + distance * direction.gridOffset.y)
     }
     
-    /// The `GridPoint` in each of the four directions from the current cell.
+    /// The `GridCell` in each of the four directions from the current cell.
     /// - Note: These may not all be valid cells on a particular `GridMap`.
     func neighbors(distance: Int = 1) -> [NeighborCell] {
         Direction.allCases.map { (
@@ -50,9 +50,9 @@ extension GridPoint {
 extension GridMap {
     
     /// The valid neighboring cells for the given cell.
-    func neighboringCells(_ cell: GridPoint, distance: Int = 1) -> [NeighborCell] {
+    func neighboringCells(_ cell: GridCell, distance: Int = 1) -> [NeighborCell] {
         return cell.neighbors(distance: distance).compactMap {
-            isValid(location: $0.cell) ? $0 : nil
+            isValid(cell: $0.cell) ? $0 : nil
         }
     }
 }

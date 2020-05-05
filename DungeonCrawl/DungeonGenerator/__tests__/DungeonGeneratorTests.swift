@@ -123,8 +123,8 @@ class DungeonGeneratorTests: XCTestCase {
     func tilesMatch(_ map: GridMap, bounds: GridRect, expected: Tile) -> Bool {
         for x in bounds.gridXRange {
             for y in bounds.gridYRange {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) != expected {
+                let location = GridCell(x: x, y: y)
+                if map.tile(at: location) != expected {
                     return false
                 }
             }
@@ -133,28 +133,28 @@ class DungeonGeneratorTests: XCTestCase {
     }
     
     func allRoomsAreReachable(_ dungeon: DungeonModel) -> Bool {
-        guard let startTile = findStartTile(dungeon.map) else { return false }
+        guard let startCell = findStartCell(dungeon.map) else { return false }
         for room in dungeon.rooms {
-            if !pathExists(from: startTile, to: room.bounds.origin, in: dungeon) {
+            if !pathExists(from: startCell, to: room.bounds.origin, in: dungeon) {
                 return false
             }
         }
         return true
     }
     
-    func findStartTile(_ map: GridMap) -> GridPoint? {
+    func findStartCell(_ map: GridMap) -> GridCell? {
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                if map.cell(location: location) == .floor {
-                    return GridPoint(x: x, y: y)
+                let location = GridCell(x: x, y: y)
+                if map.tile(at: location) == .floor {
+                    return GridCell(x: x, y: y)
                 }
             }
         }
         return nil
     }
     
-    func pathExists(from start: GridPoint, to end: GridPoint, in dungeon: DungeonModel) -> Bool {
+    func pathExists(from start: GridCell, to end: GridCell, in dungeon: DungeonModel) -> Bool {
         let pathfinder = Pathfinder(map: dungeon.map)
         return pathfinder.findPath(from: start, to: end).count > 0
     }

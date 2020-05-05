@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias CellRegionPair = (cell: GridPoint, region: Int)
+typealias CellRegionPair = (cell: GridCell, region: Int)
 
 protocol RegionConnecting {
     func connect(regions: inout Regions, in map: inout MutableGridMap)
@@ -35,8 +35,8 @@ class RegionConnector: RegionConnecting {
         }
     }
     
-    private func addConnection(location: GridPoint, to map: inout MutableGridMap) {
-        map.setCell(location: location, tile: .door)
+    private func addConnection(location: GridCell, to map: inout MutableGridMap) {
+        map.setTile(at: location, tile: .door)
     }
 }
 
@@ -52,7 +52,7 @@ private extension Regions {
         return borderCells
     }
     
-    func regionsConnectingCell(location: GridPoint, to region: Int, in map: GridMap) -> [Int] {
+    func regionsConnectingCell(location: GridCell, to region: Int, in map: GridMap) -> [Int] {
         var bordersRegion = false
         var neighborRegions = [Int]()
         for neighbor in map.neighboringCells(location) {
@@ -71,13 +71,13 @@ private extension Regions {
 
 private extension GridMap {
     
-    func wallCells() -> [GridPoint] {
-        var wallCells = [GridPoint]()
+    func wallCells() -> [GridCell] {
+        var wallCells = [GridCell]()
         // No need to test the outermost rows and columns.
         for x in 1 ..< self.size.width - 1 {
             for y in 1 ..< self.size.height - 1 {
-                let location = GridPoint(x: x, y: y)
-                if self.cell(location: location) == .wall {
+                let location = GridCell(x: x, y: y)
+                if tile(at: location) == .wall {
                     wallCells.append(location)
                 }
             }

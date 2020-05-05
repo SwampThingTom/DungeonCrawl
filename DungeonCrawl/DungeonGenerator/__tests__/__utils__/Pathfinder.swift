@@ -11,10 +11,10 @@
 class Pathfinder {
     
     private let adjacentNodes = [
-        AdjacentNode(offset: GridPoint(x: 0, y: -1), cost: 10),
-        AdjacentNode(offset: GridPoint(x: -1, y: 0), cost: 10),
-        AdjacentNode(offset: GridPoint(x: 1, y: 0), cost: 10),
-        AdjacentNode(offset: GridPoint(x: 0, y: 1), cost: 10)
+        AdjacentNode(offset: GridCell(x: 0, y: -1), cost: 10),
+        AdjacentNode(offset: GridCell(x: -1, y: 0), cost: 10),
+        AdjacentNode(offset: GridCell(x: 1, y: 0), cost: 10),
+        AdjacentNode(offset: GridCell(x: 0, y: 1), cost: 10)
     ]
     
     private let map: GridMap
@@ -25,36 +25,36 @@ class Pathfinder {
         pathMap = PathNode.createNodeMap(size: map.size)
     }
     
-    func findPath(from start: GridPoint, to end: GridPoint) -> [GridPoint] {
+    func findPath(from start: GridCell, to end: GridCell) -> [GridCell] {
         guard let bestPathNode = findBestPath(from: start, to: end) else {
             return []
         }
-        return bestPathNode.map { $0.tile }.reversed()
+        return bestPathNode.map { $0.cell }.reversed()
     }
     
-    private func findBestPath (from start: GridPoint, to end: GridPoint) -> PathNode? {
+    private func findBestPath (from start: GridCell, to end: GridCell) -> PathNode? {
         addToOpenList(node: pathMap[start.x][start.y])
         while !openList.isEmpty {
             let node = bestOpenNode
-            if node.tile == end {
+            if node.cell == end {
                 return node
             }
             
             for adjacent in adjacentNodes {
-                let adjacentTile = GridPoint(x: node.tile.x + adjacent.offset.x,
-                                             y: node.tile.y + adjacent.offset.y)
-                if !map.isValid(location: adjacentTile) || tileIsObstacle(adjacentTile) {
+                let adjacentCell = GridCell(x: node.cell.x + adjacent.offset.x,
+                                             y: node.cell.y + adjacent.offset.y)
+                if !map.isValid(cell: adjacentCell) || cellHasObstacle(adjacentCell) {
                     continue
                 }
                 
-                let adjacentNode = pathMap[adjacentTile.x][adjacentTile.y]
+                let adjacentNode = pathMap[adjacentCell.x][adjacentCell.y]
                 if adjacentNode.isClosed {
                     continue
                 }
                 
                 let costFromStart = node.costFromStart + adjacent.cost
                 if !adjacentNode.isOpen {
-                    let costToDest = 10 * (abs(end.x - adjacentTile.x) + abs(end.y - adjacentTile.y))
+                    let costToDest = 10 * (abs(end.x - adjacentCell.x) + abs(end.y - adjacentCell.y))
                     addToOpenList(node: adjacentNode,
                                   previous: node,
                                   costFromStart: costFromStart,
@@ -68,8 +68,8 @@ class Pathfinder {
         return nil
     }
     
-    private func tileIsObstacle(_ tile: GridPoint) -> Bool {
-        return map.cell(location: tile) == .wall
+    private func cellHasObstacle(_ cell: GridCell) -> Bool {
+        return map.tile(at: cell)?.isObstacle ?? true
     }
 
     /// MARK: Open Nodes
@@ -96,7 +96,7 @@ class Pathfinder {
 }
 
 struct AdjacentNode {
-    let offset: GridPoint
+    let offset: GridCell
     let cost: Int
 }
 
@@ -108,7 +108,7 @@ enum NodeStatus {
 
 class PathNode: Equatable, Comparable {
     
-    let tile: GridPoint
+    let cell: GridCell
     private(set) var status: NodeStatus = .unknown
     private(set) var previous: PathNode? = nil
     private(set) var costFromStart: Int = 0
@@ -131,13 +131,13 @@ class PathNode: Equatable, Comparable {
         let columnRange = [Int](0 ..< size.height)
         return rowRange.map { x in
             columnRange.map { y in
-                PathNode(tile: GridPoint(x: x, y: y))
+                PathNode(cell: GridCell(x: x, y: y))
             }
         }
     }
     
-    private init(tile: GridPoint) {
-        self.tile = tile
+    private init(cell: GridCell) {
+        self.cell = cell
     }
     
     func open() {
@@ -160,7 +160,7 @@ class PathNode: Equatable, Comparable {
     }
     
     static func == (lhs: PathNode, rhs: PathNode) -> Bool {
-        return lhs.tile == rhs.tile
+        return lhs.cell == rhs.cell
     }
     
     static func < (lhs: PathNode, rhs: PathNode) -> Bool {

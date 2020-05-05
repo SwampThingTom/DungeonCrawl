@@ -16,8 +16,8 @@ extension GridMap  {
         guard size == map.size else { return false }
         for x in 0 ..< size.width {
             for y in 0 ..< size.height {
-                let location = GridPoint(x: x, y: y)
-                if cell(location: location) != map.cell(location: location) {
+                let cell = GridCell(x: x, y: y)
+                if tile(at: cell) != map.tile(at: cell) {
                     return false
                 }
             }

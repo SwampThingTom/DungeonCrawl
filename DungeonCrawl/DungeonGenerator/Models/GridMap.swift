@@ -8,7 +8,8 @@
 
 import Foundation
 
-/// A map defined by a grid of cells. Individual cells are identified by locations ranging from
+/// A map defined by a grid of cells, each containing a tile.
+/// Individual cells are identified by locations ranging from
 /// `(x: 0 ..< size.width, y: 0 ..< size.height)`.
 protocol GridMap {
     
@@ -16,18 +17,18 @@ protocol GridMap {
     var size: GridSize { get }
     
     /// Indicates whether the given location is within the bounds of the grid.
-    func isValid(location: GridPoint) -> Bool
+    func isValid(cell: GridCell) -> Bool
 
     /// The value of the cell at the given location.
     /// Returns `nil` if the location is not within the grid.
-    func cell(location: GridPoint) -> Tile?
+    func tile(at cell: GridCell) -> Tile?
 }
 
 protocol MutableGridMap: GridMap {
     
     /// Sets the value of the cell at the given location.
     /// If location is not within the grid, throws fatal index out of range exception.
-    mutating func setCell(location: GridPoint, tile: Tile)
+    mutating func setTile(at cell: GridCell, tile: Tile)
     
     /// Sets the value of all of the cells in the givne bounds.
     /// If locations are not within the grid, throws fatal index out of range exception.
@@ -35,7 +36,7 @@ protocol MutableGridMap: GridMap {
 }
 
 struct GridRect: Equatable {
-    let origin: GridPoint
+    let origin: GridCell
     let size: GridSize
     
     var gridXRange: CountableRange<Int> {
@@ -47,12 +48,12 @@ struct GridRect: Equatable {
     }
     
     init(x: Int, y: Int, width: Int, height: Int) {
-        origin = GridPoint(x: x, y: y)
+        origin = GridCell(x: x, y: y)
         size = GridSize(width: width, height: height)
     }
 }
 
-struct GridPoint: Equatable, Hashable {
+struct GridCell: Equatable, Hashable {
     let x: Int
     let y: Int
 }
@@ -68,7 +69,7 @@ extension GridMap {
         var description = String()
         for y in 0 ..< size.height {
             for x in 0 ..< size.width {
-                let tile = cell(location: GridPoint(x: x, y: y))
+                let tile = self.tile(at: GridCell(x: x, y: y))
                 description += tile?.description ?? "?"
             }
             description += "\n"

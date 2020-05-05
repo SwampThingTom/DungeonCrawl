@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias DeadEnd = (cell: GridPoint, exit: Direction)
+typealias DeadEnd = (cell: GridCell, exit: Direction)
 
 protocol DeadEndRemoving {
     func removeDeadEnds(from map: inout MutableGridMap)
@@ -26,8 +26,8 @@ class DeadEndRemover: DeadEndRemoving {
         var deadEnds = [DeadEnd]()
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
-                let location = GridPoint(x: x, y: y)
-                guard map.cell(location: location) == .floor else {
+                let location = GridCell(x: x, y: y)
+                guard map.tile(at: location) == .floor else {
                     continue
                 }
                 let exits = map.exits(for: location)
@@ -43,7 +43,7 @@ class DeadEndRemover: DeadEndRemoving {
         var nextDeadEnd = deadEnd
         while true {
             let cell = nextDeadEnd.cell
-            map.setCell(location: cell, tile: .wall)
+            map.setTile(at: cell, tile: .wall)
             let nextCell = cell.neighbor(direction: nextDeadEnd.exit)
             let nextCellExits = map.exits(for: nextCell)
             if nextCellExits.count != 1 {
@@ -56,10 +56,10 @@ class DeadEndRemover: DeadEndRemoving {
 
 extension GridMap {
     
-    func exits(for location: GridPoint) -> [Direction] {
+    func exits(for location: GridCell) -> [Direction] {
         var exits = [Direction]()
         for neighbor in neighboringCells(location) {
-            guard let cell = cell(location: neighbor.cell) else {
+            guard let cell = tile(at: neighbor.cell) else {
                 continue
             }
             if !cell.isObstacle {

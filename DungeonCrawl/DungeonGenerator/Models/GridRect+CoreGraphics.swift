@@ -19,7 +19,7 @@ extension GridRect {
     }
     
     init(rect: CGRect) {
-        origin = GridPoint(x: Int(rect.origin.x), y: Int(rect.origin.y))
+        origin = GridCell(x: Int(rect.origin.x), y: Int(rect.origin.y))
         size = GridSize(width: Int(rect.size.width), height: Int(rect.size.height))
     }
     

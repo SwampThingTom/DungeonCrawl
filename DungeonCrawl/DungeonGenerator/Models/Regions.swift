@@ -13,7 +13,7 @@ import Foundation
 struct Regions {
     
     /// Map of cell locations to region.
-    var regionMap = Dictionary<GridPoint, Int>()
+    var regionMap = Dictionary<GridCell, Int>()
     
     /// The number of regions.
     var count: Int { activeRegions.count }
@@ -27,7 +27,7 @@ struct Regions {
     }
     
     /// Adds a cell location to the current region.
-    mutating func add(cell location: GridPoint) {
+    mutating func add(cell location: GridCell) {
         regionMap[location] = currentRegion
         activeRegions.insert(currentRegion)
     }
@@ -36,7 +36,7 @@ struct Regions {
     mutating func add(rect: GridRect) {
         for x in rect.gridXRange {
             for y in rect.gridYRange {
-                add(cell: GridPoint(x: x, y: y))
+                add(cell: GridCell(x: x, y: y))
             }
         }
     }
