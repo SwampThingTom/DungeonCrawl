@@ -15,14 +15,10 @@ class DungeonTileMapBuilderTests: XCTestCase {
 
     func testBuild() throws {
         // Arrange
-        let dungeonGenerator = MockDungeonGenerator()
-        dungeonGenerator.mockDungeonModel = DungeonModel(map: fiveRegionMap(),
-                                                         rooms: [])
-        let dungeonSize = GridSize(width: 32, height: 32)
+        let map = fiveRegionMap()
         let tileSet = SKTileSet(named: "Dungeon")!
         let tileSize = CGSize(width: 32, height: 32)
-        let sut = DungeonTileMapBuilder(dungeonGenerator: dungeonGenerator,
-                                        dungeonSize: dungeonSize,
+        let sut = DungeonTileMapBuilder(map: map,
                                         tileSet: tileSet,
                                         tileSize: tileSize)
         
@@ -30,24 +26,10 @@ class DungeonTileMapBuilderTests: XCTestCase {
         let tileMap = sut.build()
         
         // Assert
-        XCTAssertEqual(tileMap.numberOfColumns, dungeonSize.width)
-        XCTAssertEqual(tileMap.numberOfRows, dungeonSize.height)
+        XCTAssertEqual(tileMap.numberOfColumns, map.size.width)
+        XCTAssertEqual(tileMap.numberOfRows, map.size.height)
         XCTAssertEqual(tileMap.tileSet, tileSet)
         XCTAssertEqual(tileMap.tileSize, tileSize)
-    }
-}
-
-class MockDungeonGenerator: DungeonGenerating {
-    
-    // The value to be returned by generate.
-    var mockDungeonModel: DungeonModel?
-    
-    // The value provided to generate for size.
-    var generateGridSize: GridSize?
-    
-    func generate(size: GridSize) -> DungeonModel {
-        generateGridSize = size
-        return mockDungeonModel!
     }
 }
 

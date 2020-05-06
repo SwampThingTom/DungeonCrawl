@@ -14,28 +14,25 @@ protocol TileMapBuilder {
 
 struct DungeonTileMapBuilder: TileMapBuilder {
     
-    private let dungeonGenerator: DungeonGenerating
-    private let dungeonSize: GridSize
+    private let map: GridMap
     private let tileSet: SKTileSet
     private let tileSize: CGSize
     
-    init(dungeonGenerator: DungeonGenerating, dungeonSize: GridSize, tileSet: SKTileSet, tileSize: CGSize) {
-        self.dungeonGenerator = dungeonGenerator
-        self.dungeonSize = dungeonSize
+    init(map: GridMap, tileSet: SKTileSet, tileSize: CGSize) {
+        self.map = map
         self.tileSet = tileSet
         self.tileSize = tileSize
     }
     
     func build() -> SKTileMapNode {
-        let dungeon = dungeonGenerator.generate(size: dungeonSize)
         let tileMap = SKTileMapNode(tileSet: tileSet,
-                                    columns: dungeonSize.width,
-                                    rows: dungeonSize.height,
+                                    columns: map.size.width,
+                                    rows: map.size.height,
                                     tileSize: tileSize)
-        for x in 0 ..< dungeonSize.width {
-            for y in 0 ..< dungeonSize.height {
+        for x in 0 ..< map.size.width {
+            for y in 0 ..< map.size.height {
                 let cell = GridCell(x: x, y: y)
-                if let tile = dungeon.map.tile(at: cell) {
+                if let tile = map.tile(at: cell) {
                     tileMap.setCell(cell, to: tile)
                 }
             }

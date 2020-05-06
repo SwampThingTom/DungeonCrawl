@@ -12,6 +12,7 @@ import GameplayKit
 class DungeonScene: SKScene {
     
     let dungeonSize = GridSize(width: 25, height: 25)
+    var dungeonModel: DungeonModel!
     
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
@@ -32,8 +33,8 @@ class DungeonScene: SKScene {
     func newMap() {
         removeAllChildren()
         let dungeonGenerator = DungeonGenerator()
-        let mapBuilder = DungeonTileMapBuilder(dungeonGenerator: dungeonGenerator,
-                                               dungeonSize: dungeonSize,
+        dungeonModel = dungeonGenerator.generate(size: dungeonSize)
+        let mapBuilder = DungeonTileMapBuilder(map: dungeonModel.map,
                                                tileSet: tileSet,
                                                tileSize: tileSize)
         tileMap = mapBuilder.build()
