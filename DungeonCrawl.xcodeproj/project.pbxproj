@@ -11,6 +11,9 @@
 		89FCB22007F6FB73FA4C7918 /* Pods_DungeonCrawlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
+		E25FB15224620692000A90A8 /* DungeonTileMapBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FB15124620692000A90A8 /* DungeonTileMapBuilder.swift */; };
+		E25FB15524620E16000A90A8 /* DungeonTileMapBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FB15424620E16000A90A8 /* DungeonTileMapBuilderTests.swift */; };
+		E25FB15924621DEB000A90A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */; };
 		E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */; };
 		E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */; };
@@ -59,6 +62,8 @@
 		B167E8A2771D4CD9D27B946B /* Pods-DungeonCrawl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawl.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawl/Pods-DungeonCrawl.release.xcconfig"; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E25FB15124620692000A90A8 /* DungeonTileMapBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTileMapBuilder.swift; sourceTree = "<group>"; };
+		E25FB15424620E16000A90A8 /* DungeonTileMapBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTileMapBuilderTests.swift; sourceTree = "<group>"; };
 		E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeneratorTests.swift; sourceTree = "<group>"; };
 		E292EA12245DD3F4002A0F31 /* MazeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGenerator.swift; sourceTree = "<group>"; };
 		E292EA14245DD6BA002A0F31 /* MazeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeGeneratorTests.swift; sourceTree = "<group>"; };
@@ -145,6 +150,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		E25FB14C2461DB45000A90A8 /* DungeonScene */ = {
+			isa = PBXGroup;
+			children = (
+				E25FB15324620DFE000A90A8 /* __tests__ */,
+				E25FB15124620692000A90A8 /* DungeonTileMapBuilder.swift */,
+			);
+			path = DungeonScene;
+			sourceTree = "<group>";
+		};
+		E25FB15324620DFE000A90A8 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E25FB15424620E16000A90A8 /* DungeonTileMapBuilderTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
 		E292EA2624604BF2002A0F31 /* __utils__ */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
+				E25FB14C2461DB45000A90A8 /* DungeonScene */,
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
@@ -348,6 +371,7 @@
 				E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */,
 				E2B2A1EB2457BCE8000ED955 /* Assets.xcassets in Resources */,
 				E225E7412461862E00F60E45 /* Assets.xcassets in Resources */,
+				E25FB14E2461DD49000A90A8 /* DungeonScene.sks in Resources */,
 				E2B2A1EE2457BCE8000ED955 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25FB15924621DEB000A90A8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +458,7 @@
 			files = (
 				E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */,
 				E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */,
+				E25FB1502461DE0B000A90A8 /* DungeonScene.swift in Sources */,
 				E2B2A227245920C5000ED955 /* AnyRandomNumberGenerator.swift in Sources */,
 				E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */,
 				E292EA2A2460B1F6002A0F31 /* DeadEndRemover.swift in Sources */,
@@ -447,6 +473,7 @@
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
+				E25FB15224620692000A90A8 /* DungeonTileMapBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25FB15524620E16000A90A8 /* DungeonTileMapBuilderTests.swift in Sources */,
 				E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */,
 				E292EA21245F0525002A0F31 /* RegionConnectorTests.swift in Sources */,
 				E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */,
