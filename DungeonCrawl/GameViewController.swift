@@ -20,7 +20,6 @@ class GameViewController: UIViewController {
         }
         
         if let scene = SKScene(fileNamed: "DungeonScene") {
-            scene.scaleMode = .aspectFill
             view.presentScene(scene)
         }
         

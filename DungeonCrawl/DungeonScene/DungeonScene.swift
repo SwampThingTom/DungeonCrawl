@@ -22,6 +22,7 @@ class DungeonScene: SKScene {
             fatalError("Unable to load DungeonTileSet")
         }
         self.tileSet = tileSet
+        scaleMode = .resizeFill
     }
     
     override func didMove(to view: SKView) {
