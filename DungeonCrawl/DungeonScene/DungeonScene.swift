@@ -37,6 +37,9 @@ class DungeonScene: SKScene {
         generateDungeon()
         buildTileMap()
         decorateDungeon()
+        let camera = createCamera()
+        addChild(camera)
+        self.camera = camera
     }
     
     private func generateDungeon() {
@@ -59,6 +62,14 @@ class DungeonScene: SKScene {
         }
         player.position = tileMap.centerOfTile(atColumn: cell.x, row: cell.y)
         addChild(player)
+    }
+    
+    private func createCamera() -> SKCameraNode {
+        let camera = SKCameraNode()
+        let zero = SKRange(constantValue: 0)
+        let followPlayer = SKConstraint.distance(zero, to: player)
+        camera.constraints = [followPlayer]
+        return camera
     }
 
     func touchDown(atPoint pos: CGPoint) {
