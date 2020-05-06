@@ -16,6 +16,8 @@ class DungeonScene: SKScene {
     
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
+    var player = Player()
+    
     let tileSize = CGSize(width: 32, height: 32)
     
     override func sceneDidLoad() {
@@ -34,6 +36,7 @@ class DungeonScene: SKScene {
         removeAllChildren()
         generateDungeon()
         buildTileMap()
+        decorateDungeon()
     }
     
     private func generateDungeon() {
@@ -49,6 +52,15 @@ class DungeonScene: SKScene {
         addChild(tileMap)
     }
     
+    private func decorateDungeon() {
+        let dungeonDecorator = DungeonDecorator(dungeon: dungeonModel)
+        guard let cell = dungeonDecorator.playerStartCell() else {
+            fatalError("Unable to create a starting location for the player")
+        }
+        player.position = tileMap.centerOfTile(atColumn: cell.x, row: cell.y)
+        addChild(player)
+    }
+
     func touchDown(atPoint pos: CGPoint) {
     }
     

@@ -47,6 +47,7 @@
 		E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */; };
 		E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE124631030005C11AD /* DungeonDecorator.swift */; };
 		E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */; };
+		E2C98AE92463247B005C11AD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE82463247B005C11AD /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGenerator.swift; sourceTree = "<group>"; };
 		E2C98AE124631030005C11AD /* DungeonDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDecorator.swift; sourceTree = "<group>"; };
 		E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDecoratorTests.swift; sourceTree = "<group>"; };
+		E2C98AE82463247B005C11AD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
 				E25FB14C2461DB45000A90A8 /* DungeonScene */,
 				E225E73D246185EF00F60E45 /* Resources */,
+				E2C98AE72463244B005C11AD /* Sprites */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
@@ -292,6 +295,14 @@
 				E2B2A226245920C5000ED955 /* AnyRandomNumberGenerator.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E2C98AE72463244B005C11AD /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				E2C98AE82463247B005C11AD /* Player.swift */,
+			);
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,6 +487,7 @@
 				E292EA2A2460B1F6002A0F31 /* DeadEndRemover.swift in Sources */,
 				E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */,
 				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,
+				E2C98AE92463247B005C11AD /* Player.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
