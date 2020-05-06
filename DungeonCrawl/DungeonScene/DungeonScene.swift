@@ -30,10 +30,18 @@ class DungeonScene: SKScene {
         newMap()
     }
     
-    func newMap() {
+    private func newMap() {
         removeAllChildren()
+        generateDungeon()
+        buildTileMap()
+    }
+    
+    private func generateDungeon() {
         let dungeonGenerator = DungeonGenerator()
         dungeonModel = dungeonGenerator.generate(size: dungeonSize)
+    }
+    
+    private func buildTileMap() {
         let mapBuilder = DungeonTileMapBuilder(map: dungeonModel.map,
                                                tileSet: tileSet,
                                                tileSize: tileSize)
