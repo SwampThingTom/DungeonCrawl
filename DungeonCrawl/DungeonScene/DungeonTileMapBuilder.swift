@@ -36,7 +36,7 @@ struct DungeonTileMapBuilder: TileMapBuilder {
             for y in 0 ..< dungeonSize.height {
                 let cell = GridCell(x: x, y: y)
                 if let tile = dungeon.map.tile(at: cell) {
-                    tileMap.setCell(cell, to: tile, using: tileSet)
+                    tileMap.setCell(cell, to: tile)
                 }
             }
         }
@@ -46,7 +46,7 @@ struct DungeonTileMapBuilder: TileMapBuilder {
 
 extension SKTileMapNode {
     
-    func setCell(_ cell: GridCell, to tile: Tile, using tileSet: SKTileSet) {
+    func setCell(_ cell: GridCell, to tile: Tile) {
         let tileGroup = tileSet.tileGroup(for: tile)
         setTileGroup(tileGroup, forColumn: cell.x, row: cell.y)
     }
