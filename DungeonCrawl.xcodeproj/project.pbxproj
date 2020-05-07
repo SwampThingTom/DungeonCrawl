@@ -52,6 +52,8 @@
 		E2E4E82624639D1B00F5EA93 /* DungeonScenePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82524639D1B00F5EA93 /* DungeonScenePresenterTests.swift */; };
 		E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */; };
 		E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */; };
+		E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */; };
+		E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		E2E4E82524639D1B00F5EA93 /* DungeonScenePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScenePresenterTests.swift; sourceTree = "<group>"; };
 		E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
+		E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
+		E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -329,6 +333,7 @@
 			children = (
 				E2E4E82B2464354800F5EA93 /* __tests__ */,
 				E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */,
+				E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */,
 			);
 			path = SKTUtils;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */,
+				E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */,
+				E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */,
 				E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */,
 				E25FB1502461DE0B000A90A8 /* DungeonScene.swift in Sources */,
 				E2B2A227245920C5000ED955 /* AnyRandomNumberGenerator.swift in Sources */,
@@ -550,6 +557,7 @@
 				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
+				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,
 				E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */,
 				E2E4E82624639D1B00F5EA93 /* DungeonScenePresenterTests.swift in Sources */,
 				E2C98AEF246379C6005C11AD /* DungeonSceneInteractorTests.swift in Sources */,
