@@ -46,7 +46,6 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
 
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
-        removeAllChildren()
         addTileMap(tileMap)
         addPlayer(position: playerStartPosition)
         addCamera()
