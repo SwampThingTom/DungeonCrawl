@@ -74,24 +74,30 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         let followPlayer = SKConstraint.distance(zero, to: player)
         camera.constraints = [followPlayer]
         return camera
-    }
 
-    func touchDown(atPoint pos: CGPoint) {
+    func touchDown(at pos: CGPoint) {
+        player.move(target: pos)
     }
     
-    func touchMoved(toPoint pos: CGPoint) {
+    func touchMoved(to pos: CGPoint) {
     }
     
-    func touchUp(atPoint pos: CGPoint) {
+    func touchUp(at pos: CGPoint) {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        touchDown(at: touch.location(in: self))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        touchMoved(to: touch.location(in: self))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        touchUp(at: touch.location(in: self))
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
