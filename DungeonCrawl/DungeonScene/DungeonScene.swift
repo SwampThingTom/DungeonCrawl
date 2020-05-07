@@ -15,60 +15,57 @@ protocol DungeonSceneDisplaying {
 
 class DungeonScene: SKScene, DungeonSceneDisplaying {
     
-    let dungeonSize = GridSize(width: 25, height: 25)
-    var dungeonModel: DungeonModel!
+    var interactor: DungeonSceneInteracting!
     
+    let tileSize = CGSize(width: 32, height: 32)
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
     var player = Player()
-    
-    let tileSize = CGSize(width: 32, height: 32)
-    
+        
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
             fatalError("Unable to load DungeonTileSet")
         }
         self.tileSet = tileSet
         scaleMode = .resizeFill
+        setup()
+    }
+    
+    private func setup() {
+        var presenter = DungeonScenePresenter(tileSet: tileSet, tileSize: tileSize)
+        presenter.scene = self
+        var interactor = DungeonSceneInteractor()
+        interactor.presenter = presenter
+        interactor.dungeonGenerator = DungeonGenerator()
+        self.interactor = interactor
     }
     
     override func didMove(to view: SKView) {
-        newMap()
+        let dungeonSize = GridSize(width: 25, height: 25)
+        interactor.createScene(dungeonSize: dungeonSize)
     }
 
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
-    }
-    
-    private func newMap() {
         removeAllChildren()
-        generateDungeon()
-        buildTileMap()
-        decorateDungeon()
-        let camera = createCamera()
-        addChild(camera)
-        self.camera = camera
+        addTileMap(tileMap)
+        addPlayer(position: playerStartPosition)
+        addCamera()
     }
     
-    private func generateDungeon() {
-        let dungeonGenerator = DungeonGenerator()
-        dungeonModel = dungeonGenerator.generate(size: dungeonSize)
-    }
-    
-    private func buildTileMap() {
-        let mapBuilder = DungeonTileMapBuilder(map: dungeonModel.map,
-                                               tileSet: tileSet,
-                                               tileSize: tileSize)
-        tileMap = mapBuilder.build()
+    private func addTileMap(_ tileMap: SKTileMapNode) {
+        self.tileMap = tileMap
         addChild(tileMap)
     }
     
-    private func decorateDungeon() {
-        let dungeonDecorator = DungeonDecorator(dungeon: dungeonModel)
-        guard let cell = dungeonDecorator.playerStartCell() else {
-            fatalError("Unable to create a starting location for the player")
-        }
-        player.position = tileMap.centerOfTile(atColumn: cell.x, row: cell.y)
+    private func addPlayer(position: CGPoint) {
+        player.position = position
         addChild(player)
+    }
+    
+    private func addCamera() {
+        let camera = createCamera()
+        addChild(camera)
+        self.camera = camera
     }
     
     private func createCamera() -> SKCameraNode {
@@ -86,7 +83,6 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     func touchUp(atPoint pos: CGPoint) {
-        newMap()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,7 +92,6 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        newMap()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
