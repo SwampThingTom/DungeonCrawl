@@ -29,14 +29,22 @@ struct DungeonScenePresenter: DungeonScenePresenting {
                                     columns: map.size.width,
                                     rows: map.size.height,
                                     tileSize: tileSize)
+        var obstacles = [SKPhysicsBody]()
         for x in 0 ..< map.size.width {
             for y in 0 ..< map.size.height {
                 let cell = GridCell(x: x, y: y)
                 if let tile = map.tile(at: cell) {
                     tileMap.setCell(cell, to: tile)
+                    if tile.isObstacle {
+                        let obstacleBody = tileMap.wallPhysicsBody(at: cell)
+                        obstacles.append(obstacleBody)
+                    }
                 }
             }
         }
+        tileMap.physicsBody = SKPhysicsBody(bodies: obstacles)
+        tileMap.physicsBody?.isDynamic = false
+        tileMap.physicsBody?.friction = 0
         return tileMap
     }
 }
@@ -46,6 +54,11 @@ extension SKTileMapNode {
     func setCell(_ cell: GridCell, to tile: Tile) {
         let tileGroup = tileSet.tileGroup(for: tile)
         setTileGroup(tileGroup, forColumn: cell.x, row: cell.y)
+    }
+    
+    func wallPhysicsBody(at cell: GridCell) -> SKPhysicsBody {
+        let center = centerOfTile(atColumn: cell.x, row: cell.y)
+        return SKPhysicsBody(rectangleOf: tileSize, center: center)
     }
 }
 
