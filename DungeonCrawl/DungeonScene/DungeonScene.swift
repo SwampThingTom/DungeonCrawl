@@ -63,17 +63,13 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     private func addCamera() {
-        let camera = createCamera()
+        guard let view = view else {
+            fatalError("Unable to get view for DungeonScene")
+        }
+        let camera = DungeonCamera(follow: player, mapNode: tileMap, viewBounds: view.bounds)
         addChild(camera)
         self.camera = camera
     }
-    
-    private func createCamera() -> SKCameraNode {
-        let camera = SKCameraNode()
-        let zero = SKRange(constantValue: 0)
-        let followPlayer = SKConstraint.distance(zero, to: player)
-        camera.constraints = [followPlayer]
-        return camera
 
     func touchDown(at pos: CGPoint) {
         player.move(target: pos)
