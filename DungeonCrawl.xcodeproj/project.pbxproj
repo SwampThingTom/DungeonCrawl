@@ -50,6 +50,8 @@
 		E2C98AED2463795F005C11AD /* DungeonScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */; };
 		E2C98AEF246379C6005C11AD /* DungeonSceneInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AEE246379C6005C11AD /* DungeonSceneInteractorTests.swift */; };
 		E2E4E82624639D1B00F5EA93 /* DungeonScenePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82524639D1B00F5EA93 /* DungeonScenePresenterTests.swift */; };
+		E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */; };
+		E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScenePresenter.swift; sourceTree = "<group>"; };
 		E2C98AEE246379C6005C11AD /* DungeonSceneInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSceneInteractorTests.swift; sourceTree = "<group>"; };
 		E2E4E82524639D1B00F5EA93 /* DungeonScenePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScenePresenterTests.swift; sourceTree = "<group>"; };
+		E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -247,6 +251,7 @@
 				E25FB14C2461DB45000A90A8 /* DungeonScene */,
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2C98AE72463244B005C11AD /* Sprites */,
+				E2E4E827246433F200F5EA93 /* Utils */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
@@ -309,6 +314,31 @@
 				E2C98AE82463247B005C11AD /* Player.swift */,
 			);
 			path = Sprites;
+			sourceTree = "<group>";
+		};
+		E2E4E827246433F200F5EA93 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E2E4E8282464340300F5EA93 /* SKTUtils */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E2E4E8282464340300F5EA93 /* SKTUtils */ = {
+			isa = PBXGroup;
+			children = (
+				E2E4E82B2464354800F5EA93 /* __tests__ */,
+				E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */,
+			);
+			path = SKTUtils;
+			sourceTree = "<group>";
+		};
+		E2E4E82B2464354800F5EA93 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */,
+			);
+			path = __tests__;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -503,6 +533,7 @@
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
+				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
 				E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */,
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
@@ -525,6 +556,7 @@
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
+				E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
