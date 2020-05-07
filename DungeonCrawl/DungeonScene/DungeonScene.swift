@@ -9,7 +9,11 @@
 import SpriteKit
 import GameplayKit
 
-class DungeonScene: SKScene {
+protocol DungeonSceneDisplaying {
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint)
+}
+
+class DungeonScene: SKScene, DungeonSceneDisplaying {
     
     let dungeonSize = GridSize(width: 25, height: 25)
     var dungeonModel: DungeonModel!
@@ -30,6 +34,9 @@ class DungeonScene: SKScene {
     
     override func didMove(to view: SKView) {
         newMap()
+    }
+
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
     }
     
     private func newMap() {

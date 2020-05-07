@@ -1,5 +1,5 @@
 //
-//  DungeonSceneInteractorTests.swift
+//  DungeonScenePresenterTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/6/20.
@@ -8,43 +8,48 @@
 
 @testable import DungeonCrawl
 
+import SpriteKit
 import XCTest
 
-class DungeonSceneInteractorTests: XCTestCase {
+class DungeonScenePresenterTests: XCTestCase {
 
-    func testCreateScene() throws {
+    func testPresentScene() throws {
         // Arrange
-        let presenter = MockDungeonScenePresenter()
-        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
-        let dungeonGenerator = MockDungeonGenerator()
-        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
-        var sut = DungeonSceneInteractor()
-        sut.presenter = presenter
-        sut.dungeonGenerator = dungeonGenerator
+        let scene = MockDungeonScene()
+        let tileSet = SKTileSet(named: "Dungeon")!
+        let tileSize = CGSize(width: 32, height: 32)
+        let map = fiveRegionMap()
+        let dungeonModel = DungeonModel(map: map, rooms: [])
+        let playerStartCell = GridCell(x: 13, y: 3)
+        let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
         
         // Act
-        sut.createScene(dungeonSize: expectedDungeonModel.map.size)
+        sut.presentScene(dungeon: dungeonModel, playerStartCell: playerStartCell)
         
         // Assert
-        XCTAssertEqual(presenter.presentSceneDungeonModel?.map.size, expectedDungeonModel.map.size)
+        let tileMap = scene.displaySceneTileMap!
+        let dungeonMap = dungeonModel.map
+        XCTAssertEqual(tileMap.numberOfColumns, dungeonMap.size.width)
+        XCTAssertEqual(tileMap.numberOfRows, dungeonMap.size.height)
+        XCTAssertEqual(tileMap.tileSet, tileSet)
+        XCTAssertEqual(tileMap.tileSize, tileSize)
+        
+        let playerStartPosition = scene.displayScenePlayerStartPosition!
+        let mapColumn = tileMap.tileColumnIndex(fromPosition: playerStartPosition)
+        let mapRow = tileMap.tileRowIndex(fromPosition: playerStartPosition)
+        let mapCell = GridCell(x: mapColumn, y: mapRow)
+        XCTAssertEqual(playerStartCell, mapCell)
     }
 }
 
-class MockDungeonScenePresenter: DungeonScenePresenting {
+class MockDungeonScene: DungeonSceneDisplaying {
     
-    var presentSceneDungeonModel: DungeonModel?
+    var displaySceneTileMap: SKTileMapNode?
+    var displayScenePlayerStartPosition: CGPoint?
     
-    func presentScene(dungeon: DungeonModel, playerStartCell: GridCell) {
-        presentSceneDungeonModel = dungeon
-    }
-}
-
-class MockDungeonGenerator: DungeonGenerating {
-    
-    var mockGenerateDungeonModel: DungeonModel?
-    
-    func generate(size: GridSize) -> DungeonModel {
-        return mockGenerateDungeonModel!
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
+        displaySceneTileMap = tileMap
+        displayScenePlayerStartPosition = playerStartPosition
     }
 }
 
