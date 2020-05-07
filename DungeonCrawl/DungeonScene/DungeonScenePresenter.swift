@@ -40,3 +40,49 @@ struct DungeonScenePresenter: DungeonScenePresenting {
         return tileMap
     }
 }
+
+extension SKTileMapNode {
+    
+    func setCell(_ cell: GridCell, to tile: Tile) {
+        let tileGroup = tileSet.tileGroup(for: tile)
+        setTileGroup(tileGroup, forColumn: cell.x, row: cell.y)
+    }
+}
+
+extension SKTileSet {
+    
+    func tileGroup(for tile: Tile) -> SKTileGroup {
+        switch tile {
+        case .wall:
+            return wallTileGroup
+        case .floor:
+            return floorTileGroup
+        case .door:
+            return doorTileGroup
+        }
+    }
+    
+    var wallsTileGroup: SKTileGroup {
+        // LATER: use adjacency group rules
+        return tileGroup(named: "Walls")
+    }
+    
+    var wallTileGroup: SKTileGroup {
+        return tileGroup(named: "Wall")
+    }
+    
+    var floorTileGroup: SKTileGroup {
+        return tileGroup(named: "Floor")
+    }
+    
+    var doorTileGroup: SKTileGroup {
+        return tileGroup(named: "Door")
+    }
+
+    func tileGroup(named name: String) -> SKTileGroup {
+        guard let tileGroup = self.tileGroups.first(where: { $0.name == name }) else {
+            fatalError("Unable to find tile group named \(name)")
+        }
+        return tileGroup
+    }
+}
