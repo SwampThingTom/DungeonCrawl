@@ -21,7 +21,9 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
     var player = Player()
-        
+    
+    var lastUpdateTime: TimeInterval = 0
+    
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
             fatalError("Unable to load DungeonTileSet")
@@ -69,9 +71,15 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         addChild(camera)
         self.camera = camera
     }
+    
+    override func update(_ currentTime: TimeInterval) {
+        let deltaTime = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
+        lastUpdateTime = currentTime
+        player.update(deltaTime)
+    }
 
     func touchDown(at pos: CGPoint) {
-        player.move(target: pos)
+        player.move(to: pos)
     }
     
     func touchMoved(to pos: CGPoint) {
@@ -96,9 +104,5 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
 }
