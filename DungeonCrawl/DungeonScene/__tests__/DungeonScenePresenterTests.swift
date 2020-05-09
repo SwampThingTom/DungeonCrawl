@@ -33,7 +33,6 @@ class DungeonScenePresenterTests: XCTestCase {
         XCTAssertEqual(tileMap.numberOfRows, dungeonMap.size.height)
         XCTAssertEqual(tileMap.tileSet, tileSet)
         XCTAssertEqual(tileMap.tileSize, tileSize)
-        XCTAssertEqual(tileMap.physicsBody!.area, 5.9, accuracy: 0.2)
         
         let playerStartPosition = scene.displayScenePlayerStartPosition!
         let mapColumn = tileMap.tileColumnIndex(fromPosition: playerStartPosition)

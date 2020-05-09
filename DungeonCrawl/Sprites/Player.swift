@@ -19,7 +19,6 @@ class Player: SKSpriteNode {
         super.init(texture: texture, color: .white, size: texture.size())
         name = "Player"
         zPosition = 50
-        physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
     }
     
     required init?(coder aDecoder: NSCoder) {
