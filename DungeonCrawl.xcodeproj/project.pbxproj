@@ -10,6 +10,8 @@
 		77833BCFBB41A67479A3C035 /* Pods_DungeonCrawl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */; };
 		89FCB22007F6FB73FA4C7918 /* Pods_DungeonCrawlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */; };
 		E216F5CE2466CAFC00844BF8 /* DungeonCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E8322464408000F5EA93 /* DungeonCamera.swift */; };
+		E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5CF24670F2E00844BF8 /* CGFloat+Extensions.swift */; };
+		E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E25FB14E2461DD49000A90A8 /* DungeonScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25FB14D2461DD49000A90A8 /* DungeonScene.sks */; };
@@ -72,6 +74,8 @@
 		92768E9600B71E15C1D571EC /* Pods-DungeonCrawlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.debug.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.debug.xcconfig"; sourceTree = "<group>"; };
 		935E634EBE517E61572844D5 /* Pods-DungeonCrawlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.release.xcconfig"; sourceTree = "<group>"; };
 		B167E8A2771D4CD9D27B946B /* Pods-DungeonCrawl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawl.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawl/Pods-DungeonCrawl.release.xcconfig"; sourceTree = "<group>"; };
+		E216F5CF24670F2E00844BF8 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E25FB14D2461DD49000A90A8 /* DungeonScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonScene.sks; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				E2E4E82B2464354800F5EA93 /* __tests__ */,
 				E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */,
 				E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */,
+				E216F5CF24670F2E00844BF8 /* CGFloat+Extensions.swift */,
 			);
 			path = SKTUtils;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			children = (
 				E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */,
 				E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */,
+				E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -543,6 +549,7 @@
 				E2C98AED2463795F005C11AD /* DungeonScenePresenter.swift in Sources */,
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
+				E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */,
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
 				E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */,
@@ -557,6 +564,7 @@
 			files = (
 				E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */,
 				E292EA21245F0525002A0F31 /* RegionConnectorTests.swift in Sources */,
+				E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */,
 				E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */,
 				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
