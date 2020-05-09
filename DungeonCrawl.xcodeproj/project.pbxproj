@@ -60,6 +60,7 @@
 		E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */; };
 		E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */; };
 		E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */; };
+		E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
 		E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E2E4E8322464408000F5EA93 /* DungeonCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonCamera.swift; sourceTree = "<group>"; };
+		E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTurnState.swift; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 				E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */,
 				E2C98AEA24637618005C11AD /* DungeonSceneInteractor.swift */,
 				E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */,
+				E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */,
 				E216F5CB2466CA6300844BF8 /* PlayerAction.swift */,
 				E216F5D324671E5600844BF8 /* SKTileMapNode+Grid.swift */,
 			);
@@ -559,6 +562,7 @@
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
 				E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */,
+				E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */,
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
 				E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */,

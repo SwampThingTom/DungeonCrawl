@@ -14,8 +14,6 @@ enum PlayerSettings {
 
 class Player: SKSpriteNode {
     
-    private var targetPosition: CGPoint?
-    
     init() {
         let texture = SKTexture(imageNamed: "Player_Female_South_01")
         super.init(texture: texture, color: .white, size: texture.size())
@@ -26,29 +24,5 @@ class Player: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use default initializer")
-    }
-    
-    func move(to newTargetPosition: CGPoint) {
-        targetPosition = newTargetPosition
-    }
-    
-    func update(_ deltaTime: TimeInterval) {
-        move(deltaTime)
-    }
-    
-    private func move(_ deltaTime: TimeInterval) {
-        guard let targetPosition = targetPosition else { return }
-        
-        let offset = targetPosition - position
-        let length = offset.length()
-        guard length > PlayerSettings.speed / 60.0 else {
-            position = targetPosition
-            self.targetPosition = nil
-            return
-        }
-        
-        let velocity = (offset / length) * PlayerSettings.speed
-        let distance = velocity * CGFloat(deltaTime)
-        position += distance
     }
 }

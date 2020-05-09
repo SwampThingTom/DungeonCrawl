@@ -11,18 +11,24 @@ import GameplayKit
 
 protocol DungeonSceneDisplaying {
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint)
+    func displayActionForTurn(action: SKAction)
+    func displayEndOfTurn()
 }
 
 class DungeonScene: SKScene, DungeonSceneDisplaying {
     
-    var interactor: DungeonSceneInteracting!
+    private var interactor: DungeonSceneInteracting!
     
-    let tileSize = CGSize(width: 32, height: 32)
-    var tileSet: SKTileSet!
-    var tileMap: SKTileMapNode!
-    var player = Player()
+    private let tileSize = CGSize(width: 32, height: 32)
+    private var tileSet: SKTileSet!
+    private var tileMap: SKTileMapNode!
+    private var player = Player()
     
-    var lastUpdateTime: TimeInterval = 0
+    private var gameState: DungeonTurnState = .waitingForInput {
+        didSet {
+            print("gameState is now \(gameState)")
+        }
+    }
     
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
@@ -46,7 +52,9 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         let dungeonSize = GridSize(width: 25, height: 25)
         interactor.createScene(dungeonSize: dungeonSize)
     }
-
+    
+    // MARK: - DungeonSceneDisplaying
+    
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
         addTileMap(tileMap)
         addPlayer(position: playerStartPosition)
@@ -71,21 +79,39 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         addChild(camera)
         self.camera = camera
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-        let deltaTime = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
-        lastUpdateTime = currentTime
-        player.update(deltaTime)
-    }
 
-    func touchDown(at pos: CGPoint) {
-        player.move(to: pos)
+    private func takePlayerTurn(_ playerAction: PlayerAction) {
+        guard gameState == .waitingForInput else {
+            return
+        }
+        interactor.takeTurn(playerAction: playerAction, tileMap: tileMap, playerNodeName: player.name!)
     }
     
-    func touchMoved(to pos: CGPoint) {
+    func displayActionForTurn(action: SKAction) {
+        gameState = .takingTurn
+        run(action)
     }
     
-    func touchUp(at pos: CGPoint) {
+    func displayEndOfTurn() {
+        gameState = .waitingForInput
+    }
+    
+    // MARK: - Player input
+    
+    private func touchDown(at position: CGPoint) {
+    }
+    
+    private func touchMoved(to position: CGPoint) {
+    }
+    
+    private func touchUp(at position: CGPoint) {
+        guard let direction = Direction.direction(from: player.position, to: position) else {
+            fatalError("Unable to calculate direction from \(player.position) to \(position)")
+        }
+        let playerCell = tileMap.cell(for: player.position)
+        let targetCell = playerCell.neighbor(direction: direction)
+        let action = PlayerAction.move(to: targetCell)
+        takePlayerTurn(action)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
