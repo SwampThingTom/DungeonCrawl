@@ -1,5 +1,5 @@
 //
-//  SKTileMapNode+Grid.swift
+//  GridCellProviding.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/9/20.
