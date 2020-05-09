@@ -110,6 +110,9 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         }
         let playerCell = tileMap.cell(for: player.position)
         let targetCell = playerCell.neighbor(direction: direction)
+        guard !tileMap.isObstacle(targetCell) else {
+            return
+        }
         let action = PlayerAction.move(to: targetCell)
         takePlayerTurn(action)
     }
