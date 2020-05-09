@@ -41,6 +41,36 @@ class DungeonScenePresenterTests: XCTestCase {
         let mapCell = GridCell(x: mapColumn, y: mapRow)
         XCTAssertEqual(playerStartCell, mapCell)
     }
+    
+    func testPresentActionsForTurn() throws {
+        // Arrange
+        let scene = MockDungeonScene()
+        let tileSet = SKTileSet(named: "Dungeon")!
+        let tileSize = CGSize(width: 32, height: 32)
+        let point = CGPoint(x: CGFloat(50.0), y: CGFloat(50.0))
+        let nodeActions = [NodeAction(nodeName: "player", action: SpriteAction.move(to: point))]
+        let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
+        
+        // Act
+        sut.presentActionsForTurn(actions: nodeActions, endOfTurnBlock: {})
+        
+        // Assert
+        XCTAssertNotNil(scene.displayActionsForTurnAction)
+    }
+    
+    func testPresentEndOfTurn() throws {
+        // Arrange
+        let scene = MockDungeonScene()
+        let tileSet = SKTileSet(named: "Dungeon")!
+        let tileSize = CGSize(width: 32, height: 32)
+        let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
+        
+        // Act
+        sut.presentEndOfTurn()
+        
+        // Assert
+        XCTAssert(scene.displayEndOfTurnCalled)
+    }
 }
 
 class MockDungeonScene: DungeonSceneDisplaying {
@@ -51,6 +81,18 @@ class MockDungeonScene: DungeonSceneDisplaying {
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
         displaySceneTileMap = tileMap
         displayScenePlayerStartPosition = playerStartPosition
+    }
+    
+    var displayActionsForTurnAction: SKAction?
+    
+    func displayActionForTurn(action: SKAction) {
+        displayActionsForTurnAction = action
+    }
+    
+    var displayEndOfTurnCalled = false
+    
+    func displayEndOfTurn() {
+        displayEndOfTurnCalled = true
     }
 }
 

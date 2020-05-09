@@ -8,8 +8,14 @@
 
 import SpriteKit
 
+enum GameSettings {
+    static let turnDuration: TimeInterval = 0.5
+}
+
 protocol DungeonScenePresenting {
     func presentScene(dungeon: DungeonModel, playerStartCell: GridCell)
+    func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void)
+    func presentEndOfTurn()
 }
 
 struct DungeonScenePresenter: DungeonScenePresenting {
@@ -46,6 +52,33 @@ struct DungeonScenePresenter: DungeonScenePresenting {
         tileMap.physicsBody?.isDynamic = false
         tileMap.physicsBody?.friction = 0
         return tileMap
+    }
+    
+    func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void) {
+        let spriteActions = actions.map { spriteAction(for: $0) }
+        let turnAction = SKAction.group(spriteActions)        
+        let endOfTurnAction = runAtEndOfTurnAction(endOfTurnBlock)
+        let action = SKAction.sequence([turnAction, endOfTurnAction])
+        scene?.displayActionForTurn(action: action)
+    }
+    
+    private func spriteAction(for nodeAction: NodeAction) -> SKAction {
+        switch nodeAction.action {
+        case .move(let position):
+            let spriteAction = SKAction.move(to: position, duration: GameSettings.turnDuration)
+            let action = SKAction.run(spriteAction, onChildWithName: nodeAction.nodeName)
+            return action
+        }
+    }
+    
+    private func runAtEndOfTurnAction(_ block: @escaping () -> Void) -> SKAction {
+        let waitAction = SKAction.wait(forDuration: GameSettings.turnDuration)
+        let endOfTurnAction = SKAction.run(block)
+        return SKAction.sequence([waitAction, endOfTurnAction])
+    }
+    
+    func presentEndOfTurn() {
+        scene?.displayEndOfTurn()
     }
 }
 

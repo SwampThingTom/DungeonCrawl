@@ -28,14 +28,49 @@ class DungeonSceneInteractorTests: XCTestCase {
         // Assert
         XCTAssertEqual(presenter.presentSceneDungeonModel?.map.size, expectedDungeonModel.map.size)
     }
+    
+    func testTakeTurn_move() throws {
+        // Arrange
+        let playerAction = PlayerAction.move(to: GridCell(x: 5, y: 5))
+        let mockTileMap = MockTileMap()
+        let pointForGridCell = CGPoint(x: CGFloat(50.0), y: CGFloat(50.0))
+        let nodeAction = NodeAction(nodeName: "player", action: .move(to: pointForGridCell))
+        let expectedNodeActions = [nodeAction]
+        let presenter = MockDungeonScenePresenter()
+        var sut = DungeonSceneInteractor()
+        sut.presenter = presenter
+        
+        // Act
+        sut.takeTurn(playerAction: playerAction, tileMap: mockTileMap, playerNodeName: "player")
+        
+        // Assert
+        XCTAssertEqual(presenter.presentActionsForTurnActions, expectedNodeActions)
+        XCTAssertFalse(presenter.presentEndOfTurnCalled)
+        presenter.presentEndOfTurnBlock!()
+        XCTAssertTrue(presenter.presentEndOfTurnCalled)
+    }
 }
 
 class MockDungeonScenePresenter: DungeonScenePresenting {
-    
+        
     var presentSceneDungeonModel: DungeonModel?
     
     func presentScene(dungeon: DungeonModel, playerStartCell: GridCell) {
         presentSceneDungeonModel = dungeon
+    }
+    
+    var presentActionsForTurnActions: [NodeAction]?
+    var presentEndOfTurnBlock: (() -> Void)?
+    
+    func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void) {
+        presentActionsForTurnActions = actions
+        presentEndOfTurnBlock = endOfTurnBlock
+    }
+    
+    var presentEndOfTurnCalled = false
+    
+    func presentEndOfTurn() {
+        presentEndOfTurnCalled = true
     }
 }
 
@@ -118,5 +153,17 @@ private class MockMapBuilder {
     
     func build() -> DungeonMap {
         return map
+    }
+}
+
+class MockTileMap: GridCellProviding {
+    func cell(for position: CGPoint) -> GridCell {
+        return GridCell(x: Int(position.x / 10.0),
+                        y: Int(position.y / 10.0))
+    }
+    
+    func center(of cell: GridCell) -> CGPoint {
+        return CGPoint(x: CGFloat(cell.x) * 10.0,
+                       y: CGFloat(cell.y) * 10.0)
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		77833BCFBB41A67479A3C035 /* Pods_DungeonCrawl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */; };
 		89FCB22007F6FB73FA4C7918 /* Pods_DungeonCrawlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */; };
+		E216F5CC2466CA6300844BF8 /* PlayerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5CB2466CA6300844BF8 /* PlayerAction.swift */; };
 		E216F5CE2466CAFC00844BF8 /* DungeonCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E8322464408000F5EA93 /* DungeonCamera.swift */; };
 		E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5CF24670F2E00844BF8 /* CGFloat+Extensions.swift */; };
 		E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */; };
@@ -76,6 +77,7 @@
 		92768E9600B71E15C1D571EC /* Pods-DungeonCrawlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.debug.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.debug.xcconfig"; sourceTree = "<group>"; };
 		935E634EBE517E61572844D5 /* Pods-DungeonCrawlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawlTests.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawlTests/Pods-DungeonCrawlTests.release.xcconfig"; sourceTree = "<group>"; };
 		B167E8A2771D4CD9D27B946B /* Pods-DungeonCrawl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DungeonCrawl.release.xcconfig"; path = "Target Support Files/Pods-DungeonCrawl/Pods-DungeonCrawl.release.xcconfig"; sourceTree = "<group>"; };
+		E216F5CB2466CA6300844BF8 /* PlayerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAction.swift; sourceTree = "<group>"; };
 		E216F5CF24670F2E00844BF8 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E216F5D324671E5600844BF8 /* SKTileMapNode+Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKTileMapNode+Grid.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */,
 				E2C98AEA24637618005C11AD /* DungeonSceneInteractor.swift */,
 				E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */,
+				E216F5CB2466CA6300844BF8 /* PlayerAction.swift */,
 				E216F5D324671E5600844BF8 /* SKTileMapNode+Grid.swift */,
 			);
 			path = DungeonScene;
@@ -561,6 +564,7 @@
 				E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */,
 				E216F5D424671E5600844BF8 /* SKTileMapNode+Grid.swift in Sources */,
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
+				E216F5CC2466CA6300844BF8 /* PlayerAction.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

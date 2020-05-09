@@ -6,10 +6,20 @@
 //  Copyright © 2020 Bayou Games. All rights reserved.
 //
 
-import Foundation
+import CoreGraphics
+
+enum SpriteAction: Equatable {
+    case move(to: CGPoint)
+}
+
+struct NodeAction: Equatable {
+    let nodeName: String
+    let action: SpriteAction
+}
 
 protocol DungeonSceneInteracting {
     func createScene(dungeonSize: GridSize)
+    func takeTurn(playerAction: PlayerAction, tileMap: GridCellProviding, playerNodeName: String)
 }
 
 struct DungeonSceneInteractor: DungeonSceneInteracting {
@@ -36,4 +46,35 @@ struct DungeonSceneInteractor: DungeonSceneInteracting {
         return nil
     }
 
+    func takeTurn(playerAction: PlayerAction, tileMap: GridCellProviding, playerNodeName: String) {
+        let playerNodeAction = nodeAction(for: playerAction, tileMap: tileMap, nodeName: playerNodeName)
+        guard let nodeAction = playerNodeAction else {
+            return
+        }
+        presenter?.presentActionsForTurn(actions: [nodeAction]) {
+            self.presenter?.presentEndOfTurn()
+        }
+    }
+    
+    private func nodeAction(for playerAction: PlayerAction,
+                            tileMap: GridCellProviding,
+                            nodeName: String) -> NodeAction? {
+        switch playerAction {
+        case .attack:
+            return nil
+            
+        case .move(let cell):
+            let position = tileMap.center(of: cell)
+            return NodeAction(nodeName: nodeName, action: .move(to: position))
+            
+        case .pickUp:
+            return nil
+            
+        case .rest:
+            return nil
+            
+        case .use:
+            return nil
+        }
+    }
 }
