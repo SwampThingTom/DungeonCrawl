@@ -8,15 +8,24 @@
 
 import Foundation
 
-class DungeonDecorator {
+struct DungeonDecorations {
+    let playerStartCell: GridCell
+}
+
+protocol DungeonDecorating {
+    func decorate(dungeon: DungeonModel) -> DungeonDecorations
+}
+
+struct DungeonDecorator: DungeonDecorating {
     
-    let dungeon: DungeonModel
-    
-    init(dungeon: DungeonModel) {
-        self.dungeon = dungeon
+    func decorate(dungeon: DungeonModel) -> DungeonDecorations {
+        guard let playerStartCell = playerStartCell(in: dungeon) else {
+            fatalError("Unable to place player in dungeon")
+        }
+        return DungeonDecorations(playerStartCell: playerStartCell)
     }
-    
-    func playerStartCell() -> GridCell? {
+
+    private func playerStartCell(in dungeon: DungeonModel) -> GridCell? {
         for x in 0 ..< dungeon.map.size.width {
             for y in 0 ..< dungeon.map.size.height {
                 let cell = GridCell(x: x, y: y)

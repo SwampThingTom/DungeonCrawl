@@ -12,17 +12,16 @@ import XCTest
 
 class DungeonDecoratorTests: XCTestCase {
 
-    func testPlayerStartCell() throws {
+    func testDecorate() throws {
         // Arrange
         let dungeon = DungeonModel(map: fiveRegionMap(), rooms: [])
-        let sut = DungeonDecorator(dungeon: dungeon)
+        let sut = DungeonDecorator()
         
         // Act
-        let playerStartCell = sut.playerStartCell()
+        let decorations = sut.decorate(dungeon: dungeon)
         
         // Assert
-        XCTAssertNotNil(playerStartCell)
-        let tileAtStartCell = dungeon.map.tile(at: playerStartCell!)
+        let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
     }
 }

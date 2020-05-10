@@ -26,6 +26,7 @@ struct DungeonSceneInteractor: DungeonSceneInteracting {
     
     var presenter: DungeonScenePresenting?
     var dungeonGenerator: DungeonGenerating?
+    var dungeonDecorator: DungeonDecorating?
     
     func createScene(dungeonSize: GridSize) {
         guard let presenter = presenter else { return }
