@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 protocol DungeonSceneDisplaying {
-    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint)
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint, enemySprites: [SKSpriteNode])
     func displayActionForTurn(action: SKAction)
     func animateSprite(heading: Direction, forSpriteNamed spriteName: String)
     func displayEndOfTurn()
@@ -56,7 +56,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     
     // MARK: - DungeonSceneDisplaying
     
-    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint, enemySprites: [SKSpriteNode]) {
         addTileMap(tileMap)
         addPlayer(position: playerStartPosition)
         addCamera()

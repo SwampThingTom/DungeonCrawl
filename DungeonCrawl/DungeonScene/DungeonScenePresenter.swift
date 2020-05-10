@@ -21,6 +21,7 @@ protocol DungeonScenePresenting {
 struct DungeonScenePresenter: DungeonScenePresenting {
     
     var scene: DungeonSceneDisplaying?
+    var enemySpriteProvider: EnemySpriteProviding?
     var tileSet: SKTileSet
     var tileSize: CGSize
     
@@ -28,7 +29,8 @@ struct DungeonScenePresenter: DungeonScenePresenting {
         let tileMap = self.tileMap(for: dungeon.map)
         let playerStartCell = decorations.playerStartCell
         let playerStartPosition = tileMap.centerOfTile(atColumn: playerStartCell.x, row: playerStartCell.y)
-        scene?.displayScene(tileMap: tileMap, playerStartPosition: playerStartPosition)
+        let enemies = sprites(for: decorations.enemies, on: tileMap)
+        scene?.displayScene(tileMap: tileMap, playerStartPosition: playerStartPosition, enemySprites: enemies)
     }
     
     private func tileMap(for map: GridMap) -> SKTileMapNode {
@@ -45,6 +47,14 @@ struct DungeonScenePresenter: DungeonScenePresenting {
             }
         }
         return tileMap
+    }
+    
+    private func sprites(for enemies: [EnemyModel], on map: SKTileMapNode) -> [SKSpriteNode] {
+        enemies.compactMap { enemy in
+            let sprite = enemySpriteProvider?.sprite(for: enemy.spriteName)
+            sprite?.position = map.centerOfTile(atColumn: enemy.cell.x, row: enemy.cell.y)
+            return sprite
+        }
     }
     
     func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void) {

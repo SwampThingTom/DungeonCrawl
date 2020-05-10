@@ -20,8 +20,14 @@ class DungeonScenePresenterTests: XCTestCase {
         let tileSize = CGSize(width: 32, height: 32)
         let map = fiveRegionMap()
         let dungeonModel = DungeonModel(map: map, rooms: [])
-        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3), enemies: [])
-        let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
+        let enemies = [
+            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 2, y: 2)),
+            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 13, y: 2)),
+            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 5, y: 9))
+        ]
+        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3), enemies: enemies)
+        var sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
+        sut.enemySpriteProvider = MockEnemySpriteProvider()
         
         // Act
         sut.presentScene(dungeon: dungeonModel, decorations: decorations)
@@ -39,6 +45,8 @@ class DungeonScenePresenterTests: XCTestCase {
         let mapRow = tileMap.tileRowIndex(fromPosition: playerStartPosition)
         let playerStartCell = GridCell(x: mapColumn, y: mapRow)
         XCTAssertEqual(playerStartCell, GridCell(x: 13, y: 3))
+        
+        XCTAssertEqual(scene.displaySceneEnemySprites?.count, enemies.count)
     }
     
     func testPresentActionsForTurn_move() throws {
@@ -78,10 +86,12 @@ class MockDungeonScene: DungeonSceneDisplaying {
     
     var displaySceneTileMap: SKTileMapNode?
     var displayScenePlayerStartPosition: CGPoint?
+    var displaySceneEnemySprites: [SKSpriteNode]?
     
-    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint) {
+    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint, enemySprites: [SKSpriteNode]) {
         displaySceneTileMap = tileMap
         displayScenePlayerStartPosition = playerStartPosition
+        displaySceneEnemySprites = enemySprites
     }
     
     var displayActionsForTurnAction: SKAction?
@@ -102,6 +112,13 @@ class MockDungeonScene: DungeonSceneDisplaying {
     
     func displayEndOfTurn() {
         displayEndOfTurnCalled = true
+    }
+}
+
+class MockEnemySpriteProvider: EnemySpriteProviding {
+    
+    func sprite(for enemyNamed: String) -> SKSpriteNode? {
+        return SKSpriteNode()
     }
 }
 
