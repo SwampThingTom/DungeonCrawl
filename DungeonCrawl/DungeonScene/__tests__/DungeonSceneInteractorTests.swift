@@ -58,6 +58,26 @@ class DungeonSceneInteractorTests: XCTestCase {
         presenter.presentEndOfTurnBlock!()
         XCTAssertTrue(presenter.presentEndOfTurnCalled)
     }
+    
+    func testTakeTurn_attack() throws {
+        // Arrange
+        let playerAction = PlayerAction.attack(cell: GridCell(x: 5, y: 5), heading: .west)
+        let mockTileMap = MockTileMap()
+        let nodeAction = NodeAction(nodeName: "player", action: .attack(heading: .west))
+        let expectedNodeActions = [nodeAction]
+        let presenter = MockDungeonScenePresenter()
+        var sut = DungeonSceneInteractor()
+        sut.presenter = presenter
+        
+        // Act
+        sut.takeTurn(playerAction: playerAction, tileMap: mockTileMap, playerNodeName: "player")
+        
+        // Assert
+        XCTAssertEqual(presenter.presentActionsForTurnActions, expectedNodeActions)
+        XCTAssertFalse(presenter.presentEndOfTurnCalled)
+        presenter.presentEndOfTurnBlock!()
+        XCTAssertTrue(presenter.presentEndOfTurnCalled)
+    }
 }
 
 class MockDungeonScenePresenter: DungeonScenePresenting {

@@ -67,6 +67,21 @@ class DungeonScenePresenterTests: XCTestCase {
         XCTAssertNotNil(scene.displayActionsForTurnAction)
     }
     
+    func testPresentActionsForTurn_attack() throws {
+        // Arrange
+        let scene = MockDungeonScene()
+        let tileSet = SKTileSet(named: "Dungeon")!
+        let tileSize = CGSize(width: 32, height: 32)
+        let nodeActions = [NodeAction(nodeName: "player", action: SpriteAction.attack(heading: .south))]
+        let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
+        
+        // Act
+        sut.presentActionsForTurn(actions: nodeActions, endOfTurnBlock: {})
+        
+        // Assert
+        XCTAssertNotNil(scene.displayActionsForTurnAction)
+    }
+
     func testPresentEndOfTurn() throws {
         // Arrange
         let scene = MockDungeonScene()
