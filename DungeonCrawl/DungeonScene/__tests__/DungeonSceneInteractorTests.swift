@@ -20,7 +20,8 @@ class DungeonSceneInteractorTests: XCTestCase {
         let dungeonGenerator = MockDungeonGenerator()
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13))
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                            enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         

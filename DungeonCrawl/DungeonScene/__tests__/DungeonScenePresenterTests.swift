@@ -20,7 +20,7 @@ class DungeonScenePresenterTests: XCTestCase {
         let tileSize = CGSize(width: 32, height: 32)
         let map = fiveRegionMap()
         let dungeonModel = DungeonModel(map: map, rooms: [])
-        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3))
+        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3), enemies: [])
         let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
         
         // Act

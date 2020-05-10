@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct DungeonDecorations: Equatable {
-    let playerStartCell: GridCell
-}
-
 protocol DungeonDecorating {
     func decorate(dungeon: DungeonModel) -> DungeonDecorations
 }
@@ -22,7 +18,7 @@ struct DungeonDecorator: DungeonDecorating {
         guard let playerStartCell = playerStartCell(in: dungeon) else {
             fatalError("Unable to place player in dungeon")
         }
-        return DungeonDecorations(playerStartCell: playerStartCell)
+        return DungeonDecorations(playerStartCell: playerStartCell, enemies: [])
     }
 
     private func playerStartCell(in dungeon: DungeonModel) -> GridCell? {
