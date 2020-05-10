@@ -13,7 +13,7 @@ enum GameSettings {
 }
 
 protocol DungeonScenePresenting {
-    func presentScene(dungeon: DungeonModel, playerStartCell: GridCell)
+    func presentScene(dungeon: DungeonModel, decorations: DungeonDecorations)
     func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void)
     func presentEndOfTurn()
 }
@@ -24,8 +24,9 @@ struct DungeonScenePresenter: DungeonScenePresenting {
     var tileSet: SKTileSet
     var tileSize: CGSize
     
-    func presentScene(dungeon: DungeonModel, playerStartCell: GridCell) {
+    func presentScene(dungeon: DungeonModel, decorations: DungeonDecorations) {
         let tileMap = self.tileMap(for: dungeon.map)
+        let playerStartCell = decorations.playerStartCell
         let playerStartPosition = tileMap.centerOfTile(atColumn: playerStartCell.x, row: playerStartCell.y)
         scene?.displayScene(tileMap: tileMap, playerStartPosition: playerStartPosition)
     }

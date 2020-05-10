@@ -20,11 +20,11 @@ class DungeonScenePresenterTests: XCTestCase {
         let tileSize = CGSize(width: 32, height: 32)
         let map = fiveRegionMap()
         let dungeonModel = DungeonModel(map: map, rooms: [])
-        let playerStartCell = GridCell(x: 13, y: 3)
+        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3))
         let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
         
         // Act
-        sut.presentScene(dungeon: dungeonModel, playerStartCell: playerStartCell)
+        sut.presentScene(dungeon: dungeonModel, decorations: decorations)
         
         // Assert
         let tileMap = scene.displaySceneTileMap!
@@ -37,8 +37,8 @@ class DungeonScenePresenterTests: XCTestCase {
         let playerStartPosition = scene.displayScenePlayerStartPosition!
         let mapColumn = tileMap.tileColumnIndex(fromPosition: playerStartPosition)
         let mapRow = tileMap.tileRowIndex(fromPosition: playerStartPosition)
-        let mapCell = GridCell(x: mapColumn, y: mapRow)
-        XCTAssertEqual(playerStartCell, mapCell)
+        let playerStartCell = GridCell(x: mapColumn, y: mapRow)
+        XCTAssertEqual(playerStartCell, GridCell(x: 13, y: 3))
     }
     
     func testPresentActionsForTurn_move() throws {

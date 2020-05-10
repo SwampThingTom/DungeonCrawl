@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DungeonDecorations {
+struct DungeonDecorations: Equatable {
     let playerStartCell: GridCell
 }
 

@@ -32,7 +32,7 @@ struct DungeonSceneInteractor: DungeonSceneInteracting {
         guard let presenter = presenter else { return }
         guard let dungeonModel = dungeonGenerator?.generate(size: dungeonSize) else { return }
         guard let decorations = dungeonDecorator?.decorate(dungeon: dungeonModel) else { return }
-        presenter.presentScene(dungeon: dungeonModel, playerStartCell: decorations.playerStartCell)
+        presenter.presentScene(dungeon: dungeonModel, decorations: decorations)
     }
 
     func takeTurn(playerAction: PlayerAction, tileMap: GridCellProviding, playerNodeName: String) {

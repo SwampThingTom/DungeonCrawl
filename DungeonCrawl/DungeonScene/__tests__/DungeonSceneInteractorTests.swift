@@ -20,9 +20,9 @@ class DungeonSceneInteractorTests: XCTestCase {
         let dungeonGenerator = MockDungeonGenerator()
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         
-        let expectedPlayerStartCell = GridCell(x: 1, y: 13)
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13))
         let dungeonDecorator = MockDungeonDecorator()
-        dungeonDecorator.mockDecorations = DungeonDecorations(playerStartCell: expectedPlayerStartCell)
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
         var sut = DungeonSceneInteractor()
         sut.presenter = presenter
@@ -34,7 +34,7 @@ class DungeonSceneInteractorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(presenter.presentSceneDungeonModel?.map.size, expectedDungeonModel.map.size)
-        XCTAssertEqual(presenter.presentScenePlayerStartCell, expectedPlayerStartCell)
+        XCTAssertEqual(presenter.presentSceneDecorations, expectedDungeonDecorations)
     }
     
     func testTakeTurn_move() throws {
@@ -62,11 +62,11 @@ class DungeonSceneInteractorTests: XCTestCase {
 class MockDungeonScenePresenter: DungeonScenePresenting {
         
     var presentSceneDungeonModel: DungeonModel?
-    var presentScenePlayerStartCell: GridCell?
+    var presentSceneDecorations: DungeonDecorations?
     
-    func presentScene(dungeon: DungeonModel, playerStartCell: GridCell) {
+    func presentScene(dungeon: DungeonModel, decorations: DungeonDecorations) {
         presentSceneDungeonModel = dungeon
-        presentScenePlayerStartCell = playerStartCell
+        presentSceneDecorations = decorations
     }
     
     var presentActionsForTurnActions: [NodeAction]?
