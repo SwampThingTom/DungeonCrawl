@@ -10,7 +10,7 @@ import Foundation
 
 enum PlayerAction {
     case attack
-    case move(to: GridCell)
+    case move(to: GridCell, heading: Direction)
     case pickUp
     case rest
     case use

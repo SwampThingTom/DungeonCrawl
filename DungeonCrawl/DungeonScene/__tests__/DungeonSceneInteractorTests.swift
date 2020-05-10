@@ -31,10 +31,10 @@ class DungeonSceneInteractorTests: XCTestCase {
     
     func testTakeTurn_move() throws {
         // Arrange
-        let playerAction = PlayerAction.move(to: GridCell(x: 5, y: 5))
+        let playerAction = PlayerAction.move(to: GridCell(x: 5, y: 5), heading: .east)
         let mockTileMap = MockTileMap()
         let pointForGridCell = CGPoint(x: CGFloat(50.0), y: CGFloat(50.0))
-        let nodeAction = NodeAction(nodeName: "player", action: .move(to: pointForGridCell))
+        let nodeAction = NodeAction(nodeName: "player", action: .move(to: pointForGridCell, heading: .east))
         let expectedNodeActions = [nodeAction]
         let presenter = MockDungeonScenePresenter()
         var sut = DungeonSceneInteractor()

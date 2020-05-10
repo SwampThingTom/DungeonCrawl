@@ -41,19 +41,21 @@ class DungeonScenePresenterTests: XCTestCase {
         XCTAssertEqual(playerStartCell, mapCell)
     }
     
-    func testPresentActionsForTurn() throws {
+    func testPresentActionsForTurn_move() throws {
         // Arrange
         let scene = MockDungeonScene()
         let tileSet = SKTileSet(named: "Dungeon")!
         let tileSize = CGSize(width: 32, height: 32)
         let point = CGPoint(x: CGFloat(50.0), y: CGFloat(50.0))
-        let nodeActions = [NodeAction(nodeName: "player", action: SpriteAction.move(to: point))]
+        let nodeActions = [NodeAction(nodeName: "player", action: SpriteAction.move(to: point, heading: .north))]
         let sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
         
         // Act
         sut.presentActionsForTurn(actions: nodeActions, endOfTurnBlock: {})
         
         // Assert
+        XCTAssertEqual(scene.displaySpriteName, "player")
+        XCTAssertEqual(scene.displaySpriteHeading, Direction.north)
         XCTAssertNotNil(scene.displayActionsForTurnAction)
     }
     
@@ -86,6 +88,14 @@ class MockDungeonScene: DungeonSceneDisplaying {
     
     func displayActionForTurn(action: SKAction) {
         displayActionsForTurnAction = action
+    }
+    
+    var displaySpriteHeading: Direction?
+    var displaySpriteName: String?
+    
+    func displaySprite(heading: Direction, forSpriteNamed spriteName: String) {
+        displaySpriteHeading = heading
+        displaySpriteName = spriteName
     }
     
     var displayEndOfTurnCalled = false

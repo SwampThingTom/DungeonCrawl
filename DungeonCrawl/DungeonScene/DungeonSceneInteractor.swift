@@ -9,7 +9,7 @@
 import CoreGraphics
 
 enum SpriteAction: Equatable {
-    case move(to: CGPoint)
+    case move(to: CGPoint, heading: Direction)
 }
 
 struct NodeAction: Equatable {
@@ -63,9 +63,10 @@ struct DungeonSceneInteractor: DungeonSceneInteracting {
         case .attack:
             return nil
             
-        case .move(let cell):
+        case .move(let cell, let heading):
             let position = tileMap.center(of: cell)
-            return NodeAction(nodeName: nodeName, action: .move(to: position))
+            let spriteAction = SpriteAction.move(to: position, heading: heading)
+            return NodeAction(nodeName: nodeName, action: spriteAction)
             
         case .pickUp:
             return nil
