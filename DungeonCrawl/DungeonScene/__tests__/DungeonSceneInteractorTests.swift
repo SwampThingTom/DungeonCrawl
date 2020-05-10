@@ -15,18 +15,26 @@ class DungeonSceneInteractorTests: XCTestCase {
     func testCreateScene() throws {
         // Arrange
         let presenter = MockDungeonScenePresenter()
+        
         let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
         let dungeonGenerator = MockDungeonGenerator()
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        
+        let expectedPlayerStartCell = GridCell(x: 1, y: 13)
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = DungeonDecorations(playerStartCell: expectedPlayerStartCell)
+        
         var sut = DungeonSceneInteractor()
         sut.presenter = presenter
         sut.dungeonGenerator = dungeonGenerator
+        sut.dungeonDecorator = dungeonDecorator
         
         // Act
         sut.createScene(dungeonSize: expectedDungeonModel.map.size)
         
         // Assert
         XCTAssertEqual(presenter.presentSceneDungeonModel?.map.size, expectedDungeonModel.map.size)
+        XCTAssertEqual(presenter.presentScenePlayerStartCell, expectedPlayerStartCell)
     }
     
     func testTakeTurn_move() throws {
@@ -54,9 +62,11 @@ class DungeonSceneInteractorTests: XCTestCase {
 class MockDungeonScenePresenter: DungeonScenePresenting {
         
     var presentSceneDungeonModel: DungeonModel?
+    var presentScenePlayerStartCell: GridCell?
     
     func presentScene(dungeon: DungeonModel, playerStartCell: GridCell) {
         presentSceneDungeonModel = dungeon
+        presentScenePlayerStartCell = playerStartCell
     }
     
     var presentActionsForTurnActions: [NodeAction]?
@@ -80,6 +90,15 @@ class MockDungeonGenerator: DungeonGenerating {
     
     func generate(size: GridSize) -> DungeonModel {
         return mockGenerateDungeonModel!
+    }
+}
+
+class MockDungeonDecorator: DungeonDecorating {
+    
+    var mockDecorations: DungeonDecorations?
+    
+    func decorate(dungeon: DungeonModel) -> DungeonDecorations {
+        return mockDecorations!
     }
 }
 
