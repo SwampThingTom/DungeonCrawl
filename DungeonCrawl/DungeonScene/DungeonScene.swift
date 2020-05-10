@@ -43,9 +43,12 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     private func setup() {
         var presenter = DungeonScenePresenter(tileSet: tileSet, tileSize: tileSize)
         presenter.scene = self
+        presenter.enemySpriteProvider = EnemySpriteProvider()
+        
         var interactor = DungeonSceneInteractor()
         interactor.presenter = presenter
         interactor.dungeonGenerator = DungeonGenerator()
+        interactor.dungeonDecorator = DungeonDecorator()
         self.interactor = interactor
     }
     
@@ -59,6 +62,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint, enemySprites: [SKSpriteNode]) {
         addTileMap(tileMap)
         addPlayer(position: playerStartPosition)
+        addEnemies(enemySprites)
         addCamera()
     }
     
@@ -70,6 +74,12 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     private func addPlayer(position: CGPoint) {
         player.position = position
         addChild(player)
+    }
+    
+    private func addEnemies(_ enemySprites: [SKSpriteNode]) {
+        for sprite in enemySprites {
+            addChild(sprite)
+        }
     }
     
     private func addCamera() {
