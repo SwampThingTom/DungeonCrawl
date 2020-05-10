@@ -3,7 +3,7 @@
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 4/28/20.
-//  Copyright © 2020 Bayou Games. All rights reserved.
+//  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
 import CoreGraphics

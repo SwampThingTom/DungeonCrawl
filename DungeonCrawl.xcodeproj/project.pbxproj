@@ -420,7 +420,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = "Bayou Games";
+				ORGANIZATIONNAME = "Thomas H Aylesworth";
 				TargetAttributes = {
 					E2B2A1D92457BCE4000ED955 = {
 						CreatedOnToolsVersion = 11.3.1;
