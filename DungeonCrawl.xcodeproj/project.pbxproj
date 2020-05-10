@@ -32,6 +32,7 @@
 		E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA24245F2D1A002A0F31 /* Direction.swift */; };
 		E292EA2A2460B1F6002A0F31 /* DeadEndRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA292460B1F6002A0F31 /* DeadEndRemover.swift */; };
 		E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292EA2B2460B36A002A0F31 /* DeadEndRemoverTests.swift */; };
+		E2AD164424677B03003A9197 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AD164324677B03003A9197 /* Animatable.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
 		E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1E32457BCE4000ED955 /* GameScene.swift */; };
@@ -99,6 +100,7 @@
 		E292EA24245F2D1A002A0F31 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		E292EA292460B1F6002A0F31 /* DeadEndRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadEndRemover.swift; sourceTree = "<group>"; };
 		E292EA2B2460B36A002A0F31 /* DeadEndRemoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadEndRemoverTests.swift; sourceTree = "<group>"; };
+		E2AD164324677B03003A9197 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B2A1DF2457BCE4000ED955 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 		E2C98AE72463244B005C11AD /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				E2AD164324677B03003A9197 /* Animatable.swift */,
 				E2C98AE82463247B005C11AD /* Player.swift */,
 			);
 			path = Sprites;
@@ -566,6 +569,7 @@
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
 				E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */,
+				E2AD164424677B03003A9197 /* Animatable.swift in Sources */,
 				E216F5D424671E5600844BF8 /* GridCellProviding.swift in Sources */,
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
 				E216F5CC2466CA6300844BF8 /* PlayerAction.swift in Sources */,

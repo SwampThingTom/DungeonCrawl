@@ -12,11 +12,19 @@ enum PlayerSettings {
     static let speed: CGFloat = 140.0
 }
 
-class Player: SKSpriteNode {
+class Player: SKSpriteNode, Animatable {
+    
+    var heading = Direction.south {
+        didSet { texture = standingTexture[heading] }
+    }
+    var animations = [Direction: SKAction]()
+    var standingTexture = [Direction: SKTexture]()
     
     init() {
-        let texture = SKTexture(imageNamed: "Player_Female_South_01")
+        let textureName = "Player_Female"
+        let texture = SKTexture(imageNamed: "\(textureName)_North_01")
         super.init(texture: texture, color: .white, size: texture.size())
+        createAnimations(textureName: textureName)
         name = "Player"
         zPosition = 50
     }
