@@ -31,6 +31,16 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         }
     }
     
+    private var playableViewBounds: CGRect {
+        guard let view = view else {
+            fatalError("Unable to get view for DungeonScene")
+        }
+        let hudHeight: CGFloat = 160.0
+        let playableViewSize = CGSize(width: view.bounds.size.width,
+                                      height: view.bounds.size.height - hudHeight)
+        return CGRect(origin: view.bounds.origin, size: playableViewSize)
+    }
+    
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
             fatalError("Unable to load DungeonTileSet")
@@ -83,10 +93,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     private func addCamera() {
-        guard let view = view else {
-            fatalError("Unable to get view for DungeonScene")
-        }
-        let camera = DungeonCamera(follow: player, mapNode: tileMap, viewBounds: view.bounds)
+        let camera = DungeonCamera(follow: player, mapNode: tileMap, viewBounds: playableViewBounds)
         addChild(camera)
         self.camera = camera
     }
