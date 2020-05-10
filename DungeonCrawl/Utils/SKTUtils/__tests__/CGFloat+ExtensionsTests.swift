@@ -6,7 +6,7 @@
 import XCTest
 import CoreGraphics
 
-class FloatTests: XCTestCase {
+class CGFloatTests: XCTestCase {
 
   func testClamped() {
     XCTAssertEqual(CGFloat(10).clamped(-5, 6), CGFloat(6))
