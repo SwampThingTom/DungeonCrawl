@@ -12,7 +12,7 @@ import GameplayKit
 protocol DungeonSceneDisplaying {
     func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint)
     func displayActionForTurn(action: SKAction)
-    func displaySprite(heading: Direction, forSpriteNamed spriteName: String)
+    func animateSprite(heading: Direction, forSpriteNamed spriteName: String)
     func displayEndOfTurn()
 }
 
@@ -93,16 +93,25 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         run(action)
     }
     
-    func displaySprite(heading: Direction, forSpriteNamed spriteName: String) {
+    func animateSprite(heading: Direction, forSpriteNamed spriteName: String) {
         guard let sprite = childNode(withName: spriteName) as? Animatable else {
             print("Unable to update heading for sprite named \(spriteName)")
             return
         }
         sprite.heading = heading
+        sprite.startAnimation()
     }
     
     func displayEndOfTurn() {
+        stopAnimations()
         gameState = .waitingForInput
+    }
+    
+    func stopAnimations() {
+        for node in children {
+            guard let sprite = node as? Animatable else { continue }
+            sprite.stopAnimation()
+        }
     }
     
     // MARK: - Player input

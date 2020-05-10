@@ -57,7 +57,7 @@ struct DungeonScenePresenter: DungeonScenePresenting {
     private func spriteAction(for nodeAction: NodeAction) -> SKAction {
         switch nodeAction.action {
         case .move(let position, let heading):
-            scene?.displaySprite(heading: heading, forSpriteNamed: nodeAction.nodeName)
+            scene?.animateSprite(heading: heading, forSpriteNamed: nodeAction.nodeName)
             let spriteAction = SKAction.move(to: position, duration: GameSettings.turnDuration)
             let action = SKAction.run(spriteAction, onChildWithName: nodeAction.nodeName)
             return action

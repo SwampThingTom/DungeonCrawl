@@ -12,6 +12,9 @@ protocol Animatable: class {
     var heading: Direction { get set }
     var animations: [Direction: SKAction] { get set }
     var standingTexture: [Direction: SKTexture] { get set }
+    
+    func startAnimation()
+    func stopAnimation()
 }
 
 extension Animatable {

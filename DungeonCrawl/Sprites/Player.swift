@@ -12,6 +12,10 @@ enum PlayerSettings {
     static let speed: CGFloat = 140.0
 }
 
+enum PlayerActionKeys {
+    static let animation = "animation"
+}
+
 class Player: SKSpriteNode, Animatable {
     
     var heading = Direction.south {
@@ -31,5 +35,16 @@ class Player: SKSpriteNode, Animatable {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use default initializer")
+    }
+    
+    func startAnimation() {
+        guard let animation = animations[heading] else { return }
+        if action(forKey: PlayerActionKeys.animation) == nil {
+            run(SKAction.repeatForever(animation), withKey: PlayerActionKeys.animation)
+        }
+    }
+    
+    func stopAnimation() {
+        removeAction(forKey: PlayerActionKeys.animation)
     }
 }

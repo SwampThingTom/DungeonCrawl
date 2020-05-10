@@ -93,7 +93,7 @@ class MockDungeonScene: DungeonSceneDisplaying {
     var displaySpriteHeading: Direction?
     var displaySpriteName: String?
     
-    func displaySprite(heading: Direction, forSpriteNamed spriteName: String) {
+    func animateSprite(heading: Direction, forSpriteNamed spriteName: String) {
         displaySpriteHeading = heading
         displaySpriteName = spriteName
     }
