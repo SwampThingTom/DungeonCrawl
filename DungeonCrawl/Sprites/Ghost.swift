@@ -27,6 +27,7 @@ class Ghost: SKSpriteNode, Animatable {
         createAnimations(textureName: textureName)
         name = "Ghost"
         zPosition = 50
+        userData = ["isEnemy": true]
     }
     
     required init?(coder aDecoder: NSCoder) {

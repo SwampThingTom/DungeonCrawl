@@ -148,10 +148,27 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         guard !tileMap.isObstacle(targetCell) else {
             return
         }
-        let action = PlayerAction.move(to: targetCell, heading: direction)
+        let action = playerAction(for: targetCell, direction: direction)
         takePlayerTurn(action)
     }
     
+    private func playerAction(for cell: GridCell, direction: Direction) -> PlayerAction {
+        if isEnemy(cell) {
+            return PlayerAction.attack(heading: direction)
+        }
+        return PlayerAction.move(to: cell, heading: direction)
+    }
+    
+    private func isEnemy(_ cell: GridCell) -> Bool {
+        for sprite in children {
+            let isEnemy = sprite.userData?.object(forKey: "isEnemy") != nil
+            if isEnemy && cell == tileMap.cell(for: sprite.position) {
+                return true
+            }
+        }
+        return false
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         touchDown(at: touch.location(in: self))

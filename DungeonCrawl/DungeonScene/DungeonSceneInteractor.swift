@@ -50,7 +50,7 @@ struct DungeonSceneInteractor: DungeonSceneInteracting {
                             tileMap: GridCellProviding,
                             nodeName: String) -> NodeAction? {
         switch playerAction {
-        case .attack(_, let heading):
+        case .attack(let heading):
             let spriteAction = SpriteAction.attack(heading: heading)
             return NodeAction(nodeName: nodeName, action: spriteAction)
 

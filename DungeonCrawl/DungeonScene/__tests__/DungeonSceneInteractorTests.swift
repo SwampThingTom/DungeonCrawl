@@ -61,7 +61,7 @@ class DungeonSceneInteractorTests: XCTestCase {
     
     func testTakeTurn_attack() throws {
         // Arrange
-        let playerAction = PlayerAction.attack(cell: GridCell(x: 5, y: 5), heading: .west)
+        let playerAction = PlayerAction.attack(heading: .west)
         let mockTileMap = MockTileMap()
         let nodeAction = NodeAction(nodeName: "player", action: .attack(heading: .west))
         let expectedNodeActions = [nodeAction]
