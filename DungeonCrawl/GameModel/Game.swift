@@ -70,21 +70,9 @@ class PlayerActor: Actor {
         self.name = name
         self.cell = cell
     }
-    
-    func doTurnAction(_ action: TurnAction) -> Animation? {
-        switch action {
-        case .attack(let heading):
-            return .attack(heading: heading)
-        case .move(let cell, let heading):
-            self.cell = cell
-            return .move(to: cell, heading: heading)
-        case .nothing:
-            return nil
-        }
-    }
 }
 
-struct EnemyActor: AIActor {
+class EnemyActor: AIActor {
     
     let name: String
     let enemyType: EnemyType
@@ -98,10 +86,6 @@ struct EnemyActor: AIActor {
     
     func turnAction(level: LevelProviding) -> TurnAction {
         return .nothing
-    }
-    
-    func doTurnAction(_ action: TurnAction) -> Animation? {
-        return nil
     }
 }
 
