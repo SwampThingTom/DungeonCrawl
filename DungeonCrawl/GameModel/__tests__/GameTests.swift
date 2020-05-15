@@ -62,6 +62,26 @@ class GameTests: XCTestCase {
     }
 }
 
+class MockDungeonGenerator: DungeonGenerating {
+    
+    var mockGenerateDungeonModel: DungeonModel?
+    var generateGridSize: GridSize?
+    
+    func generate(size: GridSize) -> DungeonModel {
+        generateGridSize = size
+        return mockGenerateDungeonModel!
+    }
+}
+
+class MockDungeonDecorator: DungeonDecorating {
+    
+    var mockDecorations: DungeonDecorations?
+    
+    func decorate(dungeon: DungeonModel) -> DungeonDecorations {
+        return mockDecorations!
+    }
+}
+
 /// Returns a 17x15 map with five regions.
 ///
 ///    `                      1111111`
@@ -134,6 +154,18 @@ private class MockMapBuilder {
         return map
     }
 }
+//
+//class MockTileMap: GridCellProviding {
+//    func cell(for position: CGPoint) -> GridCell {
+//        return GridCell(x: Int(position.x / 10.0),
+//                        y: Int(position.y / 10.0))
+//    }
+//    
+//    func center(of cell: GridCell) -> CGPoint {
+//        return CGPoint(x: CGFloat(cell.x) * 10.0,
+//                       y: CGFloat(cell.y) * 10.0)
+//    }
+//}
 
 extension PlayerActor: Equatable {
     public static func == (lhs: PlayerActor, rhs: PlayerActor) -> Bool {

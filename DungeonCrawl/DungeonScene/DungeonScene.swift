@@ -9,15 +9,14 @@
 import SpriteKit
 import GameplayKit
 
-protocol DungeonSceneDisplaying {
-    func displayActionForTurn(action: SKAction)
-    func animateSprite(heading: Direction, forSpriteNamed spriteName: String)
-    func displayEndOfTurn()
+enum GameSettings {
+    static let turnDuration: TimeInterval = 0.5
 }
 
-class DungeonScene: SKScene, DungeonSceneDisplaying {
-    
-    private var interactor: DungeonSceneInteracting!
+protocol DungeonSceneDisplaying {
+}
+
+class DungeonScene: SKScene {
     
     private let tileSize = CGSize(width: 32, height: 32)
     private var tileSet: SKTileSet!
@@ -44,7 +43,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
-            fatalError("Unable to load DungeonTileSet")
+            fatalError("Unable to load Dungeon tile set")
         }
         self.tileSet = tileSet
         scaleMode = .resizeFill
@@ -53,39 +52,6 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     override func didMove(to view: SKView) {
         game = createGame()
         setupScene(for: game.level)
-    }
-
-    private func takePlayerTurn(_ playerAction: PlayerAction) {
-        guard gameState == .waitingForInput else {
-            return
-        }
-        interactor.takeTurn(playerAction: playerAction, tileMap: tileMap, playerNodeName: playerSprite.name!)
-    }
-    
-    func displayActionForTurn(action: SKAction) {
-        gameState = .takingTurn
-        run(action)
-    }
-    
-    func animateSprite(heading: Direction, forSpriteNamed spriteName: String) {
-        guard let sprite = childNode(withName: spriteName) as? Animatable else {
-            print("Unable to update heading for sprite named \(spriteName)")
-            return
-        }
-        sprite.heading = heading
-        sprite.startAnimation()
-    }
-    
-    func displayEndOfTurn() {
-        stopAnimations()
-        gameState = .waitingForInput
-    }
-    
-    func stopAnimations() {
-        for node in children {
-            guard let sprite = node as? Animatable else { continue }
-            sprite.stopAnimation()
-        }
     }
     
     // MARK: - Player input
@@ -109,11 +75,11 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         takePlayerTurn(action)
     }
     
-    private func playerAction(for cell: GridCell, direction: Direction) -> PlayerAction {
+    private func playerAction(for cell: GridCell, direction: Direction) -> TurnAction {
         if isEnemy(cell) {
-            return PlayerAction.attack(heading: direction)
+            return TurnAction.attack(direction: direction)
         }
-        return PlayerAction.move(to: cell, heading: direction)
+        return TurnAction.move(to: cell, direction: direction)
     }
     
     private func isEnemy(_ cell: GridCell) -> Bool {
@@ -125,7 +91,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         }
         return false
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         touchDown(at: touch.location(in: self))
@@ -191,6 +157,7 @@ extension DungeonScene {
             return sprite
         }
     }
+    
 }
 
 // MARK: - Display Scene
@@ -224,5 +191,131 @@ extension DungeonScene {
         let camera = DungeonCamera(follow: playerSprite, mapNode: tileMap, viewBounds: playableViewBounds)
         addChild(camera)
         self.camera = camera
+    }
+}
+
+// MARK: - Take Turn
+
+extension DungeonScene {
+    
+    func takePlayerTurn(_ playerAction: TurnAction) {
+        guard gameState == .waitingForInput else {
+            return
+        }
+        gameState = .takingTurn
+        let animations = game.takeTurn(playerAction: playerAction)
+        let animationAction = animationActionForTurn(animations: animations)
+        run(animationAction)
+    }
+    
+    func displayEndOfTurn() {
+        stopAnimations()
+        gameState = .waitingForInput
+    }
+}
+
+// MARK: - Animations
+
+extension DungeonScene {
+    
+    func animationActionForTurn(animations: [ActorAnimation]) -> SKAction {
+        let spriteActions = animations.map { spriteAction(for: $0) }
+        let turnAction = SKAction.group(spriteActions)
+        let endOfTurnAction = runAtEndOfTurnAction { self.displayEndOfTurn() }
+        return SKAction.sequence([turnAction, endOfTurnAction])
+    }
+    
+    func stopAnimations() {
+        for node in children {
+            guard let sprite = node as? Animatable else { continue }
+            sprite.stopAnimation()
+        }
+    }
+
+    private func spriteAction(for actorAnimation: ActorAnimation) -> SKAction {
+        switch actorAnimation.animation {
+        case .attack:
+            let attackAction1 = SKAction.moveBy(x: 0.0, y: 8.0, duration: GameSettings.turnDuration / 2.0)
+            let attackAction2 = SKAction.moveBy(x: 0.0, y: -8.0, duration: GameSettings.turnDuration / 2.0)
+            let attackActions = SKAction.sequence([attackAction1, attackAction2])
+            let action = SKAction.run(attackActions, onChildWithName: actorAnimation.actor.name)
+            return action
+            
+        case .move(let cell, let heading):
+            let position = tileMap.center(of: cell)
+            animateSprite(heading: heading, forSpriteNamed: actorAnimation.actor.name)
+            let spriteAction = SKAction.move(to: position, duration: GameSettings.turnDuration)
+            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.name)
+            return action
+        }
+    }
+    
+    private func runAtEndOfTurnAction(_ block: @escaping () -> Void) -> SKAction {
+        let waitAction = SKAction.wait(forDuration: GameSettings.turnDuration)
+        let endOfTurnAction = SKAction.run(block)
+        return SKAction.sequence([waitAction, endOfTurnAction])
+    }
+    
+    private func animateSprite(heading: Direction, forSpriteNamed spriteName: String) {
+        guard let sprite = childNode(withName: spriteName) as? Animatable else {
+            print("Unable to update heading for sprite named \(spriteName)")
+            return
+        }
+        sprite.heading = heading
+        sprite.startAnimation()
+    }
+}
+
+extension SKTileMapNode {
+    
+    func setCell(_ cell: GridCell, to tile: Tile) {
+        let tileGroup = tileSet.tileGroup(for: tile)
+        setTileGroup(tileGroup, forColumn: cell.x, row: cell.y)
+    }
+}
+
+extension SKTileSet {
+    
+    func tileGroup(for tile: Tile) -> SKTileGroup {
+        switch tile {
+        case .wall:
+            return wallTileGroup
+        case .floor:
+            return floorTileGroup
+        case .door:
+            return doorTileGroup
+        }
+    }
+    
+    var wallsTileGroup: SKTileGroup {
+        // LATER: use adjacency group rules
+        return tileGroup(named: "Walls")
+    }
+    
+    var wallTileGroup: SKTileGroup {
+        return tileGroup(named: "Wall")
+    }
+    
+    var floorTileGroup: SKTileGroup {
+        return tileGroup(named: "Floor")
+    }
+    
+    var doorTileGroup: SKTileGroup {
+        return tileGroup(named: "Door")
+    }
+    
+    func tileGroup(named name: String) -> SKTileGroup {
+        guard let tileGroup = self.tileGroups.first(where: { $0.name == name }) else {
+            fatalError("Unable to find tile group named \(name)")
+        }
+        return tileGroup
+    }
+}
+
+extension EnemyType {
+    var spriteName: String {
+        switch self {
+        case .ghost: return "Ghost"
+        }
     }
 }
