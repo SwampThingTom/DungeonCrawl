@@ -108,8 +108,10 @@ class MockDungeonScenePresenter: DungeonScenePresenting {
 class MockDungeonGenerator: DungeonGenerating {
     
     var mockGenerateDungeonModel: DungeonModel?
+    var generateGridSize: GridSize?
     
     func generate(size: GridSize) -> DungeonModel {
+        generateGridSize = size
         return mockGenerateDungeonModel!
     }
 }
