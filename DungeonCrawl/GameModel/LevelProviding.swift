@@ -31,7 +31,7 @@ enum TurnAction {
     case nothing
 }
 
-enum Animation {
+enum Animation: Equatable {
     case attack(heading: Direction)
     case move(to: GridCell, heading: Direction)
 }

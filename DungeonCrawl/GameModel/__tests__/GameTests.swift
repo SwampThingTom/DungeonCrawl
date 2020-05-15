@@ -35,6 +35,31 @@ class GameTests: XCTestCase {
         XCTAssertEqual(sut.level.player.cell, expectedDungeonDecorations.playerStartCell)
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
     }
+    
+    func testTakeTurn() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                            enemies: [])
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize)
+
+        // Act
+        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+
+        // Assert
+        XCTAssertEqual(actorAnimations.count, 1)
+        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+    }
 }
 
 /// Returns a 17x15 map with five regions.
@@ -107,5 +132,11 @@ private class MockMapBuilder {
     
     func build() -> DungeonMap {
         return map
+    }
+}
+
+extension PlayerActor: Equatable {
+    public static func == (lhs: PlayerActor, rhs: PlayerActor) -> Bool {
+        return lhs.name == rhs.name && lhs.cell == rhs.cell
     }
 }

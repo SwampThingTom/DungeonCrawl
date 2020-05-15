@@ -22,6 +22,38 @@ class Game {
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
     }
+    
+    func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
+        let playerAnimation = takePlayerTurn(player: level.player, action: playerAction)
+        let actorAnimations = takeActorTurns(for: level.actors)
+        return combinedAnimations(playerAnimation: playerAnimation, actorAnimations: actorAnimations)
+    }
+    
+    private func takePlayerTurn(player: Actor, action: TurnAction) -> ActorAnimation? {
+        let playerTurnAnimation = level.player.doTurnAction(action)
+        return actorAnimation(actor: level.player, animation: playerTurnAnimation)
+    }
+    
+    private func takeActorTurns(for actors: [AIActor]) -> [ActorAnimation] {
+        return actors.compactMap { actor in
+            let action = actor.turnAction(level: level)
+            let animation = actor.doTurnAction(action)
+            return actorAnimation(actor: actor, animation: animation)
+        }
+    }
+    
+    private func actorAnimation(actor: Actor, animation: Animation?) -> ActorAnimation? {
+        guard let animation = animation else { return nil }
+        return ActorAnimation(actor: actor, animation: animation)
+    }
+    
+    private func combinedAnimations(playerAnimation: ActorAnimation?,
+                                    actorAnimations: [ActorAnimation]) -> [ActorAnimation] {
+        if let playerAnimation = playerAnimation {
+            return [playerAnimation] + actorAnimations
+        }
+        return actorAnimations
+    }
 }
 
 struct DungeonLevel: LevelProviding {
@@ -30,12 +62,25 @@ struct DungeonLevel: LevelProviding {
     var actors: [AIActor]
 }
 
-struct PlayerActor: Actor {
+class PlayerActor: Actor {
     let name: String
     var cell: GridCell
     
+    init(name: String, cell: GridCell) {
+        self.name = name
+        self.cell = cell
+    }
+    
     func doTurnAction(_ action: TurnAction) -> Animation? {
-        return nil
+        switch action {
+        case .attack(let heading):
+            return .attack(heading: heading)
+        case .move(let cell, let heading):
+            self.cell = cell
+            return .move(to: cell, heading: heading)
+        case .nothing:
+            return nil
+        }
     }
 }
 
@@ -59,3 +104,5 @@ struct EnemyActor: AIActor {
         return nil
     }
 }
+
+typealias ActorAnimation = (actor: Actor, animation: Animation)
