@@ -13,9 +13,6 @@ enum GameSettings {
     static let turnDuration: TimeInterval = 0.5
 }
 
-protocol DungeonSceneDisplaying {
-}
-
 class DungeonScene: SKScene {
     
     private let tileSize = CGSize(width: 32, height: 32)

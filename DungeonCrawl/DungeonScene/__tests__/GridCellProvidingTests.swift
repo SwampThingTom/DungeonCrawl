@@ -1,5 +1,5 @@
 //
-//  SKTileMapNode+GridTests.swift
+//  GridCellProvidingTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/9/20.
@@ -10,7 +10,7 @@
 
 import XCTest
 
-class SKTileMapNodeGridTests: XCTestCase {
+class GridCellProvidingTests: XCTestCase {
     
     func testDirectionForAngle() throws {
         let pi_4 = CGFloat.pi / CGFloat(4.0)
