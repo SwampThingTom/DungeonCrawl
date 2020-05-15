@@ -9,17 +9,15 @@
 import SpriteKit
 
 protocol EnemySpriteProviding {
-    func sprite(for enemyNamed: String) -> SKSpriteNode?
+    func sprite(for enemyType: EnemyType) -> SKSpriteNode?
 }
 
 class EnemySpriteProvider: EnemySpriteProviding {
     
-    func sprite(for enemyName: String) -> SKSpriteNode? {
-        switch enemyName {
-        case "Ghost":
+    func sprite(for enemyType: EnemyType) -> SKSpriteNode? {
+        switch enemyType {
+        case .ghost:
             return Ghost()
-        default:
-            return nil
         }
     }
 }

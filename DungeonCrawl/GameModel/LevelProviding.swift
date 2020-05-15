@@ -37,5 +37,5 @@ enum Animation {
 }
 
 enum EnemyType {
-    
+    case ghost
 }

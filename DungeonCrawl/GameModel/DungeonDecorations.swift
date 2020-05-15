@@ -9,7 +9,7 @@
 import CoreGraphics
 
 struct EnemyModel: Equatable {
-    let spriteName: String
+    let enemyType: EnemyType
     let cell: GridCell
 }
 

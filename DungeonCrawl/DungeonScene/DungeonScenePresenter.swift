@@ -51,7 +51,7 @@ struct DungeonScenePresenter: DungeonScenePresenting {
     
     private func sprites(for enemies: [EnemyModel], on map: SKTileMapNode) -> [SKSpriteNode] {
         enemies.compactMap { enemy in
-            let sprite = enemySpriteProvider?.sprite(for: enemy.spriteName)
+            let sprite = enemySpriteProvider?.sprite(for: enemy.enemyType)
             sprite?.position = map.centerOfTile(atColumn: enemy.cell.x, row: enemy.cell.y)
             return sprite
         }

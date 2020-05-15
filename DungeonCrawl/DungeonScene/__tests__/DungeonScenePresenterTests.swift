@@ -21,9 +21,9 @@ class DungeonScenePresenterTests: XCTestCase {
         let map = fiveRegionMap()
         let dungeonModel = DungeonModel(map: map, rooms: [])
         let enemies = [
-            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 2, y: 2)),
-            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 13, y: 2)),
-            EnemyModel(spriteName: "Enemy", cell: GridCell(x: 5, y: 9))
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 2, y: 2)),
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 2)),
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 9))
         ]
         let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3), enemies: enemies)
         var sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
@@ -132,7 +132,7 @@ class MockDungeonScene: DungeonSceneDisplaying {
 
 class MockEnemySpriteProvider: EnemySpriteProviding {
     
-    func sprite(for enemyNamed: String) -> SKSpriteNode? {
+    func sprite(for enemyType: EnemyType) -> SKSpriteNode? {
         return SKSpriteNode()
     }
 }

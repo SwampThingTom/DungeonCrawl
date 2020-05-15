@@ -46,7 +46,7 @@ class DungeonDecorator: DungeonDecorating {
         }
         let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
         let cell = room.bounds.randomCell(using: &randomNumberGenerator)
-        let enemy = EnemyModel(spriteName: "Ghost", cell: cell)
+        let enemy = EnemyModel(enemyType: .ghost, cell: cell)
         return [enemy]
     }
 }
