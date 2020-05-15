@@ -19,22 +19,12 @@ struct NodeAction: Equatable {
 }
 
 protocol DungeonSceneInteracting {
-    func createScene(dungeonSize: GridSize)
     func takeTurn(playerAction: PlayerAction, tileMap: GridCellProviding, playerNodeName: String)
 }
 
 struct DungeonSceneInteractor: DungeonSceneInteracting {
     
     var presenter: DungeonScenePresenting?
-    var dungeonGenerator: DungeonGenerating?
-    var dungeonDecorator: DungeonDecorating?
-    
-    func createScene(dungeonSize: GridSize) {
-        guard let presenter = presenter else { return }
-        guard let dungeonModel = dungeonGenerator?.generate(size: dungeonSize) else { return }
-        guard let decorations = dungeonDecorator?.decorate(dungeon: dungeonModel) else { return }
-        presenter.presentScene(dungeon: dungeonModel, decorations: decorations)
-    }
 
     func takeTurn(playerAction: PlayerAction, tileMap: GridCellProviding, playerNodeName: String) {
         let playerNodeAction = nodeAction(for: playerAction, tileMap: tileMap, nodeName: playerNodeName)

@@ -12,42 +12,6 @@ import SpriteKit
 import XCTest
 
 class DungeonScenePresenterTests: XCTestCase {
-
-    func testPresentScene() throws {
-        // Arrange
-        let scene = MockDungeonScene()
-        let tileSet = SKTileSet(named: "Dungeon")!
-        let tileSize = CGSize(width: 32, height: 32)
-        let map = fiveRegionMap()
-        let dungeonModel = DungeonModel(map: map, rooms: [])
-        let enemies = [
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 2, y: 2)),
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 2)),
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 9))
-        ]
-        let decorations = DungeonDecorations(playerStartCell: GridCell(x: 13, y: 3), enemies: enemies)
-        var sut = DungeonScenePresenter(scene: scene, tileSet: tileSet, tileSize: tileSize)
-        sut.enemySpriteProvider = MockEnemySpriteProvider()
-        
-        // Act
-        sut.presentScene(dungeon: dungeonModel, decorations: decorations)
-        
-        // Assert
-        let tileMap = scene.displaySceneTileMap!
-        let dungeonMap = dungeonModel.map
-        XCTAssertEqual(tileMap.numberOfColumns, dungeonMap.size.width)
-        XCTAssertEqual(tileMap.numberOfRows, dungeonMap.size.height)
-        XCTAssertEqual(tileMap.tileSet, tileSet)
-        XCTAssertEqual(tileMap.tileSize, tileSize)
-        
-        let playerStartPosition = scene.displayScenePlayerStartPosition!
-        let mapColumn = tileMap.tileColumnIndex(fromPosition: playerStartPosition)
-        let mapRow = tileMap.tileRowIndex(fromPosition: playerStartPosition)
-        let playerStartCell = GridCell(x: mapColumn, y: mapRow)
-        XCTAssertEqual(playerStartCell, GridCell(x: 13, y: 3))
-        
-        XCTAssertEqual(scene.displaySceneEnemySprites?.count, enemies.count)
-    }
     
     func testPresentActionsForTurn_move() throws {
         // Arrange

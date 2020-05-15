@@ -11,32 +11,6 @@
 import XCTest
 
 class DungeonSceneInteractorTests: XCTestCase {
-
-    func testCreateScene() throws {
-        // Arrange
-        let presenter = MockDungeonScenePresenter()
-        
-        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
-        let dungeonGenerator = MockDungeonGenerator()
-        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
-        
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: [])
-        let dungeonDecorator = MockDungeonDecorator()
-        dungeonDecorator.mockDecorations = expectedDungeonDecorations
-        
-        var sut = DungeonSceneInteractor()
-        sut.presenter = presenter
-        sut.dungeonGenerator = dungeonGenerator
-        sut.dungeonDecorator = dungeonDecorator
-        
-        // Act
-        sut.createScene(dungeonSize: expectedDungeonModel.map.size)
-        
-        // Assert
-        XCTAssertEqual(presenter.presentSceneDungeonModel?.map.size, expectedDungeonModel.map.size)
-        XCTAssertEqual(presenter.presentSceneDecorations, expectedDungeonDecorations)
-    }
     
     func testTakeTurn_move() throws {
         // Arrange

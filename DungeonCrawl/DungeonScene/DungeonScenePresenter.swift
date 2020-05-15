@@ -13,7 +13,6 @@ enum GameSettings {
 }
 
 protocol DungeonScenePresenting {
-    func presentScene(dungeon: DungeonModel, decorations: DungeonDecorations)
     func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void)
     func presentEndOfTurn()
 }
@@ -24,38 +23,6 @@ struct DungeonScenePresenter: DungeonScenePresenting {
     var enemySpriteProvider: EnemySpriteProviding?
     var tileSet: SKTileSet
     var tileSize: CGSize
-    
-    func presentScene(dungeon: DungeonModel, decorations: DungeonDecorations) {
-        let tileMap = self.tileMap(for: dungeon.map)
-        let playerStartCell = decorations.playerStartCell
-        let playerStartPosition = tileMap.centerOfTile(atColumn: playerStartCell.x, row: playerStartCell.y)
-        let enemies = sprites(for: decorations.enemies, on: tileMap)
-        scene?.displayScene(tileMap: tileMap, playerStartPosition: playerStartPosition, enemySprites: enemies)
-    }
-    
-    private func tileMap(for map: GridMap) -> SKTileMapNode {
-        let tileMap = SKTileMapNode(tileSet: tileSet,
-                                    columns: map.size.width,
-                                    rows: map.size.height,
-                                    tileSize: tileSize)
-        for x in 0 ..< map.size.width {
-            for y in 0 ..< map.size.height {
-                let cell = GridCell(x: x, y: y)
-                if let tile = map.tile(at: cell) {
-                    tileMap.setCell(cell, to: tile)
-                }
-            }
-        }
-        return tileMap
-    }
-    
-    private func sprites(for enemies: [EnemyModel], on map: SKTileMapNode) -> [SKSpriteNode] {
-        enemies.compactMap { enemy in
-            let sprite = enemySpriteProvider?.sprite(for: enemy.enemyType)
-            sprite?.position = map.centerOfTile(atColumn: enemy.cell.x, row: enemy.cell.y)
-            return sprite
-        }
-    }
     
     func presentActionsForTurn(actions: [NodeAction], endOfTurnBlock: @escaping () -> Void) {
         let spriteActions = actions.map { spriteAction(for: $0) }
