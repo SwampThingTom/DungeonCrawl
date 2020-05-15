@@ -57,3 +57,21 @@ extension DungeonScene {
         sprite.startAnimation()
     }
 }
+
+extension SKTileMapNode {
+    
+    func cell(for position: CGPoint) -> GridCell {
+        let x = tileColumnIndex(fromPosition: position)
+        let y = tileRowIndex(fromPosition: position)
+        return GridCell(x: x, y: y)
+    }
+    
+    func center(of cell: GridCell) -> CGPoint {
+        return centerOfTile(atColumn: cell.x, row: cell.y)
+    }
+    
+    func isObstacle(_ cell: GridCell) -> Bool {
+        let tile = tileDefinition(atColumn: cell.x, row: cell.y)
+        return tile?.userData?.object(forKey: "obstacle") != nil
+    }
+}

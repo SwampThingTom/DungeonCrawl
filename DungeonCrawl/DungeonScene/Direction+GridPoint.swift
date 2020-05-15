@@ -1,5 +1,5 @@
 //
-//  GridCellProviding.swift
+//  Direction+GridPoint.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/9/20.
@@ -7,29 +7,6 @@
 //
 
 import SpriteKit
-
-protocol GridCellProviding {
-    func cell(for position: CGPoint) -> GridCell
-    func center(of cell: GridCell) -> CGPoint
-}
-
-extension SKTileMapNode: GridCellProviding {
-    
-    func cell(for position: CGPoint) -> GridCell {
-        let x = tileColumnIndex(fromPosition: position)
-        let y = tileRowIndex(fromPosition: position)
-        return GridCell(x: x, y: y)
-    }
-    
-    func center(of cell: GridCell) -> CGPoint {
-        return centerOfTile(atColumn: cell.x, row: cell.y)
-    }
-    
-    func isObstacle(_ cell: GridCell) -> Bool {
-        let tile = tileDefinition(atColumn: cell.x, row: cell.y)
-        return tile?.userData?.object(forKey: "obstacle") != nil
-    }
-}
 
 extension Direction {
     
