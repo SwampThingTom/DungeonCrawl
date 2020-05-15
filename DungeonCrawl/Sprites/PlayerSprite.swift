@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  PlayerSprite.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/6/20.
@@ -16,7 +16,7 @@ enum PlayerActionKeys {
     static let animation = "animation"
 }
 
-class Player: SKSpriteNode, Animatable {
+class PlayerSprite: SKSpriteNode, Animatable {
     
     var heading = Direction.south {
         didSet { texture = standingTexture[heading] }

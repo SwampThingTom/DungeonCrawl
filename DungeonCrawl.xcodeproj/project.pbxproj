@@ -57,7 +57,7 @@
 		E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */; };
 		E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE124631030005C11AD /* DungeonDecorator.swift */; };
 		E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */; };
-		E2C98AE92463247B005C11AD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE82463247B005C11AD /* Player.swift */; };
+		E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE82463247B005C11AD /* PlayerSprite.swift */; };
 		E2C98AEB24637618005C11AD /* DungeonSceneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AEA24637618005C11AD /* DungeonSceneInteractor.swift */; };
 		E2C98AED2463795F005C11AD /* DungeonScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */; };
 		E2C98AEF246379C6005C11AD /* DungeonSceneInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AEE246379C6005C11AD /* DungeonSceneInteractorTests.swift */; };
@@ -135,7 +135,7 @@
 		E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGenerator.swift; sourceTree = "<group>"; };
 		E2C98AE124631030005C11AD /* DungeonDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDecorator.swift; sourceTree = "<group>"; };
 		E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDecoratorTests.swift; sourceTree = "<group>"; };
-		E2C98AE82463247B005C11AD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E2C98AE82463247B005C11AD /* PlayerSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSprite.swift; sourceTree = "<group>"; };
 		E2C98AEA24637618005C11AD /* DungeonSceneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSceneInteractor.swift; sourceTree = "<group>"; };
 		E2C98AEC2463795F005C11AD /* DungeonScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScenePresenter.swift; sourceTree = "<group>"; };
 		E2C98AEE246379C6005C11AD /* DungeonSceneInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSceneInteractorTests.swift; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 				E2AD164324677B03003A9197 /* Animatable.swift */,
 				E2980F3324687E16000BA2AC /* EnemySpriteProvider.swift */,
 				E2980F3124687CB5000BA2AC /* Ghost.swift */,
-				E2C98AE82463247B005C11AD /* Player.swift */,
+				E2C98AE82463247B005C11AD /* PlayerSprite.swift */,
 			);
 			path = Sprites;
 			sourceTree = "<group>";
@@ -590,7 +590,7 @@
 				E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */,
 				E2980F362468E32E000BA2AC /* LevelProviding.swift in Sources */,
 				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,
-				E2C98AE92463247B005C11AD /* Player.swift in Sources */,
+				E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,

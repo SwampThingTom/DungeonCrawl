@@ -23,7 +23,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     private let tileSize = CGSize(width: 32, height: 32)
     private var tileSet: SKTileSet!
     private var tileMap: SKTileMapNode!
-    private var player = Player()
+    private var playerSprite = PlayerSprite()
     
     private var gameState: DungeonTurnState = .waitingForInput {
         didSet {
@@ -82,8 +82,8 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     private func addPlayer(position: CGPoint) {
-        player.position = position
-        addChild(player)
+        playerSprite.position = position
+        addChild(playerSprite)
     }
     
     private func addEnemies(_ enemySprites: [SKSpriteNode]) {
@@ -93,7 +93,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     private func addCamera() {
-        let camera = DungeonCamera(follow: player, mapNode: tileMap, viewBounds: playableViewBounds)
+        let camera = DungeonCamera(follow: playerSprite, mapNode: tileMap, viewBounds: playableViewBounds)
         addChild(camera)
         self.camera = camera
     }
@@ -102,7 +102,7 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
         guard gameState == .waitingForInput else {
             return
         }
-        interactor.takeTurn(playerAction: playerAction, tileMap: tileMap, playerNodeName: player.name!)
+        interactor.takeTurn(playerAction: playerAction, tileMap: tileMap, playerNodeName: playerSprite.name!)
     }
     
     func displayActionForTurn(action: SKAction) {
@@ -140,10 +140,10 @@ class DungeonScene: SKScene, DungeonSceneDisplaying {
     }
     
     private func touchUp(at position: CGPoint) {
-        guard let direction = Direction.direction(from: player.position, to: position) else {
-            fatalError("Unable to calculate direction from \(player.position) to \(position)")
+        guard let direction = Direction.direction(from: playerSprite.position, to: position) else {
+            fatalError("Unable to calculate direction from \(playerSprite.position) to \(position)")
         }
-        let playerCell = tileMap.cell(for: player.position)
+        let playerCell = tileMap.cell(for: playerSprite.position)
         let targetCell = playerCell.neighbor(direction: direction)
         guard !tileMap.isObstacle(targetCell) else {
             return
