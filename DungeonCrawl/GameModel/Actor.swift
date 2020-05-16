@@ -21,7 +21,7 @@ protocol AIActor: Actor {
     func turnAction(level: LevelProviding) -> TurnAction
 }
 
-enum TurnAction {
+enum TurnAction: Equatable {
     case attack(direction: Direction)
     case move(to: GridCell, direction: Direction)
     case nothing

@@ -37,6 +37,8 @@
 		E2980F362468E32E000BA2AC /* LevelProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2980F352468E32E000BA2AC /* LevelProviding.swift */; };
 		E2980F3A246D6EF8000BA2AC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2980F39246D6EF8000BA2AC /* Game.swift */; };
 		E29F72E624709666008C7719 /* Actor+TurnTaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* Actor+TurnTaking.swift */; };
+		E29F72E82470A533008C7719 /* EnemyActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E72470A533008C7719 /* EnemyActor.swift */; };
+		E29F72EA2470A568008C7719 /* EnemyActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyActorTests.swift */; };
 		E2AD164424677B03003A9197 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AD164324677B03003A9197 /* Animatable.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
@@ -119,6 +121,8 @@
 		E2980F352468E32E000BA2AC /* LevelProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProviding.swift; sourceTree = "<group>"; };
 		E2980F39246D6EF8000BA2AC /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* Actor+TurnTaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Actor+TurnTaking.swift"; sourceTree = "<group>"; };
+		E29F72E72470A533008C7719 /* EnemyActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyActor.swift; sourceTree = "<group>"; };
+		E29F72E92470A568008C7719 /* EnemyActorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyActorTests.swift; sourceTree = "<group>"; };
 		E2AD164324677B03003A9197 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -382,6 +386,7 @@
 				E2E2BDD9247009DB009DE525 /* D20.swift */,
 				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
 				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
+				E29F72E72470A533008C7719 /* EnemyActor.swift */,
 				E2980F39246D6EF8000BA2AC /* Game.swift */,
 				E2980F352468E32E000BA2AC /* LevelProviding.swift */,
 			);
@@ -395,6 +400,7 @@
 				E2E2BDDB24700E60009DE525 /* CombatantActorTests.swift */,
 				E2E2BDD5246F64B6009DE525 /* CombatTests.swift */,
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
+				E29F72E92470A568008C7719 /* EnemyActorTests.swift */,
 				E2E2BDC3246ED069009DE525 /* GameTests.swift */,
 			);
 			path = __tests__;
@@ -623,6 +629,7 @@
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
 				E2E2BDC6246F47D2009DE525 /* DungeonScene+CreateGame.swift in Sources */,
 				E2980F30246867D6000BA2AC /* DungeonDecorations.swift in Sources */,
+				E29F72E82470A533008C7719 /* EnemyActor.swift in Sources */,
 				E2E2BDCA246F490F009DE525 /* DungeonScene+TakeTurn.swift in Sources */,
 				E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
@@ -665,6 +672,7 @@
 				E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */,
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
+				E29F72EA2470A568008C7719 /* EnemyActorTests.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
