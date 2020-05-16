@@ -60,6 +60,7 @@ struct DungeonLevel: LevelProviding {
     let map: GridMap
     var player: Actor
     var actors: [AIActor]
+    var message: MessageLogging?
     
     init(map: GridMap, player: Actor, actors: [AIActor]) {
         self.map = map

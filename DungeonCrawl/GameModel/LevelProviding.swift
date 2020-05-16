@@ -8,8 +8,13 @@
 
 import SpriteKit
 
+protocol MessageLogging {
+    func show(_ message: String)
+}
+
 protocol LevelProviding {
     var map: GridMap { get }
     var player: Actor { get }
     var actors: [AIActor] { get }
+    var message: MessageLogging? { get }
 }

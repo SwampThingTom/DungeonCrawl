@@ -15,6 +15,7 @@ extension DungeonScene {
             return
         }
         gameState = .takingTurn
+        show("")
         let animations = game.takeTurn(playerAction: playerAction)
         let animationAction = animationActionForTurn(animations: animations)
         run(animationAction)

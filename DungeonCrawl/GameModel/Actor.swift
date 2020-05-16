@@ -66,21 +66,24 @@ extension Actor {
             return false
         }
         if let damage = attackerSelf.attack(target) {
+            gameLevel?.message?.show("\(attackerSelf.name) hit \(target.name) for \(damage) damage.")
             target.takeDamage(damage)
+        } else {
+            gameLevel?.message?.show("\(attackerSelf.name) missed \(target.name)")
         }
         return true
     }
     
-    private func validTarget(direction: Direction) -> Combatant? {
+    private func validTarget(direction: Direction) -> CombatantActor? {
         guard let gameLevel = gameLevel else {
             fatalError("The current actor has no game level")
         }
         let targetCell = cell.neighbor(direction: direction)
         if gameLevel.player.cell == targetCell {
-            return gameLevel.player as? Combatant
+            return gameLevel.player as? CombatantActor
         }
         let target = gameLevel.actors.first(where: { $0.cell == targetCell })
-        return target as? Combatant
+        return target as? CombatantActor
     }
 
     // MARK: move

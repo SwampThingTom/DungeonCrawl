@@ -15,6 +15,7 @@ extension DungeonScene {
         addPlayer(position: playerStartPosition)
         addEnemies(enemySprites)
         addCamera()
+        addMessageLabel()
     }
     
     private var playableViewBounds: CGRect {
@@ -47,5 +48,12 @@ extension DungeonScene {
         let camera = DungeonCamera(follow: playerSprite, mapNode: tileMap, viewBounds: playableViewBounds)
         addChild(camera)
         self.camera = camera
+    }
+    
+    private func addMessageLabel() {
+        messageLabel.position = CGPoint(x: 0, y: 300)
+        messageLabel.fontName = "Damascus"
+        messageLabel.fontSize = 16
+        camera?.addChild(messageLabel)
     }
 }

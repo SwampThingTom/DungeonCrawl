@@ -175,6 +175,7 @@ struct MockGameLevel: LevelProviding {
     var map: GridMap = DungeonMap()
     var player: Actor
     var actors: [AIActor]
+    var message: MessageLogging?
     
     init(player: Actor, actors: [AIActor]) {
         self.player = player

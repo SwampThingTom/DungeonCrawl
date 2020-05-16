@@ -13,12 +13,13 @@ enum GameSettings {
     static let turnDuration: TimeInterval = 0.5
 }
 
-class DungeonScene: SKScene {
+class DungeonScene: SKScene, MessageLogging {
     
     let tileSize = CGSize(width: 32, height: 32)
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
     var playerSprite = PlayerSprite()
+    var messageLabel = SKLabelNode()
     
     var game: Game!
     
@@ -38,7 +39,14 @@ class DungeonScene: SKScene {
     
     override func didMove(to view: SKView) {
         game = createGame()
+        game.level.message = self
         setupScene(for: game.level)
+    }
+    
+    // MARK: - Display message
+    
+    func show(_ message: String) {
+        self.messageLabel.text = message
     }
     
     // MARK: - Player input
