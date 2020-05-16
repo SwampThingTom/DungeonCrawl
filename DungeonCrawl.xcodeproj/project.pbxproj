@@ -67,6 +67,7 @@
 		E2E2BDD2246F5B72009DE525 /* ActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2BDD1246F5B72009DE525 /* ActorTests.swift */; };
 		E2E2BDD4246F63E0009DE525 /* Combat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2BDD3246F63E0009DE525 /* Combat.swift */; };
 		E2E2BDD6246F64B6009DE525 /* CombatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2BDD5246F64B6009DE525 /* CombatTests.swift */; };
+		E2E2BDDA247009DB009DE525 /* D20.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2BDD9247009DB009DE525 /* D20.swift */; };
 		E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */; };
 		E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */; };
 		E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */; };
@@ -149,6 +150,7 @@
 		E2E2BDD1246F5B72009DE525 /* ActorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorTests.swift; sourceTree = "<group>"; };
 		E2E2BDD3246F63E0009DE525 /* Combat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combat.swift; sourceTree = "<group>"; };
 		E2E2BDD5246F64B6009DE525 /* CombatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatTests.swift; sourceTree = "<group>"; };
+		E2E2BDD9247009DB009DE525 /* D20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D20.swift; sourceTree = "<group>"; };
 		E2E4E8292464345100F5EA93 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				E2E2BDC2246ECC85009DE525 /* __tests__ */,
 				E2E2BDCF246F5775009DE525 /* Actor.swift */,
 				E2E2BDD3246F63E0009DE525 /* Combat.swift */,
+				E2E2BDD9247009DB009DE525 /* D20.swift */,
 				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
 				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
 				E2980F39246D6EF8000BA2AC /* Game.swift */,
@@ -601,6 +604,7 @@
 				E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */,
 				E292EA2A2460B1F6002A0F31 /* DeadEndRemover.swift in Sources */,
 				E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */,
+				E2E2BDDA247009DB009DE525 /* D20.swift in Sources */,
 				E2980F362468E32E000BA2AC /* LevelProviding.swift in Sources */,
 				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,
 				E2E2BDCE246F4D8B009DE525 /* DungeonScene+Touch.swift in Sources */,

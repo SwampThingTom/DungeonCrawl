@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol D20Providing {
-    /// Returns a random number between 1 ... 20.
-    func roll() -> Int
-}
-
 protocol Combatant {
     var attackBonus: Int { get }
     var armorClass: Int { get }
