@@ -20,7 +20,7 @@ class CombatantActorTests: XCTestCase {
         let damage = sut.damage()
         
         // Assert
-        XCTAssertEqual(damage, 1)
+        XCTAssertEqual(damage, 3)
     }
     
     func testTakeDamage() throws {

@@ -83,6 +83,8 @@ class EnemyActor: CombatantActor, AIActor {
     init(name: String, model: EnemyModel) {
         enemyType = model.enemyType
         super.init(name: name, displayName: enemyType.description, cell: model.cell)
+        armorClass = 12
+        hitPoints = 5
     }
     
     func turnAction(level: LevelProviding) -> TurnAction {

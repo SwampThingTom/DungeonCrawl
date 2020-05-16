@@ -16,8 +16,8 @@ class CombatantActor: Actor, Combatant {
     var gameLevel: LevelProviding?
     var combat: CombatProviding = Combat(d20: D20())
     
-    var attackBonus: Int = 1
-    var armorClass: Int = 1
+    var attackBonus: Int = 0
+    var armorClass: Int = 10
     var hitPoints: Int = 10
     
     init(name: String, displayName: String, cell: GridCell) {
@@ -27,7 +27,7 @@ class CombatantActor: Actor, Combatant {
     }
     
     func damage() -> Int {
-        return 1
+        return 3
     }
     
     func takeDamage(_ damage: Int) {
