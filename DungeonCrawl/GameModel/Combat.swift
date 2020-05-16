@@ -33,8 +33,11 @@ struct Combat: CombatProviding {
     var d20: D20Providing
     
     func attack(attacker: Combatant, defender: Combatant) -> Int? {
-        let attackRoll = d20.roll() + attacker.attackBonus
-        if attackRoll >= defender.armorClass {
+        let attackRoll = d20.roll()
+        let naturalMiss = attackRoll == 1
+        let naturalHit = attackRoll == 20
+        let hit = attackRoll + attacker.attackBonus >= defender.armorClass
+        if !naturalMiss && (naturalHit || hit) {
             return attacker.damage()
         }
         return nil
