@@ -12,11 +12,12 @@ import XCTest
 
 class CombatTests: XCTestCase {
 
-    func testAttack() throws {
+    func testAttack_hit() throws {
         // Arrange
-        let sut = Combat()
-        let attacker = MockActor(name: "Attacker", cell: GridCell(x: 0, y: 0), combat: sut)
-        let defender = MockActor(name: "Defender", cell: GridCell(x: 1, y: 0), combat: sut)
+        let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
+        let defender = MockCombatant(attackBonus: 1, armorClass: 11)
+        let d20 = MockD20(nextRoll: 10)
+        let sut = Combat(d20: d20)
         
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -24,16 +25,36 @@ class CombatTests: XCTestCase {
         // Assert
         XCTAssertEqual(damage, 1)
     }
+    
+    func testAttack_miss() throws {
+        // Arrange
+        let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
+        let defender = MockCombatant(attackBonus: 1, armorClass: 12)
+        let d20 = MockD20(nextRoll: 10)
+        let sut = Combat(d20: d20)
+
+        // Act
+        let damage = sut.attack(attacker: attacker, defender: defender)
+        
+        // Assert
+        XCTAssertNil(damage)
+    }
 }
 
-class MockActor: Actor {
-    var combat: CombatProviding
-    var name: String
-    var cell: GridCell
+struct MockCombatant: Combatant {
+    var attackBonus: Int
+    var armorClass: Int
     
-    init(name: String, cell: GridCell, combat: CombatProviding) {
-        self.name = name
-        self.cell = cell
-        self.combat = combat
+    func damage() -> Int {
+        return 1
+    }
+}
+
+struct MockD20: D20Providing {
+    
+    var nextRoll: Int
+    
+    func roll() -> Int {
+        return nextRoll
     }
 }
