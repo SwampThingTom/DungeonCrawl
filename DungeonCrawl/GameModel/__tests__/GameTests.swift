@@ -34,6 +34,8 @@ class GameTests: XCTestCase {
         XCTAssertEqual(sut.level.map.size, dungeonSize)
         XCTAssertEqual(sut.level.player.cell, expectedDungeonDecorations.playerStartCell)
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
+        XCTAssertNotNil(sut.level.player.gameLevel)
+        sut.level.actors.forEach { XCTAssertNotNil($0.gameLevel) }
     }
     
     func testTakeTurn() throws {

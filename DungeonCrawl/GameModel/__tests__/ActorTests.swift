@@ -39,7 +39,8 @@ class ActorTests: XCTestCase {
 class TestActor: Actor {
     var name: String
     var cell: GridCell
-    
+    var gameLevel: LevelProviding?
+
     init(name: String, cell: GridCell) {
         self.name = name
         self.cell = cell

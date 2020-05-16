@@ -11,6 +11,7 @@ import Foundation
 protocol Actor: class {
     var name: String { get }
     var cell: GridCell { get set }
+    var gameLevel: LevelProviding? { get set }
     func doTurnAction(_ action: TurnAction) -> Animation?
 }
 

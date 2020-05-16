@@ -60,6 +60,16 @@ struct DungeonLevel: LevelProviding {
     let map: GridMap
     var player: Actor
     var actors: [AIActor]
+    
+    init(map: GridMap, player: Actor, actors: [AIActor]) {
+        self.map = map
+        self.player = player
+        self.actors = actors
+        self.player.gameLevel = self
+        for actor in actors {
+            actor.gameLevel = self
+        }
+    }
 }
 
 class PlayerActor: CombatantActor {

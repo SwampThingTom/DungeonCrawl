@@ -12,6 +12,7 @@ class CombatantActor: Actor, Combatant {
     
     var name: String
     var cell: GridCell
+    var gameLevel: LevelProviding?
     var combat: CombatProviding = Combat(d20: D20())
     
     var attackBonus: Int = 1
