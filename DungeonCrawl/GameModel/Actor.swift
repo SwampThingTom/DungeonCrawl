@@ -40,20 +40,53 @@ extension Actor {
     func doTurnAction(_ action: TurnAction) -> Animation? {
         switch action {
         case .attack(let heading):
-            attack(heading: heading)
-            return .attack(heading: heading)
+            if attack(heading: heading) {
+                return .attack(heading: heading)
+            }
+            
         case .move(let cell, let heading):
-            move(to: cell, heading: heading)
-            return .move(to: cell, heading: heading)
+            if move(to: cell, heading: heading) {
+                return .move(to: cell, heading: heading)
+            }
+            
         case .nothing:
             return nil
         }
+        
+        return nil
     }
     
-    private func attack(heading: Direction) {
+    // MARK: attack
+    
+    private func attack(heading: Direction) -> Bool {
+        guard let attackerSelf = self as? CombatantActor else {
+            return false
+        }
+        guard let target = validTarget(direction: heading) else {
+            return false
+        }
+        if let damage = attackerSelf.attack(target) {
+            target.takeDamage(damage)
+        }
+        return true
     }
     
-    private func move(to cell: GridCell, heading: Direction) {
+    private func validTarget(direction: Direction) -> Combatant? {
+        guard let gameLevel = gameLevel else {
+            fatalError("The current actor has no game level")
+        }
+        let targetCell = cell.neighbor(direction: direction)
+        if gameLevel.player.cell == targetCell {
+            return gameLevel.player as? Combatant
+        }
+        let target = gameLevel.actors.first(where: { $0.cell == targetCell })
+        return target as? Combatant
+    }
+
+    // MARK: move
+    
+    private func move(to cell: GridCell, heading: Direction) -> Bool {
         self.cell = cell
+        return true
     }
 }
