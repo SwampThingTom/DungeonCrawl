@@ -13,6 +13,7 @@ Each turn the player can do one of the following:
 * attack
 * pick up an item
 * use an item
+* search
 * rest(?)
 
 Dungeons are dark so the player can only see 1-3 spaces away. Using a torch increases that distance. 
