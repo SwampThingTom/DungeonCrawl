@@ -56,9 +56,9 @@ class Game {
     }
 }
 
-struct DungeonLevel: LevelProviding {
+class DungeonLevel: LevelProviding {
     let map: GridMap
-    var player: Actor
+    let player: Actor
     var actors: [AIActor]
     var message: MessageLogging?
     
