@@ -10,7 +10,8 @@ import Foundation
 
 class CombatantActor: Actor, Combatant {
     
-    var name: String
+    let name: String
+    let displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
     var combat: CombatProviding = Combat(d20: D20())
@@ -19,8 +20,9 @@ class CombatantActor: Actor, Combatant {
     var armorClass: Int = 1
     var hitPoints: Int = 10
     
-    init(name: String, cell: GridCell) {
+    init(name: String, displayName: String, cell: GridCell) {
         self.name = name
+        self.displayName = displayName
         self.cell = cell
     }
     

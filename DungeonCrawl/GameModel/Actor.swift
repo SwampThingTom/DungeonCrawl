@@ -10,6 +10,7 @@ import Foundation
 
 protocol Actor: class {
     var name: String { get }
+    var displayName: String { get }
     var cell: GridCell { get set }
     var gameLevel: LevelProviding? { get set }
     func doTurnAction(_ action: TurnAction) -> Animation?
@@ -33,6 +34,14 @@ enum Animation: Equatable {
 
 enum EnemyType {
     case ghost
+}
+
+extension EnemyType: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .ghost: return "ghost"
+        }
+    }
 }
 
 extension Actor {
@@ -66,10 +75,10 @@ extension Actor {
             return false
         }
         if let damage = attackerSelf.attack(target) {
-            gameLevel?.message?.show("\(attackerSelf.name) hit \(target.name) for \(damage) damage.")
+            gameLevel?.message?.show("\(attackerSelf.displayName) hit \(target.displayName) for \(damage) damage.")
             target.takeDamage(damage)
         } else {
-            gameLevel?.message?.show("\(attackerSelf.name) missed \(target.name)")
+            gameLevel?.message?.show("\(attackerSelf.displayName) missed \(target.displayName)")
         }
         return true
     }

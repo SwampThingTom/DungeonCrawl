@@ -29,7 +29,7 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -46,7 +46,7 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = nil
         let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -93,7 +93,7 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -109,7 +109,7 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAIActor(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -123,23 +123,27 @@ class ActorTests: XCTestCase {
 
 class TestActor: Actor {
     var name: String
+    var displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
 
     init(name: String, cell: GridCell) {
         self.name = name
+        self.displayName = name
         self.cell = cell
     }
 }
 
 class TestAIActor: AIActor {
     var name: String
+    var displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
     var enemyType: EnemyType = .ghost
     
     init(name: String, cell: GridCell) {
         self.name = name
+        self.displayName = name
         self.cell = cell
     }
     
@@ -150,6 +154,10 @@ class TestAIActor: AIActor {
 
 class TestAICombatant: CombatantActor, AIActor {
     var enemyType: EnemyType = .ghost
+    
+    init(name: String, cell: GridCell) {
+        super.init(name: name, displayName: name, cell: cell)
+    }
     
     var mockDamageTaken: Int?
     
@@ -164,6 +172,10 @@ class TestAICombatant: CombatantActor, AIActor {
 
 class MockCombatantActor: CombatantActor {
     
+    init(name: String, cell: GridCell) {
+        super.init(name: name, displayName: name, cell: cell)
+    }
+
     var mockDamageTaken: Int?
     
     override func takeDamage(_ damage: Int) {

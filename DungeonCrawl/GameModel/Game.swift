@@ -15,7 +15,7 @@ class Game {
     init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
-        let playerActor = PlayerActor(name: "Player", cell: decorations.playerStartCell)
+        let playerActor = PlayerActor(name: "Player", displayName: "Player", cell: decorations.playerStartCell)
         let enemyActors: [EnemyActor] = decorations.enemies.enumerated().map {
             let name = "Ghost_\($0)"
             return EnemyActor(name: name, model: $1)
@@ -81,8 +81,8 @@ class EnemyActor: CombatantActor, AIActor {
     let enemyType: EnemyType
 
     init(name: String, model: EnemyModel) {
-        self.enemyType = model.enemyType
-        super.init(name: name, cell: model.cell)
+        enemyType = model.enemyType
+        super.init(name: name, displayName: enemyType.description, cell: model.cell)
     }
     
     func turnAction(level: LevelProviding) -> TurnAction {
