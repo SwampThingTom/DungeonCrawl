@@ -19,6 +19,7 @@ class CombatantActor: Actor, Combatant {
     var attackBonus: Int = 0
     var armorClass: Int = 10
     var hitPoints: Int = 10
+    var weaponDamage: Int = 3
     
     init(name: String, displayName: String, cell: GridCell) {
         self.name = name
@@ -27,7 +28,7 @@ class CombatantActor: Actor, Combatant {
     }
     
     func damage() -> Int {
-        return 3
+        return weaponDamage
     }
     
     func takeDamage(_ damage: Int) {
