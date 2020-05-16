@@ -76,6 +76,9 @@ struct MockCombatant: Combatant {
     func damage() -> Int {
         return 1
     }
+    
+    func takeDamage(_ damage: Int) {
+    }
 }
 
 struct MockD20: D20Providing {

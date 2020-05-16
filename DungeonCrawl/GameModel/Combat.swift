@@ -9,9 +9,12 @@
 import Foundation
 
 protocol Combatant {
+    
     var attackBonus: Int { get }
     var armorClass: Int { get }
+    
     func damage() -> Int
+    func takeDamage(_ damage: Int)
 }
 
 protocol CombatProviding {

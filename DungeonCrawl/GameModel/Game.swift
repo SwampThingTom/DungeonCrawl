@@ -62,26 +62,16 @@ struct DungeonLevel: LevelProviding {
     var actors: [AIActor]
 }
 
-class PlayerActor: Actor {
-    let name: String
-    var cell: GridCell
-    
-    init(name: String, cell: GridCell) {
-        self.name = name
-        self.cell = cell
-    }
+class PlayerActor: CombatantActor {
 }
 
-class EnemyActor: AIActor {
+class EnemyActor: CombatantActor, AIActor {
     
-    let name: String
     let enemyType: EnemyType
-    var cell: GridCell
-    
+
     init(name: String, model: EnemyModel) {
-        self.name = name
         self.enemyType = model.enemyType
-        self.cell = model.cell
+        super.init(name: name, cell: model.cell)
     }
     
     func turnAction(level: LevelProviding) -> TurnAction {
