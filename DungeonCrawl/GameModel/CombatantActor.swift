@@ -21,6 +21,10 @@ class CombatantActor: Actor, Combatant {
     var hitPoints: Int = 10
     var weaponDamage: Int = 3
     
+    var isDead: Bool {
+        return hitPoints <= 0
+    }
+    
     init(name: String, displayName: String, cell: GridCell) {
         self.name = name
         self.displayName = displayName

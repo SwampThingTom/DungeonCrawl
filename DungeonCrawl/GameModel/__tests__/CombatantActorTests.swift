@@ -33,8 +33,21 @@ class CombatantActorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(sut.hitPoints, 7)
+        XCTAssertFalse(sut.isDead)
     }
     
+    func testTakeDamage_dead() throws {
+        // Arrange
+        let sut = CombatantActor(name: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
+        sut.hitPoints = 3
+        
+        // Act
+        sut.takeDamage(3)
+        
+        // Assert
+        XCTAssertTrue(sut.isDead)
+    }
+
     func testAttack() throws {
         // Arrange
         let mockCombat = MockCombat()
