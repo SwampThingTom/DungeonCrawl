@@ -39,6 +39,8 @@
 		E29F72E624709666008C7719 /* Actor+TurnTaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* Actor+TurnTaking.swift */; };
 		E29F72E82470A533008C7719 /* EnemyActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E72470A533008C7719 /* EnemyActor.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyActorTests.swift */; };
+		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
+		E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EE2470B650008C7719 /* FixedSizeQueueTests.swift */; };
 		E2AD164424677B03003A9197 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AD164324677B03003A9197 /* Animatable.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
@@ -123,6 +125,8 @@
 		E29F72E524709666008C7719 /* Actor+TurnTaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Actor+TurnTaking.swift"; sourceTree = "<group>"; };
 		E29F72E72470A533008C7719 /* EnemyActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyActor.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyActorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyActorTests.swift; sourceTree = "<group>"; };
+		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
+		E29F72EE2470B650008C7719 /* FixedSizeQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueueTests.swift; sourceTree = "<group>"; };
 		E2AD164324677B03003A9197 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -279,6 +283,14 @@
 			path = __tests__;
 			sourceTree = "<group>";
 		};
+		E29F72ED2470B63C008C7719 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E29F72EE2470B650008C7719 /* FixedSizeQueueTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
 		E2B2A1D12457BCE4000ED955 = {
 			isa = PBXGroup;
 			children = (
@@ -409,7 +421,9 @@
 		E2E4E827246433F200F5EA93 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E29F72ED2470B63C008C7719 /* __tests__ */,
 				E2E4E8282464340300F5EA93 /* SKTUtils */,
+				E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -650,6 +664,7 @@
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
 				E2E2BDC8246F48A9009DE525 /* DungeonScene+DisplayScene.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
+				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E2E2BDD8246F8D94009DE525 /* CombatantActor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,6 +688,7 @@
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
 				E29F72EA2470A568008C7719 /* EnemyActorTests.swift in Sources */,
+				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
