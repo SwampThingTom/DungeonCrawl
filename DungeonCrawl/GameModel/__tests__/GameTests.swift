@@ -38,17 +38,17 @@ class GameTests: XCTestCase {
         sut.level.actors.forEach { XCTAssertNotNil($0.gameLevel) }
     }
     
-    func testTakeTurn() throws {
+    func testTakeTurn_playerOnly() throws {
         // Arrange
         let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
         let dungeonGenerator = MockDungeonGenerator()
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
                                                             enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
-        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        dungeonDecorator.mockDecorations = dungeonDecorations
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
@@ -62,6 +62,75 @@ class GameTests: XCTestCase {
         XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
         XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
     }
+    
+    // LATER: This is more of an integration test because it uses the actual EnemyActor
+    // code to determine the move it takes. It would be better to inject the EnemyActors.
+    func testTakeTurn_enemyActors() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let enemyModels: [EnemyModel] = [
+            // Placing this enemy next to the player's move location will cause it to attack.
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 4)),
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+        ]
+        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                            enemies: enemyModels)
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = dungeonDecorations
+        
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize)
+
+        // Act
+        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+
+        // Assert
+        XCTAssertEqual(actorAnimations.count, 2)
+        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(actorAnimations[1].actor as? EnemyActor, sut.level.actors[0] as? EnemyActor)
+        XCTAssertEqual(actorAnimations[1].animation, Animation.attack(heading: .south))
+    }
+    
+    func testTakeTurn_removeDeadActors() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let enemyModels: [EnemyModel] = [
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+        ]
+        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                            enemies: enemyModels)
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = dungeonDecorations
+        
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize)
+        let deadEnemy = sut.level.actors[0] as? EnemyActor
+        deadEnemy?.hitPoints = -1
+
+        // Act
+        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+
+        // Assert
+        XCTAssertEqual(actorAnimations.count, 2)
+        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(actorAnimations[1].actor as? EnemyActor, deadEnemy)
+        XCTAssertEqual(actorAnimations[1].animation, Animation.death)
+        XCTAssertEqual(sut.level.actors.count, 1)
+    }
+
 }
 
 class MockDungeonGenerator: DungeonGenerating {
@@ -156,21 +225,16 @@ private class MockMapBuilder {
         return map
     }
 }
-//
-//class MockTileMap: GridCellProviding {
-//    func cell(for position: CGPoint) -> GridCell {
-//        return GridCell(x: Int(position.x / 10.0),
-//                        y: Int(position.y / 10.0))
-//    }
-//    
-//    func center(of cell: GridCell) -> CGPoint {
-//        return CGPoint(x: CGFloat(cell.x) * 10.0,
-//                       y: CGFloat(cell.y) * 10.0)
-//    }
-//}
 
 extension PlayerActor: Equatable {
     public static func == (lhs: PlayerActor, rhs: PlayerActor) -> Bool {
         return lhs.name == rhs.name && lhs.cell == rhs.cell
     }
+}
+
+extension EnemyActor: Equatable {
+    public static func == (lhs: EnemyActor, rhs: EnemyActor) -> Bool {
+        return lhs.name == rhs.name && lhs.cell == rhs.cell && lhs.enemyType == rhs.enemyType
+    }
+
 }

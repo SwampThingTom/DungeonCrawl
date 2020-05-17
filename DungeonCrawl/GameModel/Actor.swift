@@ -12,6 +12,7 @@ protocol Actor: class {
     var name: String { get }
     var displayName: String { get }
     var cell: GridCell { get set }
+    var isDead: Bool { get }
     var gameLevel: LevelProviding? { get set }
     func doTurnAction(_ action: TurnAction) -> Animation?
 }
@@ -33,7 +34,7 @@ enum Animation: Equatable {
     case move(to: GridCell, heading: Direction)
 }
 
-enum EnemyType {
+enum EnemyType: Equatable {
     case ghost
 }
 

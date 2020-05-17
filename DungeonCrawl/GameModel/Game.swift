@@ -26,7 +26,9 @@ class Game {
     func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
         let playerAnimation = takePlayerTurn(player: level.player, action: playerAction)
         let actorAnimations = takeActorTurns(for: level.actors)
-        return combinedAnimations(playerAnimation: playerAnimation, actorAnimations: actorAnimations)
+        let deathAnimations = removeDeadActors()
+        return combinedAnimations(playerAnimation: playerAnimation,
+                                  actorAnimations: actorAnimations + deathAnimations)
     }
     
     private func takePlayerTurn(player: Actor, action: TurnAction) -> ActorAnimation? {
@@ -36,6 +38,7 @@ class Game {
     
     private func takeActorTurns(for actors: [AIActor]) -> [ActorAnimation] {
         return actors.compactMap { actor in
+            guard !actor.isDead else { return nil }
             let action = actor.turnAction()
             let animation = actor.doTurnAction(action)
             return actorAnimation(actor: actor, animation: animation)
@@ -53,6 +56,23 @@ class Game {
             return [playerAnimation] + actorAnimations
         }
         return actorAnimations
+    }
+    
+    private func removeDeadActors() -> [ActorAnimation] {
+        var deathAnimations = [ActorAnimation]()
+        var deadActors = [Actor]()
+        for actor in level.actors {
+            guard let combatant = actor as? CombatantActor else { continue }
+            if combatant.isDead {
+                let deathAnimation = ActorAnimation(actor: combatant, animation: Animation.death)
+                deathAnimations.append(deathAnimation)
+                deadActors.append(combatant)
+            }
+        }
+        level.actors = level.actors.filter { actor in
+            !deadActors.contains { $0.name == actor.name }
+        }
+        return deathAnimations
     }
 }
 

@@ -23,6 +23,12 @@ extension DungeonScene {
     
     func displayEndOfTurn() {
         stopAnimations()
+        let actorNames = [game.level.player.name] + game.level.actors.map { $0.name }
+        let nodesToRemove = children.filter { node in
+            guard node is SKSpriteNode, let nodeName = node.name else { return false }
+            return !actorNames.contains(nodeName)
+        }
+        removeChildren(in: nodesToRemove)
         gameState = .waitingForInput
     }
 }

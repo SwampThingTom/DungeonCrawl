@@ -125,6 +125,7 @@ class TestActor: Actor {
     var name: String
     var displayName: String
     var cell: GridCell
+    var isDead: Bool = false
     var gameLevel: LevelProviding?
 
     init(name: String, cell: GridCell) {
@@ -138,6 +139,7 @@ class TestAIActor: AIActor {
     var name: String
     var displayName: String
     var cell: GridCell
+    var isDead: Bool = false
     var gameLevel: LevelProviding?
     var enemyType: EnemyType = .ghost
     
