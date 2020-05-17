@@ -41,6 +41,10 @@
 		E29F72EA2470A568008C7719 /* EnemyActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyActorTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
 		E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EE2470B650008C7719 /* FixedSizeQueueTests.swift */; };
+		E29F72F124719A23008C7719 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72F024719A23008C7719 /* EntityManager.swift */; };
+		E29F72F324719C51008C7719 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72F224719C51008C7719 /* Entity.swift */; };
+		E29F72F524719D2E008C7719 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72F424719D2E008C7719 /* Component.swift */; };
+		E29F72F924719F18008C7719 /* EntityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72F824719F18008C7719 /* EntityManagerTests.swift */; };
 		E2AD164424677B03003A9197 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AD164324677B03003A9197 /* Animatable.swift */; };
 		E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */; };
 		E2B2A1E02457BCE4000ED955 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B2A1DF2457BCE4000ED955 /* GameScene.sks */; };
@@ -127,6 +131,10 @@
 		E29F72E92470A568008C7719 /* EnemyActorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyActorTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
 		E29F72EE2470B650008C7719 /* FixedSizeQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueueTests.swift; sourceTree = "<group>"; };
+		E29F72F024719A23008C7719 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		E29F72F224719C51008C7719 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		E29F72F424719D2E008C7719 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		E29F72F824719F18008C7719 /* EntityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManagerTests.swift; sourceTree = "<group>"; };
 		E2AD164324677B03003A9197 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		E2B2A1DA2457BCE4000ED955 /* DungeonCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungeonCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +299,25 @@
 			path = __tests__;
 			sourceTree = "<group>";
 		};
+		E29F72F624719EC8008C7719 /* EntityComponentSystem */ = {
+			isa = PBXGroup;
+			children = (
+				E29F72F724719EF8008C7719 /* __tests__ */,
+				E29F72F424719D2E008C7719 /* Component.swift */,
+				E29F72F224719C51008C7719 /* Entity.swift */,
+				E29F72F024719A23008C7719 /* EntityManager.swift */,
+			);
+			path = EntityComponentSystem;
+			sourceTree = "<group>";
+		};
+		E29F72F724719EF8008C7719 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E29F72F824719F18008C7719 /* EntityManagerTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
 		E2B2A1D12457BCE4000ED955 = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +343,7 @@
 			children = (
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
 				E25FB14C2461DB45000A90A8 /* DungeonScene */,
+				E29F72F624719EC8008C7719 /* EntityComponentSystem */,
 				E2E2BDC1246ECB90009DE525 /* GameModel */,
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2C98AE72463244B005C11AD /* Sprites */,
@@ -640,11 +668,13 @@
 				E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
+				E29F72F524719D2E008C7719 /* Component.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
 				E2E2BDC6246F47D2009DE525 /* DungeonScene+CreateGame.swift in Sources */,
 				E2980F30246867D6000BA2AC /* DungeonDecorations.swift in Sources */,
 				E29F72E82470A533008C7719 /* EnemyActor.swift in Sources */,
 				E2E2BDCA246F490F009DE525 /* DungeonScene+TakeTurn.swift in Sources */,
+				E29F72F124719A23008C7719 /* EntityManager.swift in Sources */,
 				E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
@@ -663,6 +693,7 @@
 				E216F5D424671E5600844BF8 /* Direction+GridPoint.swift in Sources */,
 				E292EA1D245EF149002A0F31 /* Regions.swift in Sources */,
 				E2E2BDC8246F48A9009DE525 /* DungeonScene+DisplayScene.swift in Sources */,
+				E29F72F324719C51008C7719 /* Entity.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E2E2BDD8246F8D94009DE525 /* CombatantActor.swift in Sources */,
@@ -684,6 +715,7 @@
 				E2E2BDD2246F5B72009DE525 /* ActorTests.swift in Sources */,
 				E2E2BDDC24700E60009DE525 /* CombatantActorTests.swift in Sources */,
 				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,
+				E29F72F924719F18008C7719 /* EntityManagerTests.swift in Sources */,
 				E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */,
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
