@@ -35,15 +35,3 @@ enum Animation: Equatable {
     case death
     case move(to: GridCell, heading: Direction)
 }
-
-enum EnemyType: Equatable {
-    case ghost
-}
-
-extension EnemyType: CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .ghost: return "ghost"
-        }
-    }
-}
