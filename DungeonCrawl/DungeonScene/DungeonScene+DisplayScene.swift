@@ -51,9 +51,10 @@ extension DungeonScene {
     }
     
     private func addMessageLabel() {
-        messageLabel.position = CGPoint(x: 0, y: 300)
+        messageLabel.position = CGPoint(x: 0, y: 280)
         messageLabel.fontName = "Damascus"
         messageLabel.fontSize = 16
+        messageLabel.numberOfLines = 2
         camera?.addChild(messageLabel)
     }
 }

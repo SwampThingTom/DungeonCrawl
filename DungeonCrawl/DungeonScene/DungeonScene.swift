@@ -19,7 +19,9 @@ class DungeonScene: SKScene, MessageLogging {
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
     var playerSprite = PlayerSprite()
+    
     var messageLabel = SKLabelNode()
+    var messages = FixedSizeQueue<String>(maxSize: 2)
     
     var game: Game!
     
@@ -46,7 +48,10 @@ class DungeonScene: SKScene, MessageLogging {
     // MARK: - Display message
     
     func show(_ message: String) {
-        self.messageLabel.text = message
+        messages.push(message)
+        let lineOne = messages.first ?? ""
+        let lineTwo = messages.last ?? ""
+        self.messageLabel.text = lineOne + "\n" + lineTwo
     }
     
     // MARK: - Player input
