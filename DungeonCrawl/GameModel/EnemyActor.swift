@@ -12,9 +12,9 @@ class EnemyActor: CombatantActor, AIActor {
     
     let enemyType: EnemyType
 
-    init(name: String, model: EnemyModel) {
+    init(spriteName: String, model: EnemyModel) {
         enemyType = model.enemyType
-        super.init(name: name, displayName: enemyType.description, cell: model.cell)
+        super.init(spriteName: spriteName, displayName: enemyType.description, cell: model.cell)
         armorClass = 12
         hitPoints = 5
     }

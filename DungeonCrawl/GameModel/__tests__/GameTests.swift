@@ -40,7 +40,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
         XCTAssertNotNil(sut.level.player.gameLevel)
         sut.level.actors.forEach {
-            XCTAssert($0.name.starts(with: "ghost_"))
+            XCTAssert($0.spriteName.starts(with: "ghost_"))
             XCTAssertEqual($0.displayName, "ghost")
             XCTAssertEqual(($0 as? EnemyActor)?.enemyType, .ghost)
             XCTAssertNotNil($0.gameLevel)
@@ -237,13 +237,13 @@ private class MockMapBuilder {
 
 extension PlayerActor: Equatable {
     public static func == (lhs: PlayerActor, rhs: PlayerActor) -> Bool {
-        return lhs.name == rhs.name && lhs.cell == rhs.cell
+        return lhs.spriteName == rhs.spriteName && lhs.cell == rhs.cell
     }
 }
 
 extension EnemyActor: Equatable {
     public static func == (lhs: EnemyActor, rhs: EnemyActor) -> Bool {
-        return lhs.name == rhs.name && lhs.cell == rhs.cell && lhs.enemyType == rhs.enemyType
+        return lhs.spriteName == rhs.spriteName && lhs.cell == rhs.cell && lhs.enemyType == rhs.enemyType
     }
 
 }

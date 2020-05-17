@@ -33,19 +33,19 @@ extension DungeonScene {
             let attackAction1 = SKAction.moveBy(x: 0.0, y: 8.0, duration: GameSettings.turnDuration / 2.0)
             let attackAction2 = SKAction.moveBy(x: 0.0, y: -8.0, duration: GameSettings.turnDuration / 2.0)
             let attackActions = SKAction.sequence([attackAction1, attackAction2])
-            let action = SKAction.run(attackActions, onChildWithName: actorAnimation.actor.name)
+            let action = SKAction.run(attackActions, onChildWithName: actorAnimation.actor.spriteName)
             return action
                 
         case .death:
             let spriteAction = SKAction.rotate(byAngle: CGFloat.pi, duration: GameSettings.turnDuration)
-            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.name)
+            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.spriteName)
             return action
 
         case .move(let cell, let heading):
             let position = tileMap.center(of: cell)
-            animateSprite(heading: heading, forSpriteNamed: actorAnimation.actor.name)
+            animateSprite(heading: heading, forSpriteNamed: actorAnimation.actor.spriteName)
             let spriteAction = SKAction.move(to: position, duration: GameSettings.turnDuration)
-            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.name)
+            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.spriteName)
             return action
         }
     }

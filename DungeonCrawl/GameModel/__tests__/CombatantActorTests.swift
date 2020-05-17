@@ -14,7 +14,7 @@ class CombatantActorTests: XCTestCase {
 
     func testDamage() throws {
         // Arrange
-        let sut = CombatantActor(name: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
+        let sut = CombatantActor(spriteName: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
         
         // Act
         let damage = sut.damage()
@@ -25,7 +25,7 @@ class CombatantActorTests: XCTestCase {
     
     func testTakeDamage() throws {
         // Arrange
-        let sut = CombatantActor(name: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
+        let sut = CombatantActor(spriteName: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
         sut.hitPoints = 10
         
         // Act
@@ -38,7 +38,7 @@ class CombatantActorTests: XCTestCase {
     
     func testTakeDamage_dead() throws {
         // Arrange
-        let sut = CombatantActor(name: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
+        let sut = CombatantActor(spriteName: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
         sut.hitPoints = 3
         
         // Act
@@ -53,7 +53,7 @@ class CombatantActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = MockCombatant(attackBonus: 1, armorClass: 1)
-        let sut = CombatantActor(name: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
+        let sut = CombatantActor(spriteName: "Combatant", displayName: "Combatant", cell: GridCell(x: 0, y: 0))
         sut.combat = mockCombat
         
         // Act

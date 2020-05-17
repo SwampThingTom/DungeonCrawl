@@ -20,12 +20,12 @@ class Ghost: SKSpriteNode, Animatable {
     var animations = [Direction: SKAction]()
     var standingTexture = [Direction: SKTexture]()
     
-    init(name: String) {
+    init(spriteName: String) {
         let textureName = "Ghost"
         let texture = SKTexture(imageNamed: "\(textureName)_North_01")
         super.init(texture: texture, color: .white, size: texture.size())
-        self.name = name
         createAnimations(textureName: textureName)
+        name = spriteName
         zPosition = 50
         userData = ["isEnemy": true]
     }

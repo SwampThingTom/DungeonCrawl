@@ -15,10 +15,12 @@ class Game {
     init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
-        let playerActor = PlayerActor(name: "player", displayName: "player", cell: decorations.playerStartCell)
+        let playerActor = PlayerActor(spriteName: "player",
+                                      displayName: "player",
+                                      cell: decorations.playerStartCell)
         let enemyActors: [EnemyActor] = decorations.enemies.enumerated().map {
-            let name = "\($1.enemyType.description)_\($0)"
-            return EnemyActor(name: name, model: $1)
+            let spriteName = "\($1.enemyType.description)_\($0)"
+            return EnemyActor(spriteName: spriteName, model: $1)
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
     }
@@ -70,7 +72,7 @@ class Game {
             }
         }
         level.actors = level.actors.filter { actor in
-            !deadActors.contains { $0.name == actor.name }
+            !deadActors.contains { $0.spriteName == actor.spriteName }
         }
         return deathAnimations
     }

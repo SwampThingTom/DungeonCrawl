@@ -14,7 +14,7 @@ class ActorTests: XCTestCase {
 
     func testDoTurnAction_move() throws {
         // Arrange
-        let sut = TestActor(name: "TestActor", cell: GridCell(x: 5, y: 5))
+        let sut = TestActor(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
         
         // Act
         let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west))
@@ -28,8 +28,8 @@ class ActorTests: XCTestCase {
         // Arrange
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
-        let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -45,8 +45,8 @@ class ActorTests: XCTestCase {
         // Arrange
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = nil
-        let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -62,8 +62,8 @@ class ActorTests: XCTestCase {
         // Arrange
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
-        let target = MockCombatantActor(name: "Player", cell: GridCell(x: 5, y: 4))
-        let sut = TestAICombatant(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = MockCombatantActor(spriteName: "Player", cell: GridCell(x: 5, y: 4))
+        let sut = TestAICombatant(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         let level = MockGameLevel(player: target, actors: [sut])
         
@@ -77,8 +77,8 @@ class ActorTests: XCTestCase {
 
     func testDoTurnAction_attack_attackerNotCombatant() throws {
         // Arrange
-        let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = TestActor(name: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let sut = TestActor(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         _ = MockGameLevel(player: sut, actors: [target])
         
         // Act
@@ -92,8 +92,8 @@ class ActorTests: XCTestCase {
         // Arrange
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
-        let target = TestAICombatant(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -108,8 +108,8 @@ class ActorTests: XCTestCase {
         // Arrange
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
-        let target = TestAIActor(name: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(name: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let target = TestAIActor(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
         sut.combat = mockCombat
         _ = MockGameLevel(player: sut, actors: [target])
         
@@ -122,30 +122,30 @@ class ActorTests: XCTestCase {
 }
 
 class TestActor: Actor {
-    var name: String
+    var spriteName: String
     var displayName: String
     var cell: GridCell
     var isDead: Bool = false
     var gameLevel: LevelProviding?
 
-    init(name: String, cell: GridCell) {
-        self.name = name
-        self.displayName = name
+    init(spriteName: String, cell: GridCell) {
+        self.spriteName = spriteName
+        self.displayName = spriteName
         self.cell = cell
     }
 }
 
 class TestAIActor: AIActor {
-    var name: String
+    var spriteName: String
     var displayName: String
     var cell: GridCell
     var isDead: Bool = false
     var gameLevel: LevelProviding?
     var enemyType: EnemyType = .ghost
     
-    init(name: String, cell: GridCell) {
-        self.name = name
-        self.displayName = name
+    init(spriteName: String, cell: GridCell) {
+        self.spriteName = spriteName
+        self.displayName = spriteName
         self.cell = cell
     }
     
@@ -157,8 +157,8 @@ class TestAIActor: AIActor {
 class TestAICombatant: CombatantActor, AIActor {
     var enemyType: EnemyType = .ghost
     
-    init(name: String, cell: GridCell) {
-        super.init(name: name, displayName: name, cell: cell)
+    init(spriteName: String, cell: GridCell) {
+        super.init(spriteName: spriteName, displayName: spriteName, cell: cell)
     }
     
     var mockDamageTaken: Int?
@@ -174,8 +174,8 @@ class TestAICombatant: CombatantActor, AIActor {
 
 class MockCombatantActor: CombatantActor {
     
-    init(name: String, cell: GridCell) {
-        super.init(name: name, displayName: name, cell: cell)
+    init(spriteName: String, cell: GridCell) {
+        super.init(spriteName: spriteName, displayName: spriteName, cell: cell)
     }
 
     var mockDamageTaken: Int?

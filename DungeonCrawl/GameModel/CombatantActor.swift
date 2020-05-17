@@ -10,7 +10,7 @@ import Foundation
 
 class CombatantActor: Actor, Combatant {
     
-    let name: String
+    let spriteName: String
     let displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
@@ -25,8 +25,8 @@ class CombatantActor: Actor, Combatant {
         return hitPoints <= 0
     }
     
-    init(name: String, displayName: String, cell: GridCell) {
-        self.name = name
+    init(spriteName: String, displayName: String, cell: GridCell) {
+        self.spriteName = spriteName
         self.displayName = displayName
         self.cell = cell
     }
