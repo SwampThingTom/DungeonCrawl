@@ -38,12 +38,16 @@ extension Actor {
         guard let target = validTarget(direction: heading) else {
             return false
         }
+        var resultMessage: String = "\(attackerSelf.displayName) missed \(target.displayName)"
         if let damage = attackerSelf.attack(target) {
-            gameLevel?.message?.show("\(attackerSelf.displayName) hit \(target.displayName) for \(damage) damage.")
             target.takeDamage(damage)
-        } else {
-            gameLevel?.message?.show("\(attackerSelf.displayName) missed \(target.displayName)")
+            if target.isDead {
+                resultMessage = "\(attackerSelf.displayName) killed \(target.displayName)."
+            } else {
+                resultMessage = "\(attackerSelf.displayName) hit \(target.displayName) for \(damage) damage."
+            }
         }
+        gameLevel?.message?.show(resultMessage)
         return true
     }
     
