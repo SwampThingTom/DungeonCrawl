@@ -47,7 +47,7 @@ extension DungeonScene {
     private func sprites(for enemies: [AIActor], on map: SKTileMapNode) -> [SKSpriteNode] {
         let enemySpriteProvider = EnemySpriteProvider()
         return enemies.compactMap { enemy in
-            let sprite = enemySpriteProvider.sprite(for: enemy.enemyType)
+            let sprite = enemySpriteProvider.sprite(for: enemy.enemyType, name: enemy.name)
             sprite?.position = map.centerOfTile(atColumn: enemy.cell.x, row: enemy.cell.y)
             return sprite
         }
