@@ -8,10 +8,6 @@
 
 import SpriteKit
 
-enum PlayerSettings {
-    static let speed: CGFloat = 140.0
-}
-
 enum PlayerActionKeys {
     static let animation = "animation"
 }
