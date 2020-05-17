@@ -11,6 +11,7 @@ import Foundation
 class Game {
     
     var level: DungeonLevel
+    var combatSystem: CombatSystem
     var turnSystem: TurnSystem
     var aiSystem: AISystem
     
@@ -23,7 +24,8 @@ class Game {
             return EnemyActor(spriteName: spriteName, model: $1)
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
-        turnSystem = TurnSystem(gameLevel: level)
+        combatSystem = CombatSystem()
+        turnSystem = TurnSystem(gameLevel: level, combatSystem: combatSystem)
         aiSystem = AISystem(gameLevel: level)
     }
     

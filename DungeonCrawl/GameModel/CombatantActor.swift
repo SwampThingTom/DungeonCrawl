@@ -14,7 +14,6 @@ class CombatantActor: Actor, Combatant {
     let displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
-    var combat: CombatProviding = CombatSystem(d20: D20())
     
     var attackBonus: Int = 0
     var armorClass: Int = 10
@@ -29,17 +28,5 @@ class CombatantActor: Actor, Combatant {
         self.spriteName = spriteName
         self.displayName = displayName
         self.cell = cell
-    }
-    
-    func damage() -> Int {
-        return weaponDamage
-    }
-    
-    func takeDamage(_ damage: Int) {
-        hitPoints -= damage
-    }
-
-    func attack(_ target: Combatant) -> Int? {
-        return combat.attack(attacker: self, defender: target)
     }
 }

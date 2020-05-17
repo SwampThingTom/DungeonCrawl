@@ -16,7 +16,7 @@ class TurnSystemTests: XCTestCase {
         // Arrange
         let actor = TestActor(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
         let gameLevel = MockGameLevel(player: actor, actors: [])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
         let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west), for: actor)
@@ -31,17 +31,17 @@ class TurnSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        target.hitPoints = 10
         let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        actor.combat = mockCombat
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
-        XCTAssertEqual(target.mockDamageTaken, 3)
+        XCTAssertEqual(target.hitPoints, 7)
     }
     
     func testDoTurnAction_attack_miss() throws {
@@ -49,17 +49,17 @@ class TurnSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = nil
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        target.hitPoints = 10
         let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        actor.combat = mockCombat
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
-        XCTAssertNil(target.mockDamageTaken)
+        XCTAssertEqual(target.hitPoints, 10)
     }
     
     func testDoTurnAction_attack_playerTarget() throws {
@@ -67,17 +67,17 @@ class TurnSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = MockCombatantActor(spriteName: "Player", cell: GridCell(x: 5, y: 4))
+        target.hitPoints = 10
         let actor = TestAICombatant(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
-        actor.combat = mockCombat
         let gameLevel = MockGameLevel(player: target, actors: [actor])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
-        XCTAssertEqual((gameLevel.player as? MockCombatantActor)!.mockDamageTaken, 3)
+        XCTAssertEqual((gameLevel.player as? MockCombatantActor)!.hitPoints, 7)
     }
 
     func testDoTurnAction_attack_attackerNotCombatant() throws {
@@ -85,7 +85,7 @@ class TurnSystemTests: XCTestCase {
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let actor = TestActor(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: MockCombat())
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -100,9 +100,8 @@ class TurnSystemTests: XCTestCase {
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        actor.combat = mockCombat
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
         let animation = sut.doTurnAction(.attack(direction: .south), for: actor)
@@ -117,9 +116,8 @@ class TurnSystemTests: XCTestCase {
         mockCombat.mockAttackDamage = 3
         let target = TestAIActor(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        actor.combat = mockCombat
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(gameLevel: gameLevel)
+        let sut = TurnSystem(gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -168,28 +166,12 @@ class TestAICombatant: CombatantActor, AIActor {
     init(spriteName: String, cell: GridCell) {
         super.init(spriteName: spriteName, displayName: spriteName, cell: cell)
     }
-    
-    var mockDamageTaken: Int?
-    
-    override func takeDamage(_ damage: Int) {
-        mockDamageTaken = damage
-    }
-
-    func turnAction() -> TurnAction {
-        return .nothing
-    }
 }
 
 class MockCombatantActor: CombatantActor {
     
     init(spriteName: String, cell: GridCell) {
         super.init(spriteName: spriteName, displayName: spriteName, cell: cell)
-    }
-
-    var mockDamageTaken: Int?
-    
-    override func takeDamage(_ damage: Int) {
-        mockDamageTaken = damage
     }
 }
 
@@ -206,5 +188,16 @@ struct MockGameLevel: LevelProviding {
         for actor in self.actors {
             actor.gameLevel = self
         }
+    }
+}
+
+class MockCombat: CombatProviding {
+    
+    var d20: D20Providing = D20()
+    
+    var mockAttackDamage: Int?
+    
+    func attack(attacker: Combatant, defender: Combatant) -> Int? {
+        return mockAttackDamage
     }
 }

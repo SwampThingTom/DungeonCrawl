@@ -23,9 +23,11 @@ enum Animation: Equatable {
 class TurnSystem {
     
     var gameLevel: LevelProviding
+    var combatSystem: CombatProviding
     
-    init(gameLevel: LevelProviding) {
+    init(gameLevel: LevelProviding, combatSystem: CombatProviding) {
         self.gameLevel = gameLevel
+        self.combatSystem = combatSystem
     }
     
     func doTurnAction(_ action: TurnAction, for actor: Actor) -> Animation? {
@@ -57,8 +59,8 @@ class TurnSystem {
             return false
         }
         var resultMessage: String = "\(attacker.displayName) missed \(target.displayName)"
-        if let damage = attacker.attack(target) {
-            target.takeDamage(damage)
+        if let damage = combatSystem.attack(attacker: attacker, defender: target) {
+            target.hitPoints -= damage
             if target.isDead {
                 resultMessage = "\(attacker.displayName) killed \(target.displayName)."
             } else {

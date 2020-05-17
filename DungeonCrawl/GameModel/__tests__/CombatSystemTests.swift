@@ -72,13 +72,8 @@ class CombatTests: XCTestCase {
 struct MockCombatant: Combatant {
     var attackBonus: Int
     var armorClass: Int
-    
-    func damage() -> Int {
-        return 1
-    }
-    
-    func takeDamage(_ damage: Int) {
-    }
+    var hitPoints: Int = 10
+    var weaponDamage: Int = 1
 }
 
 struct MockD20: D20Providing {

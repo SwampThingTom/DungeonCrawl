@@ -12,13 +12,11 @@ protocol Combatant {
     
     var attackBonus: Int { get }
     var armorClass: Int { get }
-    
-    func damage() -> Int
-    func takeDamage(_ damage: Int)
+    var hitPoints: Int { get set }
+    var weaponDamage: Int { get }
 }
 
 protocol CombatProviding {
-    var d20: D20Providing { get set }
     func attack(attacker: Combatant, defender: Combatant) -> Int?
 }
 
@@ -26,9 +24,13 @@ protocol CombatProviding {
 ///
 /// - SeeAlso: https://www.d20pfsrd.com/Gamemastering/Combat/#TOC-Damage
 /// - SeeAlso: http://www.easydamus.com/BasicD20.pdf
-struct CombatSystem: CombatProviding {
+class CombatSystem: CombatProviding {
     
-    var d20: D20Providing
+    private let d20: D20Providing
+    
+    init(d20: D20Providing = D20()) {
+        self.d20 = d20
+    }
     
     func attack(attacker: Combatant, defender: Combatant) -> Int? {
         let attackRoll = d20.roll()
@@ -36,7 +38,7 @@ struct CombatSystem: CombatProviding {
         let naturalHit = attackRoll == 20
         let hit = attackRoll + attacker.attackBonus >= defender.armorClass
         if !naturalMiss && (naturalHit || hit) {
-            return attacker.damage()
+            return attacker.weaponDamage
         }
         return nil
     }
