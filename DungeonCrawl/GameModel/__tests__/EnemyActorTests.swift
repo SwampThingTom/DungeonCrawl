@@ -17,10 +17,10 @@ class EnemyActorTests: XCTestCase {
         let player = PlayerActor(name: "Player", displayName: "Player", cell: GridCell(x: 4, y: 5))
         let enemy = EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let sut = EnemyActor(name: "Enemy", model: enemy)
-        let level = MockGameLevel(player: player, actors: [sut])
+        _ = MockGameLevel(player: player, actors: [sut])
 
         // Act
-        let action = sut.turnAction(level: level)
+        let action = sut.turnAction()
         
         // Assert
         XCTAssertEqual(action, TurnAction.attack(direction: .west))
@@ -31,10 +31,10 @@ class EnemyActorTests: XCTestCase {
         let player = PlayerActor(name: "Player", displayName: "Player", cell: GridCell(x: 0, y: 0))
         let enemy = EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let sut = EnemyActor(name: "Enemy", model: enemy)
-        let level = MockGameLevel(player: player, actors: [sut])
+        _ = MockGameLevel(player: player, actors: [sut])
 
         // Act
-        let action = sut.turnAction(level: level)
+        let action = sut.turnAction()
         
         // Assert
         XCTAssertEqual(action, TurnAction.nothing)

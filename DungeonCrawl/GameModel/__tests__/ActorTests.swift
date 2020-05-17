@@ -147,7 +147,7 @@ class TestAIActor: AIActor {
         self.cell = cell
     }
     
-    func turnAction(level: LevelProviding) -> TurnAction {
+    func turnAction() -> TurnAction {
         return .nothing
     }
 }
@@ -165,7 +165,7 @@ class TestAICombatant: CombatantActor, AIActor {
         mockDamageTaken = damage
     }
 
-    func turnAction(level: LevelProviding) -> TurnAction {
+    func turnAction() -> TurnAction {
         return .nothing
     }
 }

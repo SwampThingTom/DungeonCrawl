@@ -18,7 +18,7 @@ protocol Actor: class {
 
 protocol AIActor: Actor {
     var enemyType: EnemyType { get }
-    func turnAction(level: LevelProviding) -> TurnAction
+    func turnAction() -> TurnAction
 }
 
 enum TurnAction: Equatable {

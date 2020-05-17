@@ -36,7 +36,7 @@ class Game {
     
     private func takeActorTurns(for actors: [AIActor]) -> [ActorAnimation] {
         return actors.compactMap { actor in
-            let action = actor.turnAction(level: level)
+            let action = actor.turnAction()
             let animation = actor.doTurnAction(action)
             return actorAnimation(actor: actor, animation: animation)
         }

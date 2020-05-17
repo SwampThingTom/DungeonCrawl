@@ -19,7 +19,7 @@ class EnemyActor: CombatantActor, AIActor {
         hitPoints = 5
     }
     
-    func turnAction(level: LevelProviding) -> TurnAction {
+    func turnAction() -> TurnAction {
         if let targetDirection = directionForTargetInAttackRange() {
             return .attack(direction: targetDirection)
         }
