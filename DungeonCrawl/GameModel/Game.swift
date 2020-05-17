@@ -11,6 +11,7 @@ import Foundation
 class Game {
     
     var level: DungeonLevel
+    var turnSystem: TurnSystem
     
     init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
@@ -21,6 +22,7 @@ class Game {
             return EnemyActor(spriteName: spriteName, model: $1)
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
+        turnSystem = TurnSystem(gameLevel: level)
     }
     
     func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
@@ -32,7 +34,7 @@ class Game {
     }
     
     private func takePlayerTurn(player: Actor, action: TurnAction) -> ActorAnimation? {
-        let playerTurnAnimation = level.player.doTurnAction(action)
+        let playerTurnAnimation = turnSystem.doTurnAction(action, for: player)
         return actorAnimation(actor: level.player, animation: playerTurnAnimation)
     }
     
@@ -40,7 +42,7 @@ class Game {
         return actors.compactMap { actor in
             guard !actor.isDead else { return nil }
             let action = actor.turnAction()
-            let animation = actor.doTurnAction(action)
+            let animation = turnSystem.doTurnAction(action, for: actor)
             return actorAnimation(actor: actor, animation: animation)
         }
     }

@@ -1,5 +1,5 @@
 //
-//  ActorTests.swift
+//  TurnSystemTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/15/20.
@@ -10,18 +10,20 @@
 
 import XCTest
 
-class ActorTests: XCTestCase {
+class TurnSystemTests: XCTestCase {
 
     func testDoTurnAction_move() throws {
         // Arrange
-        let sut = TestActor(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actor = TestActor(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let gameLevel = MockGameLevel(player: actor, actors: [])
+        let sut = TurnSystem(gameLevel: gameLevel)
         
         // Act
-        let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west))
+        let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west), for: actor)
         
         // Assert
-        XCTAssertEqual(sut.cell, GridCell(x: 4, y: 5))
         XCTAssertEqual(animation, Animation.move(to: GridCell(x: 4, y: 5), heading: .west))
+        XCTAssertEqual(actor.cell, GridCell(x: 4, y: 5))
     }
     
     func testDoTurnAction_attack_hit() throws {
@@ -29,12 +31,13 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        sut.combat = mockCombat
-        _ = MockGameLevel(player: sut, actors: [target])
+        let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        actor.combat = mockCombat
+        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let sut = TurnSystem(gameLevel: gameLevel)
         
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north))
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
@@ -46,12 +49,13 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = nil
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        sut.combat = mockCombat
-        _ = MockGameLevel(player: sut, actors: [target])
-        
+        let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        actor.combat = mockCombat
+        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let sut = TurnSystem(gameLevel: gameLevel)
+
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north))
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
@@ -63,26 +67,28 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = MockCombatantActor(spriteName: "Player", cell: GridCell(x: 5, y: 4))
-        let sut = TestAICombatant(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
-        sut.combat = mockCombat
-        let level = MockGameLevel(player: target, actors: [sut])
-        
+        let actor = TestAICombatant(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        actor.combat = mockCombat
+        let gameLevel = MockGameLevel(player: target, actors: [actor])
+        let sut = TurnSystem(gameLevel: gameLevel)
+
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north))
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
-        XCTAssertEqual((level.player as? MockCombatantActor)!.mockDamageTaken, 3)
+        XCTAssertEqual((gameLevel.player as? MockCombatantActor)!.mockDamageTaken, 3)
     }
 
     func testDoTurnAction_attack_attackerNotCombatant() throws {
         // Arrange
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = TestActor(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
-        _ = MockGameLevel(player: sut, actors: [target])
-        
+        let actor = TestActor(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let sut = TurnSystem(gameLevel: gameLevel)
+
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north))
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertNil(animation)
@@ -93,12 +99,13 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAICombatant(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        sut.combat = mockCombat
-        _ = MockGameLevel(player: sut, actors: [target])
+        let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        actor.combat = mockCombat
+        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let sut = TurnSystem(gameLevel: gameLevel)
         
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .south))
+        let animation = sut.doTurnAction(.attack(direction: .south), for: actor)
         
         // Assert
         XCTAssertNil(animation)
@@ -109,12 +116,13 @@ class ActorTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         let target = TestAIActor(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
-        let sut = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
-        sut.combat = mockCombat
-        _ = MockGameLevel(player: sut, actors: [target])
-        
+        let actor = CombatantActor(spriteName: "Attacker", displayName: "Attacker", cell: GridCell(x: 5, y: 5))
+        actor.combat = mockCombat
+        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let sut = TurnSystem(gameLevel: gameLevel)
+
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north))
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
         
         // Assert
         XCTAssertNil(animation)

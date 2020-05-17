@@ -16,22 +16,9 @@ protocol Actor: class {
     var cell: GridCell { get set }
     var isDead: Bool { get }
     var gameLevel: LevelProviding? { get set }
-    func doTurnAction(_ action: TurnAction) -> Animation?
 }
 
 protocol AIActor: Actor {
     var enemyType: EnemyType { get }
     func turnAction() -> TurnAction
-}
-
-enum TurnAction: Equatable {
-    case attack(direction: Direction)
-    case move(to: GridCell, direction: Direction)
-    case nothing
-}
-
-enum Animation: Equatable {
-    case attack(heading: Direction)
-    case death
-    case move(to: GridCell, heading: Direction)
 }
