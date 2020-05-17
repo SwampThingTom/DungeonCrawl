@@ -32,7 +32,12 @@ extension DungeonScene {
             let attackActions = SKAction.sequence([attackAction1, attackAction2])
             let action = SKAction.run(attackActions, onChildWithName: actorAnimation.actor.name)
             return action
-            
+                
+        case .death:
+            let spriteAction = SKAction.rotate(byAngle: CGFloat.pi, duration: GameSettings.turnDuration)
+            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.name)
+            return action
+
         case .move(let cell, let heading):
             let position = tileMap.center(of: cell)
             animateSprite(heading: heading, forSpriteNamed: actorAnimation.actor.name)
