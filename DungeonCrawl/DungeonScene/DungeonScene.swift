@@ -7,7 +7,6 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 enum GameSettings {
     static let turnDuration: TimeInterval = 0.5

@@ -228,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				E25FB15324620DFE000A90A8 /* __tests__ */,
+				E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */,
 				E2E4E8322464408000F5EA93 /* DungeonCamera.swift */,
 				E25FB14D2461DD49000A90A8 /* DungeonScene.sks */,
 				E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */,
@@ -237,7 +238,6 @@
 				E2E2BDC9246F490F009DE525 /* DungeonScene+TakeTurn.swift */,
 				E2E2BDCD246F4D8B009DE525 /* DungeonScene+Touch.swift */,
 				E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */,
-				E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */,
 			);
 			path = DungeonScene;
 			sourceTree = "<group>";

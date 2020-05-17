@@ -6,8 +6,7 @@
 //  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
-import SpriteKit
-import GameKit
+import Foundation
 
 enum DungeonTurnState {
     case waitingForInput

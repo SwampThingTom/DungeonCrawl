@@ -6,7 +6,7 @@
 //  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
-import SpriteKit
+import Foundation
 
 protocol MessageLogging {
     func show(_ message: String)
