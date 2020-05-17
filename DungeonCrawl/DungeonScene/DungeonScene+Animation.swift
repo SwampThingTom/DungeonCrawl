@@ -11,9 +11,12 @@ import SpriteKit
 extension DungeonScene {
     
     func animationActionForTurn(animations: [ActorAnimation]) -> SKAction {
-        let spriteActions = animations.map { spriteAction(for: $0) }
-        let turnAction = SKAction.group(spriteActions)
         let endOfTurnAction = runAtEndOfTurnAction { self.displayEndOfTurn() }
+        let spriteActions = animations.map { spriteAction(for: $0) }
+        guard spriteActions.count > 0 else {
+            return endOfTurnAction
+        }
+        let turnAction = SKAction.group(spriteActions)
         return SKAction.sequence([turnAction, endOfTurnAction])
     }
     
