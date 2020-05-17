@@ -14,7 +14,7 @@ class CombatantActor: Actor, Combatant {
     let displayName: String
     var cell: GridCell
     var gameLevel: LevelProviding?
-    var combat: CombatProviding = Combat(d20: D20())
+    var combat: CombatProviding = CombatSystem(d20: D20())
     
     var attackBonus: Int = 0
     var armorClass: Int = 10

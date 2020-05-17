@@ -17,7 +17,7 @@ class CombatTests: XCTestCase {
         let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
         let defender = MockCombatant(attackBonus: 1, armorClass: 11)
         let d20 = MockD20(nextRoll: 10)
-        let sut = Combat(d20: d20)
+        let sut = CombatSystem(d20: d20)
         
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -31,7 +31,7 @@ class CombatTests: XCTestCase {
         let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
         let defender = MockCombatant(attackBonus: 1, armorClass: 12)
         let d20 = MockD20(nextRoll: 10)
-        let sut = Combat(d20: d20)
+        let sut = CombatSystem(d20: d20)
 
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -45,7 +45,7 @@ class CombatTests: XCTestCase {
         let attacker = MockCombatant(attackBonus: 1, armorClass: 10)
         let defender = MockCombatant(attackBonus: 1, armorClass: 22)
         let d20 = MockD20(nextRoll: 20)
-        let sut = Combat(d20: d20)
+        let sut = CombatSystem(d20: d20)
 
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -59,7 +59,7 @@ class CombatTests: XCTestCase {
         let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
         let defender = MockCombatant(attackBonus: 1, armorClass: 1)
         let d20 = MockD20(nextRoll: 1)
-        let sut = Combat(d20: d20)
+        let sut = CombatSystem(d20: d20)
         
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)

@@ -26,7 +26,7 @@ protocol CombatProviding {
 ///
 /// - SeeAlso: https://www.d20pfsrd.com/Gamemastering/Combat/#TOC-Damage
 /// - SeeAlso: http://www.easydamus.com/BasicD20.pdf
-struct Combat: CombatProviding {
+struct CombatSystem: CombatProviding {
     
     var d20: D20Providing
     
