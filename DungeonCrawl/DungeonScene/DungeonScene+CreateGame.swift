@@ -16,7 +16,8 @@ extension DungeonScene {
         let dungeonSize = GridSize(width: 25, height: 25)
         let game = Game(dungeonGenerator: dungeonGenerator,
                         dungeonDecorator: dungeonDecorator,
-                        dungeonSize: dungeonSize)
+                        dungeonSize: dungeonSize,
+                        playerSpriteName: playerSprite.name ?? "player")
         return game
     }
     

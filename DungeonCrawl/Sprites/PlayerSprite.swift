@@ -20,12 +20,12 @@ class PlayerSprite: SKSpriteNode, Animatable {
     var animations = [Direction: SKAction]()
     var standingTexture = [Direction: SKTexture]()
     
-    init() {
+    init(spriteName: String) {
         let textureName = "Player_Female"
         let texture = SKTexture(imageNamed: "\(textureName)_North_01")
         super.init(texture: texture, color: .white, size: texture.size())
         createAnimations(textureName: textureName)
-        name = "Player"
+        name = spriteName
         zPosition = 50
     }
     

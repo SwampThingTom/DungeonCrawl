@@ -31,12 +31,14 @@ class GameTests: XCTestCase {
         // Act
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       playerSpriteName: "player")
 
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
         XCTAssertEqual(sut.level.map.size, dungeonSize)
         XCTAssertEqual(sut.level.player.cell, expectedDungeonDecorations.playerStartCell)
+        XCTAssertEqual(sut.level.player.spriteName, "player")
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
         XCTAssertNotNil(sut.level.player.gameLevel)
         sut.level.actors.forEach {
@@ -61,7 +63,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       playerSpriteName: "player")
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -93,7 +96,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       playerSpriteName: "player")
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -124,7 +128,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       playerSpriteName: "player")
         let deadEnemy = sut.level.actors[0] as? EnemyActor
         deadEnemy?.hitPoints = -1
 

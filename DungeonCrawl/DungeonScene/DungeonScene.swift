@@ -18,7 +18,7 @@ class DungeonScene: SKScene, MessageLogging {
     let tileSize = CGSize(width: 32, height: 32)
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
-    var playerSprite = PlayerSprite()
+    var playerSprite = PlayerSprite(spriteName: "player")
     
     var messageLabel = SKLabelNode()
     var messages = FixedSizeQueue<String>(maxSize: 2)

@@ -12,7 +12,10 @@ class Game {
     
     var level: DungeonLevel
     
-    init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
+    init(dungeonGenerator: DungeonGenerating,
+         dungeonDecorator: DungeonDecorating,
+         dungeonSize: GridSize,
+         playerSpriteName: String) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
         let playerActor = PlayerActor(spriteName: "player",
