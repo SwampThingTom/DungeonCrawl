@@ -15,9 +15,9 @@ class Game {
     init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
-        let playerActor = PlayerActor(name: "Player", displayName: "Player", cell: decorations.playerStartCell)
+        let playerActor = PlayerActor(name: "player", displayName: "player", cell: decorations.playerStartCell)
         let enemyActors: [EnemyActor] = decorations.enemies.enumerated().map {
-            let name = "Ghost_\($0)"
+            let name = "\($1.enemyType.description)_\($0)"
             return EnemyActor(name: name, model: $1)
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)

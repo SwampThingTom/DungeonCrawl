@@ -19,8 +19,12 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
+        let enemyModels = [
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
+            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+        ]
         let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: [])
+                                                            enemies: enemyModels)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -35,7 +39,12 @@ class GameTests: XCTestCase {
         XCTAssertEqual(sut.level.player.cell, expectedDungeonDecorations.playerStartCell)
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
         XCTAssertNotNil(sut.level.player.gameLevel)
-        sut.level.actors.forEach { XCTAssertNotNil($0.gameLevel) }
+        sut.level.actors.forEach {
+            XCTAssert($0.name.starts(with: "ghost_"))
+            XCTAssertEqual($0.displayName, "ghost")
+            XCTAssertEqual(($0 as? EnemyActor)?.enemyType, .ghost)
+            XCTAssertNotNil($0.gameLevel)
+        }
     }
     
     func testTakeTurn_playerOnly() throws {
