@@ -12,6 +12,7 @@ class Game {
     
     var level: DungeonLevel
     var turnSystem: TurnSystem
+    var aiSystem: AISystem
     
     init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
@@ -23,6 +24,7 @@ class Game {
         }
         level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
         turnSystem = TurnSystem(gameLevel: level)
+        aiSystem = AISystem(gameLevel: level)
     }
     
     func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
@@ -41,7 +43,7 @@ class Game {
     private func takeActorTurns(for actors: [AIActor]) -> [ActorAnimation] {
         return actors.compactMap { actor in
             guard !actor.isDead else { return nil }
-            let action = actor.turnAction()
+            let action = aiSystem.turnAction(for: actor)
             let animation = turnSystem.doTurnAction(action, for: actor)
             return actorAnimation(actor: actor, animation: animation)
         }

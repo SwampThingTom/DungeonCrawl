@@ -1,5 +1,5 @@
 //
-//  EnemyActorTests.swift
+//  AISystemTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/16/20.
@@ -10,17 +10,18 @@
 
 import XCTest
 
-class EnemyActorTests: XCTestCase {
+class AISystemTests: XCTestCase {
 
     func testTurnAction_playerInRange() throws {
         // Arrange
         let player = PlayerActor(spriteName: "Player", displayName: "Player", cell: GridCell(x: 4, y: 5))
         let enemy = EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
-        let sut = EnemyActor(spriteName: "Enemy", model: enemy)
-        _ = MockGameLevel(player: player, actors: [sut])
-
+        let actor = EnemyActor(spriteName: "Enemy", model: enemy)
+        let level = MockGameLevel(player: player, actors: [actor])
+        let sut = AISystem(gameLevel: level)
+        
         // Act
-        let action = sut.turnAction()
+        let action = sut.turnAction(for: actor)
         
         // Assert
         XCTAssertEqual(action, TurnAction.attack(direction: .west))
@@ -30,11 +31,12 @@ class EnemyActorTests: XCTestCase {
         // Arrange
         let player = PlayerActor(spriteName: "Player", displayName: "Player", cell: GridCell(x: 0, y: 0))
         let enemy = EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
-        let sut = EnemyActor(spriteName: "Enemy", model: enemy)
-        _ = MockGameLevel(player: player, actors: [sut])
+        let actor = EnemyActor(spriteName: "Enemy", model: enemy)
+        let level = MockGameLevel(player: player, actors: [actor])
+        let sut = AISystem(gameLevel: level)
 
         // Act
-        let action = sut.turnAction()
+        let action = sut.turnAction(for: actor)
         
         // Assert
         XCTAssertEqual(action, TurnAction.nothing)

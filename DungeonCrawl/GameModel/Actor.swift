@@ -20,5 +20,4 @@ protocol Actor: class {
 
 protocol AIActor: Actor {
     var enemyType: EnemyType { get }
-    func turnAction() -> TurnAction
 }
