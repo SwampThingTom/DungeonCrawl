@@ -16,17 +16,15 @@ extension DungeonScene {
         let dungeonSize = GridSize(width: 25, height: 25)
         let game = Game(dungeonGenerator: dungeonGenerator,
                         dungeonDecorator: dungeonDecorator,
-                        dungeonSize: dungeonSize,
-                        playerSpriteName: playerSprite.name ?? "player")
+                        dungeonSize: dungeonSize)
         return game
     }
     
     func setupScene(for level: LevelProviding) {
         let tileMap = self.tileMap(for: level.map)
-        let playerStartCell = level.player.cell
-        let playerStartPosition = tileMap.centerOfTile(atColumn: playerStartCell.x, row: playerStartCell.y)
+        let player = sprite(for: level.player, on: tileMap)
         let enemies = sprites(for: level.actors, on: tileMap)
-        displayScene(tileMap: tileMap, playerStartPosition: playerStartPosition, enemySprites: enemies)
+        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies)
     }
     
     private func tileMap(for map: GridMap) -> SKTileMapNode {
@@ -43,6 +41,12 @@ extension DungeonScene {
             }
         }
         return tileMap
+    }
+    
+    private func sprite(for player: Actor, on map: SKTileMapNode) -> SKSpriteNode {
+        let sprite = PlayerSprite(spriteName: player.spriteName)
+        sprite.position = map.centerOfTile(atColumn: player.cell.x, row: player.cell.y)
+        return sprite
     }
     
     private func sprites(for enemies: [AIActor], on map: SKTileMapNode) -> [SKSpriteNode] {

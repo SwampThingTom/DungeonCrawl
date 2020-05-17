@@ -17,7 +17,6 @@ class DungeonScene: SKScene, MessageLogging {
     let tileSize = CGSize(width: 32, height: 32)
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
-    var playerSprite = PlayerSprite(spriteName: "player")
     
     var messageLabel = SKLabelNode()
     var messages = FixedSizeQueue<String>(maxSize: 2)
@@ -56,6 +55,9 @@ class DungeonScene: SKScene, MessageLogging {
     // MARK: - Player input
     
     func handleMapTouch(at position: CGPoint) {
+        guard let playerSprite = childNode(withName: game.level.player.spriteName) else {
+            fatalError("Unable to find player sprite")
+        }
         guard let direction = Direction.direction(from: playerSprite.position, to: position) else {
             fatalError("Unable to calculate direction from \(playerSprite.position) to \(position)")
         }

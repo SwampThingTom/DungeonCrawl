@@ -10,9 +10,9 @@ import SpriteKit
 
 extension DungeonScene {
     
-    func displayScene(tileMap: SKTileMapNode, playerStartPosition: CGPoint, enemySprites: [SKSpriteNode]) {
+    func displayScene(tileMap: SKTileMapNode, playerSprite: SKSpriteNode, enemySprites: [SKSpriteNode]) {
         addTileMap(tileMap)
-        addPlayer(position: playerStartPosition)
+        addPlayer(playerSprite)
         addEnemies(enemySprites)
         addCamera()
         addMessageLabel()
@@ -33,9 +33,8 @@ extension DungeonScene {
         addChild(tileMap)
     }
     
-    private func addPlayer(position: CGPoint) {
-        playerSprite.position = position
-        addChild(playerSprite)
+    private func addPlayer(_ sprite: SKSpriteNode) {
+        addChild(sprite)
     }
     
     private func addEnemies(_ enemySprites: [SKSpriteNode]) {
@@ -45,6 +44,9 @@ extension DungeonScene {
     }
     
     private func addCamera() {
+        guard let playerSprite = childNode(withName: game.level.player.spriteName) else {
+            fatalError("Unable to find player sprite")
+        }
         let camera = DungeonCamera(follow: playerSprite, mapNode: tileMap, viewBounds: playableViewBounds)
         addChild(camera)
         self.camera = camera

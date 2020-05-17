@@ -31,8 +31,7 @@ class GameTests: XCTestCase {
         // Act
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize,
-                       playerSpriteName: "player")
+                       dungeonSize: dungeonSize)
 
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
@@ -63,8 +62,7 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize,
-                       playerSpriteName: "player")
+                       dungeonSize: dungeonSize)
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -96,8 +94,7 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize,
-                       playerSpriteName: "player")
+                       dungeonSize: dungeonSize)
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -128,8 +125,7 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize,
-                       playerSpriteName: "player")
+                       dungeonSize: dungeonSize)
         let deadEnemy = sut.level.actors[0] as? EnemyActor
         deadEnemy?.hitPoints = -1
 
