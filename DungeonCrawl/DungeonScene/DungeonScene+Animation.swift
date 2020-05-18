@@ -28,24 +28,27 @@ extension DungeonScene {
     }
 
     private func spriteAction(for actorAnimation: ActorAnimation) -> SKAction {
+        guard let spriteComponent = game.entityManager.spriteComponent(for: actorAnimation.actor) else {
+            fatalError("Unable to get sprite component for animation")
+        }
         switch actorAnimation.animation {
         case .attack:
             let attackAction1 = SKAction.moveBy(x: 0.0, y: 8.0, duration: GameSettings.turnDuration / 2.0)
             let attackAction2 = SKAction.moveBy(x: 0.0, y: -8.0, duration: GameSettings.turnDuration / 2.0)
             let attackActions = SKAction.sequence([attackAction1, attackAction2])
-            let action = SKAction.run(attackActions, onChildWithName: actorAnimation.actor.spriteName)
+            let action = SKAction.run(attackActions, onChildWithName: spriteComponent.spriteName)
             return action
                 
         case .death:
             let spriteAction = SKAction.rotate(byAngle: CGFloat.pi, duration: GameSettings.turnDuration)
-            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.spriteName)
+            let action = SKAction.run(spriteAction, onChildWithName: spriteComponent.spriteName)
             return action
 
         case .move(let cell, let heading):
             let position = tileMap.center(of: cell)
-            animateSprite(heading: heading, forSpriteNamed: actorAnimation.actor.spriteName)
+            animateSprite(heading: heading, forSpriteNamed: spriteComponent.spriteName)
             let spriteAction = SKAction.move(to: position, duration: GameSettings.turnDuration)
-            let action = SKAction.run(spriteAction, onChildWithName: actorAnimation.actor.spriteName)
+            let action = SKAction.run(spriteAction, onChildWithName: spriteComponent.spriteName)
             return action
         }
     }

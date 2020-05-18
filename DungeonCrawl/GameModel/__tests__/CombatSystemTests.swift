@@ -12,12 +12,28 @@ import XCTest
 
 class CombatTests: XCTestCase {
 
+    var entityManager: EntityManager?
+    var entityFactory: EntityFactory?
+    
+    override func setUp() {
+        entityManager = EntityManager()
+        entityFactory = EntityFactory(entityManager: entityManager!)
+    }
+    
+    override func tearDown() {
+        entityManager = nil
+        entityFactory = nil
+    }
+
     func testAttack_hit() throws {
         // Arrange
-        let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
-        let defender = MockCombatant(attackBonus: 1, armorClass: 11)
+        let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
+        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
+        let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
+        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
+        
         let d20 = MockD20(nextRoll: 10)
-        let sut = CombatSystem(d20: d20)
+        let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -28,10 +44,13 @@ class CombatTests: XCTestCase {
     
     func testAttack_miss() throws {
         // Arrange
-        let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
-        let defender = MockCombatant(attackBonus: 1, armorClass: 12)
+        let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
+        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
+        let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 12)
+        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
+
         let d20 = MockD20(nextRoll: 10)
-        let sut = CombatSystem(d20: d20)
+        let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -42,10 +61,13 @@ class CombatTests: XCTestCase {
     
     func testAttack_naturalHit() throws {
         // Arrange
-        let attacker = MockCombatant(attackBonus: 1, armorClass: 10)
-        let defender = MockCombatant(attackBonus: 1, armorClass: 22)
+        let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 10)
+        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
+        let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 22)
+        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
+
         let d20 = MockD20(nextRoll: 20)
-        let sut = CombatSystem(d20: d20)
+        let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -56,10 +78,13 @@ class CombatTests: XCTestCase {
     
     func testAttack_naturalMiss() throws {
         // Arrange
-        let attacker = MockCombatant(attackBonus: 1, armorClass: 11)
-        let defender = MockCombatant(attackBonus: 1, armorClass: 1)
+        let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
+        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
+        let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 1)
+        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
+
         let d20 = MockD20(nextRoll: 1)
-        let sut = CombatSystem(d20: d20)
+        let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
         let damage = sut.attack(attacker: attacker, defender: defender)
@@ -67,13 +92,16 @@ class CombatTests: XCTestCase {
         // Assert
         XCTAssertNil(damage)
     }
-}
-
-struct MockCombatant: Combatant {
-    var attackBonus: Int
-    var armorClass: Int
-    var hitPoints: Int = 10
-    var weaponDamage: Int = 1
+    
+    func mockCombatComponent(attackBonus: Int, armorClass: Int) -> CombatComponent {
+        return CombatComponent(attackBonus: attackBonus, armorClass: armorClass, hitPoints: 10, weaponDamage: 1)
+    }
+    
+    func entityWithCombatComponent(combatComponent: CombatComponent) -> Entity {
+        let entity = entityManager!.createEntity()
+        entityManager!.add(component: combatComponent, to: entity)
+        return entity
+    }
 }
 
 struct MockD20: D20Providing {

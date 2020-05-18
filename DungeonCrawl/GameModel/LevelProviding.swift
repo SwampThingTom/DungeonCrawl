@@ -14,7 +14,7 @@ protocol MessageLogging {
 
 protocol LevelProviding {
     var map: GridMap { get }
-    var player: Actor { get }
-    var actors: [AIActor] { get }
+    var player: Entity { get }
+    var actors: [Entity] { get }
     var message: MessageLogging? { get }
 }

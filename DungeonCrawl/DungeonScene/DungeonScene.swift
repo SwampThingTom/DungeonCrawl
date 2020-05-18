@@ -29,6 +29,13 @@ class DungeonScene: SKScene, MessageLogging {
         }
     }
     
+    var playerSpriteComponent: SpriteComponent? {
+        guard let playerSpriteComponent = game.entityManager.spriteComponent(for: game.level.player) else {
+            return nil
+        }
+        return playerSpriteComponent
+    }
+    
     override func sceneDidLoad() {
         guard let tileSet = SKTileSet(named: "Dungeon") else {
             fatalError("Unable to load Dungeon tile set")
@@ -55,7 +62,10 @@ class DungeonScene: SKScene, MessageLogging {
     // MARK: - Player input
     
     func handleMapTouch(at position: CGPoint) {
-        guard let playerSprite = childNode(withName: game.level.player.spriteName) else {
+        guard let playerSpriteComponent = playerSpriteComponent else {
+            fatalError("Unable to find player sprite component")
+        }
+        guard let playerSprite = childNode(withName: playerSpriteComponent.spriteName) else {
             fatalError("Unable to find player sprite")
         }
         guard let direction = Direction.direction(from: playerSprite.position, to: position) else {

@@ -26,3 +26,10 @@ class CombatComponent: Component {
         self.weaponDamage = weaponDamage
     }
 }
+
+extension EntityManager {
+    
+    func combatComponent(for entity: Entity) -> CombatComponent? {
+        return component(of: CombatComponent.self, for: entity) as? CombatComponent
+    }
+}

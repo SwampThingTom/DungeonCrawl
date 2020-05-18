@@ -20,17 +20,18 @@ enum Animation: Equatable {
     case move(to: GridCell, heading: Direction)
 }
 
-class TurnSystem {
+class TurnSystem: System {
     
     var gameLevel: LevelProviding
     var combatSystem: CombatProviding
     
-    init(gameLevel: LevelProviding, combatSystem: CombatProviding) {
+    init(entityManager: EntityManager, gameLevel: LevelProviding, combatSystem: CombatProviding) {
         self.gameLevel = gameLevel
         self.combatSystem = combatSystem
+        super.init(entityManager: entityManager)
     }
     
-    func doTurnAction(_ action: TurnAction, for actor: Actor) -> Animation? {
+    func doTurnAction(_ action: TurnAction, for actor: Entity) -> Animation? {
         switch action {
         case .attack(let heading):
             if attack(actor: actor, heading: heading) {
@@ -51,39 +52,88 @@ class TurnSystem {
     
     // MARK: attack
     
-    private func attack(actor: Actor, heading: Direction) -> Bool {
-        guard let attacker = actor as? CombatantActor else {
+    private func attack(actor: Entity, heading: Direction) -> Bool {
+        guard let attackerSpriteComponent = entityManager.spriteComponent(for: actor) else {
             return false
         }
-        guard let target = validTarget(fromCell: actor.cell, direction: heading) else {
+        guard entityManager.combatComponent(for: actor) != nil else {
             return false
         }
-        var resultMessage: String = "\(attacker.displayName) missed \(target.displayName)"
-        if let damage = combatSystem.attack(attacker: attacker, defender: target) {
-            target.hitPoints -= damage
-            if target.isDead {
-                resultMessage = "\(attacker.displayName) killed \(target.displayName)."
-            } else {
-                resultMessage = "\(attacker.displayName) hit \(target.displayName) for \(damage) damage."
-            }
+        
+        guard let target = validTarget(fromCell: attackerSpriteComponent.cell, direction: heading) else {
+            return false
         }
-        gameLevel.message?.show(resultMessage)
+        guard let targetCombatComponent = entityManager.combatComponent(for: target) else {
+            return false
+        }
+        
+        guard let damage = combatSystem.attack(attacker: actor, defender: target) else {
+            showAttackMissedMessage(attacker: actor, defender: target)
+            return true
+        }
+        
+        targetCombatComponent.hitPoints -= damage
+        if targetCombatComponent.isDead {
+            showAttackKilledMessage(attacker: actor, defender: target)
+        } else {
+            showAttackHitMessage(attacker: actor, defender: target, damage: damage)
+        }
+        
         return true
     }
     
-    private func validTarget(fromCell cell: GridCell, direction: Direction) -> CombatantActor? {
-        let targetCell = cell.neighbor(direction: direction)
-        if gameLevel.player.cell == targetCell {
-            return gameLevel.player as? CombatantActor
+    private func validTarget(fromCell cell: GridCell, direction: Direction) -> Entity? {
+        guard let playerSpriteComponent = entityManager.spriteComponent(for: gameLevel.player) else {
+            return nil
         }
-        let target = gameLevel.actors.first(where: { $0.cell == targetCell })
-        return target as? CombatantActor
+        let targetCell = cell.neighbor(direction: direction)
+        // LATER: Check all entities with a CombatComponent
+        // LATER: Consider checking whether they are on the opposite "team"?
+        if playerSpriteComponent.cell == targetCell {
+            return gameLevel.player
+        }
+        let target = gameLevel.actors.first(where: { actor in
+            guard let actorSpriteComponent = entityManager.spriteComponent(for: actor) else {
+                return false
+            }
+            return actorSpriteComponent.cell == targetCell
+        })
+        return target
     }
     
     // MARK: move
     
-    private func move(actor: Actor, to cell: GridCell, heading: Direction) -> Bool {
-        actor.cell = cell
+    private func move(actor: Entity, to cell: GridCell, heading: Direction) -> Bool {
+        guard let actorSpriteComponent = entityManager.spriteComponent(for: actor) else {
+            return false
+        }
+        actorSpriteComponent.cell = cell
         return true
+    }
+    
+    // MARK: show message
+    
+    private func showAttackMissedMessage(attacker: Entity, defender: Entity) {
+        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
+            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+                return
+        }
+        gameLevel.message?.show("\(attackerSprite.displayName) missed \(defenderSprite.displayName)")
+    }
+    
+    private func showAttackHitMessage(attacker: Entity, defender: Entity, damage: Int) {
+        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
+            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+                return
+        }
+        gameLevel.message?.show("\(attackerSprite.displayName) hit \(defenderSprite.displayName) for \(damage) damage.")
+    }
+    
+    private func showAttackKilledMessage(attacker: Entity, defender: Entity) {
+        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
+            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+                return
+        }
+        gameLevel.message?.show("\(attackerSprite.displayName) killed \(defenderSprite.displayName).")
     }
 }

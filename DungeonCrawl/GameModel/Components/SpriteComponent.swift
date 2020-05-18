@@ -25,3 +25,10 @@ class SpriteComponent: Component {
         self.cell = cell
     }
 }
+
+extension EntityManager {
+    
+    func spriteComponent(for entity: Entity) -> SpriteComponent? {
+        return component(of: SpriteComponent.self, for: entity) as? SpriteComponent
+    }
+}

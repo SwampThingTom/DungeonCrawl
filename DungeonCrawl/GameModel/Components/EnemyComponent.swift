@@ -28,3 +28,10 @@ extension EnemyType: CustomStringConvertible {
         }
     }
 }
+
+extension EntityManager {
+    
+    func enemyComponent(for entity: Entity) -> EnemyComponent? {
+        return component(of: EnemyComponent.self, for: entity) as? EnemyComponent
+    }
+}

@@ -10,23 +10,33 @@ import Foundation
 
 class Game {
     
+    var entityManager: EntityManager
     var level: DungeonLevel
     var combatSystem: CombatSystem
     var turnSystem: TurnSystem
-    var aiSystem: AISystem
+    var aiSystem: EnemySystem
     
-    init(dungeonGenerator: DungeonGenerating, dungeonDecorator: DungeonDecorating, dungeonSize: GridSize) {
+    init(dungeonGenerator: DungeonGenerating,
+         dungeonDecorator: DungeonDecorating,
+         dungeonSize: GridSize) {
+        
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
-        let playerActor = PlayerActor(spriteName: "player", displayName: "player", cell: decorations.playerStartCell)
-        let enemyActors: [EnemyActor] = decorations.enemies.enumerated().map {
-            let spriteName = "\($1.enemyType.description)_\($0)"
-            return EnemyActor(spriteName: spriteName, model: $1)
+        
+        entityManager = EntityManager()
+        let entityFactory = EntityFactory(entityManager: entityManager)
+        let playerEntity = entityFactory.createPlayer(cell: decorations.playerStartCell)
+        let enemyEntities: [Entity] = decorations.enemies.map {
+            entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
-        level = DungeonLevel(map: dungeonModel.map, player: playerActor, actors: enemyActors)
-        combatSystem = CombatSystem()
-        turnSystem = TurnSystem(gameLevel: level, combatSystem: combatSystem)
-        aiSystem = AISystem(gameLevel: level)
+        
+        level = DungeonLevel(map: dungeonModel.map,
+                             player: playerEntity,
+                             actors: enemyEntities)
+        
+        combatSystem = CombatSystem(entityManager: entityManager)
+        turnSystem = TurnSystem(entityManager: entityManager, gameLevel: level, combatSystem: combatSystem)
+        aiSystem = EnemySystem(entityManager: entityManager, gameLevel: level)
     }
     
     func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
@@ -37,21 +47,22 @@ class Game {
                                   actorAnimations: actorAnimations + deathAnimations)
     }
     
-    private func takePlayerTurn(player: Actor, action: TurnAction) -> ActorAnimation? {
+    private func takePlayerTurn(player: Entity, action: TurnAction) -> ActorAnimation? {
         let playerTurnAnimation = turnSystem.doTurnAction(action, for: player)
         return actorAnimation(actor: level.player, animation: playerTurnAnimation)
     }
     
-    private func takeActorTurns(for actors: [AIActor]) -> [ActorAnimation] {
+    private func takeActorTurns(for actors: [Entity]) -> [ActorAnimation] {
         return actors.compactMap { actor in
-            guard !actor.isDead else { return nil }
+            guard let combatComponent = entityManager.combatComponent(for: actor) else { return nil }
+            guard !combatComponent.isDead else { return nil }
             let action = aiSystem.turnAction(for: actor)
             let animation = turnSystem.doTurnAction(action, for: actor)
             return actorAnimation(actor: actor, animation: animation)
         }
     }
     
-    private func actorAnimation(actor: Actor, animation: Animation?) -> ActorAnimation? {
+    private func actorAnimation(actor: Entity, animation: Animation?) -> ActorAnimation? {
         guard let animation = animation else { return nil }
         return ActorAnimation(actor: actor, animation: animation)
     }
@@ -66,17 +77,21 @@ class Game {
     
     private func removeDeadActors() -> [ActorAnimation] {
         var deathAnimations = [ActorAnimation]()
-        var deadActors = [Actor]()
+        var deadActors = [Entity]()
         for actor in level.actors {
-            guard let combatant = actor as? CombatantActor else { continue }
-            if combatant.isDead {
-                let deathAnimation = ActorAnimation(actor: combatant, animation: Animation.death)
+            guard let combatComponent = entityManager.combatComponent(for: actor) else { continue }
+            if combatComponent.isDead {
+                let deathAnimation = ActorAnimation(actor: actor, animation: Animation.death)
                 deathAnimations.append(deathAnimation)
-                deadActors.append(combatant)
+                deadActors.append(actor)
             }
         }
         level.actors = level.actors.filter { actor in
-            !deadActors.contains { $0.spriteName == actor.spriteName }
+            guard let actorSprite = entityManager.spriteComponent(for: actor) else { return false }
+            return !deadActors.contains { deadActor in
+                guard let deadActorSprite = entityManager.spriteComponent(for: deadActor) else { return false }
+                return deadActorSprite.spriteName == actorSprite.spriteName
+            }
         }
         return deathAnimations
     }
@@ -84,22 +99,15 @@ class Game {
 
 class DungeonLevel: LevelProviding {
     let map: GridMap
-    let player: Actor
-    var actors: [AIActor]
+    let player: Entity
+    var actors: [Entity]
     var message: MessageLogging?
     
-    init(map: GridMap, player: Actor, actors: [AIActor]) {
+    init(map: GridMap, player: Entity, actors: [Entity]) {
         self.map = map
         self.player = player
         self.actors = actors
-        self.player.gameLevel = self
-        for actor in actors {
-            actor.gameLevel = self
-        }
     }
 }
 
-class PlayerActor: CombatantActor {
-}
-
-typealias ActorAnimation = (actor: Actor, animation: Animation)
+typealias ActorAnimation = (actor: Entity, animation: Animation)

@@ -36,15 +36,16 @@ class GameTests: XCTestCase {
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
         XCTAssertEqual(sut.level.map.size, dungeonSize)
-        XCTAssertEqual(sut.level.player.cell, expectedDungeonDecorations.playerStartCell)
-        XCTAssertEqual(sut.level.player.spriteName, "player")
+        
+        let playerSprite = sut.entityManager.spriteComponent(for: sut.level.player)!
+        XCTAssertEqual(playerSprite.cell, expectedDungeonDecorations.playerStartCell)
+        
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
-        XCTAssertNotNil(sut.level.player.gameLevel)
-        sut.level.actors.forEach {
-            XCTAssert($0.spriteName.starts(with: "ghost_"))
-            XCTAssertEqual($0.displayName, "ghost")
-            XCTAssertEqual(($0 as? EnemyActor)?.enemyType, .ghost)
-            XCTAssertNotNil($0.gameLevel)
+        sut.level.actors.enumerated().forEach {
+            let enemySprite = sut.entityManager.spriteComponent(for: $1)!
+            XCTAssertEqual(enemySprite.cell, enemyModels[$0].cell)
+            let enemyEnemyComponent = sut.entityManager.enemyComponent(for: $1)!
+            XCTAssertEqual(enemyEnemyComponent.enemyType, .ghost)
         }
     }
     
@@ -69,7 +70,7 @@ class GameTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(actorAnimations.count, 1)
-        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
         XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
     }
     
@@ -101,9 +102,9 @@ class GameTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(actorAnimations.count, 2)
-        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
         XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
-        XCTAssertEqual(actorAnimations[1].actor as? EnemyActor, sut.level.actors[0] as? EnemyActor)
+        XCTAssertEqual(actorAnimations[1].actor, sut.level.actors[0])
         XCTAssertEqual(actorAnimations[1].animation, Animation.attack(heading: .south))
     }
     
@@ -126,17 +127,18 @@ class GameTests: XCTestCase {
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize)
-        let deadEnemy = sut.level.actors[0] as? EnemyActor
-        deadEnemy?.hitPoints = -1
+        let deadEnemy = sut.level.actors[0]
+        let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
+        deadEnemyCombat.hitPoints = -1
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
 
         // Assert
         XCTAssertEqual(actorAnimations.count, 2)
-        XCTAssertEqual(actorAnimations.first?.actor as? PlayerActor, sut.level.player as? PlayerActor)
+        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
         XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
-        XCTAssertEqual(actorAnimations[1].actor as? EnemyActor, deadEnemy)
+        XCTAssertEqual(actorAnimations[1].actor, deadEnemy)
         XCTAssertEqual(actorAnimations[1].animation, Animation.death)
         XCTAssertEqual(sut.level.actors.count, 1)
     }
@@ -234,17 +236,4 @@ private class MockMapBuilder {
     func build() -> DungeonMap {
         return map
     }
-}
-
-extension PlayerActor: Equatable {
-    public static func == (lhs: PlayerActor, rhs: PlayerActor) -> Bool {
-        return lhs.spriteName == rhs.spriteName && lhs.cell == rhs.cell
-    }
-}
-
-extension EnemyActor: Equatable {
-    public static func == (lhs: EnemyActor, rhs: EnemyActor) -> Bool {
-        return lhs.spriteName == rhs.spriteName && lhs.cell == rhs.cell && lhs.enemyType == rhs.enemyType
-    }
-
 }
