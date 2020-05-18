@@ -53,14 +53,14 @@ class TurnSystem: System {
     // MARK: attack
     
     private func attack(actor: Entity, heading: Direction) -> Bool {
-        guard let attackerSpriteComponent = entityManager.spriteComponent(for: actor) else {
+        guard let attackerSprite = entityManager.spriteComponent(for: actor) else {
             return false
         }
         guard let attackerCombat = entityManager.combatComponent(for: actor) else {
             return false
         }
         
-        guard let target = validTarget(fromCell: attackerSpriteComponent.cell, direction: heading) else {
+        guard let target = validTarget(fromCell: attackerSprite.cell, direction: heading) else {
             return false
         }
         guard let targetCombat = entityManager.combatComponent(for: target) else {
@@ -83,20 +83,20 @@ class TurnSystem: System {
     }
     
     private func validTarget(fromCell cell: GridCell, direction: Direction) -> Entity? {
-        guard let playerSpriteComponent = entityManager.spriteComponent(for: gameLevel.player) else {
+        guard let playerSprite = entityManager.spriteComponent(for: gameLevel.player) else {
             return nil
         }
         let targetCell = cell.neighbor(direction: direction)
         // LATER: Check all entities with a CombatComponent
         // LATER: Consider checking whether they are on the opposite "team"?
-        if playerSpriteComponent.cell == targetCell {
+        if playerSprite.cell == targetCell {
             return gameLevel.player
         }
         let target = gameLevel.actors.first(where: { actor in
-            guard let actorSpriteComponent = entityManager.spriteComponent(for: actor) else {
+            guard let actorSprite = entityManager.spriteComponent(for: actor) else {
                 return false
             }
-            return actorSpriteComponent.cell == targetCell
+            return actorSprite.cell == targetCell
         })
         return target
     }
@@ -104,10 +104,10 @@ class TurnSystem: System {
     // MARK: move
     
     private func move(actor: Entity, to cell: GridCell, heading: Direction) -> Bool {
-        guard let actorSpriteComponent = entityManager.spriteComponent(for: actor) else {
+        guard let actorSprite = entityManager.spriteComponent(for: actor) else {
             return false
         }
-        actorSpriteComponent.cell = cell
+        actorSprite.cell = cell
         return true
     }
     
