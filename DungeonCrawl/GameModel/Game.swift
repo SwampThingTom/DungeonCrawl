@@ -54,9 +54,10 @@ class Game {
     
     private func takeActorTurns(for actors: [Entity]) -> [ActorAnimation] {
         return actors.compactMap { actor in
-            guard let combatComponent = entityManager.combatComponent(for: actor) else { return nil }
-            guard !combatComponent.isDead else { return nil }
-            let action = aiSystem.turnAction(for: actor)
+            guard let actorSprite = entityManager.spriteComponent(for: actor) else { return nil }
+            guard let actorCombat = entityManager.combatComponent(for: actor) else { return nil }
+            guard !actorCombat.isDead else { return nil }
+            let action = aiSystem.turnAction(for: actorSprite)
             let animation = turnSystem.doTurnAction(action, for: actor)
             return actorAnimation(actor: actor, animation: animation)
         }

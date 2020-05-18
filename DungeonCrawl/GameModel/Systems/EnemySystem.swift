@@ -8,7 +8,17 @@
 
 import Foundation
 
-class EnemySystem: System {
+protocol EnemyTurnActionProviding {
+    
+    /// Returns the action to be taken this turn.
+    /// - Parameter actor: The actor's sprite component.
+    /// - Returns: An action.
+    ///
+    /// - Note: Assumes that the `actor` is an enemy. If the player is within attack range, it will attack.
+    func turnAction(for actor: SpriteComponent) -> TurnAction
+}
+
+class EnemySystem: System, EnemyTurnActionProviding {
     
     let gameLevel: LevelProviding
     
@@ -17,10 +27,8 @@ class EnemySystem: System {
         super.init(entityManager: entityManager)
     }
     
-    // LATER: Pass in spriteComponent
-    func turnAction(for actor: Entity) -> TurnAction {
-        guard let actorSprite = entityManager.spriteComponent(for: actor) else { return .nothing }
-        if let targetDirection = directionForTargetInAttackRange(from: actorSprite.cell) {
+    func turnAction(for actor: SpriteComponent) -> TurnAction {
+        if let targetDirection = directionForTargetInAttackRange(from: actor.cell) {
             return .attack(direction: targetDirection)
         }
         return .nothing
