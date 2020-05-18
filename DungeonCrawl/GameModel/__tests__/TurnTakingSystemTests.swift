@@ -33,7 +33,8 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
-        let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west), for: actor)
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
+        let animation = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertEqual(animation, Animation.move(to: GridCell(x: 4, y: 5), heading: .west))
@@ -60,7 +61,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
@@ -87,7 +88,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
@@ -112,7 +113,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertEqual(animation, Animation.attack(heading: .north))
@@ -136,7 +137,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
 
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertNil(animation)
@@ -162,7 +163,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .south), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .south), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertNil(animation)
@@ -185,7 +186,7 @@ class TurnTakingSystemTests: XCTestCase {
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
-        let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
+        let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertNil(animation)

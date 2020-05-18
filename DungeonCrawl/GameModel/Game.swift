@@ -49,7 +49,8 @@ class Game {
     }
     
     private func takePlayerTurn(player: Entity, action: TurnAction) -> ActorAnimation? {
-        let playerTurnAnimation = turnTakingSystem.doTurnAction(action, for: player)
+        guard let playerSprite = entityManager.spriteComponent(for: player) else { return nil }
+        let playerTurnAnimation = turnTakingSystem.doTurnAction(action, for: player, actorSprite: playerSprite)
         return actorAnimation(actor: player, animation: playerTurnAnimation)
     }
     
@@ -59,7 +60,7 @@ class Game {
             guard let actorCombat = entityManager.combatComponent(for: actor) else { return nil }
             guard !actorCombat.isDead else { return nil }
             let action = enemyTurnActionSystem.turnAction(for: actorSprite)
-            let animation = turnTakingSystem.doTurnAction(action, for: actor)
+            let animation = turnTakingSystem.doTurnAction(action, for: actor, actorSprite: actorSprite)
             return actorAnimation(actor: actor, animation: animation)
         }
     }

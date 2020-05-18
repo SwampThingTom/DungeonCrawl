@@ -26,8 +26,9 @@ protocol TurnTaking {
     ///
     /// - Parameter action: The action to take this turn.
     /// - Parameter actor: The actor.
+    /// - Parameter actorSprite: The actor's sprite component.
     /// - Returns: An animation to be rendered for the action.
-    func doTurnAction(_ action: TurnAction, for actor: Entity) -> Animation?
+    func doTurnAction(_ action: TurnAction, for actor: Entity, actorSprite: SpriteComponent) -> Animation?
 }
 
 class TurnTakingSystem: System, TurnTaking {
@@ -41,10 +42,10 @@ class TurnTakingSystem: System, TurnTaking {
         super.init(entityManager: entityManager)
     }
     
-    func doTurnAction(_ action: TurnAction, for actor: Entity) -> Animation? {
+    func doTurnAction(_ action: TurnAction, for actor: Entity, actorSprite: SpriteComponent) -> Animation? {
         switch action {
         case .attack(let heading):
-            if attack(actor: actor, heading: heading) {
+            if attack(actor: actor, actorSprite: actorSprite, heading: heading) {
                 return .attack(heading: heading)
             }
             
@@ -62,15 +63,12 @@ class TurnTakingSystem: System, TurnTaking {
     
     // MARK: attack
     
-    private func attack(actor: Entity, heading: Direction) -> Bool {
-        guard let attackerSprite = entityManager.spriteComponent(for: actor) else {
-            return false
-        }
+    private func attack(actor: Entity, actorSprite: SpriteComponent, heading: Direction) -> Bool {
         guard let attackerCombat = entityManager.combatComponent(for: actor) else {
             return false
         }
         
-        guard let target = validTarget(fromCell: attackerSprite.cell, direction: heading) else {
+        guard let target = validTarget(fromCell: actorSprite.cell, direction: heading) else {
             return false
         }
         guard let targetCombat = entityManager.combatComponent(for: target) else {
