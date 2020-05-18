@@ -1,5 +1,5 @@
 //
-//  EnemySystemTests.swift
+//  EnemyTurnActionSystemTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/16/20.
@@ -10,7 +10,7 @@
 
 import XCTest
 
-class EnemySystemTests: XCTestCase {
+class EnemyTurnActionSystemTests: XCTestCase {
 
     var entityManager: EntityManager?
     var entityFactory: EntityFactory?
@@ -31,7 +31,7 @@ class EnemySystemTests: XCTestCase {
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
-        let sut = EnemySystem(entityManager: entityManager!, gameLevel: level)
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act
         let action = sut.turnAction(for: actorSprite!)
@@ -46,7 +46,7 @@ class EnemySystemTests: XCTestCase {
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
-        let sut = EnemySystem(entityManager: entityManager!, gameLevel: level)
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act
         let action = sut.turnAction(for: actorSprite!)

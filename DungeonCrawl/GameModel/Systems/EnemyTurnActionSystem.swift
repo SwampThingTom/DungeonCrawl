@@ -1,5 +1,5 @@
 //
-//  EnemySystem.swift
+//  EnemyTurnActionSystem.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/17/20.
@@ -18,7 +18,7 @@ protocol EnemyTurnActionProviding {
     func turnAction(for actor: SpriteComponent) -> TurnAction
 }
 
-class EnemySystem: System, EnemyTurnActionProviding {
+class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     
     let gameLevel: LevelProviding
     

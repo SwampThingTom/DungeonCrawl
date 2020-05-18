@@ -12,9 +12,10 @@ class Game {
     
     var entityManager: EntityManager
     var level: DungeonLevel
+    
     var combatSystem: CombatSystem
+    var enemyTurnActionSystem: EnemyTurnActionSystem
     var turnSystem: TurnSystem
-    var aiSystem: EnemySystem
     
     init(dungeonGenerator: DungeonGenerating,
          dungeonDecorator: DungeonDecorating,
@@ -35,8 +36,8 @@ class Game {
                              actors: enemyEntities)
         
         combatSystem = CombatSystem(entityManager: entityManager)
+        enemyTurnActionSystem = EnemyTurnActionSystem(entityManager: entityManager, gameLevel: level)
         turnSystem = TurnSystem(entityManager: entityManager, gameLevel: level, combatSystem: combatSystem)
-        aiSystem = EnemySystem(entityManager: entityManager, gameLevel: level)
     }
     
     func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
@@ -57,7 +58,7 @@ class Game {
             guard let actorSprite = entityManager.spriteComponent(for: actor) else { return nil }
             guard let actorCombat = entityManager.combatComponent(for: actor) else { return nil }
             guard !actorCombat.isDead else { return nil }
-            let action = aiSystem.turnAction(for: actorSprite)
+            let action = enemyTurnActionSystem.turnAction(for: actorSprite)
             let animation = turnSystem.doTurnAction(action, for: actor)
             return actorAnimation(actor: actor, animation: animation)
         }
