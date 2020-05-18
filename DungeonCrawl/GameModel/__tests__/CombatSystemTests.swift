@@ -28,15 +28,13 @@ class CombatTests: XCTestCase {
     func testAttack_hit() throws {
         // Arrange
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
-        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
-        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
         
         let d20 = MockD20(nextRoll: 10)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
-        let damage = sut.attack(attacker: attacker, defender: defender)
+        let damage = sut.attack(attacker: attackerCombat, defender: defenderCombat)
         
         // Assert
         XCTAssertEqual(damage, 1)
@@ -45,15 +43,13 @@ class CombatTests: XCTestCase {
     func testAttack_miss() throws {
         // Arrange
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
-        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 12)
-        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
 
         let d20 = MockD20(nextRoll: 10)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
-        let damage = sut.attack(attacker: attacker, defender: defender)
+        let damage = sut.attack(attacker: attackerCombat, defender: defenderCombat)
         
         // Assert
         XCTAssertNil(damage)
@@ -62,15 +58,13 @@ class CombatTests: XCTestCase {
     func testAttack_naturalHit() throws {
         // Arrange
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 10)
-        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 22)
-        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
 
         let d20 = MockD20(nextRoll: 20)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
-        let damage = sut.attack(attacker: attacker, defender: defender)
+        let damage = sut.attack(attacker: attackerCombat, defender: defenderCombat)
         
         // Assert
         XCTAssertEqual(damage, 1)
@@ -79,15 +73,13 @@ class CombatTests: XCTestCase {
     func testAttack_naturalMiss() throws {
         // Arrange
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
-        let attacker = entityWithCombatComponent(combatComponent: attackerCombat)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 1)
-        let defender = entityWithCombatComponent(combatComponent: defenderCombat)
 
         let d20 = MockD20(nextRoll: 1)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
-        let damage = sut.attack(attacker: attacker, defender: defender)
+        let damage = sut.attack(attacker: attackerCombat, defender: defenderCombat)
         
         // Assert
         XCTAssertNil(damage)

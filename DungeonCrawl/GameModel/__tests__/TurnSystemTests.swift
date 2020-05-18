@@ -237,7 +237,7 @@ class MockCombat: CombatProviding {
     
     var mockAttackDamage: Int?
     
-    func attack(attacker: Entity, defender: Entity) -> Int? {
+    func attack(attacker: CombatComponent, defender: CombatComponent) -> Int? {
         return mockAttackDamage
     }
 }

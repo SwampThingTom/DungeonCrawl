@@ -9,7 +9,12 @@
 import Foundation
 
 protocol CombatProviding {
-    func attack(attacker: Entity, defender: Entity) -> Int?
+    
+    /// Calculates combat results.
+    /// - Parameter attacker: The attacker's combat data.
+    /// - Parameter defender: The defender's combat data.
+    /// - Returns: The damage dealt by the attack, or `nil` if the attack misses.
+    func attack(attacker: CombatComponent, defender: CombatComponent) -> Int?
 }
 
 /// Determines combat results based on a simplified D20 system.
@@ -25,20 +30,13 @@ class CombatSystem: System, CombatProviding {
         super.init(entityManager: entityManager)
     }
     
-    // LATER: Pass in CombatComponents
-    func attack(attacker: Entity, defender: Entity) -> Int? {
-        guard let attackerCombatant = entityManager.combatComponent(for: attacker) else {
-            return nil
-        }
-        guard let defenderCombatant = entityManager.combatComponent(for: defender) else {
-            return nil
-        }
+    func attack(attacker: CombatComponent, defender: CombatComponent) -> Int? {
         let attackRoll = d20.roll()
         let naturalMiss = attackRoll == 1
         let naturalHit = attackRoll == 20
-        let hit = attackRoll + attackerCombatant.attackBonus >= defenderCombatant.armorClass
+        let hit = attackRoll + attacker.attackBonus >= defender.armorClass
         if !naturalMiss && (naturalHit || hit) {
-            return attackerCombatant.weaponDamage
+            return attacker.weaponDamage
         }
         return nil
     }

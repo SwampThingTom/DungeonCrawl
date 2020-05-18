@@ -56,24 +56,24 @@ class TurnSystem: System {
         guard let attackerSpriteComponent = entityManager.spriteComponent(for: actor) else {
             return false
         }
-        guard entityManager.combatComponent(for: actor) != nil else {
+        guard let attackerCombat = entityManager.combatComponent(for: actor) else {
             return false
         }
         
         guard let target = validTarget(fromCell: attackerSpriteComponent.cell, direction: heading) else {
             return false
         }
-        guard let targetCombatComponent = entityManager.combatComponent(for: target) else {
+        guard let targetCombat = entityManager.combatComponent(for: target) else {
             return false
         }
         
-        guard let damage = combatSystem.attack(attacker: actor, defender: target) else {
+        guard let damage = combatSystem.attack(attacker: attackerCombat, defender: targetCombat) else {
             showAttackMissedMessage(attacker: actor, defender: target)
             return true
         }
         
-        targetCombatComponent.hitPoints -= damage
-        if targetCombatComponent.isDead {
+        targetCombat.hitPoints -= damage
+        if targetCombat.isDead {
             showAttackKilledMessage(attacker: actor, defender: target)
         } else {
             showAttackHitMessage(attacker: actor, defender: target, damage: damage)
