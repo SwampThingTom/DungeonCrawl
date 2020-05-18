@@ -1,5 +1,5 @@
 //
-//  TurnSystem.swift
+//  TurnTakingSystem.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/16/20.
@@ -20,7 +20,17 @@ enum Animation: Equatable {
     case move(to: GridCell, heading: Direction)
 }
 
-class TurnSystem: System {
+protocol TurnTaking {
+    
+    /// Applies the results of the actor's action.
+    ///
+    /// - Parameter action: The action to take this turn.
+    /// - Parameter actor: The actor.
+    /// - Returns: An animation to be rendered for the action.
+    func doTurnAction(_ action: TurnAction, for actor: Entity) -> Animation?
+}
+
+class TurnTakingSystem: System, TurnTaking {
     
     var gameLevel: LevelProviding
     var combatSystem: CombatProviding

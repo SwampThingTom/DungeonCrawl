@@ -1,5 +1,5 @@
 //
-//  TurnSystemTests.swift
+//  TurnTakingSystemTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/15/20.
@@ -10,7 +10,7 @@
 
 import XCTest
 
-class TurnSystemTests: XCTestCase {
+class TurnTakingSystemTests: XCTestCase {
     
     var entityManager: EntityManager?
     var entityFactory: EntityFactory?
@@ -30,7 +30,7 @@ class TurnSystemTests: XCTestCase {
         let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
         let actor = mockEntity(spriteComponent: actorSprite)
         let gameLevel = MockGameLevel(player: actor, actors: [])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
         let animation = sut.doTurnAction(.move(to: GridCell(x: 4, y: 5), direction: .west), for: actor)
@@ -57,7 +57,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
 
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -84,7 +84,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
 
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -109,7 +109,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat, enemyComponent: actorEnemy)
 
         let gameLevel = MockGameLevel(player: target, actors: [actor])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -133,7 +133,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite)
 
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
@@ -159,7 +159,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
 
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
         let animation = sut.doTurnAction(.attack(direction: .south), for: actor)
@@ -182,7 +182,7 @@ class TurnSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
         let gameLevel = MockGameLevel(player: actor, actors: [target])
-        let sut = TurnSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
 
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor)
