@@ -32,3 +32,9 @@ extension EntityManager {
         return component(of: SpriteComponent.self, for: entity) as? SpriteComponent
     }
 }
+
+extension Entity {
+    func spriteComponent() -> SpriteComponent? {
+        return component(of: SpriteComponent.self) as? SpriteComponent
+    }
+}

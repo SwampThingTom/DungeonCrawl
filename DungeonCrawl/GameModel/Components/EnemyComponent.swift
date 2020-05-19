@@ -35,3 +35,9 @@ extension EntityManager {
         return component(of: EnemyComponent.self, for: entity) as? EnemyComponent
     }
 }
+
+extension Entity {
+    func enemyComponent() -> EnemyComponent? {
+        return component(of: EnemyComponent.self) as? EnemyComponent
+    }
+}
