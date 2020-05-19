@@ -8,11 +8,34 @@
 
 import Foundation
 
+/// An object in the game world whose characteristics are provided by a collection of components.
 class Entity {
+    
+    private weak var entityManager: EntityManager?
+    
+    /// Unique identifier for the entity.
     let entityId: UInt
     
-    init(entityId: UInt) {
+    /// Initializes a new entity object.
+    ///
+    /// - Warning: This should never be called directly. Use `EntityManager.createEntity()` instead.
+    init(entityId: UInt, entityManager: EntityManager) {
         self.entityId = entityId
+        self.entityManager = entityManager
+    }
+    
+    deinit {
+        entityManager?.remove(entity: self)
+    }
+    
+    /// Adds a component to the entity.
+    func add(component: Component) {
+        entityManager?.add(component: component, to: self)
+    }
+    
+    /// Returns the entity's component of the specified type.
+    func component(of componentType: Component.Type) -> Component? {
+        return entityManager?.component(of: componentType, for: self)
     }
 }
 

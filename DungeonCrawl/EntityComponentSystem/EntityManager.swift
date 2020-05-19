@@ -35,26 +35,32 @@ class EntityManager: EntityManaging {
     
     private var components = [String: EntityComponentMap]()
     
+    /// Creates a new entity.
     func createEntity() -> Entity {
-        return Entity(entityId: nextEntityId)
+        return Entity(entityId: nextEntityId, entityManager: self)
     }
     
+    /// Removes an entity and all of its components.
     func remove(entity: Entity) {
         for component in components.values {
             component[entity] = nil
         }
     }
     
+    /// Adds a component to an entity.
     func add(component: Component, to entity: Entity) {
         let componentsForEntity = componentMap(for: entity, of: type(of: component))
         componentsForEntity[entity] = component
+        component._add(to: entity)
     }
     
+    /// Returns the component of the specified type for an entity.
     func component(of componentType: Component.Type, for entity: Entity) -> Component? {
         let componentsForEntity = components[key(for: componentType)]
         return componentsForEntity?[entity]
     }
     
+    /// Returns all of the entities with the specified component type.
     func entities(with componentType: Component.Type) -> [Entity] {
         guard let componentsForEntity = components[key(for: componentType)] else {
             return []

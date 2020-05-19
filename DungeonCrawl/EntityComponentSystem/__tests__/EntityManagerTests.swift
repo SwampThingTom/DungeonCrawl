@@ -36,6 +36,7 @@ class EntityManagerTests: XCTestCase {
         // Assert
         let component = sut.component(of: MockComponent1.self, for: entity) as? MockComponent1
         XCTAssertEqual(component, expectedComponent)
+        XCTAssertEqual(component?.entity, entity)
     }
     
     func testAddComponent_multipleComponents() throws {
