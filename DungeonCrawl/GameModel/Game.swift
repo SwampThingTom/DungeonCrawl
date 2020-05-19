@@ -15,6 +15,7 @@ class Game {
     
     var combatSystem: CombatSystem
     var enemyTurnActionSystem: EnemyTurnActionSystem
+    var playerTurnActionSystem: PlayerTurnActionSystem
     var turnTakingSystem: TurnTakingSystem
     
     var isPlayerDead: Bool {
@@ -47,6 +48,7 @@ class Game {
         
         combatSystem = CombatSystem(entityManager: entityManager)
         enemyTurnActionSystem = EnemyTurnActionSystem(entityManager: entityManager, gameLevel: level)
+        playerTurnActionSystem = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
         turnTakingSystem = TurnTakingSystem(entityManager: entityManager, gameLevel: level, combatSystem: combatSystem)
     }
     

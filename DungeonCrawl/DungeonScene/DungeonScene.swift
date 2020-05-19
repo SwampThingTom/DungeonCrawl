@@ -71,29 +71,10 @@ class DungeonScene: SKScene, MessageLogging {
         guard let direction = Direction.direction(from: playerSprite.position, to: position) else {
             fatalError("Unable to calculate direction from \(playerSprite.position) to \(position)")
         }
-        let playerCell = tileMap.cell(for: playerSprite.position)
-        let targetCell = playerCell.neighbor(direction: direction)
-        guard !tileMap.isObstacle(targetCell) else {
-            return
+        let playerTurnProvider = game.playerTurnActionSystem
+        if let action = playerTurnProvider.turnActionForMapTouch(direction: direction,
+                                                                 playerSprite: playerSpriteComponent) {
+            takePlayerTurn(action)
         }
-        let action = playerAction(for: targetCell, direction: direction)
-        takePlayerTurn(action)
-    }
-    
-    private func playerAction(for cell: GridCell, direction: Direction) -> TurnAction {
-        if isEnemy(cell) {
-            return TurnAction.attack(direction: direction)
-        }
-        return TurnAction.move(to: cell, direction: direction)
-    }
-    
-    private func isEnemy(_ cell: GridCell) -> Bool {
-        for sprite in children {
-            let isEnemy = sprite.userData?.object(forKey: "isEnemy") != nil
-            if isEnemy && cell == tileMap.cell(for: sprite.position) {
-                return true
-            }
-        }
-        return false
     }
 }
