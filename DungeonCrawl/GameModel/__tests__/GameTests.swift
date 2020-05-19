@@ -31,7 +31,8 @@ class GameTests: XCTestCase {
         // Act
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
 
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
@@ -63,7 +64,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -95,7 +97,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
 
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
@@ -126,7 +129,8 @@ class GameTests: XCTestCase {
         
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
-                       dungeonSize: dungeonSize)
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
         let deadEnemy = sut.level.actors[0]
         let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
         deadEnemyCombat.hitPoints = -1
@@ -142,7 +146,103 @@ class GameTests: XCTestCase {
         XCTAssertEqual(actorAnimations[1].animation, Animation.death)
         XCTAssertEqual(sut.level.actors.count, 1)
     }
+    
+    func testIsPlayerDead_false() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
 
+        // Act
+        let isPlayerDead = sut.isPlayerDead
+
+        // Assert
+        XCTAssertFalse(isPlayerDead)
+    }
+    
+    func testIsPlayerDead_true() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize,
+                       quest: MockQuest())
+        sut.level.player.combatComponent()?.hitPoints = -1
+        
+        // Act
+        let isPlayerDead = sut.isPlayerDead
+
+        // Assert
+        XCTAssertTrue(isPlayerDead)
+    }
+    
+    func testIsQuestComplete_false() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        
+        let mockQuest = MockQuest()
+        mockQuest.mockIsComplete = false
+        
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize,
+                       quest: mockQuest)
+
+        // Act
+        let isQuestComplete = sut.isQuestComplete
+
+        // Assert
+        XCTAssertFalse(isQuestComplete)
+    }
+    
+    func testIsQuestComplete_true() throws {
+        // Arrange
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let dungeonGenerator = MockDungeonGenerator()
+        dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
+        let dungeonSize = expectedDungeonModel.map.size
+        
+        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let dungeonDecorator = MockDungeonDecorator()
+        dungeonDecorator.mockDecorations = expectedDungeonDecorations
+        
+        let mockQuest = MockQuest()
+        mockQuest.mockIsComplete = true
+        
+        let sut = Game(dungeonGenerator: dungeonGenerator,
+                       dungeonDecorator: dungeonDecorator,
+                       dungeonSize: dungeonSize,
+                       quest: mockQuest)
+
+        // Act
+        let isQuestComplete = sut.isQuestComplete
+
+        // Assert
+        XCTAssertTrue(isQuestComplete)
+    }
 }
 
 class MockDungeonGenerator: DungeonGenerating {
@@ -235,5 +335,14 @@ private class MockMapBuilder {
     
     func build() -> DungeonMap {
         return map
+    }
+}
+
+class MockQuest: QuestStatusProviding {
+    
+    var mockIsComplete: Bool = false
+    
+    func isComplete(gameLevel: LevelProviding) -> Bool {
+        return mockIsComplete
     }
 }

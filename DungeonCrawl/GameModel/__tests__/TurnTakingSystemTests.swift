@@ -217,10 +217,10 @@ class TurnTakingSystemTests: XCTestCase {
         }
         return entity
     }
-
 }
 
 struct MockGameLevel: LevelProviding {
+    var quest: QuestStatusProviding = MockQuest()
     var map: GridMap = DungeonMap()
     var player: Entity
     var actors: [Entity]

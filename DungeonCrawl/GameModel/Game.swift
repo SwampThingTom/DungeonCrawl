@@ -17,9 +17,18 @@ class Game {
     var enemyTurnActionSystem: EnemyTurnActionSystem
     var turnTakingSystem: TurnTakingSystem
     
+    var isPlayerDead: Bool {
+        return level.player.combatComponent()?.isDead ?? true
+    }
+    
+    var isQuestComplete: Bool {
+        return level.quest.isComplete(gameLevel: level)
+    }
+    
     init(dungeonGenerator: DungeonGenerating,
          dungeonDecorator: DungeonDecorating,
-         dungeonSize: GridSize) {
+         dungeonSize: GridSize,
+         quest: QuestStatusProviding) {
         
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
         let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
@@ -31,7 +40,8 @@ class Game {
             entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
         
-        level = DungeonLevel(map: dungeonModel.map,
+        level = DungeonLevel(quest: quest,
+                             map: dungeonModel.map,
                              player: playerEntity,
                              actors: enemyEntities)
         
@@ -101,12 +111,14 @@ class Game {
 }
 
 class DungeonLevel: LevelProviding {
+    let quest: QuestStatusProviding
     let map: GridMap
     let player: Entity
     var actors: [Entity]
     var message: MessageLogging?
     
-    init(map: GridMap, player: Entity, actors: [Entity]) {
+    init(quest: QuestStatusProviding, map: GridMap, player: Entity, actors: [Entity]) {
+        self.quest = quest
         self.map = map
         self.player = player
         self.actors = actors

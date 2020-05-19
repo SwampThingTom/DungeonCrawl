@@ -13,6 +13,7 @@ protocol MessageLogging {
 }
 
 protocol LevelProviding {
+    var quest: QuestStatusProviding { get }
     var map: GridMap { get }
     var player: Entity { get }
     var actors: [Entity] { get }

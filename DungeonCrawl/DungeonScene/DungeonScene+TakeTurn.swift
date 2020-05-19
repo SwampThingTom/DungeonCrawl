@@ -32,6 +32,34 @@ extension DungeonScene {
             return !actorNames.contains(nodeName)
         }
         removeChildren(in: nodesToRemove)
+        if game.isQuestComplete {
+            showPlayerWon()
+            gameState = .dungeonComplete
+            return
+        } else if game.isPlayerDead {
+            showPlayerDied()
+            gameState = .dungeonComplete
+            return
+        }
         gameState = .waitingForInput
+    }
+    
+    func showPlayerWon() {
+        showAlert(message: "You have completed the quest!", handler: nil)
+    }
+    
+    func showPlayerDied() {
+        showAlert(message: "You have completed the died!", handler: nil)
+    }
+}
+
+extension SKScene {
+    
+    // LATER: Probably better to implement this in SpriteKit, or transition to new scene.
+    func showAlert(message: String?, handler: (() -> Void)?) {
+        let alert = UIAlertController.init(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel) { _ in handler?() }
+        alert.addAction(okAction)
+        view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }

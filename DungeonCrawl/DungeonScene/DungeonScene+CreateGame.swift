@@ -14,9 +14,11 @@ extension DungeonScene {
         let dungeonGenerator = DungeonGenerator()
         let dungeonDecorator = DungeonDecorator()
         let dungeonSize = GridSize(width: 25, height: 25)
+        let quest = Quest()
         let game = Game(dungeonGenerator: dungeonGenerator,
                         dungeonDecorator: dungeonDecorator,
-                        dungeonSize: dungeonSize)
+                        dungeonSize: dungeonSize,
+                        quest: quest)
         return game
     }
     
