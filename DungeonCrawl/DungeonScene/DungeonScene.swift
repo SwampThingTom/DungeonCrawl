@@ -45,6 +45,13 @@ class DungeonScene: SKScene, MessageLogging {
     }
     
     override func didMove(to view: SKView) {
+        startNewGame()
+    }
+    
+    func startNewGame() {
+        removeAllChildren()
+        clearMessages()
+        gameState = .waitingForInput
         game = createGame()
         game.level.message = self
         setupScene(for: game.level)
@@ -57,6 +64,11 @@ class DungeonScene: SKScene, MessageLogging {
         let lineOne = messages.first ?? ""
         let lineTwo = messages.last ?? ""
         self.messageLabel.text = lineOne + "\n" + lineTwo
+    }
+    
+    func clearMessages() {
+        show("")
+        show("")
     }
     
     // MARK: - Player input

@@ -15,7 +15,7 @@ extension DungeonScene {
             return
         }
         gameState = .takingTurn
-        show("")
+        clearMessages()
         let animations = game.takeTurn(playerAction: playerAction)
         let animationAction = animationActionForTurn(animations: animations)
         run(animationAction)
@@ -45,11 +45,15 @@ extension DungeonScene {
     }
     
     func showPlayerWon() {
-        showAlert(message: "You have completed the quest!", handler: nil)
+        showAlert(message: "You have completed the quest!") {
+            self.startNewGame()
+        }
     }
     
     func showPlayerDied() {
-        showAlert(message: "You have completed the died!", handler: nil)
+        showAlert(message: "You have died!") {
+            self.startNewGame()
+        }
     }
 }
 
