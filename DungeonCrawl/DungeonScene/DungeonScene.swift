@@ -30,7 +30,7 @@ class DungeonScene: SKScene, MessageLogging {
     }
     
     var playerSpriteComponent: SpriteComponent? {
-        guard let playerSpriteComponent = game.entityManager.spriteComponent(for: game.level.player) else {
+        guard let playerSpriteComponent = game.level.player.spriteComponent() else {
             return nil
         }
         return playerSpriteComponent

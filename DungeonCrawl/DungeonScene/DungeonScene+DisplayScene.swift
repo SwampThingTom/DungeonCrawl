@@ -44,7 +44,7 @@ extension DungeonScene {
     }
     
     private func addCamera() {
-        guard let spriteComponent = game.entityManager.spriteComponent(for: game.level.player) else {
+        guard let spriteComponent = game.level.player.spriteComponent() else {
             fatalError("Unable to find player sprite")
         }
         guard let playerSprite = childNode(withName: spriteComponent.spriteName) else {

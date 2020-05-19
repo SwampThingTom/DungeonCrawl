@@ -28,7 +28,7 @@ extension DungeonScene {
     }
 
     private func spriteAction(for actorAnimation: ActorAnimation) -> SKAction {
-        guard let spriteComponent = game.entityManager.spriteComponent(for: actorAnimation.actor) else {
+        guard let spriteComponent = actorAnimation.actor.spriteComponent() else {
             fatalError("Unable to get sprite component for animation")
         }
         switch actorAnimation.animation {

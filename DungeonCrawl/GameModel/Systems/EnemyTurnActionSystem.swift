@@ -35,7 +35,7 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     }
     
     private func directionForTargetInAttackRange(from cell: GridCell) -> Direction? {
-        guard let playerSprite = entityManager.spriteComponent(for: gameLevel.player) else { return nil }
+        guard let playerSprite = gameLevel.player.spriteComponent() else { return nil }
         let targetNeighbor = cell.neighbors().first { $0.cell == playerSprite.cell }
         return targetNeighbor?.direction
     }

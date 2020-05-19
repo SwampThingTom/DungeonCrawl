@@ -64,14 +64,14 @@ class TurnTakingSystem: System, TurnTaking {
     // MARK: attack
     
     private func attack(actor: Entity, actorSprite: SpriteComponent, heading: Direction) -> Bool {
-        guard let attackerCombat = entityManager.combatComponent(for: actor) else {
+        guard let attackerCombat = actor.combatComponent() else {
             return false
         }
         
         guard let target = validTarget(fromCell: actorSprite.cell, direction: heading) else {
             return false
         }
-        guard let targetCombat = entityManager.combatComponent(for: target) else {
+        guard let targetCombat = target.combatComponent() else {
             return false
         }
         
@@ -91,7 +91,7 @@ class TurnTakingSystem: System, TurnTaking {
     }
     
     private func validTarget(fromCell cell: GridCell, direction: Direction) -> Entity? {
-        guard let playerSprite = entityManager.spriteComponent(for: gameLevel.player) else {
+        guard let playerSprite = gameLevel.player.spriteComponent() else {
             return nil
         }
         let targetCell = cell.neighbor(direction: direction)
@@ -101,7 +101,7 @@ class TurnTakingSystem: System, TurnTaking {
             return gameLevel.player
         }
         let target = gameLevel.actors.first(where: { actor in
-            guard let actorSprite = entityManager.spriteComponent(for: actor) else {
+            guard let actorSprite = actor.spriteComponent() else {
                 return false
             }
             return actorSprite.cell == targetCell
@@ -112,7 +112,7 @@ class TurnTakingSystem: System, TurnTaking {
     // MARK: move
     
     private func move(actor: Entity, to cell: GridCell, heading: Direction) -> Bool {
-        guard let actorSprite = entityManager.spriteComponent(for: actor) else {
+        guard let actorSprite = actor.spriteComponent() else {
             return false
         }
         actorSprite.cell = cell
@@ -122,24 +122,24 @@ class TurnTakingSystem: System, TurnTaking {
     // MARK: show message
     
     private func showAttackMissedMessage(attacker: Entity, defender: Entity) {
-        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
-            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+        guard let attackerSprite = attacker.spriteComponent(),
+            let defenderSprite = defender.spriteComponent() else {
                 return
         }
         gameLevel.message?.show("\(attackerSprite.displayName) missed \(defenderSprite.displayName)")
     }
     
     private func showAttackHitMessage(attacker: Entity, defender: Entity, damage: Int) {
-        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
-            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+        guard let attackerSprite = attacker.spriteComponent(),
+            let defenderSprite = defender.spriteComponent() else {
                 return
         }
         gameLevel.message?.show("\(attackerSprite.displayName) hit \(defenderSprite.displayName) for \(damage) damage.")
     }
     
     private func showAttackKilledMessage(attacker: Entity, defender: Entity) {
-        guard let attackerSprite = entityManager.spriteComponent(for: attacker),
-            let defenderSprite = entityManager.spriteComponent(for: defender) else {
+        guard let attackerSprite = attacker.spriteComponent(),
+            let defenderSprite = defender.spriteComponent() else {
                 return
         }
         gameLevel.message?.show("\(attackerSprite.displayName) killed \(defenderSprite.displayName).")

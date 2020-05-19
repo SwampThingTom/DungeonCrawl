@@ -49,15 +49,15 @@ class Game {
     }
     
     private func takePlayerTurn(player: Entity, action: TurnAction) -> ActorAnimation? {
-        guard let playerSprite = entityManager.spriteComponent(for: player) else { return nil }
+        guard let playerSprite = player.spriteComponent() else { return nil }
         let playerTurnAnimation = turnTakingSystem.doTurnAction(action, for: player, actorSprite: playerSprite)
         return actorAnimation(actor: player, animation: playerTurnAnimation)
     }
     
     private func takeActorTurns(for actors: [Entity]) -> [ActorAnimation] {
         return actors.compactMap { actor in
-            guard let actorSprite = entityManager.spriteComponent(for: actor) else { return nil }
-            guard let actorCombat = entityManager.combatComponent(for: actor) else { return nil }
+            guard let actorSprite = actor.spriteComponent() else { return nil }
+            guard let actorCombat = actor.combatComponent() else { return nil }
             guard !actorCombat.isDead else { return nil }
             let action = enemyTurnActionSystem.turnAction(for: actorSprite)
             let animation = turnTakingSystem.doTurnAction(action, for: actor, actorSprite: actorSprite)
@@ -82,7 +82,7 @@ class Game {
         var deathAnimations = [ActorAnimation]()
         var deadActors = [Entity]()
         for actor in level.actors {
-            guard let combatComponent = entityManager.combatComponent(for: actor) else { continue }
+            guard let combatComponent = actor.combatComponent() else { continue }
             if combatComponent.isDead {
                 let deathAnimation = ActorAnimation(actor: actor, animation: Animation.death)
                 deathAnimations.append(deathAnimation)
@@ -90,9 +90,9 @@ class Game {
             }
         }
         level.actors = level.actors.filter { actor in
-            guard let actorSprite = entityManager.spriteComponent(for: actor) else { return false }
+            guard let actorSprite = actor.spriteComponent() else { return false }
             return !deadActors.contains { deadActor in
-                guard let deadActorSprite = entityManager.spriteComponent(for: deadActor) else { return false }
+                guard let deadActorSprite = deadActor.spriteComponent() else { return false }
                 return deadActorSprite.spriteName == actorSprite.spriteName
             }
         }

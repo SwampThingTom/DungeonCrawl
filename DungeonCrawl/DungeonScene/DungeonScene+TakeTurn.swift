@@ -24,7 +24,7 @@ extension DungeonScene {
     func displayEndOfTurn() {
         stopAnimations()
         let actorNames = [playerSpriteComponent!.spriteName] + game.level.actors.compactMap {
-            guard let spriteComponent = game.entityManager.spriteComponent(for: $0) else { return nil }
+            guard let spriteComponent = $0.spriteComponent() else { return nil }
             return spriteComponent.spriteName
         }
         let nodesToRemove = children.filter { node in
