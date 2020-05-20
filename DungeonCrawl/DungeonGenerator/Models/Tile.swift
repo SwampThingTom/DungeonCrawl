@@ -21,17 +21,3 @@ enum Tile {
         }
     }
 }
-
-extension Tile {
-    
-    var description: String {
-        switch self {
-        case .wall:
-            return "*"
-        case .floor:
-            return "_"
-        case .door:
-            return "$"
-        }
-    }
-}

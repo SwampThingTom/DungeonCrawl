@@ -21,6 +21,7 @@
 		E227B55924737B6500115B09 /* QuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55824737B6500115B09 /* QuestTests.swift */; };
 		E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */; };
 		E227B55D2474922400115B09 /* PlayerTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */; };
+		E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237D00824754F5600914C1D /* GridMap+Description.swift */; };
 		E25FB14E2461DD49000A90A8 /* DungeonScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25FB14D2461DD49000A90A8 /* DungeonScene.sks */; };
 		E25FB1502461DE0B000A90A8 /* DungeonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */; };
 		E25FB15924621DEB000A90A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
@@ -119,6 +120,7 @@
 		E227B55824737B6500115B09 /* QuestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestTests.swift; sourceTree = "<group>"; };
 		E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTurnActionSystem.swift; sourceTree = "<group>"; };
 		E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTurnActionSystemTests.swift; sourceTree = "<group>"; };
+		E237D00824754F5600914C1D /* GridMap+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridMap+Description.swift"; sourceTree = "<group>"; };
 		E25FB14D2461DD49000A90A8 /* DungeonScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonScene.sks; sourceTree = "<group>"; };
 		E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScene.swift; sourceTree = "<group>"; };
 		E292EA10245D9737002A0F31 /* RoomGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGeneratorTests.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		E292EA2624604BF2002A0F31 /* __utils__ */ = {
 			isa = PBXGroup;
 			children = (
+				E237D00824754F5600914C1D /* GridMap+Description.swift */,
 				E292EA22245F06D8002A0F31 /* GridMap+Equatable.swift */,
 				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
 				E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */,
@@ -761,6 +764,7 @@
 				E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */,
 				E2E2BDD6246F64B6009DE525 /* CombatSystemTests.swift in Sources */,
 				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
+				E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
 				E2E2BDD2246F5B72009DE525 /* TurnTakingSystemTests.swift in Sources */,
