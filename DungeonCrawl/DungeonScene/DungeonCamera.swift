@@ -11,7 +11,10 @@ import SpriteKit
 class DungeonCamera: SKCameraNode {
     
     /// Initializes a camera that will follow the given node within the bounds of the map and view.
-    convenience init(follow nodeToFollow: SKNode, mapNode: SKNode, viewBounds: CGRect) {
+    convenience init(follow nodeToFollow: SKNode,
+                     mapNode: SKNode,
+                     viewBounds: CGRect,
+                     hudHeight: CGFloat) {
         self.init()
         
         let zero = SKRange(constantValue: 0)
@@ -22,7 +25,7 @@ class DungeonCamera: SKCameraNode {
         let constraintRect = mapNode.frame.insetBy(dx: xInset, dy: yInset)
         
         let xRange = SKRange(lowerLimit: constraintRect.minX, upperLimit: constraintRect.maxX)
-        let yRange = SKRange(lowerLimit: constraintRect.minY, upperLimit: constraintRect.maxY)
+        let yRange = SKRange(lowerLimit: constraintRect.minY - hudHeight, upperLimit: constraintRect.maxY)
         let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
         edgeConstraint.referenceNode = mapNode
         

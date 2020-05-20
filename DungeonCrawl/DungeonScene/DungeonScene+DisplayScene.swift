@@ -22,9 +22,8 @@ extension DungeonScene {
         guard let view = view else {
             fatalError("Unable to get view for DungeonScene")
         }
-        let hudHeight: CGFloat = 160.0
         let playableViewSize = CGSize(width: view.bounds.size.width,
-                                      height: view.bounds.size.height - hudHeight)
+                                      height: view.bounds.size.height)
         return CGRect(origin: view.bounds.origin, size: playableViewSize)
     }
 
@@ -50,7 +49,11 @@ extension DungeonScene {
         guard let playerSprite = childNode(withName: spriteComponent.spriteName) else {
             fatalError("Unable to find player sprite")
         }
-        let camera = DungeonCamera(follow: playerSprite, mapNode: tileMap, viewBounds: playableViewBounds)
+        let hudHeight: CGFloat = 160
+        let camera = DungeonCamera(follow: playerSprite,
+                                   mapNode: tileMap,
+                                   viewBounds: playableViewBounds,
+                                   hudHeight: hudHeight)
         addChild(camera)
         self.camera = camera
     }
