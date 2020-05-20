@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Abstract superclass for classes that provide game logic.
+/// A system usually operates on one or more component types.
 class System {
     
     let entityManager: EntityManager

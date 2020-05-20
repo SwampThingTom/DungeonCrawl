@@ -323,6 +323,7 @@
 				E29F72F424719D2E008C7719 /* Component.swift */,
 				E29F72F224719C51008C7719 /* Entity.swift */,
 				E29F72F024719A23008C7719 /* EntityManager.swift */,
+				E29F73092472AFB4008C7719 /* System.swift */,
 			);
 			path = EntityComponentSystem;
 			sourceTree = "<group>";
@@ -360,7 +361,6 @@
 				E2E2BDD3246F63E0009DE525 /* CombatSystem.swift */,
 				E29F73062471F471008C7719 /* EnemyTurnActionSystem.swift */,
 				E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */,
-				E29F73092472AFB4008C7719 /* System.swift */,
 				E29F72E524709666008C7719 /* TurnTakingSystem.swift */,
 			);
 			path = Systems;
