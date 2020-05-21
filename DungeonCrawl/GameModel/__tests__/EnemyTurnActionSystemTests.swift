@@ -25,7 +25,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         entityFactory = nil
     }
     
-    func testTurnAction_playerInRange() throws {
+    func testTurnAction_attack_playerInRange() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 4, y: 5))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
@@ -41,7 +41,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertEqual(action, TurnAction.attack(direction: .west))
     }
     
-    func testTurnAction_walkNoTarget() throws {
+    func testTurnAction_walk_noTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
@@ -59,7 +59,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertNotNil(actorEnemy?.targetCell)
     }
     
-    func testTurnAction_walkReachedTarget() throws {
+    func testTurnAction_walk_reachedTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
@@ -78,7 +78,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertNotEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 5))
     }
     
-    func testTurnAction_walkTowardsTarget() throws {
+    func testTurnAction_walk_towardsTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
