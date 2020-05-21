@@ -41,11 +41,12 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertEqual(action, TurnAction.attack(direction: .west))
     }
     
-    func testTurnAction_walk() throws {
+    func testTurnAction_walkNoTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.targetCell = nil
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
@@ -55,5 +56,44 @@ class EnemyTurnActionSystemTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertNotNil(actorEnemy?.targetCell)
+    }
+    
+    func testTurnAction_walkReachedTarget() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.targetCell = GridCell(x: 5, y: 5)
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let level = MockGameLevel(player: player, actors: [actor])
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
+
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertNotNil(actorEnemy?.targetCell)
+        XCTAssertNotEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 5))
+    }
+    
+    func testTurnAction_walkTowardsTarget() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.targetCell = GridCell(x: 5, y: 4)
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let level = MockGameLevel(player: player, actors: [actor])
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
+
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertNotNil(actorEnemy?.targetCell)
+        XCTAssertEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 4))
     }
 }

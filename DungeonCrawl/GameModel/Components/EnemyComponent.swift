@@ -12,6 +12,7 @@ class EnemyComponent: Component {
     
     let enemyType: EnemyType
     var enemyAIState: EnemyAIState = .walk
+    var targetCell: GridCell?
     
     init(enemyType: EnemyType) {
         self.enemyType = enemyType

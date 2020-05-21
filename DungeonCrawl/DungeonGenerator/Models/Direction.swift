@@ -45,6 +45,15 @@ extension GridCell {
             cell: neighbor(direction: $0, distance: distance)
         ) }
     }
+    
+    /// The `Direction` from the current cell to a neighboring  cell.
+    /// - Returns: Direction to cell or `nil` if cell is not a neighbor.
+    func direction(to neighbor: GridCell) -> Direction? {
+        guard let neighborPair = neighbors().first(where: { $0.cell == neighbor }) else {
+            return nil
+        }
+        return neighborPair.direction
+    }
 }
 
 extension GridMap {
