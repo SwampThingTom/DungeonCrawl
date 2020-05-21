@@ -222,6 +222,7 @@ class TurnTakingSystemTests: XCTestCase {
 struct MockGameLevel: LevelProviding {
     var quest: QuestStatusProviding = MockQuest()
     var map: GridMap = fiveRegionMap()
+    var rooms: [RoomModel] = []
     var player: Entity
     var actors: [Entity]
     var message: MessageLogging?

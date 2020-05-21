@@ -13,6 +13,6 @@ struct DungeonModel {
     let rooms: [RoomModel]
 }
 
-struct RoomModel {
+struct RoomModel: Equatable {
     let bounds: GridRect
 }

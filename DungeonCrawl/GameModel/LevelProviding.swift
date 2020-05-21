@@ -15,6 +15,7 @@ protocol MessageLogging {
 protocol LevelProviding {
     var quest: QuestStatusProviding { get }
     var map: GridMap { get }
+    var rooms: [RoomModel] { get }
     var player: Entity { get }
     var actors: [Entity] { get }
     var message: MessageLogging? { get }

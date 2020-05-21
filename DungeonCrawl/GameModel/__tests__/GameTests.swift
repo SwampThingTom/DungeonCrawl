@@ -14,7 +14,8 @@ class GameTests: XCTestCase {
 
     func testInit() throws {
         // Arrange
-        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
+        let expectedRooms = threeRooms()
+        let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: expectedRooms)
         let dungeonGenerator = MockDungeonGenerator()
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
@@ -37,6 +38,7 @@ class GameTests: XCTestCase {
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
         XCTAssertEqual(sut.level.map.size, dungeonSize)
+        XCTAssertEqual(sut.level.rooms, expectedRooms)
         
         let playerSprite = sut.entityManager.spriteComponent(for: sut.level.player)!
         XCTAssertEqual(playerSprite.cell, expectedDungeonDecorations.playerStartCell)
@@ -290,6 +292,14 @@ class MockDungeonDecorator: DungeonDecorating {
     func decorate(dungeon: DungeonModel) -> DungeonDecorations {
         return mockDecorations!
     }
+}
+
+private func threeRooms() -> [RoomModel] {
+     return [
+        RoomModel(bounds: GridRect(x: 1, y: 9, width: 7, height: 3)),
+        RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7)),
+        RoomModel(bounds: GridRect(x: 13, y: 7, width: 7, height: 3))
+    ]
 }
 
 /// Returns a 17x15 map with five regions.

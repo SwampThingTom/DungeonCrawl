@@ -43,6 +43,7 @@ class Game {
         
         level = DungeonLevel(quest: quest,
                              map: dungeonModel.map,
+                             rooms: dungeonModel.rooms,
                              player: playerEntity,
                              actors: enemyEntities)
         
@@ -115,13 +116,15 @@ class Game {
 class DungeonLevel: LevelProviding {
     let quest: QuestStatusProviding
     let map: GridMap
+    let rooms: [RoomModel]
     let player: Entity
     var actors: [Entity]
     var message: MessageLogging?
     
-    init(quest: QuestStatusProviding, map: GridMap, player: Entity, actors: [Entity]) {
+    init(quest: QuestStatusProviding, map: GridMap, rooms: [RoomModel], player: Entity, actors: [Entity]) {
         self.quest = quest
         self.map = map
+        self.rooms = rooms
         self.player = player
         self.actors = actors
     }
