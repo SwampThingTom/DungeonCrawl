@@ -42,6 +42,8 @@
 		E2980F3424687E16000BA2AC /* EnemySpriteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2980F3324687E16000BA2AC /* EnemySpriteProvider.swift */; };
 		E2980F362468E32E000BA2AC /* LevelProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2980F352468E32E000BA2AC /* LevelProviding.swift */; };
 		E2980F3A246D6EF8000BA2AC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2980F39246D6EF8000BA2AC /* Game.swift */; };
+		E29DFBF22476E28900E4E5B0 /* Pathfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A2282459FE1E000ED955 /* Pathfinder.swift */; };
+		E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBF42476E2EB00E4E5B0 /* PathfinderTests.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -71,7 +73,6 @@
 		E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A22124589E15000ED955 /* GridRect+CoreGraphics.swift */; };
 		E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */; };
 		E2B2A227245920C5000ED955 /* AnyRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A226245920C5000ED955 /* AnyRandomNumberGenerator.swift */; };
-		E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2A2282459FE1E000ED955 /* Pathfinder.swift */; };
 		E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8D08B245BB295005EE3D8 /* GridMap.swift */; };
 		E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8D08D245BC95D005EE3D8 /* RoomGenerator.swift */; };
 		E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C98AE124631030005C11AD /* DungeonDecorator.swift */; };
@@ -140,6 +141,7 @@
 		E2980F3324687E16000BA2AC /* EnemySpriteProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemySpriteProvider.swift; sourceTree = "<group>"; };
 		E2980F352468E32E000BA2AC /* LevelProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProviding.swift; sourceTree = "<group>"; };
 		E2980F39246D6EF8000BA2AC /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		E29DFBF42476E2EB00E4E5B0 /* PathfinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathfinderTests.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -279,7 +281,6 @@
 			children = (
 				E237D00824754F5600914C1D /* GridMap+Description.swift */,
 				E292EA22245F06D8002A0F31 /* GridMap+Equatable.swift */,
-				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
 				E2B2A223245909D1000ED955 /* SeededRandomNumberGenerator.swift */,
 			);
 			path = __utils__;
@@ -304,6 +305,23 @@
 			isa = PBXGroup;
 			children = (
 				E292EA16245DF878002A0F31 /* DungeonMapTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		E29DFBF12476E0E600E4E5B0 /* Pathfinding */ = {
+			isa = PBXGroup;
+			children = (
+				E29DFBF32476E2D000E4E5B0 /* __tests__ */,
+				E2B2A2282459FE1E000ED955 /* Pathfinder.swift */,
+			);
+			path = Pathfinding;
+			sourceTree = "<group>";
+		};
+		E29DFBF32476E2D000E4E5B0 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E29DFBF42476E2EB00E4E5B0 /* PathfinderTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -393,6 +411,7 @@
 				E25FB14C2461DB45000A90A8 /* DungeonScene */,
 				E29F72F624719EC8008C7719 /* EntityComponentSystem */,
 				E2E2BDC1246ECB90009DE525 /* GameModel */,
+				E29DFBF12476E0E600E4E5B0 /* Pathfinding */,
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2C98AE72463244B005C11AD /* Sprites */,
 				E2E4E827246433F200F5EA93 /* Utils */,
@@ -747,6 +766,7 @@
 				E2E2BDC8246F48A9009DE525 /* DungeonScene+DisplayScene.swift in Sources */,
 				E29F72F324719C51008C7719 /* Entity.swift in Sources */,
 				E29F73072471F471008C7719 /* EnemyTurnActionSystem.swift in Sources */,
+				E29DFBF22476E28900E4E5B0 /* Pathfinder.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */,
@@ -763,9 +783,9 @@
 				E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */,
 				E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */,
 				E2E2BDD6246F64B6009DE525 /* CombatSystemTests.swift in Sources */,
-				E2B2A2292459FE1E000ED955 /* Pathfinder.swift in Sources */,
 				E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
+				E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
 				E2E2BDD2246F5B72009DE525 /* TurnTakingSystemTests.swift in Sources */,
 				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,

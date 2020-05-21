@@ -6,9 +6,18 @@
 //  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
-@testable import DungeonCrawl
+protocol Pathfinding {
+    
+    /// Returns a sequence of `GridCell`that defines a path from a start cell to an end cell.
+    /// - Note: Returns an empty sequence if there is no path or if the start and end cells are the same.
+    func findPath(from start: GridCell, to end: GridCell) -> [GridCell]
+}
 
-class Pathfinder {
+/// Implementation of `Pathfinding` using A* algorithm.
+///
+/// - SeeAlso: http://csis.pace.edu/~benjamin/teaching/cs627/webfiles/Astar.pdf
+/// - SeeAlso: http://swampthingtom.blogspot.com/2007/07/pathfinding-sample-using.html
+class Pathfinder: Pathfinding {
     
     private let adjacentNodes = [
         AdjacentNode(offset: GridCell(x: 0, y: -1), cost: 10),
@@ -26,10 +35,13 @@ class Pathfinder {
     }
     
     func findPath(from start: GridCell, to end: GridCell) -> [GridCell] {
+        guard map.isValid(cell: start) && map.isValid(cell: end) else {
+            return []
+        }
         guard let bestPathNode = findBestPath(from: start, to: end) else {
             return []
         }
-        return bestPathNode.map { $0.cell }.reversed()
+        return bestPathNode.dropLast().map { $0.cell }.reversed()
     }
     
     private func findBestPath (from start: GridCell, to end: GridCell) -> PathNode? {
