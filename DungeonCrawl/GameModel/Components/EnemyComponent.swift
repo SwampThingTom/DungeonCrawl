@@ -11,10 +11,17 @@ import Foundation
 class EnemyComponent: Component {
     
     let enemyType: EnemyType
+    var enemyAIState: EnemyAIState = .walk
     
     init(enemyType: EnemyType) {
         self.enemyType = enemyType
     }
+}
+
+enum EnemyAIState: Equatable {
+    case chase
+    case hunt
+    case walk
 }
 
 enum EnemyType: Equatable {
@@ -30,7 +37,6 @@ extension EnemyType: CustomStringConvertible {
 }
 
 extension EntityManager {
-    
     func enemyComponent(for entity: Entity) -> EnemyComponent? {
         return component(of: EnemyComponent.self, for: entity) as? EnemyComponent
     }

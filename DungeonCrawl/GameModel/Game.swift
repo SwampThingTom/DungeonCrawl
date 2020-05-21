@@ -13,10 +13,10 @@ class Game {
     var entityManager: EntityManager
     var level: DungeonLevel
     
-    var combatSystem: CombatSystem
-    var enemyTurnActionSystem: EnemyTurnActionSystem
-    var playerTurnActionSystem: PlayerTurnActionSystem
-    var turnTakingSystem: TurnTakingSystem
+    var combatSystem: CombatProviding
+    var enemyTurnActionSystem: EnemyTurnActionProviding
+    var playerTurnActionSystem: PlayerTurnActionProviding
+    var turnTakingSystem: TurnTaking
     
     var isPlayerDead: Bool {
         return level.player.combatComponent()?.isDead ?? true
@@ -68,10 +68,10 @@ class Game {
     
     private func takeActorTurns(for actors: [Entity]) -> [ActorAnimation] {
         return actors.compactMap { actor in
+            guard let actorCombat = actor.combatComponent(), !actorCombat.isDead else { return nil }
+            guard let actorEnemy = actor.enemyComponent() else { return nil }
             guard let actorSprite = actor.spriteComponent() else { return nil }
-            guard let actorCombat = actor.combatComponent() else { return nil }
-            guard !actorCombat.isDead else { return nil }
-            let action = enemyTurnActionSystem.turnAction(for: actorSprite)
+            let action = enemyTurnActionSystem.turnAction(for: actorEnemy, with: actorSprite)
             let animation = turnTakingSystem.doTurnAction(action, for: actor, actorSprite: actorSprite)
             return actorAnimation(actor: actor, animation: animation)
         }

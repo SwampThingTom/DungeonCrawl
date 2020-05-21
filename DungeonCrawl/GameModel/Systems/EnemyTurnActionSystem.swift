@@ -11,25 +11,37 @@ import Foundation
 protocol EnemyTurnActionProviding {
     
     /// Returns the action to be taken this turn.
-    /// - Parameter actor: The actor's sprite component.
+    /// - Parameter enemy: The entity's enemy component.
+    /// - Parameter sprite: The entity's sprite component.
     /// - Returns: An action.
-    ///
-    /// - Note: Assumes that the `actor` is an enemy. If the player is within attack range, it will attack.
-    func turnAction(for actor: SpriteComponent) -> TurnAction
+    func turnAction(for enemy: EnemyComponent, with sprite: SpriteComponent) -> TurnAction
 }
 
 class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     
-    let gameLevel: LevelProviding
+    private var randomNumberGenerator: AnyRandomNumberGenerator
     
-    init(entityManager: EntityManager, gameLevel: LevelProviding) {
+    let gameLevel: LevelProviding
+
+    init(entityManager: EntityManager,
+         gameLevel: LevelProviding,
+         randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
+        self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
         self.gameLevel = gameLevel
         super.init(entityManager: entityManager)
     }
     
-    func turnAction(for actor: SpriteComponent) -> TurnAction {
-        if let targetDirection = directionForTargetInAttackRange(from: actor.cell) {
+    func turnAction(for enemy: EnemyComponent, with sprite: SpriteComponent) -> TurnAction {
+        if let targetDirection = directionForTargetInAttackRange(from: sprite.cell) {
             return .attack(direction: targetDirection)
+        }
+        switch enemy.enemyAIState {
+        case .chase:
+            break
+        case .hunt:
+            break
+        case .walk:
+            return followCurrentPath(enemy, sprite: sprite)
         }
         return .nothing
     }
@@ -38,5 +50,15 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         guard let playerSprite = gameLevel.player.spriteComponent() else { return nil }
         let targetNeighbor = cell.neighbors().first { $0.cell == playerSprite.cell }
         return targetNeighbor?.direction
+    }
+    
+    private func followCurrentPath(_ enemy: EnemyComponent,
+                                   sprite: SpriteComponent) -> TurnAction {
+        let neighborCells = sprite.cell.neighbors().filter { neighbor in
+            guard let tile = gameLevel.map.tile(at: neighbor.cell) else { return false }
+            return !tile.isObstacle
+        }
+        let neighborCell = neighborCells.randomElement(using: &randomNumberGenerator)!
+        return .move(to: neighborCell.cell, direction: neighborCell.direction)
     }
 }

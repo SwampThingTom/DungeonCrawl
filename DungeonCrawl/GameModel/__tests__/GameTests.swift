@@ -76,8 +76,6 @@ class GameTests: XCTestCase {
         XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
     }
     
-    // LATER: This is more of an integration test because it uses the actual EnemyActor
-    // code to determine the move it takes. It would be better to inject the EnemyActors.
     func testTakeTurn_enemyActors() throws {
         // Arrange
         let expectedDungeonModel = DungeonModel(map: fiveRegionMap(), rooms: [])
@@ -99,7 +97,14 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
-
+        
+        let enemyTurnActionSystem = MockEnemyTurnActionSystem()
+        enemyTurnActionSystem.turnActionForEnemy = [
+            sut.level.actors[0]: .attack(direction: .south),
+            sut.level.actors[1]: .nothing
+        ]
+        sut.enemyTurnActionSystem = enemyTurnActionSystem
+        
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
 
@@ -131,6 +136,14 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
+        
+        let enemyTurnActionSystem = MockEnemyTurnActionSystem()
+        enemyTurnActionSystem.turnActionForEnemy = [
+            sut.level.actors[0]: .nothing,
+            sut.level.actors[1]: .nothing
+        ]
+        sut.enemyTurnActionSystem = enemyTurnActionSystem
+        
         let deadEnemy = sut.level.actors[0]
         let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
         deadEnemyCombat.hitPoints = -1
@@ -242,6 +255,20 @@ class GameTests: XCTestCase {
 
         // Assert
         XCTAssertTrue(isQuestComplete)
+    }
+}
+
+class MockEnemyTurnActionSystem: EnemyTurnActionProviding {
+    
+    var turnActionForEnemy = [Entity: TurnAction]()
+    
+    func turnAction(for enemy: EnemyComponent, with sprite: SpriteComponent) -> TurnAction {
+        guard
+            let entity = enemy.entity,
+            let turnAction = turnActionForEnemy[entity] else {
+                return .nothing
+        }
+        return turnAction
     }
 }
 

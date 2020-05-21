@@ -29,29 +29,31 @@ class EnemyTurnActionSystemTests: XCTestCase {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 4, y: 5))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act
-        let action = sut.turnAction(for: actorSprite!)
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
         // Assert
         XCTAssertEqual(action, TurnAction.attack(direction: .west))
     }
     
-    func testTurnAction_noAttackTargets() throws {
+    func testTurnAction_walk() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act
-        let action = sut.turnAction(for: actorSprite!)
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
         // Assert
-        XCTAssertEqual(action, TurnAction.nothing)
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
     }
 }
