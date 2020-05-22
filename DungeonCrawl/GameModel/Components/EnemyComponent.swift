@@ -21,7 +21,7 @@ class EnemyComponent: Component {
 
 enum EnemyAIState: Equatable {
     case chase
-    case hunt
+    case wait
     case walk
 }
 

@@ -43,12 +43,11 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         case .chase:
             guard let chaseTarget = chaseTarget else { return .nothing }
             return chase(target: chaseTarget, sprite: sprite)
-        case .hunt:
-            break
+        case .wait:
+            return .nothing
         case .walk:
             return followCurrentPath(enemy, sprite: sprite)
         }
-        return .nothing
     }
     
     // MARK: attack
