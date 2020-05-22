@@ -11,5 +11,6 @@ import UIKit
 class HUDView: UIView {
     
     @IBOutlet weak var healthLabel: UILabel?
+    @IBOutlet weak var armorLabel: UILabel?
 
 }

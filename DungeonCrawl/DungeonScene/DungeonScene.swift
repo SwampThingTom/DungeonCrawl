@@ -65,6 +65,7 @@ class DungeonScene: SKScene, MessageLogging {
     func updateHUD() {
         if let combat = game.level.player.combatComponent() {
             hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
+            hudView?.armorLabel?.text = "None (\(combat.armorClass))"
         }
     }
     

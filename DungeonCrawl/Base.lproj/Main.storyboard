@@ -97,6 +97,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="armorLabel" destination="K3F-pR-NI3" id="7Ba-SE-Q1w"/>
                                     <outlet property="healthLabel" destination="sNR-Fo-dse" id="g3T-rV-XG1"/>
                                 </connections>
                             </view>
