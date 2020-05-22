@@ -10,6 +10,8 @@ import Foundation
 
 class CombatComponent: Component {
     
+    var maxHitPoints: Int
+    
     var attackBonus: Int
     var armorClass: Int
     var hitPoints: Int
@@ -19,16 +21,16 @@ class CombatComponent: Component {
         return hitPoints <= 0
     }
     
-    init(attackBonus: Int, armorClass: Int, hitPoints: Int, weaponDamage: Int) {
+    init(attackBonus: Int, armorClass: Int, maxHitPoints: Int, weaponDamage: Int) {
         self.attackBonus = attackBonus
         self.armorClass = armorClass
-        self.hitPoints = hitPoints
+        self.maxHitPoints = maxHitPoints
+        self.hitPoints = maxHitPoints
         self.weaponDamage = weaponDamage
     }
 }
 
 extension EntityManager {
-    
     func combatComponent(for entity: Entity) -> CombatComponent? {
         return component(of: CombatComponent.self, for: entity) as? CombatComponent
     }
