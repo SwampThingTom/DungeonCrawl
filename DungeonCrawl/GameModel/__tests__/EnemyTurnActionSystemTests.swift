@@ -48,7 +48,8 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = nil
         let actorSprite = entityManager!.spriteComponent(for: actor)
-        let level = MockGameLevel(player: player, actors: [actor])
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms) 
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act
@@ -66,7 +67,8 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = GridCell(x: 5, y: 5)
         let actorSprite = entityManager!.spriteComponent(for: actor)
-        let level = MockGameLevel(player: player, actors: [actor])
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
 
         // Act

@@ -222,14 +222,15 @@ class TurnTakingSystemTests: XCTestCase {
 struct MockGameLevel: LevelProviding {
     var quest: QuestStatusProviding = MockQuest()
     var map: GridMap = fiveRegionMap()
-    var rooms: [RoomModel] = []
+    var rooms: [RoomModel]
     var player: Entity
     var actors: [Entity]
     var message: MessageLogging?
     
-    init(player: Entity, actors: [Entity]) {
+    init(player: Entity, actors: [Entity], rooms: [RoomModel] = []) {
         self.player = player
         self.actors = actors
+        self.rooms = rooms
     }
 }
 

@@ -57,20 +57,15 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         if enemy.targetCell == nil || enemy.targetCell == sprite.cell {
             enemy.targetCell = findWalkTarget(sprite: sprite)
         }
-        guard
-            let targetCell = enemy.targetCell,
-            let direction = sprite.cell.direction(to: targetCell)
-        else {
-            return .nothing
-        }
-        return .move(to: targetCell, direction: direction)
+        guard let targetCell = enemy.targetCell else { return .nothing }
+        let pathfinder = Pathfinder(map: gameLevel.map)
+        guard let nextCell = pathfinder.findPath(from: sprite.cell, to: targetCell).first else { return .nothing }
+        guard let direction = sprite.cell.direction(to: nextCell) else { return .nothing }
+        return .move(to: nextCell, direction: direction)
     }
     
-    private func findWalkTarget(sprite: SpriteComponent) -> GridCell {
-        let neighborCells = sprite.cell.neighbors().filter { neighbor in
-            guard let tile = gameLevel.map.tile(at: neighbor.cell) else { return false }
-            return !tile.isObstacle
-        }
-        return neighborCells.randomElement(using: &randomNumberGenerator)!.cell
+    private func findWalkTarget(sprite: SpriteComponent) -> GridCell? {
+        let room = gameLevel.rooms.randomElement(using: &randomNumberGenerator)
+        return room?.bounds.randomCell(using: &randomNumberGenerator)
     }
 }
