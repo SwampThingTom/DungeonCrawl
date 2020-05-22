@@ -67,6 +67,9 @@ class DungeonScene: SKScene, MessageLogging {
             hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
             hudView?.armorLabel?.text = "None (\(combat.armorClass))"
         }
+        if let items = game.level.player.itemsComponent() {
+            hudView?.goldLabel?.text = "Gold: \(items.gold)"
+        }
     }
     
     // MARK: - Display message
