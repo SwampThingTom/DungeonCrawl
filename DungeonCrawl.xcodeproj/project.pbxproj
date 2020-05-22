@@ -48,6 +48,7 @@
 		E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */; };
 		E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFC2478558800E4E5B0 /* Chance.swift */; };
 		E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0024786F8E00E4E5B0 /* HUDView.swift */; };
+		E29DFC06247881C600E4E5B0 /* ItemsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -150,6 +151,7 @@
 		E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellMathTests.swift; sourceTree = "<group>"; };
 		E29DFBFC2478558800E4E5B0 /* Chance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chance.swift; sourceTree = "<group>"; };
 		E29DFC0024786F8E00E4E5B0 /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
+		E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsComponent.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			children = (
 				E29F73022471DFC7008C7719 /* CombatComponent.swift */,
 				E29F73002471DB51008C7719 /* EnemyComponent.swift */,
+				E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */,
 				E29F72FC2471D749008C7719 /* SpriteComponent.swift */,
 			);
 			path = Components;
@@ -766,6 +769,7 @@
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E29F72F524719D2E008C7719 /* Component.swift in Sources */,
+				E29DFC06247881C600E4E5B0 /* ItemsComponent.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
 				E2E2BDC6246F47D2009DE525 /* DungeonScene+CreateGame.swift in Sources */,
 				E2980F30246867D6000BA2AC /* DungeonDecorations.swift in Sources */,

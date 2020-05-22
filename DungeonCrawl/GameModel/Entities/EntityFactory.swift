@@ -25,6 +25,9 @@ class EntityFactory {
         let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damage: 3, maxHitPoints: 10)
         entityManager.add(component: combatComponent, to: entity)
         
+        let itemsComponent = ItemsComponent()
+        entityManager.add(component: itemsComponent, to: entity)
+        
         return entity
     }
     
