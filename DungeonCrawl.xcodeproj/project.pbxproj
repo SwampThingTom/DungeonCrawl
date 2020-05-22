@@ -47,6 +47,7 @@
 		E29DFBF824781B9A00E4E5B0 /* GridCell+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBF724781B9A00E4E5B0 /* GridCell+Math.swift */; };
 		E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */; };
 		E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFC2478558800E4E5B0 /* Chance.swift */; };
+		E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0024786F8E00E4E5B0 /* HUDView.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -148,6 +149,7 @@
 		E29DFBF724781B9A00E4E5B0 /* GridCell+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridCell+Math.swift"; sourceTree = "<group>"; };
 		E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellMathTests.swift; sourceTree = "<group>"; };
 		E29DFBFC2478558800E4E5B0 /* Chance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chance.swift; sourceTree = "<group>"; };
+		E29DFC0024786F8E00E4E5B0 /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				E2E2BDC9246F490F009DE525 /* DungeonScene+TakeTurn.swift */,
 				E2E2BDCD246F4D8B009DE525 /* DungeonScene+Touch.swift */,
 				E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */,
+				E29DFC0024786F8E00E4E5B0 /* HUDView.swift */,
 			);
 			path = DungeonScene;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
+				E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
 				E2980F3424687E16000BA2AC /* EnemySpriteProvider.swift in Sources */,
 				E29F730A2472AFB4008C7719 /* System.swift in Sources */,

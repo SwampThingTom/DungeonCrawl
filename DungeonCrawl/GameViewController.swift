@@ -12,7 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
-    @IBOutlet weak var hudView: UIView?
+    @IBOutlet weak var hudView: HUDView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
