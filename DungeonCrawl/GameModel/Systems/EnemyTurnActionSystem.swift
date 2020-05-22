@@ -22,12 +22,14 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
     let gameLevel: LevelProviding
-
+    let pathfinder: Pathfinding
+    
     init(entityManager: EntityManager,
          gameLevel: LevelProviding,
          randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
         self.gameLevel = gameLevel
+        self.pathfinder = Pathfinder(map: gameLevel.map)
         super.init(entityManager: entityManager)
     }
     
@@ -58,7 +60,6 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
             enemy.targetCell = findWalkTarget(sprite: sprite)
         }
         guard let targetCell = enemy.targetCell else { return .nothing }
-        let pathfinder = Pathfinder(map: gameLevel.map)
         guard let nextCell = pathfinder.findPath(from: sprite.cell, to: targetCell).first else { return .nothing }
         guard let direction = sprite.cell.direction(to: nextCell) else { return .nothing }
         return .move(to: nextCell, direction: direction)
