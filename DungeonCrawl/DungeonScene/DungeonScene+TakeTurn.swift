@@ -33,6 +33,7 @@ extension DungeonScene {
             gameState = .dungeonComplete
             return
         }
+        updateHUD()
         gameState = .waitingForInput
     }
     

@@ -21,7 +21,8 @@ class GameViewController: UIViewController {
             return
         }
         
-        if let scene = SKScene(fileNamed: "DungeonScene") {
+        if let scene = SKScene(fileNamed: "DungeonScene") as? DungeonScene {
+            scene.hudView = hudView
             view.presentScene(scene)
         }
         

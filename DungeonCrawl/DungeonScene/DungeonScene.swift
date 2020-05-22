@@ -18,6 +18,8 @@ class DungeonScene: SKScene, MessageLogging {
     var tileSet: SKTileSet!
     var tileMap: SKTileMapNode!
     
+    var hudView: HUDView?
+    
     var messageLabel = SKLabelNode()
     var messages = FixedSizeQueue<String>(maxSize: 2)
     
@@ -55,6 +57,15 @@ class DungeonScene: SKScene, MessageLogging {
         game = createGame()
         game.level.message = self
         setupScene(for: game.level)
+        updateHUD()
+    }
+    
+    // MARK: - HUD
+    
+    func updateHUD() {
+        if let combat = game.level.player.combatComponent() {
+            hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
+        }
     }
     
     // MARK: - Display message
