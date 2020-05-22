@@ -10,23 +10,35 @@ import Foundation
 
 class CombatComponent: Component {
     
+    var baseAttackBonus: Int
+    var baseArmorClass: Int
+    var baseDamage: Int
     var maxHitPoints: Int
     
-    var attackBonus: Int
-    var armorClass: Int
+    var attackBonus: Int {
+        return baseAttackBonus
+    }
+    
+    var armorClass: Int {
+        return baseArmorClass
+    }
+    
+    var weaponDamage: Int {
+        return baseDamage
+    }
+
     var hitPoints: Int
-    var weaponDamage: Int
     
     var isDead: Bool {
         return hitPoints <= 0
     }
     
-    init(attackBonus: Int, armorClass: Int, maxHitPoints: Int, weaponDamage: Int) {
-        self.attackBonus = attackBonus
-        self.armorClass = armorClass
+    init(attackBonus: Int, armorClass: Int, damage: Int, maxHitPoints: Int) {
+        self.baseAttackBonus = attackBonus
+        self.baseArmorClass = armorClass
+        self.baseDamage = damage
         self.maxHitPoints = maxHitPoints
         self.hitPoints = maxHitPoints
-        self.weaponDamage = weaponDamage
     }
 }
 

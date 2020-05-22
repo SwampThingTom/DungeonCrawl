@@ -86,7 +86,7 @@ class CombatTests: XCTestCase {
     }
     
     func mockCombatComponent(attackBonus: Int, armorClass: Int) -> CombatComponent {
-        return CombatComponent(attackBonus: attackBonus, armorClass: armorClass, maxHitPoints: 10, weaponDamage: 1)
+        return CombatComponent(attackBonus: attackBonus, armorClass: armorClass, damage: 1, maxHitPoints: 10)
     }
     
     func entityWithCombatComponent(combatComponent: CombatComponent) -> Entity {
