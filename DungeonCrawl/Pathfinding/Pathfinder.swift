@@ -53,9 +53,9 @@ class Pathfinder: Pathfinding {
                 return node
             }
             
-            for adjacent in adjacentNodes {
+            for adjacent in adjacentNodes.shuffled() {
                 let adjacentCell = GridCell(x: node.cell.x + adjacent.offset.x,
-                                             y: node.cell.y + adjacent.offset.y)
+                                            y: node.cell.y + adjacent.offset.y)
                 if !map.isValid(cell: adjacentCell) || cellHasObstacle(adjacentCell) {
                     continue
                 }
