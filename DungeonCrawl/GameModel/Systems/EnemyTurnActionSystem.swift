@@ -41,9 +41,24 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
             return .attack(direction: targetDirection)
         }
         
+        updateAIState(enemy, sprite: sprite)
+        
+        switch enemy.enemyAIState {
+        case .chase:
+            guard let chaseTarget = enemy.targetCell else { return .nothing }
+            return chase(target: chaseTarget, sprite: sprite)
+        case .wait:
+            return .nothing
+        case .walk:
+            return followCurrentPath(enemy, sprite: sprite)
+        }
+    }
+    
+    private func updateAIState(_ enemy: EnemyComponent, sprite: SpriteComponent) {
         let chaseTarget = cellForTargetInVisibleRange(from: sprite.cell)
         if chaseTarget != nil {
             enemy.enemyAIState = .chase
+            enemy.targetCell = chaseTarget
         } else if enemy.enemyAIState == .chase {
             enemy.enemyAIState = .walk
         }
@@ -59,16 +74,6 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
             if stopWaiting {
                 enemy.enemyAIState = .walk
             }
-        }
-        
-        switch enemy.enemyAIState {
-        case .chase:
-            guard let chaseTarget = chaseTarget else { return .nothing }
-            return chase(target: chaseTarget, sprite: sprite)
-        case .wait:
-            return .nothing
-        case .walk:
-            return followCurrentPath(enemy, sprite: sprite)
         }
     }
     
