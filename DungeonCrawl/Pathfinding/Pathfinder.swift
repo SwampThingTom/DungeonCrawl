@@ -45,6 +45,7 @@ class Pathfinder: Pathfinding {
     }
     
     private func findBestPath (from start: GridCell, to end: GridCell) -> PathNode? {
+        reset()
         addToOpenList(node: pathMap[start.x][start.y])
         while !openList.isEmpty {
             let node = bestOpenNode
@@ -78,6 +79,11 @@ class Pathfinder: Pathfinding {
         }
         
         return nil
+    }
+    
+    private func reset() {
+        openList.removeAll()
+        pathMap.forEach { $0.forEach { $0.reset() } }
     }
     
     private func cellHasObstacle(_ cell: GridCell) -> Bool {
@@ -150,6 +156,13 @@ class PathNode: Equatable, Comparable {
     
     private init(cell: GridCell) {
         self.cell = cell
+    }
+    
+    func reset() {
+        status = .unknown
+        previous = nil
+        costFromStart = 0
+        estimatedCostToDestination = 0
     }
     
     func open() {

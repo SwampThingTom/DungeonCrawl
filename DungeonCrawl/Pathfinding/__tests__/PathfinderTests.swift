@@ -130,6 +130,24 @@ class PathfinderTests: XCTestCase {
         ]
         XCTAssertEqual(path, expectedPath)
     }
+    
+    func testCallRepeatedly() throws {
+        // Arrange
+        let map = mapWithCircularPath()
+        let sut = Pathfinder(map: map)
+
+        // Act
+        var nextCell: GridCell? = GridCell(x: 1, y: 3)
+        var endCell: GridCell?
+        while let cell = nextCell {
+            let path = sut.findPath(from: cell, to: GridCell(x: 2, y: 1))
+            endCell = nextCell
+            nextCell = path.first
+        }
+        
+        // Assert
+        XCTAssertEqual(endCell, GridCell(x: 2, y: 1))
+    }
 
     func mapWithAllTiles(_ tile: Tile, size: GridSize) -> DungeonMap {
         let tiles = [[Tile]](repeating: [Tile](repeating: tile, count: size.width), count: size.height)
