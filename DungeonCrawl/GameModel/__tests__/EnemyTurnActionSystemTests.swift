@@ -57,6 +57,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
         XCTAssertNotNil(actorEnemy?.targetCell)
     }
     
@@ -76,6 +77,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
         XCTAssertNotNil(actorEnemy?.targetCell)
         XCTAssertNotEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 5))
     }
@@ -95,7 +97,46 @@ class EnemyTurnActionSystemTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
         XCTAssertNotNil(actorEnemy?.targetCell)
         XCTAssertEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 4))
+    }
+    
+    func testTurnAction_chase() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 5, y: 1))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
+
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.chase)
+    }
+    
+    func testTurnAction_chase_stop() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 1, y: 1))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.enemyAIState = .chase
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
+
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
+        XCTAssertNotNil(actorEnemy?.targetCell)
     }
 }

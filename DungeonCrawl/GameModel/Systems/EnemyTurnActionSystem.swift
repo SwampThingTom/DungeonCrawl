@@ -37,9 +37,12 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         if let targetDirection = directionForTargetInAttackRange(from: sprite.cell) {
             return .attack(direction: targetDirection)
         }
+        let chaseTarget = cellForTargetInVisibleRange(from: sprite.cell)
+        enemy.enemyAIState = chaseTarget != nil ? .chase : .walk
         switch enemy.enemyAIState {
         case .chase:
-            break
+            guard let chaseTarget = chaseTarget else { return .nothing }
+            return chase(target: chaseTarget, sprite: sprite)
         case .hunt:
             break
         case .walk:
@@ -48,11 +51,26 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         return .nothing
     }
     
+    // MARK: attack
+    
     private func directionForTargetInAttackRange(from cell: GridCell) -> Direction? {
         guard let playerSprite = gameLevel.player.spriteComponent() else { return nil }
         let targetNeighbor = cell.neighbors().first { $0.cell == playerSprite.cell }
         return targetNeighbor?.direction
     }
+    
+    // MARK: chase
+    
+    private func cellForTargetInVisibleRange(from cell: GridCell) -> GridCell? {
+        guard let playerSprite = gameLevel.player.spriteComponent() else { return nil }
+        return cell.distance(to: playerSprite.cell) < 5 ? playerSprite.cell : nil
+    }
+    
+    private func chase(target: GridCell, sprite: SpriteComponent) -> TurnAction {
+        return move(from: sprite.cell, towards: target)
+    }
+    
+    // MARK: walk
     
     private func followCurrentPath(_ enemy: EnemyComponent,
                                    sprite: SpriteComponent) -> TurnAction {
@@ -68,5 +86,13 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     private func findWalkTarget(sprite: SpriteComponent) -> GridCell? {
         let room = gameLevel.rooms.randomElement(using: &randomNumberGenerator)
         return room?.bounds.randomCell(using: &randomNumberGenerator)
+    }
+    
+    // MARK: move
+    
+    private func move(from cell: GridCell, towards targetCell: GridCell) -> TurnAction {
+        guard let nextCell = pathfinder.findPath(from: cell, to: targetCell).first else { return .nothing }
+        guard let direction = cell.direction(to: nextCell) else { return .nothing }
+        return .move(to: nextCell, direction: direction)
     }
 }
