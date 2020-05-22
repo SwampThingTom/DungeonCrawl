@@ -11,7 +11,7 @@
 import XCTest
 
 class EnemyTurnActionSystemTests: XCTestCase {
-
+    
     var entityManager: EntityManager?
     var entityFactory: EntityFactory?
     
@@ -33,7 +33,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
@@ -51,7 +51,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
         let level = MockGameLevel(player: player, actors: [actor], rooms: rooms) 
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
@@ -61,7 +61,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertNotNil(actorEnemy?.targetCell)
     }
     
-    func testTurnAction_walk_reachedTarget() throws {
+    func testTurnAction_walk_reachedTargetAndWait() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
@@ -70,14 +70,38 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
         let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
-        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        let chance = MockChance()
+        chance.mockEventHappens = false
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
         // Assert
+        XCTAssertEqual(actorEnemy?.enemyAIState, .wait)
+        XCTAssertEqual(action, TurnAction.nothing)
+        XCTAssertNil(actorEnemy?.targetCell)
+    }
+    
+    func testTurnAction_walk_reachedTargetAndWalk() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.targetCell = GridCell(x: 5, y: 5)
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let chance = MockChance()
+        chance.mockEventHappens = true
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
+        
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(actorEnemy?.enemyAIState, .walk)
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
-        XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
         XCTAssertNotNil(actorEnemy?.targetCell)
         XCTAssertNotEqual(actorEnemy?.targetCell, GridCell(x: 5, y: 5))
     }
@@ -91,7 +115,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = MockGameLevel(player: player, actors: [actor])
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
@@ -111,7 +135,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
         let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
@@ -130,7 +154,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
         let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
-
+        
         // Act
         let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
         
@@ -138,5 +162,57 @@ class EnemyTurnActionSystemTests: XCTestCase {
         XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
         XCTAssertEqual(actorEnemy?.enemyAIState, EnemyAIState.walk)
         XCTAssertNotNil(actorEnemy?.targetCell)
+    }
+    
+    func testTurnAction_wait_continue() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.enemyAIState = .wait
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let chance = MockChance()
+        chance.mockEventHappens = false
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
+        
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(actorEnemy?.enemyAIState, .wait)
+        XCTAssertEqual(action, TurnAction.nothing)
+    }
+    
+    func testTurnAction_wait_stop() throws {
+        // Arrange
+        let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
+        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actorEnemy = entityManager!.enemyComponent(for: actor)
+        actorEnemy?.enemyAIState = .wait
+        let actorSprite = entityManager!.spriteComponent(for: actor)
+        let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
+        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let chance = MockChance()
+        chance.mockEventHappens = true
+        let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
+        
+        // Act
+        let action = sut.turnAction(for: actorEnemy!, with: actorSprite!)
+        
+        // Assert
+        XCTAssertEqual(actorEnemy?.enemyAIState, .walk)
+        XCTAssertEqual(action, TurnAction.move(to: GridCell(x: 5, y: 4), direction: .north))
+        XCTAssertNotNil(actorEnemy?.targetCell)
+    }
+}
+
+private class MockChance: ChanceDetermining {
+    
+    var mockEventHappens = false
+    
+    func one(in chance: Int) -> Bool {
+        return mockEventHappens
     }
 }

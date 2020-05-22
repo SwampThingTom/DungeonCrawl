@@ -46,6 +46,7 @@
 		E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBF42476E2EB00E4E5B0 /* PathfinderTests.swift */; };
 		E29DFBF824781B9A00E4E5B0 /* GridCell+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBF724781B9A00E4E5B0 /* GridCell+Math.swift */; };
 		E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */; };
+		E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFC2478558800E4E5B0 /* Chance.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -146,6 +147,7 @@
 		E29DFBF42476E2EB00E4E5B0 /* PathfinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathfinderTests.swift; sourceTree = "<group>"; };
 		E29DFBF724781B9A00E4E5B0 /* GridCell+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridCell+Math.swift"; sourceTree = "<group>"; };
 		E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellMathTests.swift; sourceTree = "<group>"; };
+		E29DFBFC2478558800E4E5B0 /* Chance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chance.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				E29F72FB2471D71F008C7719 /* Entities */,
 				E29F73082471FFFC008C7719 /* Systems */,
 				E29DFBF624781B6E00E4E5B0 /* Utils */,
+				E29DFBFC2478558800E4E5B0 /* Chance.swift */,
 				E2E2BDD9247009DB009DE525 /* D20.swift */,
 				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
 				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
@@ -779,6 +782,7 @@
 				E2980F3224687CB5000BA2AC /* Ghost.swift in Sources */,
 				E29F73012471DB51008C7719 /* EnemyComponent.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
+				E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */,
 				E2E2BDCC246F49E5009DE525 /* DungeonScene+Animation.swift in Sources */,
 				E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */,
 				E2AD164424677B03003A9197 /* Animatable.swift in Sources */,

@@ -20,14 +20,17 @@ protocol EnemyTurnActionProviding {
 class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     
     private var randomNumberGenerator: AnyRandomNumberGenerator
+    private let chance: ChanceDetermining
     
     let gameLevel: LevelProviding
     let pathfinder: Pathfinding
     
     init(entityManager: EntityManager,
          gameLevel: LevelProviding,
-         randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
+         randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator(),
+         chance: ChanceDetermining? = nil) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
+        self.chance = chance ?? Chance(randomNumberGenerator: randomNumberGenerator)
         self.gameLevel = gameLevel
         self.pathfinder = Pathfinder(map: gameLevel.map)
         super.init(entityManager: entityManager)
@@ -37,8 +40,27 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
         if let targetDirection = directionForTargetInAttackRange(from: sprite.cell) {
             return .attack(direction: targetDirection)
         }
+        
         let chaseTarget = cellForTargetInVisibleRange(from: sprite.cell)
-        enemy.enemyAIState = chaseTarget != nil ? .chase : .walk
+        if chaseTarget != nil {
+            enemy.enemyAIState = .chase
+        } else if enemy.enemyAIState == .chase {
+            enemy.enemyAIState = .walk
+        }
+        
+        if enemy.enemyAIState == .walk && enemy.targetCell == sprite.cell {
+            let keepWalking = chance.one(in: 4)
+            if !keepWalking {
+                enemy.enemyAIState = .wait
+                enemy.targetCell = nil
+            }
+        } else if enemy.enemyAIState == .wait {
+            let stopWaiting = chance.one(in: 20)
+            if stopWaiting {
+                enemy.enemyAIState = .walk
+            }
+        }
+        
         switch enemy.enemyAIState {
         case .chase:
             guard let chaseTarget = chaseTarget else { return .nothing }
