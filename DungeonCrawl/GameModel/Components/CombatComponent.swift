@@ -12,7 +12,7 @@ class CombatComponent: Component {
     
     var baseAttackBonus: Int
     var baseArmorClass: Int
-    var baseDamage: Int
+    var baseDamageDie: DieRolling
     var maxHitPoints: Int
     
     var attackBonus: Int {
@@ -30,7 +30,7 @@ class CombatComponent: Component {
     }
     
     var weaponDamage: Int {
-        return baseDamage
+        return baseDamageDie.roll()
     }
 
     var hitPoints: Int
@@ -39,10 +39,10 @@ class CombatComponent: Component {
         return hitPoints <= 0
     }
     
-    init(attackBonus: Int, armorClass: Int, damage: Int, maxHitPoints: Int) {
+    init(attackBonus: Int, armorClass: Int, damageDie: DieRolling, maxHitPoints: Int) {
         self.baseAttackBonus = attackBonus
         self.baseArmorClass = armorClass
-        self.baseDamage = damage
+        self.baseDamageDie = damageDie
         self.maxHitPoints = maxHitPoints
         self.hitPoints = maxHitPoints
     }

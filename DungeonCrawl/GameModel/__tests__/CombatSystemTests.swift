@@ -30,7 +30,7 @@ class CombatTests: XCTestCase {
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
         
-        let d20 = MockD20(nextRoll: 10)
+        let d20 = MockDie(nextRoll: 10)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
@@ -45,7 +45,7 @@ class CombatTests: XCTestCase {
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 12)
 
-        let d20 = MockD20(nextRoll: 10)
+        let d20 = MockDie(nextRoll: 10)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
@@ -60,7 +60,7 @@ class CombatTests: XCTestCase {
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 10)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 22)
 
-        let d20 = MockD20(nextRoll: 20)
+        let d20 = MockDie(nextRoll: 20)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
 
         // Act
@@ -75,7 +75,7 @@ class CombatTests: XCTestCase {
         let attackerCombat = mockCombatComponent(attackBonus: 1, armorClass: 11)
         let defenderCombat = mockCombatComponent(attackBonus: 1, armorClass: 1)
 
-        let d20 = MockD20(nextRoll: 1)
+        let d20 = MockDie(nextRoll: 1)
         let sut = CombatSystem(entityManager: entityManager!, d20: d20)
         
         // Act
@@ -86,7 +86,8 @@ class CombatTests: XCTestCase {
     }
     
     func mockCombatComponent(attackBonus: Int, armorClass: Int) -> CombatComponent {
-        return CombatComponent(attackBonus: attackBonus, armorClass: armorClass, damage: 1, maxHitPoints: 10)
+        let damageDie = MockDie(nextRoll: 1)
+        return CombatComponent(attackBonus: attackBonus, armorClass: armorClass, damageDie: damageDie, maxHitPoints: 10)
     }
     
     func entityWithCombatComponent(combatComponent: CombatComponent) -> Entity {
@@ -96,7 +97,7 @@ class CombatTests: XCTestCase {
     }
 }
 
-struct MockD20: DieRolling {
+struct MockDie: DieRolling {
     
     var nextRoll: Int
     

@@ -197,7 +197,8 @@ class TurnTakingSystemTests: XCTestCase {
     }
     
     func mockCombatComponent() -> CombatComponent {
-        return CombatComponent(attackBonus: 0, armorClass: 10, damage: 3, maxHitPoints: 10)
+        let damageDie = MockDie(nextRoll: 3)
+        return CombatComponent(attackBonus: 0, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
     }
     
     func mockEnemyComponent() -> EnemyComponent {

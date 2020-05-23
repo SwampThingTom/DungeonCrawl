@@ -25,7 +25,8 @@ class CombatComponentTests: XCTestCase {
     func testArmorClass_noItems() throws {
         // Arrange
         let entity = entityManager?.createEntity()
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damage: 10, maxHitPoints: 10)
+        let damageDie = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -40,7 +41,8 @@ class CombatComponentTests: XCTestCase {
         let entity = entityManager?.createEntity()
         let items = ItemsComponent()
         entity?.add(component: items)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damage: 10, maxHitPoints: 10)
+        let damageDie = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -60,7 +62,8 @@ class CombatComponentTests: XCTestCase {
         let armor = mockArmor(bonus: 2)
         items.equipped[.armor] = armor
         
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damage: 10, maxHitPoints: 10)
+        let damageDie = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
