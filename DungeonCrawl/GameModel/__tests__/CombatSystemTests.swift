@@ -96,7 +96,7 @@ class CombatTests: XCTestCase {
     }
 }
 
-struct MockD20: D20Providing {
+struct MockD20: DieRolling {
     
     var nextRoll: Int
     

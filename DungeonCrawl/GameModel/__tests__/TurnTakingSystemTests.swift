@@ -236,7 +236,7 @@ struct MockGameLevel: LevelProviding {
 
 class MockCombat: CombatProviding {
     
-    var d20: D20Providing = D20()
+    var d20: DieRolling = D20()
     
     var mockAttackDamage: Int?
     

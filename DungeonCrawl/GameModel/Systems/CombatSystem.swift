@@ -23,9 +23,9 @@ protocol CombatProviding {
 /// - SeeAlso: http://www.easydamus.com/BasicD20.pdf
 class CombatSystem: System, CombatProviding {
     
-    private let d20: D20Providing
+    private let d20: DieRolling
     
-    init(entityManager: EntityManager, d20: D20Providing = D20()) {
+    init(entityManager: EntityManager, d20: DieRolling = D20()) {
         self.d20 = d20
         super.init(entityManager: entityManager)
     }
