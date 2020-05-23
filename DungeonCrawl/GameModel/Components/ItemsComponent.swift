@@ -11,6 +11,7 @@ import Foundation
 class ItemsComponent: Component {
     
     var gold: Int = 0
+    var items = [Item]()
 }
 
 extension EntityManager {

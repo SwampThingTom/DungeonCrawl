@@ -48,7 +48,10 @@
 		E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */; };
 		E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFC2478558800E4E5B0 /* Chance.swift */; };
 		E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0024786F8E00E4E5B0 /* HUDView.swift */; };
+		E29DFC0424787AB300E4E5B0 /* ArmorBonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */; };
 		E29DFC06247881C600E4E5B0 /* ItemsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */; };
+		E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0724788CEC00E4E5B0 /* Item.swift */; };
+		E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC092478920100E4E5B0 /* ItemBuilder.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -151,7 +154,10 @@
 		E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellMathTests.swift; sourceTree = "<group>"; };
 		E29DFBFC2478558800E4E5B0 /* Chance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chance.swift; sourceTree = "<group>"; };
 		E29DFC0024786F8E00E4E5B0 /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
+		E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorBonus.swift; sourceTree = "<group>"; };
 		E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsComponent.swift; sourceTree = "<group>"; };
+		E29DFC0724788CEC00E4E5B0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E29DFC092478920100E4E5B0 /* ItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilder.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -354,6 +360,16 @@
 			path = __tests__;
 			sourceTree = "<group>";
 		};
+		E29DFC0224787A8C00E4E5B0 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */,
+				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
+				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		E29F72ED2470B63C008C7719 /* __tests__ */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +533,7 @@
 				E2E2BDC2246ECC85009DE525 /* __tests__ */,
 				E29F72FA2471D711008C7719 /* Components */,
 				E29F72FB2471D71F008C7719 /* Entities */,
+				E29DFC0224787A8C00E4E5B0 /* Items */,
 				E29F73082471FFFC008C7719 /* Systems */,
 				E29DFBF624781B6E00E4E5B0 /* Utils */,
 				E29DFBFC2478558800E4E5B0 /* Chance.swift */,
@@ -765,6 +782,7 @@
 				E2980F362468E32E000BA2AC /* LevelProviding.swift in Sources */,
 				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,
 				E2E2BDCE246F4D8B009DE525 /* DungeonScene+Touch.swift in Sources */,
+				E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */,
 				E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
@@ -777,6 +795,7 @@
 				E29F72F124719A23008C7719 /* EntityManager.swift in Sources */,
 				E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
+				E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */,
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,
 				E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
@@ -805,6 +824,7 @@
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */,
+				E29DFC0424787AB300E4E5B0 /* ArmorBonus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
