@@ -15,6 +15,7 @@
 		E216F5D424671E5600844BF8 /* Direction+GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */; };
 		E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */; };
 		E2251F972479A48300D2C3E1 /* TreasureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F962479A48300D2C3E1 /* TreasureComponent.swift */; };
+		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E227B55524735A9400115B09 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55424735A9400115B09 /* EntityTests.swift */; };
@@ -126,6 +127,7 @@
 		E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Direction+GridPoint.swift"; sourceTree = "<group>"; };
 		E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionGridPointTests.swift; sourceTree = "<group>"; };
 		E2251F962479A48300D2C3E1 /* TreasureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureComponent.swift; sourceTree = "<group>"; };
+		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E227B55424735A9400115B09 /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				E2AD164324677B03003A9197 /* Animatable.swift */,
 				E2980F3324687E16000BA2AC /* EnemySpriteProvider.swift */,
 				E2980F3124687CB5000BA2AC /* Ghost.swift */,
+				E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */,
 				E2C98AE82463247B005C11AD /* PlayerSprite.swift */,
 			);
 			path = Sprites;
@@ -794,6 +797,7 @@
 				E2B2A1E62457BCE4000ED955 /* GameViewController.swift in Sources */,
 				E292EA2A2460B1F6002A0F31 /* DeadEndRemover.swift in Sources */,
 				E227B5572473779300115B09 /* Quest.swift in Sources */,
+				E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */,
 				E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */,
 				E2251F972479A48300D2C3E1 /* TreasureComponent.swift in Sources */,
 				E2E2BDDA247009DB009DE525 /* Die.swift in Sources */,

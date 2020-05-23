@@ -10,10 +10,14 @@ import SpriteKit
 
 extension DungeonScene {
     
-    func displayScene(tileMap: SKTileMapNode, playerSprite: SKSpriteNode, enemySprites: [SKSpriteNode]) {
+    func displayScene(tileMap: SKTileMapNode,
+                      playerSprite: SKSpriteNode,
+                      enemySprites: [SKSpriteNode],
+                      objectSprites: [SKSpriteNode]) {
         addTileMap(tileMap)
         addPlayer(playerSprite)
         addEnemies(enemySprites)
+        addObjects(objectSprites)
         addCamera()
         addMessageLabel()
     }
@@ -38,6 +42,12 @@ extension DungeonScene {
     
     private func addEnemies(_ enemySprites: [SKSpriteNode]) {
         for sprite in enemySprites {
+            addChild(sprite)
+        }
+    }
+    
+    private func addObjects(_ objectSprites: [SKSpriteNode]) {
+        for sprite in objectSprites {
             addChild(sprite)
         }
     }

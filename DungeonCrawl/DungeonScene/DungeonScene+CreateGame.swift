@@ -24,9 +24,10 @@ extension DungeonScene {
     
     func setupScene(for level: LevelProviding) {
         let tileMap = self.tileMap(for: level.map)
-        let player = sprite(for: level.player, on: tileMap)
-        let enemies = sprites(for: level.actors, on: tileMap)
-        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies)
+        let player = sprite(forPlayer: level.player, on: tileMap)
+        let enemies = sprites(forEnemies: level.actors, on: tileMap)
+        let objects = sprites(forObjects: level.objects, on: tileMap)
+        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies, objectSprites: objects)
     }
     
     private func tileMap(for map: GridMap) -> SKTileMapNode {
@@ -45,7 +46,7 @@ extension DungeonScene {
         return tileMap
     }
     
-    private func sprite(for player: Entity, on map: SKTileMapNode) -> SKSpriteNode {
+    private func sprite(forPlayer player: Entity, on map: SKTileMapNode) -> SKSpriteNode {
         guard let spriteComponent = player.spriteComponent() else {
             fatalError("Unable to get sprite component for player.")
         }
@@ -54,7 +55,7 @@ extension DungeonScene {
         return sprite
     }
     
-    private func sprites(for enemies: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
+    private func sprites(forEnemies enemies: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
         let enemySpriteProvider = EnemySpriteProvider()
         return enemies.compactMap { enemy in
             guard let spriteComponent = enemy.spriteComponent() else {
@@ -66,6 +67,20 @@ extension DungeonScene {
             let sprite = enemySpriteProvider.sprite(for: enemyComponent.enemyType,
                                                     spriteName: spriteComponent.spriteName)
             sprite?.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
+            return sprite
+        }
+    }
+    
+    private func sprites(forObjects objects: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
+        return objects.compactMap { object in
+            guard let spriteComponent = object.spriteComponent() else {
+                return nil
+            }
+            guard object.treasureComponent() != nil else {
+                return nil
+            }
+            let sprite = ObjectSprite(textureName: "gold")
+            sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
             return sprite
         }
     }
