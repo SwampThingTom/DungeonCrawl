@@ -24,8 +24,9 @@ class DungeonDecorator: DungeonDecorating {
         guard let playerStartCell = playerStartCell(in: dungeon) else {
             fatalError("Unable to place player in dungeon")
         }
+        let objects = placeObjects(in: dungeon)
         let enemies = spawnEnemies(in: dungeon)
-        return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies)
+        return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies, objects: objects)
     }
 
     private func playerStartCell(in dungeon: DungeonModel) -> GridCell? {
@@ -38,6 +39,10 @@ class DungeonDecorator: DungeonDecorating {
             }
         }
         return nil
+    }
+    
+    private func placeObjects(in dungeon: DungeonModel) -> [DungeonObject] {
+        return []
     }
     
     private func spawnEnemies(in dungeon: DungeonModel) -> [EnemyModel] {

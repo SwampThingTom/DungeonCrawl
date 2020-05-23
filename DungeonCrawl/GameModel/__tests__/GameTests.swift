@@ -11,7 +11,7 @@
 import XCTest
 
 class GameTests: XCTestCase {
-
+    
     func testInit() throws {
         // Arrange
         let expectedRooms = threeRooms()
@@ -24,8 +24,8 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: enemyModels)
+        let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                                enemies: enemyModels)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -34,7 +34,7 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
-
+        
         // Assert
         XCTAssertEqual(dungeonGenerator.generateGridSize, dungeonSize)
         XCTAssertEqual(sut.level.map.size, dungeonSize)
@@ -59,8 +59,8 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: [])
+        let dungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                        enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = dungeonDecorations
         
@@ -68,10 +68,10 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
-
+        
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
-
+        
         // Assert
         XCTAssertEqual(actorAnimations.count, 1)
         XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
@@ -90,8 +90,8 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 4)),
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
-        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: enemyModels)
+        let dungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                        enemies: enemyModels)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = dungeonDecorations
         
@@ -109,7 +109,7 @@ class GameTests: XCTestCase {
         
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
-
+        
         // Assert
         XCTAssertEqual(actorAnimations.count, 2)
         XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
@@ -129,8 +129,8 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
-        let dungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                            enemies: enemyModels)
+        let dungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
+                                                        enemies: enemyModels)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = dungeonDecorations
         
@@ -149,10 +149,10 @@ class GameTests: XCTestCase {
         let deadEnemy = sut.level.actors[0]
         let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
         deadEnemyCombat.hitPoints = -1
-
+        
         // Act
         let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
-
+        
         // Assert
         XCTAssertEqual(actorAnimations.count, 2)
         XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
@@ -169,17 +169,17 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         let sut = Game(dungeonGenerator: dungeonGenerator,
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
-
+        
         // Act
         let isPlayerDead = sut.isPlayerDead
-
+        
         // Assert
         XCTAssertFalse(isPlayerDead)
     }
@@ -191,7 +191,7 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         let sut = Game(dungeonGenerator: dungeonGenerator,
@@ -202,7 +202,7 @@ class GameTests: XCTestCase {
         
         // Act
         let isPlayerDead = sut.isPlayerDead
-
+        
         // Assert
         XCTAssertTrue(isPlayerDead)
     }
@@ -214,7 +214,7 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -225,10 +225,10 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: mockQuest)
-
+        
         // Act
         let isQuestComplete = sut.isQuestComplete
-
+        
         // Assert
         XCTAssertFalse(isQuestComplete)
     }
@@ -240,7 +240,7 @@ class GameTests: XCTestCase {
         dungeonGenerator.mockGenerateDungeonModel = expectedDungeonModel
         let dungeonSize = expectedDungeonModel.map.size
         
-        let expectedDungeonDecorations = DungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
+        let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13), enemies: [])
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -251,10 +251,10 @@ class GameTests: XCTestCase {
                        dungeonDecorator: dungeonDecorator,
                        dungeonSize: dungeonSize,
                        quest: mockQuest)
-
+        
         // Act
         let isQuestComplete = sut.isQuestComplete
-
+        
         // Assert
         XCTAssertTrue(isQuestComplete)
     }
@@ -294,8 +294,14 @@ class MockDungeonDecorator: DungeonDecorating {
     }
 }
 
+private func mockDungeonDecorations(playerStartCell: GridCell,
+                                    enemies: [EnemyModel],
+                                    objects: [DungeonObject] = []) -> DungeonDecorations {
+    return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies, objects: objects)
+}
+
 private func threeRooms() -> [RoomModel] {
-     return [
+    return [
         RoomModel(bounds: GridRect(x: 1, y: 9, width: 7, height: 3)),
         RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7)),
         RoomModel(bounds: GridRect(x: 13, y: 7, width: 7, height: 3))
@@ -322,7 +328,7 @@ private func threeRooms() -> [RoomModel] {
 /// 13: `*_______________*`
 /// 14: `*****************`
 private func fiveRegionMap() -> MutableGridMap {
-
+    
     let tiles = [
         "_*___*___*_____",
         "_*_*_*___*_*_*_",

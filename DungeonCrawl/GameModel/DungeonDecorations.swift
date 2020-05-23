@@ -13,7 +13,19 @@ struct EnemyModel: Equatable {
     let cell: GridCell
 }
 
+enum ObjectType {
+    case chest
+    case urn
+}
+
+struct DungeonObject: Equatable {
+    let objectType: ObjectType
+    let gold: Int?
+    let cell: GridCell
+}
+
 struct DungeonDecorations: Equatable {
     let playerStartCell: GridCell
     let enemies: [EnemyModel]
+    let objects: [DungeonObject]
 }
