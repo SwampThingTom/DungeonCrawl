@@ -54,6 +54,20 @@ class EntityFactory {
         return entity
     }
     
+    func createObject(object: DungeonObject) -> Entity {
+        let entity = entityManager.createEntity()
+        
+        let spriteComponent = self.spriteComponent(for: object)
+        entityManager.add(component: spriteComponent, to: entity)
+        
+        if let gold = object.gold {
+            let treasureComponent = TreasureComponent(gold: gold)
+            entityManager.add(component: treasureComponent, to: entity)
+        }
+        
+        return entity
+    }
+    
     private func spriteComponent(for enemyType: EnemyType, cell: GridCell, uniqueID: UInt) -> SpriteComponent {
         let spriteName = "\(enemyType.description)_\(uniqueID)"
         let displayName = enemyType.description
@@ -64,6 +78,16 @@ class EntityFactory {
         switch enemyType {
         case .ghost:
             return CombatComponent(attackBonus: 0, armorClass: 12, damageDie: D3(), maxHitPoints: 5)
+        }
+    }
+    
+    private func spriteComponent(for object: DungeonObject) -> SpriteComponent {
+        switch object.objectType {
+        case .chest:
+            return SpriteComponent(spriteName: "treasure", displayName: "treasure chest", cell: object.cell)
+        case .urn:
+            let gold = object.gold ?? 0
+            return SpriteComponent(spriteName: "gold", displayName: "\(gold) gold pieces", cell: object.cell)
         }
     }
 }
