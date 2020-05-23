@@ -20,7 +20,13 @@ class CombatComponent: Component {
     }
     
     var armorClass: Int {
-        return baseArmorClass
+        return baseArmorClass + equippedArmorBonus
+    }
+    
+    private var equippedArmorBonus: Int {
+        guard let items = entity?.itemsComponent() else { return 0 }
+        guard let armor = items.equipped[.armor]?.armorBonus as ArmorBonus? else { return 0 }
+        return armor.armorBonus
     }
     
     var weaponDamage: Int {

@@ -52,6 +52,7 @@
 		E29DFC06247881C600E4E5B0 /* ItemsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */; };
 		E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0724788CEC00E4E5B0 /* Item.swift */; };
 		E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC092478920100E4E5B0 /* ItemBuilder.swift */; };
+		E29DFC102478AE6800E4E5B0 /* CombatComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -158,6 +159,7 @@
 		E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsComponent.swift; sourceTree = "<group>"; };
 		E29DFC0724788CEC00E4E5B0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E29DFC092478920100E4E5B0 /* ItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilder.swift; sourceTree = "<group>"; };
+		E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatComponentTests.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -370,6 +372,14 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
+		E29DFC0E2478AE3D00E4E5B0 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
 		E29F72ED2470B63C008C7719 /* __tests__ */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +412,7 @@
 		E29F72FA2471D711008C7719 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E29DFC0E2478AE3D00E4E5B0 /* __tests__ */,
 				E29F73022471DFC7008C7719 /* CombatComponent.swift */,
 				E29F73002471DB51008C7719 /* EnemyComponent.swift */,
 				E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */,
@@ -855,6 +866,7 @@
 				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
+				E29DFC102478AE6800E4E5B0 /* CombatComponentTests.swift in Sources */,
 				E2B2A224245909D1000ED955 /* SeededRandomNumberGenerator.swift in Sources */,
 				E2E4E82D2464357500F5EA93 /* CGPoint+ExtensionsTests.swift in Sources */,
 			);

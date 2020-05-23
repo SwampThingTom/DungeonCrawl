@@ -8,10 +8,15 @@
 
 import Foundation
 
+enum EquipmentSlot {
+    case armor
+}
+
 class ItemsComponent: Component {
     
     var gold: Int = 0
     var items = [Item]()
+    var equipped = [EquipmentSlot: Item]()
 }
 
 extension EntityManager {

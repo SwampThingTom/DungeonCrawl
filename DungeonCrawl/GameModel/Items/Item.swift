@@ -10,5 +10,5 @@ import Foundation
 
 struct Item {
     var name: String
-    var armorBonus: ArmorBonus? = nil
+    var armorBonus: ArmorBonus?
 }
