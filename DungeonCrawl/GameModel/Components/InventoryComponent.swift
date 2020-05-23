@@ -1,5 +1,5 @@
 //
-//  ItemsComponent.swift
+//  InventoryComponent.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/22/20.
@@ -13,7 +13,7 @@ enum EquipmentSlot {
     case weapon
 }
 
-class ItemsComponent: Component {
+class InventoryComponent: Component {
     
     var gold: Int = 0
     var items = [Item]()
@@ -21,13 +21,13 @@ class ItemsComponent: Component {
 }
 
 extension EntityManager {
-    func itemsComponent(for entity: Entity) -> ItemsComponent? {
-        return component(of: ItemsComponent.self, for: entity) as? ItemsComponent
+    func inventoryComponent(for entity: Entity) -> InventoryComponent? {
+        return component(of: InventoryComponent.self, for: entity) as? InventoryComponent
     }
 }
 
 extension Entity {
-    func itemsComponent() -> ItemsComponent? {
-        return component(of: ItemsComponent.self) as? ItemsComponent
+    func inventoryComponent() -> InventoryComponent? {
+        return component(of: InventoryComponent.self) as? InventoryComponent
     }
 }

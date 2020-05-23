@@ -25,7 +25,7 @@ class EntityFactory {
         let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damageDie: D3(), maxHitPoints: 10)
         entityManager.add(component: combatComponent, to: entity)
         
-        let itemsComponent = ItemsComponent()
+        let itemsComponent = InventoryComponent()
         entityManager.add(component: itemsComponent, to: entity)
         
         let armor = createLeatherArmor()

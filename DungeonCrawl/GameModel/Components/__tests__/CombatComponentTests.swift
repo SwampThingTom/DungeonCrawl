@@ -39,8 +39,8 @@ class CombatComponentTests: XCTestCase {
     func testArmorClass_noEquippedArmor() throws {
         // Arrange
         let entity = entityManager?.createEntity()
-        let items = ItemsComponent()
-        entity?.add(component: items)
+        let inventory = InventoryComponent()
+        entity?.add(component: inventory)
         let damageDie = MockDie(nextRoll: 10)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
         entity?.add(component: sut)
@@ -56,11 +56,11 @@ class CombatComponentTests: XCTestCase {
         // Arrange
         let entity = entityManager?.createEntity()
         
-        let items = ItemsComponent()
-        entity?.add(component: items)
+        let inventory = InventoryComponent()
+        entity?.add(component: inventory)
         
         let armor = mockArmor(bonus: 2)
-        items.equipped[.armor] = armor
+        inventory.equipped[.armor] = armor
         
         let damageDie = MockDie(nextRoll: 10)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
@@ -90,8 +90,8 @@ class CombatComponentTests: XCTestCase {
     func testWeaponDamage_noEquippedWeapon() throws {
         // Arrange
         let entity = entityManager?.createEntity()
-        let items = ItemsComponent()
-        entity?.add(component: items)
+        let inventory = InventoryComponent()
+        entity?.add(component: inventory)
         let damageDie = MockDie(nextRoll: 3)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
         entity?.add(component: sut)
@@ -107,11 +107,11 @@ class CombatComponentTests: XCTestCase {
         // Arrange
         let entity = entityManager?.createEntity()
         
-        let items = ItemsComponent()
-        entity?.add(component: items)
+        let inventory = InventoryComponent()
+        entity?.add(component: inventory)
         
         let weapon = mockWeapon(damageDie: MockDie(nextRoll: 10))
-        items.equipped[.weapon] = weapon
+        inventory.equipped[.weapon] = weapon
         
         let damageDie = MockDie(nextRoll: 3)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
