@@ -1,5 +1,5 @@
 //
-//  D20.swift
+//  Die.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/16/20.
