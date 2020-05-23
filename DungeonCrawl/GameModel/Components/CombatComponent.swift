@@ -30,9 +30,15 @@ class CombatComponent: Component {
     }
     
     var weaponDamage: Int {
-        return baseDamageDie.roll()
+        let damageDie = equippedWeapon?.damageDie ?? baseDamageDie
+        return damageDie.roll()
     }
-
+    
+    private var equippedWeapon: WeaponModel? {
+        guard let items = entity?.itemsComponent() else { return nil }
+        return items.equipped[.weapon]?.weapon as WeaponModel?
+    }
+    
     var hitPoints: Int
     
     var isDead: Bool {

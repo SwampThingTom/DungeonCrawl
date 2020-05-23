@@ -73,9 +73,66 @@ class CombatComponentTests: XCTestCase {
         XCTAssertEqual(armorClass, 12)
     }
     
+    func testWeaponDamage_noItems() throws {
+        // Arrange
+        let entity = entityManager?.createEntity()
+        let damageDie = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        entity?.add(component: sut)
+        
+        // Act
+        let damage = sut.weaponDamage
+        
+        // Assert
+        XCTAssertEqual(damage, 3)
+    }
+    
+    func testWeaponDamage_noEquippedWeapon() throws {
+        // Arrange
+        let entity = entityManager?.createEntity()
+        let items = ItemsComponent()
+        entity?.add(component: items)
+        let damageDie = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        entity?.add(component: sut)
+        
+        // Act
+        let damage = sut.weaponDamage
+        
+        // Assert
+        XCTAssertEqual(damage, 3)
+    }
+    
+    func testWeaponDamage_equippedWeapon() throws {
+        // Arrange
+        let entity = entityManager?.createEntity()
+        
+        let items = ItemsComponent()
+        entity?.add(component: items)
+        
+        let weapon = mockWeapon(damageDie: MockDie(nextRoll: 10))
+        items.equipped[.weapon] = weapon
+        
+        let damageDie = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        entity?.add(component: sut)
+        
+        // Act
+        let damage = sut.weaponDamage
+        
+        // Assert
+        XCTAssertEqual(damage, 10)
+    }
+
     func mockArmor(bonus: Int) -> Item {
         return ItemBuilder(name: "Mock Armor")
             .with(armor: ArmorModel(armorBonus: bonus))
+            .build()
+    }
+    
+    func mockWeapon(damageDie: DieRolling) -> Item {
+        return ItemBuilder(name: "Mock Weapon")
+            .with(weapon: WeaponModel(damageDie: damageDie))
             .build()
     }
 }

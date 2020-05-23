@@ -29,7 +29,7 @@ class ItemBuilder {
     }
     
     func build() -> Item {
-        return Item(name: name, armor: armor)
+        return Item(name: name, armor: armor, weapon: weapon)
     }
 }
 
