@@ -11,24 +11,24 @@ import Foundation
 class ItemBuilder {
     
     private let name: String
-    private var armorBonus: ArmorBonus?
+    private var armor: ArmorModel?
     
     init(name: String) {
         self.name = name
     }
     
-    func with(armorBonus: ArmorBonus) -> ItemBuilder {
-        self.armorBonus = armorBonus
+    func with(armor: ArmorModel) -> ItemBuilder {
+        self.armor = armor
         return self
     }
     
     func build() -> Item {
-        return Item(name: name, armorBonus: armorBonus)
+        return Item(name: name, armor: armor)
     }
 }
 
 func createLeatherArmor() -> Item {
     return ItemBuilder(name: "Leather")
-        .with(armorBonus: ArmorBonus(armorBonus: 2))
+        .with(armor: ArmorModel(armorBonus: 2))
         .build()
 }

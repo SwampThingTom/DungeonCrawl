@@ -1,5 +1,5 @@
 //
-//  ArmorBonus.swift
+//  ArmorModel.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/22/20.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct ArmorBonus {
+struct ArmorModel {
     let armorBonus: Int
 }

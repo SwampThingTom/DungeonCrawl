@@ -75,7 +75,7 @@ class CombatComponentTests: XCTestCase {
     
     func mockArmor(bonus: Int) -> Item {
         return ItemBuilder(name: "Mock Armor")
-            .with(armorBonus: ArmorBonus(armorBonus: bonus))
+            .with(armor: ArmorModel(armorBonus: bonus))
             .build()
     }
 }

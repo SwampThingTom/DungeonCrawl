@@ -48,7 +48,7 @@
 		E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */; };
 		E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFBFC2478558800E4E5B0 /* Chance.swift */; };
 		E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0024786F8E00E4E5B0 /* HUDView.swift */; };
-		E29DFC0424787AB300E4E5B0 /* ArmorBonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */; };
+		E29DFC0424787AB300E4E5B0 /* ArmorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */; };
 		E29DFC06247881C600E4E5B0 /* ItemsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */; };
 		E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0724788CEC00E4E5B0 /* Item.swift */; };
 		E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC092478920100E4E5B0 /* ItemBuilder.swift */; };
@@ -155,7 +155,7 @@
 		E29DFBFA24781BD200E4E5B0 /* GridCellMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellMathTests.swift; sourceTree = "<group>"; };
 		E29DFBFC2478558800E4E5B0 /* Chance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chance.swift; sourceTree = "<group>"; };
 		E29DFC0024786F8E00E4E5B0 /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
-		E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorBonus.swift; sourceTree = "<group>"; };
+		E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorModel.swift; sourceTree = "<group>"; };
 		E29DFC05247881C600E4E5B0 /* ItemsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsComponent.swift; sourceTree = "<group>"; };
 		E29DFC0724788CEC00E4E5B0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E29DFC092478920100E4E5B0 /* ItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilder.swift; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 		E29DFC0224787A8C00E4E5B0 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				E29DFC0324787AB300E4E5B0 /* ArmorBonus.swift */,
+				E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */,
 				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
 				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
 			);
@@ -835,7 +835,7 @@
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */,
-				E29DFC0424787AB300E4E5B0 /* ArmorBonus.swift in Sources */,
+				E29DFC0424787AB300E4E5B0 /* ArmorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

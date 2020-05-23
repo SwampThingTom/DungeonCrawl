@@ -25,7 +25,7 @@ class CombatComponent: Component {
     
     private var equippedArmorBonus: Int {
         guard let items = entity?.itemsComponent() else { return 0 }
-        guard let armor = items.equipped[.armor]?.armorBonus as ArmorBonus? else { return 0 }
+        guard let armor = items.equipped[.armor]?.armor as ArmorModel? else { return 0 }
         return armor.armorBonus
     }
     
