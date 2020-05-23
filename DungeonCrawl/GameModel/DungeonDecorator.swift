@@ -15,9 +15,12 @@ protocol DungeonDecorating {
 class DungeonDecorator: DungeonDecorating {
     
     private var randomNumberGenerator: AnyRandomNumberGenerator
-    
-    init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
+    private let chance: ChanceDetermining
+
+    init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator(),
+         chance: ChanceDetermining? = nil) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
+        self.chance = chance ?? Chance(randomNumberGenerator: randomNumberGenerator)
     }
     
     func decorate(dungeon: DungeonModel) -> DungeonDecorations {
@@ -42,7 +45,14 @@ class DungeonDecorator: DungeonDecorating {
     }
     
     private func placeObjects(in dungeon: DungeonModel) -> [DungeonObject] {
-        return []
+        let objects: [DungeonObject] = dungeon.rooms.compactMap { room in
+            guard chance.one(in: 2) else { return nil }
+            let objectType = ObjectType.urn
+            let gold = Int.random(in: 1...50)
+            let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
+            return DungeonObject(objectType: objectType, gold: gold, cell: cell)
+        }
+        return objects
     }
     
     private func spawnEnemies(in dungeon: DungeonModel) -> [EnemyModel] {
@@ -62,5 +72,23 @@ extension GridRect {
         let x = gridXRange.randomElement(using: &randomNumberGenerator)!
         let y = gridYRange.randomElement(using: &randomNumberGenerator)!
         return GridCell(x: x, y: y)
+    }
+    
+    func randomWallCell(using randomNumberGenerator: inout AnyRandomNumberGenerator) -> GridCell {
+        let wall = Direction.allCases.randomElement(using: &randomNumberGenerator)!
+        switch wall {
+        case .north:
+            let x = gridXRange.randomElement(using: &randomNumberGenerator)!
+            return GridCell(x: x, y: gridYRange.min()!)
+        case .south:
+            let x = gridXRange.randomElement(using: &randomNumberGenerator)!
+            return GridCell(x: x, y: gridYRange.max()!)
+        case .west:
+            let y = gridYRange.randomElement(using: &randomNumberGenerator)!
+            return GridCell(x: gridXRange.min()!, y: y)
+        case .east:
+            let y = gridYRange.randomElement(using: &randomNumberGenerator)!
+            return GridCell(x: gridXRange.max()!, y: y)
+        }
     }
 }

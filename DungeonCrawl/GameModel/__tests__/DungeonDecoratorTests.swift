@@ -24,6 +24,7 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 1)
+        XCTAssertFalse(decorationsOverlap(decorations, map: dungeon.map))
     }
     
     func testDecorate_noRooms() throws {
@@ -38,14 +39,42 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 0)
+        XCTAssertEqual(decorations.objects.count, 0)
     }
+}
+
+/// Returns true if any of the dungeon decorations are on an obstacle cell
+/// or are on the same cell as another decoration.
+private func decorationsOverlap(_ decorations: DungeonDecorations, map: GridMap) -> Bool {
+    var occupiedCells = Set<GridCell>()
+    
+    let cellIsOccupied: (GridCell) -> Bool = {
+        guard !occupiedCells.contains($0) else { return true }
+        guard let tile = map.tile(at: $0), !tile.isObstacle else { return true }
+        return false
+    }
+    
+    guard !cellIsOccupied(decorations.playerStartCell) else { return true }
+    occupiedCells.insert(decorations.playerStartCell)
+    
+    for enemy in decorations.enemies {
+        guard !cellIsOccupied(enemy.cell) else { return true }
+        occupiedCells.insert(enemy.cell)
+    }
+    
+    for object in decorations.objects {
+        guard !cellIsOccupied(object.cell) else { return true }
+        occupiedCells.insert(object.cell)
+    }
+    
+    return false
 }
 
 private func threeRooms() -> [RoomModel] {
      return [
         RoomModel(bounds: GridRect(x: 1, y: 9, width: 7, height: 3)),
         RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7)),
-        RoomModel(bounds: GridRect(x: 13, y: 7, width: 7, height: 3))
+        RoomModel(bounds: GridRect(x: 13, y: 7, width: 3, height: 7))
     ]
 }
 
