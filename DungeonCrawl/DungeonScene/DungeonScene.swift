@@ -63,11 +63,13 @@ class DungeonScene: SKScene, MessageLogging {
     // MARK: - HUD
     
     func updateHUD() {
-        if let combat = game.level.player.combatComponent() {
+        let player = game.level.player
+        if let combat = player.combatComponent() {
             hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
-            hudView?.armorLabel?.text = "None (\(combat.armorClass))"
+            let armorName = player.itemsComponent()?.equipped[.armor]?.name ?? "None"
+            hudView?.armorLabel?.text = "\(armorName) (\(combat.armorClass))"
         }
-        if let items = game.level.player.itemsComponent() {
+        if let items = player.itemsComponent() {
             hudView?.goldLabel?.text = "Gold: \(items.gold)"
         }
     }

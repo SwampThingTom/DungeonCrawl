@@ -28,6 +28,10 @@ class EntityFactory {
         let itemsComponent = ItemsComponent()
         entityManager.add(component: itemsComponent, to: entity)
         
+        let armor = createLeatherArmor()
+        itemsComponent.items.append(armor)
+        itemsComponent.equipped[.armor] = armor
+        
         return entity
     }
     
