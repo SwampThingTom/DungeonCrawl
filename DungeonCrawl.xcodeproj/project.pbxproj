@@ -53,6 +53,7 @@
 		E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0724788CEC00E4E5B0 /* Item.swift */; };
 		E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC092478920100E4E5B0 /* ItemBuilder.swift */; };
 		E29DFC102478AE6800E4E5B0 /* CombatComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */; };
+		E29DFC122479650200E4E5B0 /* WeaponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29DFC112479650200E4E5B0 /* WeaponModel.swift */; };
 		E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E524709666008C7719 /* TurnTakingSystem.swift */; };
 		E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */; };
 		E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */; };
@@ -160,6 +161,7 @@
 		E29DFC0724788CEC00E4E5B0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E29DFC092478920100E4E5B0 /* ItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilder.swift; sourceTree = "<group>"; };
 		E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatComponentTests.swift; sourceTree = "<group>"; };
+		E29DFC112479650200E4E5B0 /* WeaponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponModel.swift; sourceTree = "<group>"; };
 		E29F72E524709666008C7719 /* TurnTakingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnTakingSystem.swift; sourceTree = "<group>"; };
 		E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnActionSystemTests.swift; sourceTree = "<group>"; };
 		E29F72EB2470B636008C7719 /* FixedSizeQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizeQueue.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */,
 				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
 				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
+				E29DFC112479650200E4E5B0 /* WeaponModel.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				E2980F3224687CB5000BA2AC /* Ghost.swift in Sources */,
 				E29F73012471DB51008C7719 /* EnemyComponent.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
+				E29DFC122479650200E4E5B0 /* WeaponModel.swift in Sources */,
 				E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */,
 				E2E2BDCC246F49E5009DE525 /* DungeonScene+Animation.swift in Sources */,
 				E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */,

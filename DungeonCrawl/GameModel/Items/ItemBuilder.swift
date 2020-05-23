@@ -12,6 +12,7 @@ class ItemBuilder {
     
     private let name: String
     private var armor: ArmorModel?
+    private var weapon: WeaponModel?
     
     init(name: String) {
         self.name = name
@@ -19,6 +20,11 @@ class ItemBuilder {
     
     func with(armor: ArmorModel) -> ItemBuilder {
         self.armor = armor
+        return self
+    }
+    
+    func with(weapon: WeaponModel) -> ItemBuilder {
+        self.weapon = weapon
         return self
     }
     
@@ -30,5 +36,11 @@ class ItemBuilder {
 func createLeatherArmor() -> Item {
     return ItemBuilder(name: "Leather")
         .with(armor: ArmorModel(armorBonus: 2))
+        .build()
+}
+
+func createDagger() -> Item {
+    return ItemBuilder(name: "Dagger")
+        .with(weapon: WeaponModel(damageDie: D3()))
         .build()
 }

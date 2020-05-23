@@ -11,4 +11,5 @@ import Foundation
 struct Item {
     var name: String
     var armor: ArmorModel?
+    var weapon: WeaponModel?
 }

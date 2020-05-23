@@ -10,6 +10,7 @@ import Foundation
 
 enum EquipmentSlot {
     case armor
+    case weapon
 }
 
 class ItemsComponent: Component {
