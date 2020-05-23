@@ -40,7 +40,9 @@ class Game {
         let enemyEntities: [Entity] = decorations.enemies.map {
             entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
-        let objectEntities = [Entity]()
+        let objectEntities: [Entity] = decorations.objects.map {
+            entityFactory.createObject(object: $0)
+        }
         
         level = DungeonLevel(quest: quest,
                              map: dungeonModel.map,

@@ -24,8 +24,13 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
+        let dungeonObjects = [
+            DungeonObject(objectType: .urn, gold: 10, cell: GridCell(x: 7, y: 10)),
+            DungeonObject(objectType: .urn, gold: 50, cell: GridCell(x: 15, y: 7))
+        ]
         let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
-                                                                enemies: enemyModels)
+                                                                enemies: enemyModels,
+                                                                objects: dungeonObjects)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -50,6 +55,8 @@ class GameTests: XCTestCase {
             let enemyEnemyComponent = sut.entityManager.enemyComponent(for: $1)!
             XCTAssertEqual(enemyEnemyComponent.enemyType, .ghost)
         }
+        
+        XCTAssertEqual(sut.level.objects.count, expectedDungeonDecorations.objects.count)
     }
     
     func testTakeTurn_playerOnly() throws {
@@ -304,7 +311,7 @@ private func threeRooms() -> [RoomModel] {
     return [
         RoomModel(bounds: GridRect(x: 1, y: 9, width: 7, height: 3)),
         RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7)),
-        RoomModel(bounds: GridRect(x: 13, y: 7, width: 7, height: 3))
+        RoomModel(bounds: GridRect(x: 13, y: 7, width: 3, height: 7))
     ]
 }
 
