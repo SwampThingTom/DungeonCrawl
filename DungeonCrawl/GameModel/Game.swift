@@ -40,12 +40,14 @@ class Game {
         let enemyEntities: [Entity] = decorations.enemies.map {
             entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
+        let objectEntities = [Entity]()
         
         level = DungeonLevel(quest: quest,
                              map: dungeonModel.map,
                              rooms: dungeonModel.rooms,
                              player: playerEntity,
-                             actors: enemyEntities)
+                             actors: enemyEntities,
+                             objects: objectEntities)
         
         combatSystem = CombatSystem(entityManager: entityManager)
         enemyTurnActionSystem = EnemyTurnActionSystem(entityManager: entityManager, gameLevel: level)
@@ -119,14 +121,21 @@ class DungeonLevel: LevelProviding {
     let rooms: [RoomModel]
     let player: Entity
     var actors: [Entity]
+    var objects: [Entity]
     var message: MessageLogging?
     
-    init(quest: QuestStatusProviding, map: GridMap, rooms: [RoomModel], player: Entity, actors: [Entity]) {
+    init(quest: QuestStatusProviding,
+         map: GridMap,
+         rooms: [RoomModel],
+         player: Entity,
+         actors: [Entity],
+         objects: [Entity]) {
         self.quest = quest
         self.map = map
         self.rooms = rooms
         self.player = player
         self.actors = actors
+        self.objects = objects
     }
 }
 

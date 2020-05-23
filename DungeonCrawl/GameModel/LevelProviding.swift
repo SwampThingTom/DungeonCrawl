@@ -18,5 +18,6 @@ protocol LevelProviding {
     var rooms: [RoomModel] { get }
     var player: Entity { get }
     var actors: [Entity] { get }
+    var objects: [Entity] { get }
     var message: MessageLogging? { get }
 }
