@@ -41,6 +41,26 @@ class TurnTakingSystemTests: XCTestCase {
         XCTAssertEqual(actorSprite.cell, GridCell(x: 4, y: 5))
     }
     
+    func testDoTurnAction_move_pickUpGold() throws {
+        // Arrange
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actor = mockEntity(spriteComponent: actorSprite)
+        let actorInventory = mockInventoryComponent(gold: 10)
+        actor.add(component: actorInventory)
+        
+        let treasure = mockTreasureEntity(gold: 50, cell: GridCell(x: 4, y: 5))
+        let gameLevel = MockGameLevel(player: actor, actors: [], objects: [treasure])
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        
+        // Act
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
+        _ = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
+        
+        // Assert
+        XCTAssertEqual(actorInventory.gold, 60)
+        // LATER: XCTAssertFalse(gameLevel.objects.contains(treasure))
+    }
+    
     func testDoTurnAction_attack_hit() throws {
         // Arrange
         let mockCombat = MockCombat()
@@ -205,6 +225,12 @@ class TurnTakingSystemTests: XCTestCase {
         return EnemyComponent(enemyType: .ghost)
     }
     
+    func mockInventoryComponent(gold: Int) -> InventoryComponent {
+        let inventory = InventoryComponent()
+        inventory.gold = gold
+        return inventory
+    }
+    
     func mockEntity(spriteComponent: SpriteComponent,
                     combatComponent: CombatComponent? = nil,
                     enemyComponent: EnemyComponent? = nil) -> Entity {
@@ -216,6 +242,15 @@ class TurnTakingSystemTests: XCTestCase {
         if let enemyComponent = enemyComponent {
             entityManager!.add(component: enemyComponent, to: entity)
         }
+        return entity
+    }
+    
+    func mockTreasureEntity(gold: Int, cell: GridCell) -> Entity {
+        let entity = entityManager!.createEntity()
+        let spriteComponent = mockSpriteComponent(spriteName: "gold", cell: cell)
+        entity.add(component: spriteComponent)
+        let treasureComponent = TreasureComponent(gold: gold)
+        entity.add(component: treasureComponent)
         return entity
     }
 }

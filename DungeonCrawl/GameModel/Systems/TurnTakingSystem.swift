@@ -116,7 +116,20 @@ class TurnTakingSystem: System, TurnTaking {
             return false
         }
         actorSprite.cell = cell
+        if let inventory = actor.inventoryComponent() {
+            pickUpItems(at: cell, for: actor, inventory: inventory)
+        }
         return true
+    }
+    
+    private func pickUpItems(at cell: GridCell, for actor: Entity, inventory: InventoryComponent) {
+        for item in entityManager.entities(with: TreasureComponent.self) {
+            guard let treasure = item.treasureComponent() else { fatalError("Entity should have treasure component") }
+            guard let itemSprite = item.spriteComponent(), itemSprite.cell == cell else { continue }
+            inventory.gold += treasure.gold
+            showPickedUpTreasureMessage(actor: actor, treasureDescription: "\(treasure.gold) gold pieces")
+            entityManager.remove(entity: item)
+        }
     }
     
     // MARK: show message
@@ -143,5 +156,10 @@ class TurnTakingSystem: System, TurnTaking {
                 return
         }
         gameLevel.message?.show("\(attackerSprite.displayName) killed \(defenderSprite.displayName).")
+    }
+    
+    private func showPickedUpTreasureMessage(actor: Entity, treasureDescription: String) {
+        guard let actorSprite = actor.spriteComponent() else { return }
+        gameLevel.message?.show("\(actorSprite.displayName) picked up \(treasureDescription)")
     }
 }
