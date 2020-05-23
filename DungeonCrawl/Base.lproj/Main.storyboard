@@ -38,7 +38,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Armor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tex-qN-e6H">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dagger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tex-qN-e6H">
                                         <rect key="frame" x="174" y="58" width="100" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -100,6 +100,7 @@
                                     <outlet property="armorLabel" destination="K3F-pR-NI3" id="7Ba-SE-Q1w"/>
                                     <outlet property="goldLabel" destination="bbH-IH-3de" id="Yw9-Ne-VYK"/>
                                     <outlet property="healthLabel" destination="sNR-Fo-dse" id="g3T-rV-XG1"/>
+                                    <outlet property="weaponLabel" destination="tex-qN-e6H" id="tmi-9i-jSM"/>
                                 </connections>
                             </view>
                         </subviews>

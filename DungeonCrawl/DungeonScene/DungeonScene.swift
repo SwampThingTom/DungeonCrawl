@@ -68,6 +68,8 @@ class DungeonScene: SKScene, MessageLogging {
             hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
             let armorName = player.itemsComponent()?.equipped[.armor]?.name ?? "None"
             hudView?.armorLabel?.text = "\(armorName) (\(combat.armorClass))"
+            let weaponName = player.itemsComponent()?.equipped[.weapon]?.name ?? "Unarmed"
+            hudView?.weaponLabel?.text = weaponName
         }
         if let items = player.itemsComponent() {
             hudView?.goldLabel?.text = "Gold: \(items.gold)"
