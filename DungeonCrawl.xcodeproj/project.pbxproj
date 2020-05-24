@@ -20,6 +20,7 @@
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
 		E2251FA4247ACD6900D2C3E1 /* DungeonScene+Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA3247ACD6900D2C3E1 /* DungeonScene+Inventory.swift */; };
 		E2251FA6247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA5247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift */; };
+		E2251FAA247AFB3900D2C3E1 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA9247AFB3900D2C3E1 /* ThemeManager.swift */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E227B55524735A9400115B09 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55424735A9400115B09 /* EntityTests.swift */; };
@@ -136,6 +137,7 @@
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
 		E2251FA3247ACD6900D2C3E1 /* DungeonScene+Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DungeonScene+Inventory.swift"; sourceTree = "<group>"; };
 		E2251FA5247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSceneInventoryTests.swift; sourceTree = "<group>"; };
+		E2251FA9247AFB3900D2C3E1 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E227B55424735A9400115B09 /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				E2B2A1EA2457BCE8000ED955 /* Assets.xcassets */,
 				E2B2A1EC2457BCE8000ED955 /* LaunchScreen.storyboard */,
 				E2B2A1EF2457BCE8000ED955 /* Info.plist */,
+				E2251FA9247AFB3900D2C3E1 /* ThemeManager.swift */,
 			);
 			path = DungeonCrawl;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E29F72F524719D2E008C7719 /* Component.swift in Sources */,
+				E2251FAA247AFB3900D2C3E1 /* ThemeManager.swift in Sources */,
 				E29DFC06247881C600E4E5B0 /* InventoryComponent.swift in Sources */,
 				E2B2A22224589E15000ED955 /* GridRect+CoreGraphics.swift in Sources */,
 				E2E2BDC6246F47D2009DE525 /* DungeonScene+CreateGame.swift in Sources */,
