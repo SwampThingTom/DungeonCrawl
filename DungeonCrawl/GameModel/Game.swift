@@ -110,34 +110,4 @@ class Game {
     }
 }
 
-class DungeonLevel: LevelProviding {
-    let quest: QuestStatusProviding
-    let map: GridMap
-    let rooms: [RoomModel]
-    let entityManager: EntityManaging
-    var message: MessageLogging?
-    
-    let player: Entity
-    
-    var actors: [Entity] {
-        return entityManager.entities(with: EnemyComponent.self)
-    }
-    
-    var objects: [Entity] {
-        return entityManager.entities(with: TreasureComponent.self)
-    }
-    
-    init(quest: QuestStatusProviding,
-         map: GridMap,
-         rooms: [RoomModel],
-         entityManager: EntityManaging,
-         player: Entity) {
-        self.quest = quest
-        self.map = map
-        self.rooms = rooms
-        self.entityManager = entityManager
-        self.player = player
-    }
-}
-
 typealias SpriteAnimation = (spriteName: String, animation: Animation)
