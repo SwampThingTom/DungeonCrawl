@@ -71,8 +71,8 @@ class EntityFactory {
     }
     
     private func spriteComponent(for enemyType: EnemyType, cell: GridCell, uniqueID: UInt) -> SpriteComponent {
-        let spriteName = "\(enemyType.description)_\(uniqueID)"
-        let displayName = enemyType.description
+        let spriteName = "\(enemyType)_\(uniqueID)"
+        let displayName = "\(enemyType)"
         return SpriteComponent(spriteName: spriteName, displayName: displayName, cell: cell)
     }
     
