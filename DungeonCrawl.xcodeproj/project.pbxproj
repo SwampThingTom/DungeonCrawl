@@ -275,6 +275,14 @@
 			path = __mocks__;
 			sourceTree = "<group>";
 		};
+		E2251F9E247AB18A00D2C3E1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E2B2A1E52457BCE4000ED955 /* GameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E225E73D246185EF00F60E45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,10 +497,10 @@
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2C98AE72463244B005C11AD /* Sprites */,
 				E2E4E827246433F200F5EA93 /* Utils */,
+				E2251F9E247AB18A00D2C3E1 /* ViewControllers */,
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
-				E2B2A1E52457BCE4000ED955 /* GameViewController.swift */,
 				E2B2A1E72457BCE4000ED955 /* Main.storyboard */,
 				E2B2A1EA2457BCE8000ED955 /* Assets.xcassets */,
 				E2B2A1EC2457BCE8000ED955 /* LaunchScreen.storyboard */,
