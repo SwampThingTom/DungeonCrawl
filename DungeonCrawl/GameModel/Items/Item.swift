@@ -8,8 +8,17 @@
 
 import Foundation
 
+enum EquipmentSlot {
+    case armor
+    case weapon
+}
+
 struct Item {
     var name: String
+    
+    /// The slot where this item can be equipped or `nil` if not equippable.
+    var equipmentSlot: EquipmentSlot?
+    
     var armor: ArmorModel?
     var weapon: WeaponModel?
 }

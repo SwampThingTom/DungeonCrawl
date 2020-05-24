@@ -11,11 +11,17 @@ import Foundation
 class ItemBuilder {
     
     private let name: String
+    private var equipmentSlot: EquipmentSlot?
     private var armor: ArmorModel?
     private var weapon: WeaponModel?
     
     init(name: String) {
         self.name = name
+    }
+    
+    func with(equipmentSlot: EquipmentSlot) -> ItemBuilder {
+        self.equipmentSlot = equipmentSlot
+        return self
     }
     
     func with(armor: ArmorModel) -> ItemBuilder {
@@ -29,18 +35,20 @@ class ItemBuilder {
     }
     
     func build() -> Item {
-        return Item(name: name, armor: armor, weapon: weapon)
+        return Item(name: name, equipmentSlot: equipmentSlot, armor: armor, weapon: weapon)
     }
 }
 
 func createLeatherArmor() -> Item {
     return ItemBuilder(name: "Leather")
+        .with(equipmentSlot: .armor)
         .with(armor: ArmorModel(armorBonus: 2))
         .build()
 }
 
 func createDagger() -> Item {
     return ItemBuilder(name: "Dagger")
+        .with(equipmentSlot: .weapon)
         .with(weapon: WeaponModel(damageDie: D3()))
         .build()
 }

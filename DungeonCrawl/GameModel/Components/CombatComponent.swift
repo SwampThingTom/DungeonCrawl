@@ -25,7 +25,7 @@ class CombatComponent: Component {
     
     private var equippedArmorBonus: Int {
         guard let items = entity?.inventoryComponent() else { return 0 }
-        guard let armor = items.equipped[.armor]?.armor as ArmorModel? else { return 0 }
+        guard let armor = items.equippedItem(for: .armor)?.armor as ArmorModel? else { return 0 }
         return armor.armorBonus
     }
     
@@ -36,7 +36,7 @@ class CombatComponent: Component {
     
     private var equippedWeapon: WeaponModel? {
         guard let items = entity?.inventoryComponent() else { return nil }
-        return items.equipped[.weapon]?.weapon as WeaponModel?
+        return items.equippedItem(for: .weapon)?.weapon as WeaponModel?
     }
     
     var hitPoints: Int

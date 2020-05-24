@@ -60,7 +60,7 @@ class CombatComponentTests: XCTestCase {
         entity?.add(component: inventory)
         
         let armor = mockArmor(bonus: 2)
-        inventory.equipped[.armor] = armor
+        inventory.equip(item: armor)
         
         let damageDie = MockDie(nextRoll: 10)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
@@ -111,7 +111,7 @@ class CombatComponentTests: XCTestCase {
         entity?.add(component: inventory)
         
         let weapon = mockWeapon(damageDie: MockDie(nextRoll: 10))
-        inventory.equipped[.weapon] = weapon
+        inventory.equip(item: weapon)
         
         let damageDie = MockDie(nextRoll: 3)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
@@ -126,12 +126,14 @@ class CombatComponentTests: XCTestCase {
 
     func mockArmor(bonus: Int) -> Item {
         return ItemBuilder(name: "Mock Armor")
+            .with(equipmentSlot: .armor)
             .with(armor: ArmorModel(armorBonus: bonus))
             .build()
     }
     
     func mockWeapon(damageDie: DieRolling) -> Item {
         return ItemBuilder(name: "Mock Weapon")
+            .with(equipmentSlot: .weapon)
             .with(weapon: WeaponModel(damageDie: damageDie))
             .build()
     }

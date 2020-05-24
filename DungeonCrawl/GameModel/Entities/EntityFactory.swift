@@ -30,11 +30,11 @@ class EntityFactory {
         
         let armor = createLeatherArmor()
         itemsComponent.items.append(armor)
-        itemsComponent.equipped[.armor] = armor
+        itemsComponent.equip(item: armor)
         
         let weapon = createDagger()
         itemsComponent.items.append(weapon)
-        itemsComponent.equipped[.weapon] = weapon
+        itemsComponent.equip(item: weapon)
         
         return entity
     }

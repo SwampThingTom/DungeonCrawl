@@ -8,16 +8,20 @@
 
 import Foundation
 
-enum EquipmentSlot {
-    case armor
-    case weapon
-}
-
 class InventoryComponent: Component {
     
     var gold: Int = 0
     var items = [Item]()
-    var equipped = [EquipmentSlot: Item]()
+    private var equipped = [EquipmentSlot: Item]()
+    
+    func equip(item: Item) {
+        guard let slot = item.equipmentSlot else { return }
+        equipped[slot] = item
+    }
+    
+    func equippedItem(for slot: EquipmentSlot) -> Item? {
+        return equipped[slot]
+    }
 }
 
 extension EntityManager {
