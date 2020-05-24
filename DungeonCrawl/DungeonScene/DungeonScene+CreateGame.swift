@@ -79,7 +79,7 @@ extension DungeonScene {
             guard object.treasureComponent() != nil else {
                 return nil
             }
-            let sprite = ObjectSprite(textureName: "gold")
+            let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: "gold")
             sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
             return sprite
         }

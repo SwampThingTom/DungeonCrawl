@@ -23,12 +23,13 @@ extension DungeonScene {
     
     func displayEndOfTurn() {
         stopAnimations()
-        removeDeadActors()
+        removeInactiveSprites()
         if game.isQuestComplete {
             showPlayerWon()
             gameState = .dungeonComplete
             return
-        } else if game.isPlayerDead {
+        }
+        if game.isPlayerDead {
             showPlayerDied()
             gameState = .dungeonComplete
             return
@@ -37,14 +38,14 @@ extension DungeonScene {
         gameState = .waitingForInput
     }
     
-    private func removeDeadActors() {
-        let actorNames = [playerSpriteComponent!.spriteName] + game.level.actors.compactMap {
+    private func removeInactiveSprites() {
+        let spriteNames: [String] = game.level.entityManager.entities(with: SpriteComponent.self).compactMap {
             guard let spriteComponent = $0.spriteComponent() else { return nil }
             return spriteComponent.spriteName
         }
         let nodesToRemove = children.filter { node in
             guard node is SKSpriteNode, let nodeName = node.name else { return false }
-            return !actorNames.contains(nodeName)
+            return !spriteNames.contains(nodeName)
         }
         removeChildren(in: nodesToRemove)
     }

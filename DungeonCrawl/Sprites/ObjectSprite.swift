@@ -10,9 +10,10 @@ import SpriteKit
 
 class ObjectSprite: SKSpriteNode {
         
-    init(textureName: String) {
+    init(spriteName: String, textureName: String) {
         let texture = SKTexture(imageNamed: textureName)
         super.init(texture: texture, color: .white, size: texture.size())
+        name = spriteName
         zPosition = 10
     }
     

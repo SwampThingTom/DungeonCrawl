@@ -59,7 +59,7 @@ class EntityFactory {
     func createObject(object: DungeonObject) -> Entity {
         let entity = entityManager.createEntity()
         
-        let spriteComponent = self.spriteComponent(for: object)
+        let spriteComponent = self.spriteComponent(for: object, uniqueID: entity.entityId)
         entityManager.add(component: spriteComponent, to: entity)
         
         if let gold = object.gold {
@@ -83,13 +83,15 @@ class EntityFactory {
         }
     }
     
-    private func spriteComponent(for object: DungeonObject) -> SpriteComponent {
+    private func spriteComponent(for object: DungeonObject, uniqueID: UInt) -> SpriteComponent {
         switch object.objectType {
         case .chest:
-            return SpriteComponent(spriteName: "treasure", displayName: "treasure chest", cell: object.cell)
+            let spriteName = "treasure_\(uniqueID)"
+            return SpriteComponent(spriteName: spriteName, displayName: "treasure chest", cell: object.cell)
         case .urn:
+            let spriteName = "gold_\(uniqueID)"
             let gold = object.gold ?? 0
-            return SpriteComponent(spriteName: "gold", displayName: "\(gold) gold pieces", cell: object.cell)
+            return SpriteComponent(spriteName: spriteName, displayName: "\(gold) gold pieces", cell: object.cell)
         }
     }
 }
