@@ -12,7 +12,7 @@ enum GhostActionKeys {
     static let animation = "animation"
 }
 
-class Ghost: SKSpriteNode, Animatable {
+class GhostSprite: SKSpriteNode, Animatable {
     
     var heading = Direction.south {
         didSet { texture = standingTexture[heading] }

@@ -17,7 +17,7 @@ class EnemySpriteProvider: EnemySpriteProviding {
     func sprite(for enemyType: EnemyType, spriteName: String) -> SKSpriteNode? {
         switch enemyType {
         case .ghost:
-            return Ghost(spriteName: spriteName)
+            return GhostSprite(spriteName: spriteName)
         }
     }
 }
