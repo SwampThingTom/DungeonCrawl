@@ -37,19 +37,18 @@ class Game {
         entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let playerEntity = entityFactory.createPlayer(cell: decorations.playerStartCell)
-        let enemyEntities: [Entity] = decorations.enemies.map {
+        decorations.enemies.forEach {
             entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
-        let objectEntities: [Entity] = decorations.objects.map {
+        decorations.objects.forEach {
             entityFactory.createObject(object: $0)
         }
         
         level = DungeonLevel(quest: quest,
                              map: dungeonModel.map,
                              rooms: dungeonModel.rooms,
-                             player: playerEntity,
-                             actors: enemyEntities,
-                             objects: objectEntities)
+                             entityManager: entityManager,
+                             player: playerEntity)
         
         combatSystem = CombatSystem(entityManager: entityManager)
         enemyTurnActionSystem = EnemyTurnActionSystem(entityManager: entityManager, gameLevel: level)
@@ -98,22 +97,14 @@ class Game {
     
     private func removeDeadActors() -> [SpriteAnimation] {
         var deathAnimations = [SpriteAnimation]()
-        var deadActors = [Entity]()
         for actor in level.actors {
             guard let combatComponent = actor.combatComponent() else { continue }
             guard combatComponent.isDead else { continue }
             if let spriteComponent = actor.spriteComponent() {
                 let deathAnimation = SpriteAnimation(spriteName: spriteComponent.spriteName, animation: Animation.death)
                 deathAnimations.append(deathAnimation)
-                deadActors.append(actor)
             }
-        }
-        level.actors = level.actors.filter { actor in
-            guard let actorSprite = actor.spriteComponent() else { return false }
-            return !deadActors.contains { deadActor in
-                guard let deadActorSprite = deadActor.spriteComponent() else { return false }
-                return deadActorSprite.spriteName == actorSprite.spriteName
-            }
+            level.entityManager.remove(entity: actor)
         }
         return deathAnimations
     }
@@ -123,23 +114,29 @@ class DungeonLevel: LevelProviding {
     let quest: QuestStatusProviding
     let map: GridMap
     let rooms: [RoomModel]
-    let player: Entity
-    var actors: [Entity]
-    var objects: [Entity]
+    let entityManager: EntityManaging
     var message: MessageLogging?
+    
+    let player: Entity
+    
+    var actors: [Entity] {
+        return entityManager.entities(with: EnemyComponent.self)
+    }
+    
+    var objects: [Entity] {
+        return entityManager.entities(with: TreasureComponent.self)
+    }
     
     init(quest: QuestStatusProviding,
          map: GridMap,
          rooms: [RoomModel],
-         player: Entity,
-         actors: [Entity],
-         objects: [Entity]) {
+         entityManager: EntityManaging,
+         player: Entity) {
         self.quest = quest
         self.map = map
         self.rooms = rooms
+        self.entityManager = entityManager
         self.player = player
-        self.actors = actors
-        self.objects = objects
     }
 }
 

@@ -39,6 +39,7 @@ class EntityFactory {
         return entity
     }
     
+    @discardableResult
     func createEnemy(enemyType: EnemyType, cell: GridCell) -> Entity {
         let entity = entityManager.createEntity()
 
@@ -54,6 +55,7 @@ class EntityFactory {
         return entity
     }
     
+    @discardableResult
     func createObject(object: DungeonObject) -> Entity {
         let entity = entityManager.createEntity()
         

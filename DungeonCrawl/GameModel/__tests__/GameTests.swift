@@ -49,12 +49,18 @@ class GameTests: XCTestCase {
         XCTAssertEqual(playerSprite.cell, expectedDungeonDecorations.playerStartCell)
         
         XCTAssertEqual(sut.level.actors.count, expectedDungeonDecorations.enemies.count)
+        
+        var enemyModelCells = Set<GridCell>([enemyModels[0].cell, enemyModels[1].cell])
         sut.level.actors.enumerated().forEach {
+            // Verify enemy cell is one of the expected cells
             let enemySprite = sut.entityManager.spriteComponent(for: $1)!
-            XCTAssertEqual(enemySprite.cell, enemyModels[$0].cell)
+            XCTAssert(enemyModelCells.contains(enemySprite.cell))
+            enemyModelCells.remove(enemySprite.cell)
+            
             let enemyEnemyComponent = sut.entityManager.enemyComponent(for: $1)!
             XCTAssertEqual(enemyEnemyComponent.enemyType, .ghost)
         }
+        XCTAssert(enemyModelCells.isEmpty)
         
         XCTAssertEqual(sut.level.objects.count, expectedDungeonDecorations.objects.count)
     }
@@ -113,16 +119,24 @@ class GameTests: XCTestCase {
             sut.level.actors[1]: .nothing
         ]
         sut.enemyTurnActionSystem = enemyTurnActionSystem
+        sut.turnTakingSystem = MockTurnTakingSystem()
+        
+        let expectedPlayerSpriteName = sut.level.player.spriteComponent()!.spriteName
+        let expectedAttackSpriteName = sut.level.actors[0].spriteComponent()!.spriteName
         
         // Act
         let spriteAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
         
         // Assert
         XCTAssertEqual(spriteAnimations.count, 2)
-        XCTAssertEqual(spriteAnimations.first?.spriteName, sut.level.player.spriteComponent()!.spriteName)
-        XCTAssertEqual(spriteAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
-        XCTAssertEqual(spriteAnimations[1].spriteName, sut.level.actors[0].spriteComponent()!.spriteName)
-        XCTAssertEqual(spriteAnimations[1].animation, Animation.attack(heading: .south))
+        
+        let playerSpriteAnimation = spriteAnimations[0]
+        let enemyAttackAnimation = spriteAnimations[1]
+        
+        XCTAssertEqual(playerSpriteAnimation.spriteName, expectedPlayerSpriteName)
+        XCTAssertEqual(playerSpriteAnimation.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(enemyAttackAnimation.spriteName, expectedAttackSpriteName)
+        XCTAssertEqual(enemyAttackAnimation.animation, Animation.attack(heading: .south))
     }
     
     func testTakeTurn_removeDeadActors() throws {
@@ -279,6 +293,22 @@ class MockEnemyTurnActionSystem: EnemyTurnActionProviding {
                 return .nothing
         }
         return turnAction
+    }
+}
+
+class MockTurnTakingSystem: TurnTaking {
+    
+    func doTurnAction(_ action: TurnAction,
+                               for actor: Entity,
+                               actorSprite: SpriteComponent) -> Animation? {
+        switch action {
+        case .attack(let direction):
+            return .attack(heading: direction)
+        case .move(let cell, let direction):
+            return .move(to: cell, heading: direction)
+        default:
+            return nil
+        }
     }
 }
 
