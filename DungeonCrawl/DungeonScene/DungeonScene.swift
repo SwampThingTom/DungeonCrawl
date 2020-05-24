@@ -62,20 +62,6 @@ class DungeonScene: SKScene, MessageLogging {
     
     // MARK: - HUD
     
-    func updateHUD() {
-        let player = game.level.player
-        if let combat = player.combatComponent() {
-            hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
-            let armorName = player.inventoryComponent()?.equipped[.armor]?.name ?? "None"
-            hudView?.armorLabel?.text = "\(armorName) (\(combat.armorClass))"
-            let weaponName = player.inventoryComponent()?.equipped[.weapon]?.name ?? "Unarmed"
-            hudView?.weaponLabel?.text = weaponName
-        }
-        if let items = player.inventoryComponent() {
-            hudView?.goldLabel?.text = "Gold: \(items.gold)"
-        }
-    }
-    
     // MARK: - Display message
     
     func show(_ message: String) {
@@ -107,5 +93,35 @@ class DungeonScene: SKScene, MessageLogging {
                                                                  playerSprite: playerSpriteComponent) {
             takePlayerTurn(action)
         }
+    }
+}
+
+extension DungeonScene: HUDDelegate {
+    
+    func updateHUD() {
+        let player = game.level.player
+        if let combat = player.combatComponent() {
+            hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
+            let armorName = player.inventoryComponent()?.equipped[.armor]?.name ?? "None"
+            hudView?.armorLabel?.text = "\(armorName) (\(combat.armorClass))"
+            let weaponName = player.inventoryComponent()?.equipped[.weapon]?.name ?? "Unarmed"
+            hudView?.weaponLabel?.text = weaponName
+        }
+        if let items = player.inventoryComponent() {
+            hudView?.goldLabel?.text = "Gold: \(items.gold)"
+        }
+    }
+    
+    func attack() {
+    }
+
+    func rest() {
+    }
+    
+    func showInventory() {
+        print("Show inventory")
+    }
+
+    func showPlayer() {
     }
 }

@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
         }
         
         if let scene = SKScene(fileNamed: "DungeonScene") as? DungeonScene {
+            hudView?.hudDelegate = scene
             scene.hudView = hudView
             view.presentScene(scene)
         }
