@@ -16,6 +16,7 @@
 		E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */; };
 		E2251F972479A48300D2C3E1 /* TreasureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F962479A48300D2C3E1 /* TreasureComponent.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
+		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E227B55524735A9400115B09 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55424735A9400115B09 /* EntityTests.swift */; };
@@ -128,6 +129,7 @@
 		E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionGridPointTests.swift; sourceTree = "<group>"; };
 		E2251F962479A48300D2C3E1 /* TreasureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureComponent.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
+		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E227B55424735A9400115B09 /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
@@ -263,6 +265,14 @@
 				FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2251F9A247A174000D2C3E1 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */,
+			);
+			path = __mocks__;
 			sourceTree = "<group>";
 		};
 		E225E73D246185EF00F60E45 /* Resources */ = {
@@ -570,6 +580,7 @@
 		E2E2BDC2246ECC85009DE525 /* __tests__ */ = {
 			isa = PBXGroup;
 			children = (
+				E2251F9A247A174000D2C3E1 /* __mocks__ */,
 				E2E2BDD5246F64B6009DE525 /* CombatSystemTests.swift */,
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
 				E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */,
@@ -876,6 +887,7 @@
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
 				E29F72EA2470A568008C7719 /* EnemyTurnActionSystemTests.swift in Sources */,
 				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
+				E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
 				E29DFC102478AE6800E4E5B0 /* CombatComponentTests.swift in Sources */,

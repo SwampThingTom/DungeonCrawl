@@ -109,7 +109,7 @@ extension GridMap {
 
 /// Returns a 0x0 map.
 private func emptyMap() -> (Regions, MutableGridMap) {
-    let mapBuilder = MockMapBuilder(size: GridSize(width: 0, height: 0))
+    let mapBuilder = MockMapRegionBuilder(size: GridSize(width: 0, height: 0))
     return mapBuilder.build()
 }
 
@@ -119,7 +119,7 @@ private func emptyMap() -> (Regions, MutableGridMap) {
 /// `*1*`
 /// `***`
 private func singleTileMap() -> (Regions, MutableGridMap) {
-    let mapBuilder = MockMapBuilder(size: GridSize(width: 3, height: 3))
+    let mapBuilder = MockMapRegionBuilder(size: GridSize(width: 3, height: 3))
     mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: ["_"])
     return mapBuilder.build()
 }
@@ -144,7 +144,7 @@ private func twoRegionMap() -> (Regions, MutableGridMap) {
         "___",
     ]
     
-    let mapBuilder = MockMapBuilder(size: GridSize(width: 9, height: 5))
+    let mapBuilder = MockMapRegionBuilder(size: GridSize(width: 9, height: 5))
     mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: region1)
     mapBuilder.addRegion(origin: GridCell(x: 5, y: 1), description: region2)
     return mapBuilder.build()
@@ -220,7 +220,7 @@ private func fiveRegionMap() -> (Regions, MutableGridMap) {
         "___"
     ]
     
-    let mapBuilder = MockMapBuilder(size: GridSize(width: 17, height: 15))
+    let mapBuilder = MockMapRegionBuilder(size: GridSize(width: 17, height: 15))
     mapBuilder.addRegion(origin: GridCell(x: 1, y: 1), description: region1)
     mapBuilder.addRegion(origin: GridCell(x: 7, y: 1), description: region2)
     mapBuilder.addRegion(origin: GridCell(x: 1, y: 9), description: region3)
@@ -229,7 +229,7 @@ private func fiveRegionMap() -> (Regions, MutableGridMap) {
     return mapBuilder.build()
 }
 
-private class MockMapBuilder {
+private class MockMapRegionBuilder {
     
     private var regions: Regions
     private var map: DungeonMap
