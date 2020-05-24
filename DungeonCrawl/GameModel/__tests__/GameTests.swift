@@ -77,12 +77,12 @@ class GameTests: XCTestCase {
                        quest: MockQuest())
         
         // Act
-        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+        let spriteAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
         
         // Assert
-        XCTAssertEqual(actorAnimations.count, 1)
-        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
-        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(spriteAnimations.count, 1)
+        XCTAssertEqual(spriteAnimations.first?.spriteName, sut.level.player.spriteComponent()!.spriteName)
+        XCTAssertEqual(spriteAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
     }
     
     func testTakeTurn_enemyActors() throws {
@@ -115,14 +115,14 @@ class GameTests: XCTestCase {
         sut.enemyTurnActionSystem = enemyTurnActionSystem
         
         // Act
-        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+        let spriteAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
         
         // Assert
-        XCTAssertEqual(actorAnimations.count, 2)
-        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
-        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
-        XCTAssertEqual(actorAnimations[1].actor, sut.level.actors[0])
-        XCTAssertEqual(actorAnimations[1].animation, Animation.attack(heading: .south))
+        XCTAssertEqual(spriteAnimations.count, 2)
+        XCTAssertEqual(spriteAnimations.first?.spriteName, sut.level.player.spriteComponent()!.spriteName)
+        XCTAssertEqual(spriteAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(spriteAnimations[1].spriteName, sut.level.actors[0].spriteComponent()!.spriteName)
+        XCTAssertEqual(spriteAnimations[1].animation, Animation.attack(heading: .south))
     }
     
     func testTakeTurn_removeDeadActors() throws {
@@ -156,16 +156,17 @@ class GameTests: XCTestCase {
         let deadEnemy = sut.level.actors[0]
         let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
         deadEnemyCombat.hitPoints = -1
+        let expectedDeadEnemySpriteName = deadEnemy.spriteComponent()!.spriteName
         
         // Act
-        let actorAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
+        let spriteAnimations = sut.takeTurn(playerAction: .move(to: GridCell(x: 5, y: 5), direction: .east))
         
         // Assert
-        XCTAssertEqual(actorAnimations.count, 2)
-        XCTAssertEqual(actorAnimations.first?.actor, sut.level.player)
-        XCTAssertEqual(actorAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
-        XCTAssertEqual(actorAnimations[1].actor, deadEnemy)
-        XCTAssertEqual(actorAnimations[1].animation, Animation.death)
+        XCTAssertEqual(spriteAnimations.count, 2)
+        XCTAssertEqual(spriteAnimations.first?.spriteName, sut.level.player.spriteComponent()!.spriteName)
+        XCTAssertEqual(spriteAnimations.first?.animation, Animation.move(to: GridCell(x: 5, y: 5), heading: .east))
+        XCTAssertEqual(spriteAnimations[1].spriteName, expectedDeadEnemySpriteName)
+        XCTAssertEqual(spriteAnimations[1].animation, Animation.death)
         XCTAssertEqual(sut.level.actors.count, 1)
     }
     

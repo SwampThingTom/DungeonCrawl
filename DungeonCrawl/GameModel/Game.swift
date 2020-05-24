@@ -57,7 +57,7 @@ class Game {
         turnTakingSystem = TurnTakingSystem(entityManager: entityManager, gameLevel: level, combatSystem: combatSystem)
     }
     
-    func takeTurn(playerAction: TurnAction) -> [ActorAnimation] {
+    func takeTurn(playerAction: TurnAction) -> [SpriteAnimation] {
         let playerAnimation = takePlayerTurn(player: level.player, action: playerAction)
         let actorAnimations = takeActorTurns(for: level.actors)
         let deathAnimations = removeDeadActors()
@@ -65,13 +65,13 @@ class Game {
                                   actorAnimations: actorAnimations + deathAnimations)
     }
     
-    private func takePlayerTurn(player: Entity, action: TurnAction) -> ActorAnimation? {
+    private func takePlayerTurn(player: Entity, action: TurnAction) -> SpriteAnimation? {
         guard let playerSprite = player.spriteComponent() else { return nil }
         let playerTurnAnimation = turnTakingSystem.doTurnAction(action, for: player, actorSprite: playerSprite)
         return actorAnimation(actor: player, animation: playerTurnAnimation)
     }
     
-    private func takeActorTurns(for actors: [Entity]) -> [ActorAnimation] {
+    private func takeActorTurns(for actors: [Entity]) -> [SpriteAnimation] {
         return actors.compactMap { actor in
             guard let actorCombat = actor.combatComponent(), !actorCombat.isDead else { return nil }
             guard let actorEnemy = actor.enemyComponent() else { return nil }
@@ -82,26 +82,28 @@ class Game {
         }
     }
     
-    private func actorAnimation(actor: Entity, animation: Animation?) -> ActorAnimation? {
+    private func actorAnimation(actor: Entity, animation: Animation?) -> SpriteAnimation? {
         guard let animation = animation else { return nil }
-        return ActorAnimation(actor: actor, animation: animation)
+        guard let actorSprite = actor.spriteComponent() else { return nil }
+        return SpriteAnimation(spriteName: actorSprite.spriteName, animation: animation)
     }
     
-    private func combinedAnimations(playerAnimation: ActorAnimation?,
-                                    actorAnimations: [ActorAnimation]) -> [ActorAnimation] {
+    private func combinedAnimations(playerAnimation: SpriteAnimation?,
+                                    actorAnimations: [SpriteAnimation]) -> [SpriteAnimation] {
         if let playerAnimation = playerAnimation {
             return [playerAnimation] + actorAnimations
         }
         return actorAnimations
     }
     
-    private func removeDeadActors() -> [ActorAnimation] {
-        var deathAnimations = [ActorAnimation]()
+    private func removeDeadActors() -> [SpriteAnimation] {
+        var deathAnimations = [SpriteAnimation]()
         var deadActors = [Entity]()
         for actor in level.actors {
             guard let combatComponent = actor.combatComponent() else { continue }
-            if combatComponent.isDead {
-                let deathAnimation = ActorAnimation(actor: actor, animation: Animation.death)
+            guard combatComponent.isDead else { continue }
+            if let spriteComponent = actor.spriteComponent() {
+                let deathAnimation = SpriteAnimation(spriteName: spriteComponent.spriteName, animation: Animation.death)
                 deathAnimations.append(deathAnimation)
                 deadActors.append(actor)
             }
@@ -141,4 +143,4 @@ class DungeonLevel: LevelProviding {
     }
 }
 
-typealias ActorAnimation = (actor: Entity, animation: Animation)
+typealias SpriteAnimation = (spriteName: String, animation: Animation)
