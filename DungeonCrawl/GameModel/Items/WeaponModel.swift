@@ -9,5 +9,5 @@
 import Foundation
 
 struct WeaponModel {
-    let damageDie: DieRolling?
+    let damageDie: DieRolling
 }

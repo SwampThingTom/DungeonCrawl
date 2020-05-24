@@ -18,6 +18,8 @@
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
+		E2251FA4247ACD6900D2C3E1 /* DungeonScene+Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA3247ACD6900D2C3E1 /* DungeonScene+Inventory.swift */; };
+		E2251FA6247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA5247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift */; };
 		E225E7402461862E00F60E45 /* DungeonTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = E225E73E2461862E00F60E45 /* DungeonTileSet.sks */; };
 		E225E7412461862E00F60E45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E225E73F2461862E00F60E45 /* Assets.xcassets */; };
 		E227B55524735A9400115B09 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55424735A9400115B09 /* EntityTests.swift */; };
@@ -132,6 +134,8 @@
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
+		E2251FA3247ACD6900D2C3E1 /* DungeonScene+Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DungeonScene+Inventory.swift"; sourceTree = "<group>"; };
+		E2251FA5247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSceneInventoryTests.swift; sourceTree = "<group>"; };
 		E225E73E2461862E00F60E45 /* DungeonTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonTileSet.sks; sourceTree = "<group>"; };
 		E225E73F2461862E00F60E45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E227B55424735A9400115B09 /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				E2E2BDCB246F49E5009DE525 /* DungeonScene+Animation.swift */,
 				E2E2BDC5246F47D2009DE525 /* DungeonScene+CreateGame.swift */,
 				E2E2BDC7246F48A9009DE525 /* DungeonScene+DisplayScene.swift */,
+				E2251FA3247ACD6900D2C3E1 /* DungeonScene+Inventory.swift */,
 				E2E2BDC9246F490F009DE525 /* DungeonScene+TakeTurn.swift */,
 				E2E2BDCD246F4D8B009DE525 /* DungeonScene+Touch.swift */,
 				E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */,
@@ -318,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */,
+				E2251FA5247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -854,6 +860,7 @@
 				E2980F3224687CB5000BA2AC /* GhostSprite.swift in Sources */,
 				E29F73012471DB51008C7719 /* EnemyComponent.swift in Sources */,
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
+				E2251FA4247ACD6900D2C3E1 /* DungeonScene+Inventory.swift in Sources */,
 				E29DFC122479650200E4E5B0 /* WeaponModel.swift in Sources */,
 				E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */,
 				E2E2BDCC246F49E5009DE525 /* DungeonScene+Animation.swift in Sources */,
@@ -886,6 +893,7 @@
 				E2E2BDD6246F64B6009DE525 /* CombatSystemTests.swift in Sources */,
 				E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */,
 				E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */,
+				E2251FA6247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,

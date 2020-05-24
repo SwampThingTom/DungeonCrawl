@@ -13,10 +13,12 @@ protocol DieRolling {
     func roll() -> Int
 }
 
-class Die: DieRolling {
+class Die: DieRolling, CustomStringConvertible {
     
     let sides: Int
     
+    var description: String { return "d\(sides)" }
+
     private var randomNumberGenerator: AnyRandomNumberGenerator
     
     init(sides: Int, randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {

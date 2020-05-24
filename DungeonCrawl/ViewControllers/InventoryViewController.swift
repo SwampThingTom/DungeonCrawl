@@ -29,10 +29,16 @@ class InventoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
         title = "Inventory"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close,
                                                            target: self,
                                                            action: .closeButtonTapped)
+    }
+    
+    private func configureTableView() {
+        tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "inventoryCell")
     }
     

@@ -124,7 +124,7 @@ extension DungeonScene: HUDDelegate {
     }
     
     func showInventory() {
-        print("Show inventory")
+        presentInventoryView()
     }
 
     func showPlayer() {
