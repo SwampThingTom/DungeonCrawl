@@ -123,18 +123,18 @@ class CombatComponentTests: XCTestCase {
         // Assert
         XCTAssertEqual(damage, 10)
     }
+}
 
-    func mockArmor(bonus: Int) -> Item {
-        return ItemBuilder(name: "Mock Armor")
-            .with(equipmentSlot: .armor)
-            .with(armor: ArmorModel(armorBonus: bonus))
-            .build()
-    }
-    
-    func mockWeapon(damageDie: DieRolling) -> Item {
-        return ItemBuilder(name: "Mock Weapon")
-            .with(equipmentSlot: .weapon)
-            .with(weapon: WeaponModel(damageDie: damageDie))
-            .build()
-    }
+func mockArmor(bonus: Int, name: String = "MockArmor") -> Item {
+    return ItemBuilder(name: name)
+        .with(equipmentSlot: .armor)
+        .with(armor: ArmorModel(armorBonus: bonus))
+        .build()
+}
+
+func mockWeapon(damageDie: DieRolling, name: String = "Mock Weapon") -> Item {
+    return ItemBuilder(name: name)
+        .with(equipmentSlot: .weapon)
+        .with(weapon: WeaponModel(damageDie: damageDie))
+        .build()
 }

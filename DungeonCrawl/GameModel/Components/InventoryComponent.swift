@@ -19,7 +19,8 @@ class InventoryComponent: Component {
         equipped[slot] = item
     }
     
-    func equippedItem(for slot: EquipmentSlot) -> Item? {
+    func equippedItem(for slot: EquipmentSlot?) -> Item? {
+        guard let slot = slot else { return nil }
         return equipped[slot]
     }
 }
