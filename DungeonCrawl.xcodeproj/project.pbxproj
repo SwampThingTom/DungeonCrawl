@@ -512,11 +512,11 @@
 				E2B2A1DD2457BCE4000ED955 /* AppDelegate.swift */,
 				E2B2A1DF2457BCE4000ED955 /* GameScene.sks */,
 				E2B2A1E32457BCE4000ED955 /* GameScene.swift */,
+				E2251FA9247AFB3900D2C3E1 /* ThemeManager.swift */,
 				E2B2A1E72457BCE4000ED955 /* Main.storyboard */,
 				E2B2A1EA2457BCE8000ED955 /* Assets.xcassets */,
 				E2B2A1EC2457BCE8000ED955 /* LaunchScreen.storyboard */,
 				E2B2A1EF2457BCE8000ED955 /* Info.plist */,
-				E2251FA9247AFB3900D2C3E1 /* ThemeManager.swift */,
 			);
 			path = DungeonCrawl;
 			sourceTree = "<group>";
