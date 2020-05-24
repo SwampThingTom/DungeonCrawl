@@ -70,6 +70,6 @@ extension SKScene {
         let alert = UIAlertController.init(title: nil, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel) { _ in handler?() }
         alert.addAction(okAction)
-        view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        rootViewController?.present(alert, animated: true, completion: nil)
     }
 }

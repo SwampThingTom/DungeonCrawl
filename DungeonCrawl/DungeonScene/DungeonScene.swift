@@ -60,8 +60,6 @@ class DungeonScene: SKScene, MessageLogging {
         updateHUD()
     }
     
-    // MARK: - HUD
-    
     // MARK: - Display message
     
     func show(_ message: String) {
@@ -93,6 +91,13 @@ class DungeonScene: SKScene, MessageLogging {
                                                                  playerSprite: playerSpriteComponent) {
             takePlayerTurn(action)
         }
+    }
+}
+
+extension SKScene {
+    
+    var rootViewController: UIViewController? {
+        return view?.window?.rootViewController
     }
 }
 
