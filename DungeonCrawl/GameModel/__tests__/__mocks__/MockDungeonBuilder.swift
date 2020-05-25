@@ -40,7 +40,7 @@ func threeRooms() -> [RoomModel] {
     return [
         RoomModel(bounds: GridRect(x: 1, y: 9, width: 7, height: 3)),
         RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7)),
-        RoomModel(bounds: GridRect(x: 13, y: 7, width: 3, height: 7))
+        RoomModel(bounds: GridRect(x: 13, y: 7, width: 3, height: 3))
     ]
 }
 

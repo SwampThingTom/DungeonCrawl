@@ -24,7 +24,6 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 1)
-        // LATER: Fix fragility
         XCTAssertFalse(decorationsOverlap(decorations, map: dungeon.map))
     }
     
