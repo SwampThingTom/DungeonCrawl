@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct ArmorModel {
+struct ArmorModel: Equatable {
     let armorBonus: Int
 }
