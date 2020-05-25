@@ -503,7 +503,7 @@
 				E2B2A2172457C140000ED955 /* DungeonGenerator */,
 				E25FB14C2461DB45000A90A8 /* DungeonScene */,
 				E29F72F624719EC8008C7719 /* EntityComponentSystem */,
-				E2E2BDC1246ECB90009DE525 /* GameModel */,
+				E2E2BDC1246ECB90009DE525 /* Game */,
 				E29DFBF12476E0E600E4E5B0 /* Pathfinding */,
 				E225E73D246185EF00F60E45 /* Resources */,
 				E2C98AE72463244B005C11AD /* Sprites */,
@@ -577,7 +577,7 @@
 			path = Sprites;
 			sourceTree = "<group>";
 		};
-		E2E2BDC1246ECB90009DE525 /* GameModel */ = {
+		E2E2BDC1246ECB90009DE525 /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				E2E2BDC2246ECC85009DE525 /* __tests__ */,
@@ -594,7 +594,7 @@
 				E2980F39246D6EF8000BA2AC /* Game.swift */,
 				E227B5562473779300115B09 /* Quest.swift */,
 			);
-			path = GameModel;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		E2E2BDC2246ECC85009DE525 /* __tests__ */ = {
