@@ -11,12 +11,20 @@ import Foundation
 class ItemBuilder {
     
     private let name: String
+    private var isTreasure: Bool = false
+    private var value: Int = 0
     private var equipmentSlot: EquipmentSlot?
     private var armor: ArmorModel?
     private var weapon: WeaponModel?
     
     init(name: String) {
         self.name = name
+    }
+    
+    func with(gold: Int) -> ItemBuilder {
+        self.isTreasure = true
+        self.value = gold
+        return self
     }
     
     func with(equipmentSlot: EquipmentSlot) -> ItemBuilder {
@@ -35,8 +43,19 @@ class ItemBuilder {
     }
     
     func build() -> Item {
-        return Item(name: name, equipmentSlot: equipmentSlot, armor: armor, weapon: weapon)
+        return Item(name: name,
+                    isTreasure: isTreasure,
+                    value: value,
+                    equipmentSlot: equipmentSlot,
+                    armor: armor,
+                    weapon: weapon)
     }
+}
+
+func createTreasure(worth gold: Int, name: String = "Gold Pieces") -> Item {
+    return ItemBuilder(name: name)
+        .with(gold: gold)
+        .build()
 }
 
 func createLeatherArmor() -> Item {

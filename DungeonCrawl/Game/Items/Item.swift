@@ -16,6 +16,12 @@ enum EquipmentSlot: Equatable {
 struct Item: Equatable {
     var name: String
     
+    /// Indicates the item is treasure. When picked up, it adds to the player's gold.
+    var isTreasure: Bool = false
+    
+    /// The base value of the item.
+    var value: Int = 0
+    
     /// The slot where this item can be equipped or `nil` if not equippable.
     var equipmentSlot: EquipmentSlot?
     
