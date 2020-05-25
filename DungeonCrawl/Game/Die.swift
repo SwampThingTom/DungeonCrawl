@@ -9,6 +9,9 @@
 import Foundation
 
 protocol DieRolling {
+    
+    var sides: Int { get }
+    
     /// Returns a random number between 1 and the number of sides on a die.
     func roll() -> Int
 }

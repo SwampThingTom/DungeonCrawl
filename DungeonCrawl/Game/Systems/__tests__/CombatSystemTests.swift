@@ -99,6 +99,7 @@ class CombatTests: XCTestCase {
 
 struct MockDie: DieRolling {
     
+    var sides: Int = 20
     var nextRoll: Int
     
     func roll() -> Int {

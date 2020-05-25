@@ -11,3 +11,10 @@ import Foundation
 struct WeaponModel {
     let damageDie: DieRolling
 }
+
+extension WeaponModel: Equatable {
+    
+    static func == (lhs: WeaponModel, rhs: WeaponModel) -> Bool {
+        return lhs.damageDie.sides == rhs.damageDie.sides
+    }
+}
