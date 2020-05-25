@@ -62,10 +62,8 @@ class EntityFactory {
         let spriteComponent = self.spriteComponent(for: treasure, uniqueID: entity.entityId)
         entityManager.add(component: spriteComponent, to: entity)
         
-        if let gold = treasure.gold {
-            let treasureComponent = TreasureComponent(gold: gold)
-            entityManager.add(component: treasureComponent, to: entity)
-        }
+        let treasureComponent = TreasureComponent(gold: treasure.gold)
+        entityManager.add(component: treasureComponent, to: entity)
         
         return entity
     }
@@ -85,7 +83,6 @@ class EntityFactory {
     
     private func spriteComponent(for treasure: Treasure, uniqueID: UInt) -> SpriteComponent {
         let spriteName = "gold_\(uniqueID)"
-        let gold = treasure.gold ?? 0
-        return SpriteComponent(spriteName: spriteName, displayName: "\(gold) gold pieces", cell: treasure.cell)
+        return SpriteComponent(spriteName: spriteName, displayName: "\(treasure.gold) gold pieces", cell: treasure.cell)
     }
 }

@@ -14,7 +14,7 @@ struct EnemyModel: Equatable {
 }
 
 struct Treasure: Equatable {
-    let gold: Int?
+    let gold: Int
     let cell: GridCell
 }
 
