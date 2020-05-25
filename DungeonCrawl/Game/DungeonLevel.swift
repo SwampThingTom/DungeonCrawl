@@ -12,17 +12,7 @@ protocol MessageLogging {
     func show(_ message: String)
 }
 
-protocol LevelProviding {
-    var quest: QuestStatusProviding { get }
-    var map: GridMap { get }
-    var rooms: [RoomModel] { get }
-    var player: Entity { get }
-    var actors: [Entity] { get }
-    var items: [Entity] { get }
-    var message: MessageLogging? { get }
-}
-
-class DungeonLevel: LevelProviding {
+class DungeonLevel {
     let quest: QuestStatusProviding
     let map: GridMap
     let rooms: [RoomModel]
@@ -31,6 +21,8 @@ class DungeonLevel: LevelProviding {
     
     let player: Entity
     
+    // LATER: Do these really belong here or with EntityManaging?
+    // This tightly couples this struct to EntityManaging
     var actors: [Entity] {
         return entityManager.entities(with: EnemyComponent.self)
     }

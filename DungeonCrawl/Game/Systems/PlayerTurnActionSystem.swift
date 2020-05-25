@@ -20,9 +20,9 @@ protocol PlayerTurnActionProviding {
 
 class PlayerTurnActionSystem: System, PlayerTurnActionProviding {
     
-    let gameLevel: LevelProviding
+    let gameLevel: DungeonLevel
     
-    init(entityManager: EntityManager, gameLevel: LevelProviding) {
+    init(entityManager: EntityManager, gameLevel: DungeonLevel) {
         self.gameLevel = gameLevel
         super.init(entityManager: entityManager)
     }

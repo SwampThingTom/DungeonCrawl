@@ -316,7 +316,7 @@ class MockQuest: QuestStatusProviding {
     
     var mockIsComplete: Bool = false
     
-    func isComplete(gameLevel: LevelProviding) -> Bool {
+    func isComplete(gameLevel: DungeonLevel) -> Bool {
         return mockIsComplete
     }
 }

@@ -33,10 +33,10 @@ protocol TurnTaking {
 
 class TurnTakingSystem: System, TurnTaking {
     
-    var gameLevel: LevelProviding
+    var gameLevel: DungeonLevel
     var combatSystem: CombatProviding
     
-    init(entityManager: EntityManager, gameLevel: LevelProviding, combatSystem: CombatProviding) {
+    init(entityManager: EntityManager, gameLevel: DungeonLevel, combatSystem: CombatProviding) {
         self.gameLevel = gameLevel
         self.combatSystem = combatSystem
         super.init(entityManager: entityManager)

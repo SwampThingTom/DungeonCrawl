@@ -10,12 +10,12 @@ import Foundation
 
 protocol QuestStatusProviding {
     
-    func isComplete(gameLevel: LevelProviding) -> Bool
+    func isComplete(gameLevel: DungeonLevel) -> Bool
 }
 
 class Quest: QuestStatusProviding {
     
-    func isComplete(gameLevel: LevelProviding) -> Bool {
+    func isComplete(gameLevel: DungeonLevel) -> Bool {
         return gameLevel.actors.count == 0
     }
 }

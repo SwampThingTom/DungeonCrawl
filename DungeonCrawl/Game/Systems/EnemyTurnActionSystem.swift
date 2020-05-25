@@ -22,11 +22,11 @@ class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
     private var randomNumberGenerator: AnyRandomNumberGenerator
     private let chance: ChanceDetermining
     
-    let gameLevel: LevelProviding
+    let gameLevel: DungeonLevel
     let pathfinder: Pathfinding
     
     init(entityManager: EntityManager,
-         gameLevel: LevelProviding,
+         gameLevel: DungeonLevel,
          randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator(),
          chance: ChanceDetermining? = nil) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)

@@ -22,7 +22,7 @@ extension DungeonScene {
         return game
     }
     
-    func setupScene(for level: LevelProviding) {
+    func setupScene(for level: DungeonLevel) {
         let tileMap = self.tileMap(for: level.map)
         let sprites = [SKSpriteNode]([
             [sprite(forPlayer: level.player, on: tileMap)],
