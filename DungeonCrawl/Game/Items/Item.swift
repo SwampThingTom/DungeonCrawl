@@ -28,3 +28,10 @@ struct Item: Equatable {
     var armor: ArmorModel?
     var weapon: WeaponModel?
 }
+
+extension Item: CustomStringConvertible {
+    
+    var description: String {
+        return isTreasure ? "\(name) worth \(value) gold pieces" : name
+    }
+}

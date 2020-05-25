@@ -11,15 +11,16 @@ import Foundation
 class InventoryComponent: Component {
     
     var gold: Int = 0
-    var items = [Item]()
-    private var equipped = [EquipmentSlot: Item]()
+    var items = [ItemComponent]()
+    private var equipped = [EquipmentSlot: ItemComponent]()
     
-    func equip(item: Item) {
-        guard let slot = item.equipmentSlot else { return }
-        equipped[slot] = item
+    func equip(itemComponent: ItemComponent) {
+        assert(items.contains(itemComponent), "\(itemComponent.item) must be in inventory to be equipped")
+        guard let slot = itemComponent.item.equipmentSlot else { return }
+        equipped[slot] = itemComponent
     }
     
-    func equippedItem(for slot: EquipmentSlot?) -> Item? {
+    func equippedItem(for slot: EquipmentSlot?) -> ItemComponent? {
         guard let slot = slot else { return nil }
         return equipped[slot]
     }

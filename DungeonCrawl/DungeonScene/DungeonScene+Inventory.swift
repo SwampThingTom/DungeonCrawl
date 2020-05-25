@@ -26,8 +26,9 @@ extension DungeonScene: DismissibleViewControllerDelegate {
 
 func inventoryViewModel(for inventoryComponent: InventoryComponent) -> InventoryViewModel {
     let items: [InventoryViewModel.ItemViewModel] = inventoryComponent.items.map {
-        let isEquipped = inventoryComponent.equippedItem(for: $0.equipmentSlot) != nil
-        let description = isEquipped ? itemDescription($0) + " (equipped)" : itemDescription($0)
+        let item = $0.item
+        let isEquipped = inventoryComponent.equippedItem(for: item.equipmentSlot) === $0
+        let description = isEquipped ? itemDescription(item) + " (equipped)" : itemDescription(item)
         return InventoryViewModel.ItemViewModel(name: description)
     }
     return InventoryViewModel(items: items)

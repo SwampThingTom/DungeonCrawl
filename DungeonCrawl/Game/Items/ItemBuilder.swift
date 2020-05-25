@@ -52,28 +52,28 @@ class ItemBuilder {
     }
 }
 
-func createTreasure(worth gold: Int, name: String = "Gold Pieces") -> Item {
+func createTreasure(worth gold: Int, name: String = "gold") -> Item {
     return ItemBuilder(name: name)
         .with(gold: gold)
         .build()
 }
 
 func createLeatherArmor() -> Item {
-    return ItemBuilder(name: "Leather")
+    return ItemBuilder(name: "leather")
         .with(equipmentSlot: .armor)
         .with(armor: ArmorModel(armorBonus: 2))
         .build()
 }
 
 func createDagger() -> Item {
-    return ItemBuilder(name: "Dagger")
+    return ItemBuilder(name: "dagger")
         .with(equipmentSlot: .weapon)
         .with(weapon: WeaponModel(damageDie: D4()))
         .build()
 }
 
 func createShortSword() -> Item {
-    return ItemBuilder(name: "Short Sword")
+    return ItemBuilder(name: "short sword")
         .with(equipmentSlot: .weapon)
         .with(weapon: WeaponModel(damageDie: D6()))
         .build()

@@ -31,9 +31,9 @@ class TurnTakingSystemTests: XCTestCase {
         let actor = mockEntity(spriteComponent: actorSprite)
         let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
         
         // Act
-        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
         let animation = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
         
         // Assert
@@ -41,24 +41,45 @@ class TurnTakingSystemTests: XCTestCase {
         XCTAssertEqual(actorSprite.cell, GridCell(x: 4, y: 5))
     }
     
-    func testDoTurnAction_move_pickUpGold() throws {
+    func testDoTurnAction_move_pickUpTreasure() throws {
         // Arrange
         let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
         let actor = mockEntity(spriteComponent: actorSprite)
         let actorInventory = mockInventoryComponent(gold: 10)
         actor.add(component: actorInventory)
         
-        _ = mockTreasureEntity(gold: 50, cell: GridCell(x: 4, y: 5))
+        let treasure = mockItemEntity(item: createTreasure(worth: 50), cell: GridCell(x: 4, y: 5))
         let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
         
         // Act
-        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
         _ = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
         
         // Assert
         XCTAssertEqual(actorInventory.gold, 60)
-        // LATER: XCTAssertFalse(gameLevel.objects.contains(treasure))
+        XCTAssertFalse(gameLevel.items.contains(treasure))
+    }
+    
+    func testDoTurnAction_move_pickUpItem() throws {
+        // Arrange
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actor = mockEntity(spriteComponent: actorSprite)
+        let actorInventory = mockInventoryComponent(gold: 10)
+        actor.add(component: actorInventory)
+        
+        let shortSword = mockItemEntity(item: createShortSword(), cell: GridCell(x: 4, y: 5))
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
+        
+        // Act
+        _ = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
+        
+        // Assert
+        XCTAssert(actorInventory.items.contains(shortSword.itemComponent()!))
+        XCTAssertNil(shortSword.spriteComponent())
+        XCTAssertEqual(actorInventory.gold, 10)
     }
     
     func testDoTurnAction_attack_hit() throws {
@@ -227,7 +248,7 @@ class TurnTakingSystemTests: XCTestCase {
     
     func mockInventoryComponent(gold: Int) -> InventoryComponent {
         let inventory = InventoryComponent()
-        inventory.gold = gold
+        inventory.gold += gold
         return inventory
     }
     
@@ -245,16 +266,10 @@ class TurnTakingSystemTests: XCTestCase {
         return entity
     }
     
-    func mockTreasureEntity(gold: Int, cell: GridCell) -> Entity {
+    func mockItemEntity(item: Item, cell: GridCell) -> Entity {
         let entity = entityManager!.createEntity()
         let spriteComponent = mockSpriteComponent(spriteName: "gold", cell: cell)
         entity.add(component: spriteComponent)
-        let item = Item(name: "treasure",
-                        isTreasure: true,
-                        value: gold,
-                        equipmentSlot: nil,
-                        armor: nil,
-                        weapon: nil)
         let itemComponent = ItemComponent(item: item)
         entity.add(component: itemComponent)
         return entity

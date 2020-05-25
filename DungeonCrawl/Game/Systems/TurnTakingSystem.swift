@@ -127,11 +127,13 @@ class TurnTakingSystem: System, TurnTaking {
             guard let itemComponent = item.itemComponent() else { fatalError("Entity should have treasure component") }
             guard let itemSprite = item.spriteComponent(), itemSprite.cell == cell else { continue }
             if itemComponent.item.isTreasure {
-                let gold = itemComponent.item.value
-                inventory.gold += gold
-                showPickedUpTreasureMessage(actor: actor, treasureDescription: "\(gold) gold pieces")
+                inventory.gold += itemComponent.item.value
                 entityManager.remove(entity: item)
+            } else {
+                inventory.items.append(itemComponent)
+                item.remove(component: itemSprite)
             }
+            showPickedUpTreasureMessage(actor: actor, treasureDescription: "\(itemComponent.item)")
         }
     }
     

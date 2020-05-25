@@ -25,16 +25,16 @@ class EntityFactory {
         let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damageDie: D3(), maxHitPoints: 10)
         entityManager.add(component: combatComponent, to: entity)
         
-        let itemsComponent = InventoryComponent()
-        entityManager.add(component: itemsComponent, to: entity)
+        let inventoryComponent = InventoryComponent()
+        entityManager.add(component: inventoryComponent, to: entity)
         
-        let armor = createLeatherArmor()
-        itemsComponent.items.append(armor)
-        itemsComponent.equip(item: armor)
+        let armor = ItemComponent(item: createLeatherArmor())
+        inventoryComponent.items.append(armor)
+        inventoryComponent.equip(itemComponent: armor)
         
-        let weapon = createDagger()
-        itemsComponent.items.append(weapon)
-        itemsComponent.equip(item: weapon)
+        let weapon = ItemComponent(item: createDagger())
+        inventoryComponent.items.append(weapon)
+        inventoryComponent.equip(itemComponent: weapon)
         
         return entity
     }

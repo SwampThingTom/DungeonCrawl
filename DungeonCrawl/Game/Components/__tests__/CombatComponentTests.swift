@@ -59,8 +59,9 @@ class CombatComponentTests: XCTestCase {
         let inventory = InventoryComponent()
         entity?.add(component: inventory)
         
-        let armor = mockArmor(bonus: 2)
-        inventory.equip(item: armor)
+        let armor = ItemComponent(item: mockArmor(bonus: 2))
+        inventory.items.append(armor)
+        inventory.equip(itemComponent: armor)
         
         let damageDie = MockDie(nextRoll: 10)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
@@ -110,8 +111,9 @@ class CombatComponentTests: XCTestCase {
         let inventory = InventoryComponent()
         entity?.add(component: inventory)
         
-        let weapon = mockWeapon(damageDie: MockDie(nextRoll: 10))
-        inventory.equip(item: weapon)
+        let weapon = ItemComponent(item: mockWeapon(damageDie: MockDie(nextRoll: 10)))
+        inventory.items.append(weapon)
+        inventory.equip(itemComponent: weapon)
         
         let damageDie = MockDie(nextRoll: 3)
         let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)

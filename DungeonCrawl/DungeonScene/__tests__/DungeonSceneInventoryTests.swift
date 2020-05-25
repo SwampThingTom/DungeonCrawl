@@ -26,12 +26,12 @@ class DungeonSceneInventoryTests: XCTestCase {
     func testInventoryViewModel_items() throws {
         // Arrange
         let items = [
-            mockArmor(bonus: 2, name: "Leather"),
-            mockWeapon(damageDie: D3(), name: "Dagger"),
-            Item(name: "Junk"),
+            ItemComponent(item: mockArmor(bonus: 2, name: "Leather")),
+            ItemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
+            ItemComponent(item: Item(name: "Junk")),
         ]
         let inventoryComponent = InventoryComponent()
-        inventoryComponent.items = items
+        inventoryComponent.items.append(contentsOf: items)
         
         // Act
         let sut = inventoryViewModel(for: inventoryComponent)
@@ -46,22 +46,24 @@ class DungeonSceneInventoryTests: XCTestCase {
     func testInventoryViewModel_equippedItems() throws {
         // Arrange
         let items = [
-            mockArmor(bonus: 2, name: "Leather"),
-            mockWeapon(damageDie: D3(), name: "Dagger"),
-            Item(name: "Junk"),
+            ItemComponent(item: mockArmor(bonus: 2, name: "Leather")),
+            ItemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
+            ItemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
+            ItemComponent(item: Item(name: "Junk")),
         ]
         let inventoryComponent = InventoryComponent()
-        inventoryComponent.items = items
-        inventoryComponent.equip(item: items[0])
-        inventoryComponent.equip(item: items[1])
+        inventoryComponent.items.append(contentsOf: items)
+        inventoryComponent.equip(itemComponent: items[0])
+        inventoryComponent.equip(itemComponent: items[1])
 
         // Act
         let sut = inventoryViewModel(for: inventoryComponent)
 
         // Assert
-        XCTAssertEqual(sut.items.count, 3)
+        XCTAssertEqual(sut.items.count, 4)
         XCTAssertEqual(sut.items[0].name, "Armor: Leather (12) (equipped)")
         XCTAssertEqual(sut.items[1].name, "Weapon: Dagger (d3) (equipped)")
-        XCTAssertEqual(sut.items[2].name, "Other: Junk")
+        XCTAssertEqual(sut.items[2].name, "Weapon: Dagger (d3)")
+        XCTAssertEqual(sut.items[3].name, "Other: Junk")
     }
 }
