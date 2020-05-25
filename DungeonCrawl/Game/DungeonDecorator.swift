@@ -30,8 +30,12 @@ class DungeonDecorator: DungeonDecorating {
             fatalError("Unable to place player in dungeon")
         }
         let treasure = placeTreasure(in: dungeon)
+        let items = placeItems(in: dungeon)
         let enemies = spawnEnemies(in: dungeon)
-        return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies, treasure: treasure)
+        return DungeonDecorations(playerStartCell: playerStartCell,
+                                  enemies: enemies,
+                                  treasure: treasure,
+                                  items: items)
     }
 
     private func playerStartCell(in dungeon: DungeonModel) -> GridCell? {
@@ -57,6 +61,18 @@ class DungeonDecorator: DungeonDecorating {
             return Treasure(gold: gold, cell: cell)
         }
         return treasure
+    }
+    
+    private func placeItems(in dungeon: DungeonModel) -> [PackItem] {
+        guard dungeon.rooms.count > 0 else {
+            return []
+        }
+        let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
+        let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
+        decoratedCells.insert(cell)
+        let item = createShortSword()
+        let packItem = PackItem(item: item, cell: cell)
+        return [packItem]
     }
     
     private func spawnEnemies(in dungeon: DungeonModel) -> [EnemyModel] {

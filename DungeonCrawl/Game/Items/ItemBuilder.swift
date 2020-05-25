@@ -49,6 +49,13 @@ func createLeatherArmor() -> Item {
 func createDagger() -> Item {
     return ItemBuilder(name: "Dagger")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D3()))
+        .with(weapon: WeaponModel(damageDie: D4()))
+        .build()
+}
+
+func createShortSword() -> Item {
+    return ItemBuilder(name: "Short Sword")
+        .with(equipmentSlot: .weapon)
+        .with(weapon: WeaponModel(damageDie: D6()))
         .build()
 }

@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum EquipmentSlot {
+enum EquipmentSlot: Equatable {
     case armor
     case weapon
 }
 
-struct Item {
+struct Item: Equatable {
     var name: String
     
     /// The slot where this item can be equipped or `nil` if not equippable.
