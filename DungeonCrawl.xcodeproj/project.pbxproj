@@ -110,6 +110,7 @@
 		E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E82E246439AA00F5EA93 /* CGVector+Extensions.swift */; };
 		E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */; };
 		E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */; };
+		E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE472247B630B0043255E /* ItemComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +232,7 @@
 		E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E2E4E8322464408000F5EA93 /* DungeonCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonCamera.swift; sourceTree = "<group>"; };
 		E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTurnState.swift; sourceTree = "<group>"; };
+		E2EAE472247B630B0043255E /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -452,6 +454,7 @@
 				E29F73022471DFC7008C7719 /* CombatComponent.swift */,
 				E29F73002471DB51008C7719 /* EnemyComponent.swift */,
 				E29DFC05247881C600E4E5B0 /* InventoryComponent.swift */,
+				E2EAE472247B630B0043255E /* ItemComponent.swift */,
 				E2251F962479A48300D2C3E1 /* TreasureComponent.swift */,
 				E29F72FC2471D749008C7719 /* SpriteComponent.swift */,
 			);
@@ -887,6 +890,7 @@
 				E29F73072471F471008C7719 /* EnemyTurnActionSystem.swift in Sources */,
 				E29DFBF22476E28900E4E5B0 /* Pathfinder.swift in Sources */,
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
+				E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
 				E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */,
 				E29DFC0424787AB300E4E5B0 /* ArmorModel.swift in Sources */,

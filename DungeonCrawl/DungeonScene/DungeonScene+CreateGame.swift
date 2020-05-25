@@ -24,10 +24,13 @@ extension DungeonScene {
     
     func setupScene(for level: LevelProviding) {
         let tileMap = self.tileMap(for: level.map)
-        let player = sprite(forPlayer: level.player, on: tileMap)
-        let enemies = sprites(forEnemies: level.actors, on: tileMap)
-        let treasure = sprites(forTreasure: level.treasure, on: tileMap)
-        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies, objectSprites: treasure)
+        let sprites = [SKSpriteNode]([
+            [sprite(forPlayer: level.player, on: tileMap)],
+            self.sprites(forEnemies: level.actors, on: tileMap),
+            self.sprites(forTreasure: level.treasure, on: tileMap),
+            self.sprites(forItems: level.items, on: tileMap)
+        ].joined())
+        displayScene(tileMap: tileMap, sprites: sprites)
     }
     
     private func tileMap(for map: GridMap) -> SKTileMapNode {
@@ -80,6 +83,20 @@ extension DungeonScene {
                 return nil
             }
             let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: "gold")
+            sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
+            return sprite
+        }
+    }
+    
+    private func sprites(forItems packItems: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
+        return packItems.compactMap { packItem in
+            guard let spriteComponent = packItem.spriteComponent() else {
+                return nil
+            }
+            guard packItem.itemComponent() != nil else {
+                return nil
+            }
+            let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: "treasure")
             sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
             return sprite
         }

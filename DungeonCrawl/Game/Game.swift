@@ -43,6 +43,9 @@ class Game {
         decorations.treasure.forEach {
             entityFactory.createTreasure($0)
         }
+        decorations.items.forEach {
+            entityFactory.createItem($0)
+        }
         
         level = DungeonLevel(quest: quest,
                              map: dungeonModel.map,

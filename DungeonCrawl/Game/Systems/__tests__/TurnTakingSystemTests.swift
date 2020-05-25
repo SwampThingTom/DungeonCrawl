@@ -262,6 +262,7 @@ struct MockGameLevel: LevelProviding {
     var player: Entity
     var actors: [Entity]
     var treasure: [Entity]
+    var items: [Entity] = []
     var message: MessageLogging?
     
     init(player: Entity, actors: [Entity], treasure: [Entity] = [], rooms: [RoomModel] = []) {

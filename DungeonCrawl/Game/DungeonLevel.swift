@@ -19,6 +19,7 @@ protocol LevelProviding {
     var player: Entity { get }
     var actors: [Entity] { get }
     var treasure: [Entity] { get }
+    var items: [Entity] { get }
     var message: MessageLogging? { get }
 }
 
@@ -37,6 +38,10 @@ class DungeonLevel: LevelProviding {
     
     var treasure: [Entity] {
         return entityManager.entities(with: TreasureComponent.self)
+    }
+    
+    var items: [Entity] {
+        return entityManager.entities(with: ItemComponent.self)
     }
     
     init(quest: QuestStatusProviding,
