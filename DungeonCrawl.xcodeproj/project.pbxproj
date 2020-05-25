@@ -14,7 +14,6 @@
 		E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */; };
 		E216F5D424671E5600844BF8 /* Direction+GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */; };
 		E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */; };
-		E2251F972479A48300D2C3E1 /* TreasureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F962479A48300D2C3E1 /* TreasureComponent.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -132,7 +131,6 @@
 		E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Direction+GridPoint.swift"; sourceTree = "<group>"; };
 		E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionGridPointTests.swift; sourceTree = "<group>"; };
-		E2251F962479A48300D2C3E1 /* TreasureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureComponent.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 				E29F73002471DB51008C7719 /* EnemyComponent.swift */,
 				E29DFC05247881C600E4E5B0 /* InventoryComponent.swift */,
 				E2EAE472247B630B0043255E /* ItemComponent.swift */,
-				E2251F962479A48300D2C3E1 /* TreasureComponent.swift */,
 				E29F72FC2471D749008C7719 /* SpriteComponent.swift */,
 			);
 			path = Components;
@@ -842,7 +839,6 @@
 				E227B5572473779300115B09 /* Quest.swift in Sources */,
 				E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */,
 				E2C98AE42463103D005C11AD /* DungeonDecorator.swift in Sources */,
-				E2251F972479A48300D2C3E1 /* TreasureComponent.swift in Sources */,
 				E2E2BDDA247009DB009DE525 /* Die.swift in Sources */,
 				E2980F362468E32E000BA2AC /* DungeonLevel.swift in Sources */,
 				E292EA13245DD3F4002A0F31 /* MazeGenerator.swift in Sources */,

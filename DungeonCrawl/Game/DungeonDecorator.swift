@@ -29,12 +29,10 @@ class DungeonDecorator: DungeonDecorating {
         guard let playerStartCell = playerStartCell(in: dungeon) else {
             fatalError("Unable to place player in dungeon")
         }
-        let treasure = placeTreasure(in: dungeon)
-        let items = placeItems(in: dungeon)
+        let items = placeTreasure(in: dungeon) + placeItems(in: dungeon)
         let enemies = spawnEnemies(in: dungeon)
         return DungeonDecorations(playerStartCell: playerStartCell,
                                   enemies: enemies,
-                                  treasure: treasure,
                                   items: items)
     }
 
@@ -51,14 +49,15 @@ class DungeonDecorator: DungeonDecorating {
         return nil
     }
     
-    private func placeTreasure(in dungeon: DungeonModel) -> [Treasure] {
-        let treasure: [Treasure] = dungeon.rooms.compactMap { room in
+    private func placeTreasure(in dungeon: DungeonModel) -> [PackItem] {
+        let treasure: [PackItem] = dungeon.rooms.compactMap { room in
             guard chance.one(in: 2) else { return nil }
             let gold = Int.random(in: 1...50)
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
             guard !decoratedCells.contains(cell) else { return nil }
             decoratedCells.insert(cell)
-            return Treasure(gold: gold, cell: cell)
+            let item = createTreasure(worth: gold)
+            return PackItem(item: item, cell: cell)
         }
         return treasure
     }

@@ -27,7 +27,6 @@ extension DungeonScene {
         let sprites = [SKSpriteNode]([
             [sprite(forPlayer: level.player, on: tileMap)],
             self.sprites(forEnemies: level.actors, on: tileMap),
-            self.sprites(forTreasure: level.treasure, on: tileMap),
             self.sprites(forItems: level.items, on: tileMap)
         ].joined())
         displayScene(tileMap: tileMap, sprites: sprites)
@@ -74,29 +73,16 @@ extension DungeonScene {
         }
     }
     
-    private func sprites(forTreasure treasure: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
-        return treasure.compactMap { object in
-            guard let spriteComponent = object.spriteComponent() else {
+    private func sprites(forItems items: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
+        return items.compactMap { item in
+            guard let spriteComponent = item.spriteComponent() else {
                 return nil
             }
-            guard object.treasureComponent() != nil else {
+            guard let itemComponent = item.itemComponent() else {
                 return nil
             }
-            let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: "gold")
-            sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
-            return sprite
-        }
-    }
-    
-    private func sprites(forItems packItems: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
-        return packItems.compactMap { packItem in
-            guard let spriteComponent = packItem.spriteComponent() else {
-                return nil
-            }
-            guard packItem.itemComponent() != nil else {
-                return nil
-            }
-            let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: "treasure")
+            let texture = itemComponent.item.isTreasure ? "gold" : "treasure"
+            let sprite = ObjectSprite(spriteName: spriteComponent.spriteName, textureName: texture)
             sprite.position = map.centerOfTile(atColumn: spriteComponent.cell.x, row: spriteComponent.cell.y)
             return sprite
         }

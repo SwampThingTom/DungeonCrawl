@@ -14,13 +14,8 @@ struct EnemyModel: Equatable {
     let cell: GridCell
 }
 
-/// Gold that can be picked up.
-struct Treasure: Equatable {
-    let gold: Int
-    let cell: GridCell
-}
-
 /// An item that can be carried and dropped.
+/// TODO: rename to ItemModel?
 struct PackItem: Equatable {
     let item: Item
     let cell: GridCell
@@ -29,6 +24,5 @@ struct PackItem: Equatable {
 struct DungeonDecorations: Equatable {
     let playerStartCell: GridCell
     let enemies: [EnemyModel]
-    let treasure: [Treasure]
     let items: [PackItem]
 }

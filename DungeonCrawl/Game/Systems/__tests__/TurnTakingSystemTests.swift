@@ -249,8 +249,14 @@ class TurnTakingSystemTests: XCTestCase {
         let entity = entityManager!.createEntity()
         let spriteComponent = mockSpriteComponent(spriteName: "gold", cell: cell)
         entity.add(component: spriteComponent)
-        let treasureComponent = TreasureComponent(gold: gold)
-        entity.add(component: treasureComponent)
+        let item = Item(name: "treasure",
+                        isTreasure: true,
+                        value: gold,
+                        equipmentSlot: nil,
+                        armor: nil,
+                        weapon: nil)
+        let itemComponent = ItemComponent(item: item)
+        entity.add(component: itemComponent)
         return entity
     }
 }

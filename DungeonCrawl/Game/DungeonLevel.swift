@@ -18,7 +18,6 @@ protocol LevelProviding {
     var rooms: [RoomModel] { get }
     var player: Entity { get }
     var actors: [Entity] { get }
-    var treasure: [Entity] { get }
     var items: [Entity] { get }
     var message: MessageLogging? { get }
 }
@@ -34,10 +33,6 @@ class DungeonLevel: LevelProviding {
     
     var actors: [Entity] {
         return entityManager.entities(with: EnemyComponent.self)
-    }
-    
-    var treasure: [Entity] {
-        return entityManager.entities(with: TreasureComponent.self)
     }
     
     var items: [Entity] {

@@ -56,19 +56,6 @@ class EntityFactory {
     }
     
     @discardableResult
-    func createTreasure(_ treasure: Treasure) -> Entity {
-        let entity = entityManager.createEntity()
-        
-        let spriteComponent = self.spriteComponent(for: treasure, uniqueID: entity.entityId)
-        entityManager.add(component: spriteComponent, to: entity)
-        
-        let treasureComponent = TreasureComponent(gold: treasure.gold)
-        entityManager.add(component: treasureComponent, to: entity)
-        
-        return entity
-    }
-    
-    @discardableResult
     func createItem(_ item: PackItem) -> Entity {
         let entity = entityManager.createEntity()
         
@@ -94,13 +81,8 @@ class EntityFactory {
         }
     }
     
-    private func spriteComponent(for treasure: Treasure, uniqueID: UInt) -> SpriteComponent {
-        let spriteName = "gold_\(uniqueID)"
-        return SpriteComponent(spriteName: spriteName, displayName: "\(treasure.gold) gold pieces", cell: treasure.cell)
-    }
-    
     private func spriteComponent(for item: PackItem, uniqueID: UInt) -> SpriteComponent {
-        let spriteName = "item_\(uniqueID)"
+        let spriteName = "\(item.item.name)_\(uniqueID)"
         return SpriteComponent(spriteName: spriteName, displayName: item.item.name, cell: item.cell)
     }
 }

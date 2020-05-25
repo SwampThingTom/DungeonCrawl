@@ -24,13 +24,13 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
-        let treasure = [
-            Treasure(gold: 10, cell: GridCell(x: 7, y: 10)),
-            Treasure(gold: 50, cell: GridCell(x: 15, y: 7))
+        let items = [
+            PackItem(item: createTreasure(worth: 10), cell: GridCell(x: 7, y: 10)),
+            PackItem(item: createTreasure(worth: 50), cell: GridCell(x: 15, y: 7))
         ]
         let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
                                                                 enemies: enemyModels,
-                                                                treasure: treasure)
+                                                                items: items)
         let dungeonDecorator = MockDungeonDecorator()
         dungeonDecorator.mockDecorations = expectedDungeonDecorations
         
@@ -62,7 +62,7 @@ class GameTests: XCTestCase {
         }
         XCTAssert(enemyModelCells.isEmpty)
         
-        XCTAssertEqual(sut.level.treasure.count, expectedDungeonDecorations.treasure.count)
+        XCTAssertEqual(sut.level.items.count, expectedDungeonDecorations.items.count)
     }
     
     func testTakeTurn_playerOnly() throws {
