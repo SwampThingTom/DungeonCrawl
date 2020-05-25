@@ -23,3 +23,10 @@ class Component {
         owningEntity = entity
     }
 }
+
+extension Component: Equatable {
+    
+    static func == (lhs: Component, rhs: Component) -> Bool {
+        return type(of: lhs) == type(of: rhs) && lhs.entity == rhs.entity
+    }
+}

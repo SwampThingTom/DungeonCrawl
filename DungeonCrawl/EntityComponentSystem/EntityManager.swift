@@ -13,6 +13,7 @@ protocol EntityManaging {
     func remove(entity: Entity)
     func add(component: Component, to entity: Entity)
     func component(of componentType: Component.Type, for entity: Entity) -> Component?
+    func components(of componentType: Component.Type) -> [Component]
     func entities(with componentType: Component.Type) -> [Entity]
 }
 
@@ -60,6 +61,14 @@ class EntityManager: EntityManaging {
         return componentsForEntity?[entity]
     }
     
+    /// Returns all of the components of the specified type.
+    func components(of componentType: Component.Type) -> [Component] {
+        guard let componentsForEntity = components[key(for: componentType)] else {
+            return []
+        }
+        return componentsForEntity.values.map { $0 }
+    }
+    
     /// Returns all of the entities with the specified component type.
     func entities(with componentType: Component.Type) -> [Entity] {
         guard let componentsForEntity = components[key(for: componentType)] else {
@@ -90,6 +99,10 @@ private class EntityComponentMap {
     
     var keys: Dictionary<Entity, Component>.Keys {
         return map.keys
+    }
+    
+    var values: Dictionary<Entity, Component>.Values {
+        return map.values
     }
 
     subscript(key: Entity) -> Component? {

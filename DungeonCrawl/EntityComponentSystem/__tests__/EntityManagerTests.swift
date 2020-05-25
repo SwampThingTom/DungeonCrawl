@@ -37,6 +37,9 @@ class EntityManagerTests: XCTestCase {
         let component = sut.component(of: MockComponent1.self, for: entity) as? MockComponent1
         XCTAssertEqual(component, expectedComponent)
         XCTAssertEqual(component?.entity, entity)
+        
+        let components = sut.components(of: MockComponent1.self)
+        XCTAssert(components.contains(expectedComponent))
     }
     
     func testAddComponent_multipleComponents() throws {
@@ -55,6 +58,14 @@ class EntityManagerTests: XCTestCase {
         XCTAssertEqual(component1, expectedComponent1)
         let component2 = sut.component(of: MockComponent2.self, for: entity) as? MockComponent2
         XCTAssertEqual(component2, expectedComponent2)
+        
+        let components1 = sut.components(of: MockComponent1.self)
+        XCTAssertEqual(components1.count, 1)
+        XCTAssert(components1.contains(expectedComponent1))
+        
+        let components2 = sut.components(of: MockComponent2.self)
+        XCTAssertEqual(components2.count, 1)
+        XCTAssert(components2.contains(expectedComponent2))
     }
     
     func testComponent_none() throws {
@@ -69,6 +80,17 @@ class EntityManagerTests: XCTestCase {
         XCTAssertNil(component)
     }
     
+    func testComponents_none() throws {
+        // Arrange
+        let sut = EntityManager()
+        
+        // Act
+        let components = sut.components(of: MockComponent1.self)
+        
+        // Assert
+        XCTAssert(components.isEmpty)
+    }
+
     func testEntitiesWithComponent() throws {
         // Arrange
         let sut = EntityManager()
@@ -115,7 +137,7 @@ class EntityManagerTests: XCTestCase {
     }
 }
 
-class MockComponent1: Component, Equatable {
+class MockComponent1: Component {
     
     static var nextComponentID: Int = 0
     
@@ -125,13 +147,9 @@ class MockComponent1: Component, Equatable {
         componentID = MockComponent1.nextComponentID
         MockComponent1.nextComponentID += 1
     }
-    
-    static func == (lhs: MockComponent1, rhs: MockComponent1) -> Bool {
-        return lhs.componentID == rhs.componentID
-    }
 }
 
-class MockComponent2: Component, Equatable {
+class MockComponent2: Component {
     
     static var nextComponentID: Int = 0
     
@@ -140,9 +158,5 @@ class MockComponent2: Component, Equatable {
     override init() {
         componentID = MockComponent2.nextComponentID
         MockComponent2.nextComponentID += 1
-    }
-    
-    static func == (lhs: MockComponent2, rhs: MockComponent2) -> Bool {
-        return lhs.componentID == rhs.componentID
     }
 }
