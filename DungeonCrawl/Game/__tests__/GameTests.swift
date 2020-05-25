@@ -25,8 +25,8 @@ class GameTests: XCTestCase {
             EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
         ]
         let items = [
-            PackItem(item: createTreasure(worth: 10), cell: GridCell(x: 7, y: 10)),
-            PackItem(item: createTreasure(worth: 50), cell: GridCell(x: 15, y: 7))
+            ItemModel(item: createTreasure(worth: 10), cell: GridCell(x: 7, y: 10)),
+            ItemModel(item: createTreasure(worth: 50), cell: GridCell(x: 15, y: 7))
         ]
         let expectedDungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
                                                                 enemies: enemyModels,

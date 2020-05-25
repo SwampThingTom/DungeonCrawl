@@ -49,20 +49,20 @@ class DungeonDecorator: DungeonDecorating {
         return nil
     }
     
-    private func placeTreasure(in dungeon: DungeonModel) -> [PackItem] {
-        let treasure: [PackItem] = dungeon.rooms.compactMap { room in
+    private func placeTreasure(in dungeon: DungeonModel) -> [ItemModel] {
+        let treasure: [ItemModel] = dungeon.rooms.compactMap { room in
             guard chance.one(in: 2) else { return nil }
             let gold = Int.random(in: 1...50)
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
             guard !decoratedCells.contains(cell) else { return nil }
             decoratedCells.insert(cell)
             let item = createTreasure(worth: gold)
-            return PackItem(item: item, cell: cell)
+            return ItemModel(item: item, cell: cell)
         }
         return treasure
     }
     
-    private func placeItems(in dungeon: DungeonModel) -> [PackItem] {
+    private func placeItems(in dungeon: DungeonModel) -> [ItemModel] {
         guard dungeon.rooms.count > 0 else {
             return []
         }
@@ -70,7 +70,7 @@ class DungeonDecorator: DungeonDecorating {
         let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
         decoratedCells.insert(cell)
         let item = createShortSword()
-        let packItem = PackItem(item: item, cell: cell)
+        let packItem = ItemModel(item: item, cell: cell)
         return [packItem]
     }
     

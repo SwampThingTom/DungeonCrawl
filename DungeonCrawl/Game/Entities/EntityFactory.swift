@@ -56,7 +56,7 @@ class EntityFactory {
     }
     
     @discardableResult
-    func createItem(_ item: PackItem) -> Entity {
+    func createItem(_ item: ItemModel) -> Entity {
         let entity = entityManager.createEntity()
         
         let spriteComponent = self.spriteComponent(for: item, uniqueID: entity.entityId)
@@ -81,7 +81,7 @@ class EntityFactory {
         }
     }
     
-    private func spriteComponent(for item: PackItem, uniqueID: UInt) -> SpriteComponent {
+    private func spriteComponent(for item: ItemModel, uniqueID: UInt) -> SpriteComponent {
         let spriteName = "\(item.item.name)_\(uniqueID)"
         return SpriteComponent(spriteName: spriteName, displayName: item.item.name, cell: item.cell)
     }

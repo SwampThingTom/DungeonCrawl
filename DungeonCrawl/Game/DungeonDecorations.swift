@@ -15,8 +15,7 @@ struct EnemyModel: Equatable {
 }
 
 /// An item that can be carried and dropped.
-/// TODO: rename to ItemModel?
-struct PackItem: Equatable {
+struct ItemModel: Equatable {
     let item: Item
     let cell: GridCell
 }
@@ -24,5 +23,5 @@ struct PackItem: Equatable {
 struct DungeonDecorations: Equatable {
     let playerStartCell: GridCell
     let enemies: [EnemyModel]
-    let items: [PackItem]
+    let items: [ItemModel]
 }

@@ -32,7 +32,7 @@ class MockDungeonDecorator: DungeonDecorating {
 
 func mockDungeonDecorations(playerStartCell: GridCell,
                             enemies: [EnemyModel],
-                            items: [PackItem] = []) -> DungeonDecorations {
+                            items: [ItemModel] = []) -> DungeonDecorations {
     return DungeonDecorations(playerStartCell: playerStartCell,
                               enemies: enemies,
                               items: items)
