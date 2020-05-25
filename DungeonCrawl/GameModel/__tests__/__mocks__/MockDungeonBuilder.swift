@@ -32,8 +32,8 @@ class MockDungeonDecorator: DungeonDecorating {
 
 func mockDungeonDecorations(playerStartCell: GridCell,
                             enemies: [EnemyModel],
-                            objects: [DungeonObject] = []) -> DungeonDecorations {
-    return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies, objects: objects)
+                            treasure: [Treasure] = []) -> DungeonDecorations {
+    return DungeonDecorations(playerStartCell: playerStartCell, enemies: enemies, treasure: treasure)
 }
 
 func threeRooms() -> [RoomModel] {

@@ -40,7 +40,7 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 0)
-        XCTAssertEqual(decorations.objects.count, 0)
+        XCTAssertEqual(decorations.treasure.count, 0)
     }
 }
 
@@ -63,7 +63,7 @@ private func decorationsOverlap(_ decorations: DungeonDecorations, map: GridMap)
         occupiedCells.insert(enemy.cell)
     }
     
-    for object in decorations.objects {
+    for object in decorations.treasure {
         guard !cellIsOccupied(object.cell) else { return true }
         occupiedCells.insert(object.cell)
     }

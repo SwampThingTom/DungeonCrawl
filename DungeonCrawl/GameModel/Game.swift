@@ -40,8 +40,8 @@ class Game {
         decorations.enemies.forEach {
             entityFactory.createEnemy(enemyType: $0.enemyType, cell: $0.cell)
         }
-        decorations.objects.forEach {
-            entityFactory.createObject(object: $0)
+        decorations.treasure.forEach {
+            entityFactory.createTreasure($0)
         }
         
         level = DungeonLevel(quest: quest,

@@ -56,13 +56,13 @@ class EntityFactory {
     }
     
     @discardableResult
-    func createObject(object: DungeonObject) -> Entity {
+    func createTreasure(_ treasure: Treasure) -> Entity {
         let entity = entityManager.createEntity()
         
-        let spriteComponent = self.spriteComponent(for: object, uniqueID: entity.entityId)
+        let spriteComponent = self.spriteComponent(for: treasure, uniqueID: entity.entityId)
         entityManager.add(component: spriteComponent, to: entity)
         
-        if let gold = object.gold {
+        if let gold = treasure.gold {
             let treasureComponent = TreasureComponent(gold: gold)
             entityManager.add(component: treasureComponent, to: entity)
         }
@@ -83,15 +83,9 @@ class EntityFactory {
         }
     }
     
-    private func spriteComponent(for object: DungeonObject, uniqueID: UInt) -> SpriteComponent {
-        switch object.objectType {
-        case .chest:
-            let spriteName = "treasure_\(uniqueID)"
-            return SpriteComponent(spriteName: spriteName, displayName: "treasure chest", cell: object.cell)
-        case .urn:
-            let spriteName = "gold_\(uniqueID)"
-            let gold = object.gold ?? 0
-            return SpriteComponent(spriteName: spriteName, displayName: "\(gold) gold pieces", cell: object.cell)
-        }
+    private func spriteComponent(for treasure: Treasure, uniqueID: UInt) -> SpriteComponent {
+        let spriteName = "gold_\(uniqueID)"
+        let gold = treasure.gold ?? 0
+        return SpriteComponent(spriteName: spriteName, displayName: "\(gold) gold pieces", cell: treasure.cell)
     }
 }
