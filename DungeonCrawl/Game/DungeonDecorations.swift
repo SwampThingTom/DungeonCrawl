@@ -6,7 +6,7 @@
 //  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
-import CoreGraphics
+import Foundation
 
 struct EnemyModel: Equatable {
     let enemyType: EnemyType

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Thomas H Aylesworth. All rights reserved.
 //
 
-import Foundation
-
 enum DungeonTurnState {
     case waitingForInput
     case takingTurn
