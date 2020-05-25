@@ -469,6 +469,7 @@
 		E29F73082471FFFC008C7719 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
+				E2EAE471247B530B0043255E /* __tests__ */,
 				E2E2BDD3246F63E0009DE525 /* CombatSystem.swift */,
 				E29F73062471F471008C7719 /* EnemyTurnActionSystem.swift */,
 				E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */,
@@ -601,13 +602,9 @@
 			isa = PBXGroup;
 			children = (
 				E2251F9A247A174000D2C3E1 /* __mocks__ */,
-				E2E2BDD5246F64B6009DE525 /* CombatSystemTests.swift */,
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
-				E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */,
 				E2E2BDC3246ED069009DE525 /* GameTests.swift */,
-				E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */,
 				E227B55824737B6500115B09 /* QuestTests.swift */,
-				E2E2BDD1246F5B72009DE525 /* TurnTakingSystemTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -639,6 +636,17 @@
 				E2E4E82C2464357500F5EA93 /* CGPoint+ExtensionsTests.swift */,
 				E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */,
 				E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		E2EAE471247B530B0043255E /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E2E2BDD5246F64B6009DE525 /* CombatSystemTests.swift */,
+				E29F72E92470A568008C7719 /* EnemyTurnActionSystemTests.swift */,
+				E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */,
+				E2E2BDD1246F5B72009DE525 /* TurnTakingSystemTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
