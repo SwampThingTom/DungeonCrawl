@@ -11,13 +11,14 @@
 import XCTest
 
 class QuestTests: XCTestCase {
-
+    
     func testIsComplete() throws {
         // Arrange
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let sut = Quest()
-        let level = MockGameLevel(player: entityFactory.createPlayer(cell: GridCell(x: 0, y: 0)), actors: [])
+        let player = entityFactory.createPlayer(cell: GridCell(x: 0, y: 0))
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         
         // Act
         let isComplete = sut.isComplete(gameLevel: level)
@@ -31,8 +32,9 @@ class QuestTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let sut = Quest()
-        let level = MockGameLevel(player: entityFactory.createPlayer(cell: GridCell(x: 0, y: 0)),
-                                  actors: [entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))])
+        let player = entityFactory.createPlayer(cell: GridCell(x: 0, y: 0))
+        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         
         // Act
         let isComplete = sut.isComplete(gameLevel: level)

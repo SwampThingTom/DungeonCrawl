@@ -17,7 +17,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 0, y: 0))
-        let level = MockGameLevel(player: player, actors: [])
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
@@ -32,7 +32,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
-        let level = MockGameLevel(player: player, actors: [])
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
@@ -47,8 +47,8 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
-        let enemy = entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 15, y: 5))
-        let level = MockGameLevel(player: player, actors: [enemy])
+        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 15, y: 5))
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
@@ -63,8 +63,8 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
-        let enemy = entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 12, y: 5))
-        let level = MockGameLevel(player: player, actors: [enemy])
+        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 12, y: 5))
+        let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
         
         // Act

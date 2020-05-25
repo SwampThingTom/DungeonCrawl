@@ -24,12 +24,12 @@ class TurnTakingSystemTests: XCTestCase {
         entityManager = nil
         entityFactory = nil
     }
-
+    
     func testDoTurnAction_move() throws {
         // Arrange
         let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
         let actor = mockEntity(spriteComponent: actorSprite)
-        let gameLevel = MockGameLevel(player: actor, actors: [])
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
@@ -48,8 +48,8 @@ class TurnTakingSystemTests: XCTestCase {
         let actorInventory = mockInventoryComponent(gold: 10)
         actor.add(component: actorInventory)
         
-        let treasure = mockTreasureEntity(gold: 50, cell: GridCell(x: 4, y: 5))
-        let gameLevel = MockGameLevel(player: actor, actors: [], treasure: [treasure])
+        _ = mockTreasureEntity(gold: 50, cell: GridCell(x: 4, y: 5))
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
@@ -69,15 +69,15 @@ class TurnTakingSystemTests: XCTestCase {
         let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
-        let target = mockEntity(spriteComponent: targetSprite,
-                                combatComponent: targetCombat,
-                                enemyComponent: targetEnemy)
+        _ = mockEntity(spriteComponent: targetSprite,
+                       combatComponent: targetCombat,
+                       enemyComponent: targetEnemy)
         
         let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
-
-        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
@@ -96,17 +96,17 @@ class TurnTakingSystemTests: XCTestCase {
         let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
-        let target = mockEntity(spriteComponent: targetSprite,
-                                combatComponent: targetCombat,
-                                enemyComponent: targetEnemy)
+        _ = mockEntity(spriteComponent: targetSprite,
+                       combatComponent: targetCombat,
+                       enemyComponent: targetEnemy)
         
         let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
-
-        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
-
+        
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
@@ -128,10 +128,10 @@ class TurnTakingSystemTests: XCTestCase {
         let actorCombat = mockCombatComponent()
         let actorEnemy = mockEnemyComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat, enemyComponent: actorEnemy)
-
-        let gameLevel = MockGameLevel(player: target, actors: [actor])
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: target)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
-
+        
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
@@ -140,22 +140,22 @@ class TurnTakingSystemTests: XCTestCase {
         let playerCombat = entityManager?.combatComponent(for: gameLevel.player)
         XCTAssertEqual(playerCombat!.hitPoints, 7)
     }
-
+    
     func testDoTurnAction_attack_attackerNotCombatant() throws {
         // Arrange
         let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
-        let target = mockEntity(spriteComponent: targetSprite,
-                                combatComponent: targetCombat,
-                                enemyComponent: targetEnemy)
+        _ = mockEntity(spriteComponent: targetSprite,
+                       combatComponent: targetCombat,
+                       enemyComponent: targetEnemy)
         
         let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let actor = mockEntity(spriteComponent: actorSprite)
-
-        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
-
+        
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
@@ -171,15 +171,15 @@ class TurnTakingSystemTests: XCTestCase {
         let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
-        let target = mockEntity(spriteComponent: targetSprite,
-                                combatComponent: targetCombat,
-                                enemyComponent: targetEnemy)
-
+        _ = mockEntity(spriteComponent: targetSprite,
+                       combatComponent: targetCombat,
+                       enemyComponent: targetEnemy)
+        
         let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
-
-        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
         
         // Act
@@ -196,15 +196,15 @@ class TurnTakingSystemTests: XCTestCase {
         
         let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
         let targetEnemy = mockEnemyComponent()
-        let target = mockEntity(spriteComponent: targetSprite, enemyComponent: targetEnemy)
+        _ = mockEntity(spriteComponent: targetSprite, enemyComponent: targetEnemy)
         
         let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
-        let gameLevel = MockGameLevel(player: actor, actors: [target])
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: mockCombat)
-
+        
         // Act
         let animation = sut.doTurnAction(.attack(direction: .north), for: actor, actorSprite: actorSprite)
         
@@ -261,22 +261,12 @@ class TurnTakingSystemTests: XCTestCase {
     }
 }
 
-struct MockGameLevel: LevelProviding {
-    var quest: QuestStatusProviding = MockQuest()
-    var map: GridMap = fiveRegionMap()
-    var rooms: [RoomModel]
-    var player: Entity
-    var actors: [Entity]
-    var treasure: [Entity]
-    var items: [Entity] = []
-    var message: MessageLogging?
-    
-    init(player: Entity, actors: [Entity], treasure: [Entity] = [], rooms: [RoomModel] = []) {
-        self.player = player
-        self.actors = actors
-        self.treasure = treasure
-        self.rooms = rooms
-    }
+func mockGameLevel(entityManager: EntityManager, player: Entity, rooms: [RoomModel] = []) -> DungeonLevel {
+    return DungeonLevel(quest: MockQuest(),
+                        map: fiveRegionMap(),
+                        rooms: rooms,
+                        entityManager: entityManager,
+                        player: player)
 }
 
 class MockCombat: CombatProviding {

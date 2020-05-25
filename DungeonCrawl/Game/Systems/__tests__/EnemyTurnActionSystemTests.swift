@@ -31,7 +31,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
-        let level = MockGameLevel(player: player, actors: [actor])
+        let level = mockGameLevel(entityManager: entityManager!, player: player)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
         
         // Act
@@ -49,7 +49,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.targetCell = nil
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms) 
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
         
         // Act
@@ -69,7 +69,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.targetCell = GridCell(x: 5, y: 5)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let chance = MockChance()
         chance.mockEventHappens = false
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
@@ -91,7 +91,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.targetCell = GridCell(x: 5, y: 5)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let chance = MockChance()
         chance.mockEventHappens = true
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
@@ -113,7 +113,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = GridCell(x: 5, y: 4)
         let actorSprite = entityManager!.spriteComponent(for: actor)
-        let level = MockGameLevel(player: player, actors: [actor])
+        let level = mockGameLevel(entityManager: entityManager!, player: player)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
         
         // Act
@@ -133,7 +133,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
         
         // Act
@@ -152,7 +152,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.enemyAIState = .chase
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level)
         
         // Act
@@ -172,7 +172,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.enemyAIState = .wait
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let chance = MockChance()
         chance.mockEventHappens = false
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
@@ -193,7 +193,7 @@ class EnemyTurnActionSystemTests: XCTestCase {
         actorEnemy?.enemyAIState = .wait
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
-        let level = MockGameLevel(player: player, actors: [actor], rooms: rooms)
+        let level = mockGameLevel(entityManager: entityManager!, player: player, rooms: rooms)
         let chance = MockChance()
         chance.mockEventHappens = true
         let sut = EnemyTurnActionSystem(entityManager: entityManager!, gameLevel: level, chance: chance)
