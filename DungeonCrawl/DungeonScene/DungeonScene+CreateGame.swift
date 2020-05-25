@@ -26,8 +26,8 @@ extension DungeonScene {
         let tileMap = self.tileMap(for: level.map)
         let player = sprite(forPlayer: level.player, on: tileMap)
         let enemies = sprites(forEnemies: level.actors, on: tileMap)
-        let objects = sprites(forObjects: level.objects, on: tileMap)
-        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies, objectSprites: objects)
+        let treasure = sprites(forTreasure: level.treasure, on: tileMap)
+        displayScene(tileMap: tileMap, playerSprite: player, enemySprites: enemies, objectSprites: treasure)
     }
     
     private func tileMap(for map: GridMap) -> SKTileMapNode {
@@ -71,8 +71,8 @@ extension DungeonScene {
         }
     }
     
-    private func sprites(forObjects objects: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
-        return objects.compactMap { object in
+    private func sprites(forTreasure treasure: [Entity], on map: SKTileMapNode) -> [SKSpriteNode] {
+        return treasure.compactMap { object in
             guard let spriteComponent = object.spriteComponent() else {
                 return nil
             }

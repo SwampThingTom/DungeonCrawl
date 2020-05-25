@@ -62,7 +62,7 @@ class GameTests: XCTestCase {
         }
         XCTAssert(enemyModelCells.isEmpty)
         
-        XCTAssertEqual(sut.level.objects.count, expectedDungeonDecorations.treasure.count)
+        XCTAssertEqual(sut.level.treasure.count, expectedDungeonDecorations.treasure.count)
     }
     
     func testTakeTurn_playerOnly() throws {

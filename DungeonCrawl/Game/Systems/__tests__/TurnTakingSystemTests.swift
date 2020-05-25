@@ -49,7 +49,7 @@ class TurnTakingSystemTests: XCTestCase {
         actor.add(component: actorInventory)
         
         let treasure = mockTreasureEntity(gold: 50, cell: GridCell(x: 4, y: 5))
-        let gameLevel = MockGameLevel(player: actor, actors: [], objects: [treasure])
+        let gameLevel = MockGameLevel(player: actor, actors: [], treasure: [treasure])
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
         
         // Act
@@ -261,13 +261,13 @@ struct MockGameLevel: LevelProviding {
     var rooms: [RoomModel]
     var player: Entity
     var actors: [Entity]
-    var objects: [Entity]
+    var treasure: [Entity]
     var message: MessageLogging?
     
-    init(player: Entity, actors: [Entity], objects: [Entity] = [], rooms: [RoomModel] = []) {
+    init(player: Entity, actors: [Entity], treasure: [Entity] = [], rooms: [RoomModel] = []) {
         self.player = player
         self.actors = actors
-        self.objects = objects
+        self.treasure = treasure
         self.rooms = rooms
     }
 }
