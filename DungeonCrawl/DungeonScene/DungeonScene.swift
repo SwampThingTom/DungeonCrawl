@@ -107,9 +107,9 @@ extension DungeonScene: HUDDelegate {
         let player = game.level.player
         if let combat = player.combatComponent() {
             hudView?.healthLabel?.text = "\(combat.hitPoints) / \(combat.maxHitPoints)"
-            let armorName = player.inventoryComponent()?.equippedItem(for: .armor)?.item.name ?? "None"
+            let armorName = player.inventoryComponent()?.equippedItem(for: .armor)?.item.name ?? "none"
             hudView?.armorLabel?.text = "\(armorName) (\(combat.armorClass))"
-            let weaponName = player.inventoryComponent()?.equippedItem(for: .weapon)?.item.name ?? "Unarmed"
+            let weaponName = player.inventoryComponent()?.equippedItem(for: .weapon)?.item.name ?? "unarmed"
             hudView?.weaponLabel?.text = weaponName
         }
         if let items = player.inventoryComponent() {
