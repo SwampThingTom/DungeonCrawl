@@ -10,15 +10,25 @@ import UIKit
 
 protocol DismissibleViewControllerDelegate: class {
     
+    /// Dismiss the inventory view controller.
     func dismiss(viewController: UIViewController)
 }
 
 struct InventoryViewModel {
     
+    typealias ActionHandler = (_ itemID: UInt) -> InventoryViewModel
+    
+    struct Action {
+        var name: String
+        var handler: ActionHandler
+    }
+    
     var items: [ItemViewModel]
     
     struct ItemViewModel {
+        var itemID: UInt
         var name: String
+        var actions: [Action]
     }
 }
 
@@ -53,16 +63,32 @@ class InventoryViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inventory?.items.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "inventoryCell", for: indexPath)
-        let itemText = inventory?.items[indexPath.row].name ?? "???"
-        cell.textLabel?.text = itemText
+        cell.textLabel?.text = inventory?.items[indexPath.row].name ?? "???"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedItem = inventory?.items[indexPath.row] else { return }
+        guard !selectedItem.actions.isEmpty else { return }
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        selectedItem.actions.forEach { action in
+            let equipAction = UIAlertAction(title: action.name, style: .default) { _ in
+                self.inventory = action.handler(selectedItem.itemID)
+                tableView.reloadData()
+            }
+            alertController.addAction(equipAction)
+        }
+        
+        self.present(alertController, animated: true)
     }
 }
 
