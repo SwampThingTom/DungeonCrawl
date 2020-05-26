@@ -34,6 +34,7 @@ class EntityManager: EntityManaging {
         return entityId
     }
     
+    /// Components by type.
     private var components = [String: EntityComponentMap]()
     
     /// Creates a new entity.
@@ -55,6 +56,7 @@ class EntityManager: EntityManaging {
         component._add(to: entity)
     }
     
+    /// Remove a component from an entity.
     func remove(component: Component, from entity: Entity) {
         let componentTypeKey = key(for: type(of: component))
         guard let componentsForEntity = components[componentTypeKey] else {
