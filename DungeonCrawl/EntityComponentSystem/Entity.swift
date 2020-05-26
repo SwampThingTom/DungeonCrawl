@@ -33,6 +33,11 @@ class Entity {
         entityManager?.add(component: component, to: self)
     }
     
+    /// Removes a component from the entity.
+    func remove(component: Component) {
+        entityManager?.remove(component: component, from: self)
+    }
+    
     /// Returns the entity's component of the specified type.
     func component(of componentType: Component.Type) -> Component? {
         return entityManager?.component(of: componentType, for: self)

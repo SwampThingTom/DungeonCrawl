@@ -135,6 +135,38 @@ class EntityManagerTests: XCTestCase {
         XCTAssert(entitiesWithComponent1.contains(entity2))
         XCTAssertEqual(entitiesWithComponent2.count, 0)
     }
+    
+    func testRemoveComponent() throws {
+        // Arrange
+        let sut = EntityManager()
+        let entity = sut.createEntity()
+        let component = MockComponent1()
+        sut.add(component: component, to: entity)
+
+        // Act
+        sut.remove(component: component, from: entity)
+        
+        // Assert
+        XCTAssertNil(sut.component(of: MockComponent1.self, for: entity))
+        let components = sut.components(of: MockComponent1.self)
+        XCTAssert(components.isEmpty)
+    }
+    
+    func testRemoveComponent_none() throws {
+        // Arrange
+        let sut = EntityManager()
+        let entity = sut.createEntity()
+        let component = MockComponent1()
+        
+        // Act
+        sut.remove(component: component, from: entity)
+        
+        // Assert
+        XCTAssertNil(sut.component(of: MockComponent1.self, for: entity))
+        let components = sut.components(of: MockComponent1.self)
+        XCTAssert(components.isEmpty)
+
+    }
 }
 
 class MockComponent1: Component {

@@ -22,6 +22,14 @@ class Component {
     func _add(to entity: Entity) {
         owningEntity = entity
     }
+    
+    /// Removes the component from its owning entity.
+    ///
+    /// - Warning: This should never be called directly. Use `Entity.remove(component:)` instead.
+    func _remove(from entity: Entity) {
+        assert(entity == owningEntity, "remove component called for an entity that is not the owner")
+        owningEntity = nil
+    }
 }
 
 extension Component: Equatable {

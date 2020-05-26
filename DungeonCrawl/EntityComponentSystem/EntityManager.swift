@@ -55,6 +55,15 @@ class EntityManager: EntityManaging {
         component._add(to: entity)
     }
     
+    func remove(component: Component, from entity: Entity) {
+        let componentTypeKey = key(for: type(of: component))
+        guard let componentsForEntity = components[componentTypeKey] else {
+            return
+        }
+        componentsForEntity[entity] = nil
+        component._remove(from: entity)
+    }
+    
     /// Returns the component of the specified type for an entity.
     func component(of componentType: Component.Type, for entity: Entity) -> Component? {
         let componentsForEntity = components[key(for: componentType)]
