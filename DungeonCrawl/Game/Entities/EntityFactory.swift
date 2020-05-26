@@ -28,13 +28,13 @@ class EntityFactory {
         let inventoryComponent = InventoryComponent()
         entityManager.add(component: inventoryComponent, to: entity)
         
-        let armor = ItemComponent(item: createLeatherArmor())
-        inventoryComponent.items.append(armor)
-        inventoryComponent.equip(itemComponent: armor)
+        let armorItemComponent = createItemComponent(for: createLeatherArmor())
+        inventoryComponent.items.append(armorItemComponent)
+        inventoryComponent.equip(itemComponent: armorItemComponent)
         
-        let weapon = ItemComponent(item: createDagger())
-        inventoryComponent.items.append(weapon)
-        inventoryComponent.equip(itemComponent: weapon)
+        let weaponItemComponent = createItemComponent(for: createDagger())
+        inventoryComponent.items.append(weaponItemComponent)
+        inventoryComponent.equip(itemComponent: weaponItemComponent)
         
         return entity
     }
@@ -66,6 +66,13 @@ class EntityFactory {
         entityManager.add(component: itemComponent, to: entity)
         
         return entity
+    }
+    
+    private func createItemComponent(for item: Item) -> ItemComponent {
+        let entity = entityManager.createEntity()
+        let itemComponent = ItemComponent(item: item)
+        entityManager.add(component: itemComponent, to: entity)
+        return itemComponent
     }
     
     private func spriteComponent(for enemyType: EnemyType, cell: GridCell, uniqueID: UInt) -> SpriteComponent {

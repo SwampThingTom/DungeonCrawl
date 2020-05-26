@@ -62,7 +62,9 @@ class GameTests: XCTestCase {
         }
         XCTAssert(enemyModelCells.isEmpty)
         
-        XCTAssertEqual(sut.level.items.count, expectedDungeonDecorations.items.count)
+        // Don't include items that don't have a sprite.
+        let itemsOnMap = sut.level.items.filter { $0.spriteComponent() != nil }
+        XCTAssertEqual(itemsOnMap.count, expectedDungeonDecorations.items.count)
     }
     
     func testTakeTurn_playerOnly() throws {
