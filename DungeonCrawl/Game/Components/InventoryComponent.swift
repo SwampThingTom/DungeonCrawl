@@ -14,12 +14,15 @@ class InventoryComponent: Component {
     var items = [ItemComponent]()
     private var equipped = [EquipmentSlot: ItemComponent]()
     
+    /// Toggles whether an item is equipped.
     func equip(itemComponent: ItemComponent) {
         assert(items.contains(itemComponent), "\(itemComponent.item) must be in inventory to be equipped")
         guard let slot = itemComponent.item.equipmentSlot else { return }
-        equipped[slot] = itemComponent
+        let itemAlreadyEquipped = equipped[slot] == itemComponent
+        equipped[slot] = itemAlreadyEquipped ? nil : itemComponent
     }
     
+    /// The item equipped in an equipment slot.
     func equippedItem(for slot: EquipmentSlot?) -> ItemComponent? {
         guard let slot = slot else { return nil }
         return equipped[slot]

@@ -15,6 +15,7 @@
 		E216F5D424671E5600844BF8 /* Direction+GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */; };
 		E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */; };
 		E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */; };
+		E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -133,6 +134,7 @@
 		E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Direction+GridPoint.swift"; sourceTree = "<group>"; };
 		E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionGridPointTests.swift; sourceTree = "<group>"; };
 		E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactoryTests.swift; sourceTree = "<group>"; };
+		E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponentTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */,
+				E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				E2E2BDD6246F64B6009DE525 /* CombatSystemTests.swift in Sources */,
 				E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */,
 				E29DFBFB24781BD200E4E5B0 /* GridCellMathTests.swift in Sources */,
+				E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */,
 				E2251FA6247ACF9000D2C3E1 /* DungeonSceneInventoryTests.swift in Sources */,
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */,
