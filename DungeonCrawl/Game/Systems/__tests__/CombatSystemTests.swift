@@ -105,4 +105,8 @@ struct MockDie: DieRolling {
     func roll() -> Int {
         return nextRoll
     }
+    
+    func roll(numberOfDice: Int) -> Int {
+        return nextRoll * numberOfDice
+    }
 }

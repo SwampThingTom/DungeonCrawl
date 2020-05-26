@@ -14,6 +14,9 @@ protocol DieRolling {
     
     /// Returns a random number between 1 and the number of sides on a die.
     func roll() -> Int
+    
+    /// Returns the sum of `numberOfDice` calls to `roll()`.
+    func roll(numberOfDice: Int) -> Int
 }
 
 class Die: DieRolling, CustomStringConvertible {
@@ -28,9 +31,15 @@ class Die: DieRolling, CustomStringConvertible {
         self.sides = sides
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
     }
-
+    
     func roll() -> Int {
-        return Int.random(in: 1 ... sides, using: &randomNumberGenerator)
+        return roll(numberOfDice: 1)
+    }
+    
+    func roll(numberOfDice: Int) -> Int {
+        return (1...numberOfDice).reduce(0) { (sum, _) in
+            sum + Int.random(in: 1 ... sides, using: &randomNumberGenerator)
+        }
     }
 }
 

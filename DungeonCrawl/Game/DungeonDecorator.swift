@@ -51,8 +51,8 @@ class DungeonDecorator: DungeonDecorating {
     
     private func placeTreasure(in dungeon: DungeonModel) -> [ItemModel] {
         let treasure: [ItemModel] = dungeon.rooms.compactMap { room in
-            guard chance.one(in: 2) else { return nil }
-            let gold = Int.random(in: 1...50)
+            guard chance.one(in: 3) else { return nil }
+            let gold = D10().roll(numberOfDice: 5)
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
             guard !decoratedCells.contains(cell) else { return nil }
             decoratedCells.insert(cell)
