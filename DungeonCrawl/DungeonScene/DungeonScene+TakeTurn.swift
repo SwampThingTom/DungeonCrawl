@@ -39,8 +39,8 @@ extension DungeonScene {
     }
     
     private func removeInactiveSprites() {
-        let spriteNames: [String] = game.level.entityManager.entities(with: SpriteComponent.self).compactMap {
-            guard let spriteComponent = $0.spriteComponent() else { return nil }
+        let spriteNames: [String] = game.level.entityManager.components(of: SpriteComponent.self).compactMap {
+            guard let spriteComponent = $0 as? SpriteComponent else { return nil }
             return spriteComponent.spriteName
         }
         let nodesToRemove = children.filter { node in

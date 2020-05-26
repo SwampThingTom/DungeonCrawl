@@ -123,8 +123,8 @@ class TurnTakingSystem: System, TurnTaking {
     }
     
     private func pickUpItems(at cell: GridCell, for actor: Entity, inventory: InventoryComponent) {
-        for item in entityManager.entities(with: ItemComponent.self) {
-            guard let itemComponent = item.itemComponent() else { fatalError("Entity should have treasure component") }
+        for component in entityManager.components(of: ItemComponent.self) {
+            guard let itemComponent = component as? ItemComponent, let item = itemComponent.entity else { continue }
             guard let itemSprite = item.spriteComponent(), itemSprite.cell == cell else { continue }
             if itemComponent.item.isTreasure {
                 inventory.gold += itemComponent.item.value
