@@ -112,6 +112,8 @@
 		E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */; };
 		E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */; };
 		E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE472247B630B0043255E /* ItemComponent.swift */; };
+		E2FFA6E7247E864F007ED938 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E6247E864F007ED938 /* Weapons.swift */; };
+		E2FFA6E9247E94BF007ED938 /* Armor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E8247E94BF007ED938 /* Armor.swift */; };
 		E2FFA6EB247E9655007ED938 /* ItemPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6EA247E9655007ED938 /* ItemPicker.swift */; };
 		E2FFA6EE247E9B1D007ED938 /* ItemPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */; };
 /* End PBXBuildFile section */
@@ -237,6 +239,8 @@
 		E2E4E8322464408000F5EA93 /* DungeonCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonCamera.swift; sourceTree = "<group>"; };
 		E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTurnState.swift; sourceTree = "<group>"; };
 		E2EAE472247B630B0043255E /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		E2FFA6E6247E864F007ED938 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
+		E2FFA6E8247E94BF007ED938 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 		E2FFA6EA247E9655007ED938 /* ItemPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPicker.swift; sourceTree = "<group>"; };
 		E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerTests.swift; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,11 +421,13 @@
 			isa = PBXGroup;
 			children = (
 				E2FFA6EC247E9B0D007ED938 /* __tests__ */,
+				E2FFA6E8247E94BF007ED938 /* Armor.swift */,
 				E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */,
 				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
 				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
 				E2FFA6EA247E9655007ED938 /* ItemPicker.swift */,
 				E29DFC112479650200E4E5B0 /* WeaponModel.swift */,
+				E2FFA6E6247E864F007ED938 /* Weapons.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -875,6 +881,7 @@
 				E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */,
 				E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
+				E2FFA6E7247E864F007ED938 /* Weapons.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
 				E29F72F524719D2E008C7719 /* Component.swift in Sources */,
 				E2251FAA247AFB3900D2C3E1 /* ThemeManager.swift in Sources */,
@@ -885,6 +892,7 @@
 				E2E2BDCA246F490F009DE525 /* DungeonScene+TakeTurn.swift in Sources */,
 				E29F72F124719A23008C7719 /* EntityManager.swift in Sources */,
 				E292EA25245F2D1A002A0F31 /* Direction.swift in Sources */,
+				E2FFA6E9247E94BF007ED938 /* Armor.swift in Sources */,
 				E2B2A1DE2457BCE4000ED955 /* AppDelegate.swift in Sources */,
 				E29DFC0824788CEC00E4E5B0 /* Item.swift in Sources */,
 				E292EA19245DF8D5002A0F31 /* DungeonMap.swift in Sources */,

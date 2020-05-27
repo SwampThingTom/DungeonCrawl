@@ -57,24 +57,3 @@ func createTreasure(worth gold: Int, name: String = "gold") -> Item {
         .with(gold: gold)
         .build()
 }
-
-func createLeatherArmor() -> Item {
-    return ItemBuilder(name: "leather")
-        .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 2))
-        .build()
-}
-
-func createDagger() -> Item {
-    return ItemBuilder(name: "dagger")
-        .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D4()))
-        .build()
-}
-
-func createShortSword() -> Item {
-    return ItemBuilder(name: "short sword")
-        .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D6()))
-        .build()
-}

@@ -286,8 +286,6 @@ func mockGameLevel(entityManager: EntityManager, player: Entity, rooms: [RoomMod
 
 class MockCombat: CombatProviding {
     
-    var d20: DieRolling = D20()
-    
     var mockAttackDamage: Int?
     
     func attack(attacker: CombatComponent, defender: CombatComponent) -> Int? {

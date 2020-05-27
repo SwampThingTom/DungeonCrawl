@@ -52,10 +52,10 @@ class DungeonDecorator: DungeonDecorating {
     private func placeTreasure(in dungeon: DungeonModel) -> [ItemModel] {
         let treasure: [ItemModel] = dungeon.rooms.compactMap { room in
             guard chance.one(in: 3) else { return nil }
-            let gold = D10().roll(numberOfDice: 5)
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
             guard !decoratedCells.contains(cell) else { return nil }
             decoratedCells.insert(cell)
+            let gold = D10().roll(numberOfDice: 5)
             let item = createTreasure(worth: gold)
             return ItemModel(item: item, cell: cell)
         }
@@ -63,15 +63,27 @@ class DungeonDecorator: DungeonDecorating {
     }
     
     private func placeItems(in dungeon: DungeonModel) -> [ItemModel] {
-        guard dungeon.rooms.count > 0 else {
-            return []
+        guard dungeon.rooms.count > 0 else { return [] }
+        let items: [ItemModel] = (1...dungeon.rooms.count).compactMap { _ in
+            // LATER: When more items are available from randomItem(), only have a 1 in 3 chance of an item per room
+            let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
+            let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
+            decoratedCells.insert(cell)
+            guard let item = randomItem() else { return nil }
+            return ItemModel(item: item, cell: cell)
         }
-        let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
-        let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
-        decoratedCells.insert(cell)
-        let item = createShortSword()
-        let packItem = ItemModel(item: item, cell: cell)
-        return [packItem]
+        return items
+    }
+    
+    private func randomItem() -> Item? {
+        switch D20().roll() {
+        case 1:
+            return Weapons().random()
+        case 2:
+            return Armor().random()
+        default:
+            return nil
+        }
     }
     
     private func spawnEnemies(in dungeon: DungeonModel) -> [EnemyModel] {
