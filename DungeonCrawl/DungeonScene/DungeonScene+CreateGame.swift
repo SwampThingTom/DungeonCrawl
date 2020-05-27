@@ -11,9 +11,9 @@ import SpriteKit
 extension DungeonScene {
     
     func createGame() -> Game {
-        let dungeonGenerator = DungeonGenerator()
+        let dungeonGenerator = DungeonGenerator(roomAttempts: 9)
         let dungeonDecorator = DungeonDecorator()
-        let dungeonSize = GridSize(width: 25, height: 25)
+        let dungeonSize = GridSize(width: 75, height: 25)
         let quest = Quest()
         let game = Game(dungeonGenerator: dungeonGenerator,
                         dungeonDecorator: dungeonDecorator,
