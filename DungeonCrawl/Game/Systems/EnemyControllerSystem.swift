@@ -1,5 +1,5 @@
 //
-//  EnemyTurnActionSystem.swift
+//  EnemyControllerSystem.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/17/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EnemyTurnActionProviding {
+protocol EnemyControlling {
     
     /// Returns the action to be taken this turn.
     /// - Parameter enemy: The entity's enemy component.
@@ -17,7 +17,7 @@ protocol EnemyTurnActionProviding {
     func turnAction(for enemy: EnemyComponent, with sprite: SpriteComponent) -> TurnAction
 }
 
-class EnemyTurnActionSystem: System, EnemyTurnActionProviding {
+class EnemyControllerSystem: System, EnemyControlling {
     
     private var randomNumberGenerator: AnyRandomNumberGenerator
     private let chance: ChanceDetermining

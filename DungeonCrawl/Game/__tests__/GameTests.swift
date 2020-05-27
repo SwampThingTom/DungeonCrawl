@@ -115,12 +115,12 @@ class GameTests: XCTestCase {
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
         
-        let enemyTurnActionSystem = MockEnemyTurnActionSystem()
-        enemyTurnActionSystem.turnActionForEnemy = [
+        let enemyControllerSystem = MockEnemyControllerSystem()
+        enemyControllerSystem.turnActionForEnemy = [
             sut.level.actors[0]: .attack(direction: .south),
             sut.level.actors[1]: .nothing
         ]
-        sut.enemyTurnActionSystem = enemyTurnActionSystem
+        sut.enemyControllerSystem = enemyControllerSystem
         sut.turnTakingSystem = MockTurnTakingSystem()
         
         let expectedPlayerSpriteName = sut.level.player.spriteComponent()!.spriteName
@@ -162,12 +162,12 @@ class GameTests: XCTestCase {
                        dungeonSize: dungeonSize,
                        quest: MockQuest())
         
-        let enemyTurnActionSystem = MockEnemyTurnActionSystem()
-        enemyTurnActionSystem.turnActionForEnemy = [
+        let enemyControllerSystem = MockEnemyControllerSystem()
+        enemyControllerSystem.turnActionForEnemy = [
             sut.level.actors[0]: .nothing,
             sut.level.actors[1]: .nothing
         ]
-        sut.enemyTurnActionSystem = enemyTurnActionSystem
+        sut.enemyControllerSystem = enemyControllerSystem
         
         let deadEnemy = sut.level.actors[0]
         let deadEnemyCombat = sut.entityManager.combatComponent(for: deadEnemy)!
@@ -284,7 +284,7 @@ class GameTests: XCTestCase {
     }
 }
 
-class MockEnemyTurnActionSystem: EnemyTurnActionProviding {
+class MockEnemyControllerSystem: EnemyControlling {
     
     var turnActionForEnemy = [Entity: TurnAction]()
     
