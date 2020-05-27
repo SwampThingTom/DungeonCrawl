@@ -121,6 +121,7 @@ extension DungeonScene: HUDDelegate {
     }
 
     func rest() {
+        takePlayerTurn(.nothing)
     }
     
     func showInventory() {
