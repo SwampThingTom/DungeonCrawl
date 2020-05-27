@@ -112,6 +112,8 @@
 		E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83024643A1A00F5EA93 /* CGVector+ExtensionsTests.swift */; };
 		E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */; };
 		E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE472247B630B0043255E /* ItemComponent.swift */; };
+		E2FFA6EB247E9655007ED938 /* ItemPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6EA247E9655007ED938 /* ItemPicker.swift */; };
+		E2FFA6EE247E9B1D007ED938 /* ItemPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +237,8 @@
 		E2E4E8322464408000F5EA93 /* DungeonCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonCamera.swift; sourceTree = "<group>"; };
 		E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTurnState.swift; sourceTree = "<group>"; };
 		E2EAE472247B630B0043255E /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		E2FFA6EA247E9655007ED938 /* ItemPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPicker.swift; sourceTree = "<group>"; };
+		E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerTests.swift; sourceTree = "<group>"; };
 		F2C4C5077A6B6A699FB31008 /* Pods_DungeonCrawl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE11450BFB632D6650A98A9D /* Pods_DungeonCrawlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DungeonCrawlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -412,9 +416,11 @@
 		E29DFC0224787A8C00E4E5B0 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				E2FFA6EC247E9B0D007ED938 /* __tests__ */,
 				E29DFC0324787AB300E4E5B0 /* ArmorModel.swift */,
 				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
 				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
+				E2FFA6EA247E9655007ED938 /* ItemPicker.swift */,
 				E29DFC112479650200E4E5B0 /* WeaponModel.swift */,
 			);
 			path = Items;
@@ -665,6 +671,14 @@
 			path = __tests__;
 			sourceTree = "<group>";
 		};
+		E2FFA6EC247E9B0D007ED938 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -839,6 +853,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2FFA6EB247E9655007ED938 /* ItemPicker.swift in Sources */,
 				E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */,
 				E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */,
 				E2E2BDD4246F63E0009DE525 /* CombatSystem.swift in Sources */,
@@ -915,6 +930,7 @@
 				E227B55524735A9400115B09 /* EntityTests.swift in Sources */,
 				E292EA21245F0525002A0F31 /* RegionConnectorTests.swift in Sources */,
 				E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */,
+				E2FFA6EE247E9B1D007ED938 /* ItemPickerTests.swift in Sources */,
 				E292EA17245DF878002A0F31 /* DungeonMapTests.swift in Sources */,
 				E2E2BDD6246F64B6009DE525 /* CombatSystemTests.swift in Sources */,
 				E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */,

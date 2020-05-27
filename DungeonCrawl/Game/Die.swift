@@ -43,6 +43,12 @@ class Die: DieRolling, CustomStringConvertible {
     }
 }
 
+class D100: Die {
+    init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
+        super.init(sides: 100, randomNumberGenerator: randomNumberGenerator)
+    }
+}
+
 class D20: Die {
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator()) {
         super.init(sides: 20, randomNumberGenerator: randomNumberGenerator)
