@@ -27,8 +27,8 @@
 		E227B55524735A9400115B09 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55424735A9400115B09 /* EntityTests.swift */; };
 		E227B5572473779300115B09 /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B5562473779300115B09 /* Quest.swift */; };
 		E227B55924737B6500115B09 /* QuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55824737B6500115B09 /* QuestTests.swift */; };
-		E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */; };
-		E227B55D2474922400115B09 /* PlayerTurnActionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */; };
+		E227B55B247413F300115B09 /* PlayerControllerSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55A247413F300115B09 /* PlayerControllerSystem.swift */; };
+		E227B55D2474922400115B09 /* PlayerControllerSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E227B55C2474922400115B09 /* PlayerControllerSystemTests.swift */; };
 		E237D00924754F5600914C1D /* GridMap+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237D00824754F5600914C1D /* GridMap+Description.swift */; };
 		E25FB14E2461DD49000A90A8 /* DungeonScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25FB14D2461DD49000A90A8 /* DungeonScene.sks */; };
 		E25FB1502461DE0B000A90A8 /* DungeonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */; };
@@ -146,8 +146,8 @@
 		E227B55424735A9400115B09 /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
 		E227B5562473779300115B09 /* Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quest.swift; sourceTree = "<group>"; };
 		E227B55824737B6500115B09 /* QuestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestTests.swift; sourceTree = "<group>"; };
-		E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTurnActionSystem.swift; sourceTree = "<group>"; };
-		E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTurnActionSystemTests.swift; sourceTree = "<group>"; };
+		E227B55A247413F300115B09 /* PlayerControllerSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControllerSystem.swift; sourceTree = "<group>"; };
+		E227B55C2474922400115B09 /* PlayerControllerSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControllerSystemTests.swift; sourceTree = "<group>"; };
 		E237D00824754F5600914C1D /* GridMap+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridMap+Description.swift"; sourceTree = "<group>"; };
 		E25FB14D2461DD49000A90A8 /* DungeonScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DungeonScene.sks; sourceTree = "<group>"; };
 		E25FB14F2461DE0B000A90A8 /* DungeonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScene.swift; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 				E2EAE471247B530B0043255E /* __tests__ */,
 				E2E2BDD3246F63E0009DE525 /* CombatSystem.swift */,
 				E29F73062471F471008C7719 /* EnemyControllerSystem.swift */,
-				E227B55A247413F300115B09 /* PlayerTurnActionSystem.swift */,
+				E227B55A247413F300115B09 /* PlayerControllerSystem.swift */,
 				E29F72E524709666008C7719 /* TurnTakingSystem.swift */,
 			);
 			path = Systems;
@@ -659,7 +659,7 @@
 			children = (
 				E2E2BDD5246F64B6009DE525 /* CombatSystemTests.swift */,
 				E29F72E92470A568008C7719 /* EnemyControllerSystemTests.swift */,
-				E227B55C2474922400115B09 /* PlayerTurnActionSystemTests.swift */,
+				E227B55C2474922400115B09 /* PlayerControllerSystemTests.swift */,
 				E2E2BDD1246F5B72009DE525 /* TurnTakingSystemTests.swift */,
 			);
 			path = __tests__;
@@ -902,7 +902,7 @@
 				E2B2A21E2457C39E000ED955 /* DungeonModel.swift in Sources */,
 				E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */,
 				E29F72EC2470B636008C7719 /* FixedSizeQueue.swift in Sources */,
-				E227B55B247413F300115B09 /* PlayerTurnActionSystem.swift in Sources */,
+				E227B55B247413F300115B09 /* PlayerControllerSystem.swift in Sources */,
 				E29DFC0424787AB300E4E5B0 /* ArmorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,7 +927,7 @@
 				E2E2BDD2246F5B72009DE525 /* TurnTakingSystemTests.swift in Sources */,
 				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,
 				E29F72F924719F18008C7719 /* EntityManagerTests.swift in Sources */,
-				E227B55D2474922400115B09 /* PlayerTurnActionSystemTests.swift in Sources */,
+				E227B55D2474922400115B09 /* PlayerControllerSystemTests.swift in Sources */,
 				E227B55924737B6500115B09 /* QuestTests.swift in Sources */,
 				E292EA2C2460B36A002A0F31 /* DeadEndRemoverTests.swift in Sources */,
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,

@@ -86,7 +86,7 @@ class DungeonScene: SKScene, MessageLogging {
         guard let direction = Direction.direction(from: playerSprite.position, to: position) else {
             fatalError("Unable to calculate direction from \(playerSprite.position) to \(position)")
         }
-        let playerTurnProvider = game.playerTurnActionSystem
+        let playerTurnProvider = game.playerControllerSystem
         if let action = playerTurnProvider.turnActionForMapTouch(direction: direction,
                                                                  playerSprite: playerSpriteComponent) {
             takePlayerTurn(action)

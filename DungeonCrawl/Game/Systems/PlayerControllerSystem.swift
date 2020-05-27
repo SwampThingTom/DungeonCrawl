@@ -1,5 +1,5 @@
 //
-//  PlayerTurnActionSystem.swift
+//  PlayerControllerSystem.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/19/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PlayerTurnActionProviding {
+protocol PlayerControlling {
     
     /// Returns the action to be taken this turn based on the player tapping on the map in a given direction.
     ///
@@ -18,7 +18,7 @@ protocol PlayerTurnActionProviding {
     func turnActionForMapTouch(direction: Direction, playerSprite: SpriteComponent) -> TurnAction?
 }
 
-class PlayerTurnActionSystem: System, PlayerTurnActionProviding {
+class PlayerControllerSystem: System, PlayerControlling {
     
     let gameLevel: DungeonLevel
     

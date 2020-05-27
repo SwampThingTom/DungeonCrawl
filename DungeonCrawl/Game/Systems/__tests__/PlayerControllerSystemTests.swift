@@ -1,5 +1,5 @@
 //
-//  PlayerTurnActionSystemTests.swift
+//  PlayerControllerSystemTests.swift
 //  DungeonCrawlTests
 //
 //  Created by Thomas Aylesworth on 5/19/20.
@@ -10,7 +10,7 @@
 
 import XCTest
 
-class PlayerTurnActionSystemTests: XCTestCase {
+class PlayerControllerSystemTests: XCTestCase {
 
     func testTurnActionForMapTouch_invalidTile() throws {
         // Arrange
@@ -18,7 +18,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 0, y: 0))
         let level = mockGameLevel(entityManager: entityManager, player: player)
-        let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
+        let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
         let action = sut.turnActionForMapTouch(direction: .west, playerSprite: player.spriteComponent()!)
@@ -33,7 +33,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
-        let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
+        let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
         let action = sut.turnActionForMapTouch(direction: .west, playerSprite: player.spriteComponent()!)
@@ -49,7 +49,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
         entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 15, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
-        let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
+        let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
         let action = sut.turnActionForMapTouch(direction: .east, playerSprite: player.spriteComponent()!)
@@ -65,7 +65,7 @@ class PlayerTurnActionSystemTests: XCTestCase {
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
         entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 12, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
-        let sut = PlayerTurnActionSystem(entityManager: entityManager, gameLevel: level)
+        let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         
         // Act
         let action = sut.turnActionForMapTouch(direction: .east, playerSprite: player.spriteComponent()!)
