@@ -55,7 +55,7 @@ class DungeonDecorator: DungeonDecorating {
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
             guard !decoratedCells.contains(cell) else { return nil }
             decoratedCells.insert(cell)
-            let gold = D10().roll(numberOfDice: 5)
+            let gold = Dice(die: D10(), numberOfDice: 5).roll()
             let item = createTreasure(worth: gold)
             return ItemModel(item: item, cell: cell)
         }

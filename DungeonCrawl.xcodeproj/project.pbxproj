@@ -14,6 +14,7 @@
 		E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */; };
 		E216F5D424671E5600844BF8 /* Direction+GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */; };
 		E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */; };
+		E21F13F9247F5A0400616779 /* DieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F13F8247F5A0400616779 /* DieTests.swift */; };
 		E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */; };
 		E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
@@ -137,6 +138,7 @@
 		E216F5D1246711AD00844BF8 /* CGFloat+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		E216F5D324671E5600844BF8 /* Direction+GridPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Direction+GridPoint.swift"; sourceTree = "<group>"; };
 		E216F5D52467214000844BF8 /* DirectionGridPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionGridPointTests.swift; sourceTree = "<group>"; };
+		E21F13F8247F5A0400616779 /* DieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieTests.swift; sourceTree = "<group>"; };
 		E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactoryTests.swift; sourceTree = "<group>"; };
 		E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponentTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				E2251F9A247A174000D2C3E1 /* __mocks__ */,
+				E21F13F8247F5A0400616779 /* DieTests.swift */,
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
 				E2E2BDC3246ED069009DE525 /* GameTests.swift */,
 				E227B55824737B6500115B09 /* QuestTests.swift */,
@@ -948,6 +951,7 @@
 				E2B2A21C2457C19F000ED955 /* DungeonGeneratorTests.swift in Sources */,
 				E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
+				E21F13F9247F5A0400616779 /* DieTests.swift in Sources */,
 				E2E2BDD2246F5B72009DE525 /* TurnTakingSystemTests.swift in Sources */,
 				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,
 				E29F72F924719F18008C7719 /* EntityManagerTests.swift in Sources */,
