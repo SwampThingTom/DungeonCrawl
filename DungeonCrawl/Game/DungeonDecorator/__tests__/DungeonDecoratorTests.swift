@@ -15,7 +15,12 @@ class DungeonDecoratorTests: XCTestCase {
     func testDecorate() throws {
         // Arrange
         let dungeon = DungeonModel(map: fiveRegionMap(), rooms: threeRooms())
-        let sut = DungeonDecorator()
+        let enemyPlacer = MockEnemyPlacer()
+        enemyPlacer.mockedEnemies = [
+            EnemyModel(enemyType: .jellyCube, cell: GridCell(x: 14, y: 8)),
+            EnemyModel(enemyType: .giantBat, cell: GridCell(x: 8, y: 4))
+        ]
+        let sut = DungeonDecorator(enemyPlacer: enemyPlacer)
         
         // Act
         let decorations = sut.decorate(dungeon: dungeon)
@@ -23,7 +28,7 @@ class DungeonDecoratorTests: XCTestCase {
         // Assert
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
-        XCTAssertEqual(decorations.enemies.count, 1)
+        XCTAssertEqual(decorations.enemies.count, 2)
         // LATER: How should we verify decorations are being created?
         // XCTAssertGreaterThanOrEqual(decorations.items.count, 1)  // One sword + random treasure
         XCTAssertFalse(decorationsOverlap(decorations, map: dungeon.map))
@@ -42,6 +47,17 @@ class DungeonDecoratorTests: XCTestCase {
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 0)
         XCTAssertEqual(decorations.items.count, 0)
+    }
+}
+
+class MockEnemyPlacer: EnemyPlacing {
+    
+    var mockedEnemies = [EnemyModel]()
+    
+    func placeEnemies(in dungeon: DungeonModel,
+                      occupiedCells: OccupiedCells,
+                      maxChallengeRating: Double) -> [EnemyModel] {
+        return mockedEnemies
     }
 }
 
