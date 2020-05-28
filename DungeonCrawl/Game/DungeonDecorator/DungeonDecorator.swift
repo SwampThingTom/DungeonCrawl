@@ -17,7 +17,7 @@ class DungeonDecorator: DungeonDecorating {
     private var randomNumberGenerator: AnyRandomNumberGenerator
     private let chance: ChanceDetermining
     
-    private var decoratedCells = Set<GridCell>()
+    private var decoratedCells = OccupiedCells()
 
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator(),
          chance: ChanceDetermining? = nil) {
@@ -41,7 +41,7 @@ class DungeonDecorator: DungeonDecorating {
             for y in 0 ..< dungeon.map.size.height {
                 let cell = GridCell(x: x, y: y)
                 if dungeon.map.tile(at: cell) == .floor {
-                    decoratedCells.insert(cell)
+                    decoratedCells.occupy(cell: cell)
                     return cell
                 }
             }
@@ -53,8 +53,8 @@ class DungeonDecorator: DungeonDecorating {
         let treasure: [ItemModel] = dungeon.rooms.compactMap { room in
             guard chance.one(in: 3) else { return nil }
             let cell = room.bounds.randomWallCell(using: &randomNumberGenerator)
-            guard !decoratedCells.contains(cell) else { return nil }
-            decoratedCells.insert(cell)
+            guard !decoratedCells.isOccupied(cell: cell) else { return nil }
+            decoratedCells.occupy(cell: cell)
             let gold = Dice(die: D10(), numberOfDice: 5).roll()
             let item = createTreasure(worth: gold)
             return ItemModel(item: item, cell: cell)
@@ -67,8 +67,8 @@ class DungeonDecorator: DungeonDecorating {
         let items: [ItemModel] = (1...dungeon.rooms.count).compactMap { _ in
             // LATER: When more items are available from randomItem(), only have a 1 in 3 chance of an item per room
             let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
-            let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
-            decoratedCells.insert(cell)
+            let cell = decoratedCells.findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
+            decoratedCells.occupy(cell: cell)
             guard let item = randomItem() else { return nil }
             return ItemModel(item: item, cell: cell)
         }
@@ -91,18 +91,10 @@ class DungeonDecorator: DungeonDecorating {
             return []
         }
         let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
-        let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
-        decoratedCells.insert(cell)
+        let cell = decoratedCells.findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
+        decoratedCells.occupy(cell: cell)
         let enemy = EnemyModel(enemyType: .jellyCube, cell: cell)
         return [enemy]
-    }
-    
-    private func findEmptyCell(randomCell: () -> GridCell) -> GridCell {
-        var cell: GridCell
-        repeat {
-            cell = randomCell()
-        } while decoratedCells.contains(cell)
-        return cell
     }
 }
 

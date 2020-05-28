@@ -18,8 +18,10 @@
 		E21F13FB247FCEDC00616779 /* EnemyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F13FA247FCEDC00616779 /* EnemyPicker.swift */; };
 		E21F13FE247FE6EC00616779 /* EnemyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F13FD247FE6EC00616779 /* EnemyType.swift */; };
 		E21F1401247FE77600616779 /* EnemyPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F1400247FE77600616779 /* EnemyPickerTests.swift */; };
+		E21F1406247FF10D00616779 /* OccupiedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F1405247FF10D00616779 /* OccupiedCells.swift */; };
 		E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */; };
 		E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */; };
+		E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -145,8 +147,10 @@
 		E21F13FA247FCEDC00616779 /* EnemyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPicker.swift; sourceTree = "<group>"; };
 		E21F13FD247FE6EC00616779 /* EnemyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyType.swift; sourceTree = "<group>"; };
 		E21F1400247FE77600616779 /* EnemyPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPickerTests.swift; sourceTree = "<group>"; };
+		E21F1405247FF10D00616779 /* OccupiedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupiedCells.swift; sourceTree = "<group>"; };
 		E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactoryTests.swift; sourceTree = "<group>"; };
 		E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponentTests.swift; sourceTree = "<group>"; };
+		E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupiedCellsTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -313,10 +317,30 @@
 			path = __tests__;
 			sourceTree = "<group>";
 		};
+		E21F1402247FECF200616779 /* DungeonDecorator */ = {
+			isa = PBXGroup;
+			children = (
+				E222E806247FF5960060EB63 /* __tests__ */,
+				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
+				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
+				E21F1405247FF10D00616779 /* OccupiedCells.swift */,
+			);
+			path = DungeonDecorator;
+			sourceTree = "<group>";
+		};
 		E2203DEF247D4C5000677706 /* __tests__ */ = {
 			isa = PBXGroup;
 			children = (
 				E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		E222E806247FF5960060EB63 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
+				E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -637,13 +661,12 @@
 				E29F72FA2471D711008C7719 /* Components */,
 				E29F72FB2471D71F008C7719 /* Entities */,
 				E29F73082471FFFC008C7719 /* Systems */,
+				E21F1402247FECF200616779 /* DungeonDecorator */,
 				E21F13FC247FE6AB00616779 /* Enemies */,
 				E29DFC0224787A8C00E4E5B0 /* Items */,
 				E29DFBF624781B6E00E4E5B0 /* Utils */,
 				E29DFBFC2478558800E4E5B0 /* Chance.swift */,
 				E2E2BDD9247009DB009DE525 /* Die.swift */,
-				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
-				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
 				E2980F352468E32E000BA2AC /* DungeonLevel.swift */,
 				E2980F39246D6EF8000BA2AC /* Game.swift */,
 				E227B5562473779300115B09 /* Quest.swift */,
@@ -656,7 +679,6 @@
 			children = (
 				E2251F9A247A174000D2C3E1 /* __mocks__ */,
 				E21F13F8247F5A0400616779 /* DieTests.swift */,
-				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
 				E2E2BDC3246ED069009DE525 /* GameTests.swift */,
 				E227B55824737B6500115B09 /* QuestTests.swift */,
 			);
@@ -908,6 +930,7 @@
 				E2E2BDCE246F4D8B009DE525 /* DungeonScene+Touch.swift in Sources */,
 				E29DFC0A2478920100E4E5B0 /* ItemBuilder.swift in Sources */,
 				E2C98AE92463247B005C11AD /* PlayerSprite.swift in Sources */,
+				E21F1406247FF10D00616779 /* OccupiedCells.swift in Sources */,
 				E2C8D08E245BC95D005EE3D8 /* RoomGenerator.swift in Sources */,
 				E2FFA6E7247E864F007ED938 /* Weapons.swift in Sources */,
 				E2B2A2202457CBC4000ED955 /* Tile.swift in Sources */,
@@ -991,6 +1014,7 @@
 				E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */,
 				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
 				E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */,
+				E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E21F1401247FE77600616779 /* EnemyPickerTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
