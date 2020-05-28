@@ -21,8 +21,8 @@ class GameTests: XCTestCase {
         let dungeonSize = expectedDungeonModel.map.size
         
         let enemyModels = [
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 5, y: 1)),
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 13, y: 7))
         ]
         let items = [
             ItemModel(item: createTreasure(worth: 10), cell: GridCell(x: 7, y: 10)),
@@ -58,7 +58,7 @@ class GameTests: XCTestCase {
             enemyModelCells.remove(enemySprite.cell)
             
             let enemyEnemyComponent = sut.entityManager.enemyComponent(for: $1)!
-            XCTAssertEqual(enemyEnemyComponent.enemyType, .ghost)
+            XCTAssertEqual(enemyEnemyComponent.enemyType, .ghast)
         }
         XCTAssert(enemyModelCells.isEmpty)
         
@@ -102,8 +102,8 @@ class GameTests: XCTestCase {
         
         let enemyModels: [EnemyModel] = [
             // Placing this enemy next to the player's move location will cause it to attack.
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 4)),
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 5, y: 4)),
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 13, y: 7))
         ]
         let dungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
                                                         enemies: enemyModels)
@@ -149,8 +149,8 @@ class GameTests: XCTestCase {
         let dungeonSize = expectedDungeonModel.map.size
         
         let enemyModels: [EnemyModel] = [
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 5, y: 1)),
-            EnemyModel(enemyType: .ghost, cell: GridCell(x: 13, y: 7))
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 5, y: 1)),
+            EnemyModel(enemyType: .ghast, cell: GridCell(x: 13, y: 7))
         ]
         let dungeonDecorations = mockDungeonDecorations(playerStartCell: GridCell(x: 1, y: 13),
                                                         enemies: enemyModels)

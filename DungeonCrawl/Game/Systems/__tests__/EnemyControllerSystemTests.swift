@@ -28,7 +28,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_attack_playerInRange() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 4, y: 5))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let level = mockGameLevel(entityManager: entityManager!, player: player)
@@ -44,7 +44,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_walk_noTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = nil
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -64,7 +64,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_walk_reachedTargetAndWait() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = GridCell(x: 5, y: 5)
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -86,7 +86,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_walk_reachedTargetAndWalk() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = GridCell(x: 5, y: 5)
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -109,7 +109,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_walk_towardsTarget() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.targetCell = GridCell(x: 5, y: 4)
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -129,7 +129,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_chase() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 5, y: 1))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         let actorSprite = entityManager!.spriteComponent(for: actor)
         let rooms = [RoomModel(bounds: GridRect(x: 7, y: 1, width: 3, height: 7))]
@@ -147,7 +147,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_chase_stop() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 1, y: 1))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.enemyAIState = .chase
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -167,7 +167,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_wait_continue() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.enemyAIState = .wait
         let actorSprite = entityManager!.spriteComponent(for: actor)
@@ -188,7 +188,7 @@ class EnemyControllerSystemTests: XCTestCase {
     func testTurnAction_wait_stop() throws {
         // Arrange
         let player = entityFactory!.createPlayer(cell: GridCell(x: 0, y: 0))
-        let actor = entityFactory!.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        let actor = entityFactory!.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let actorEnemy = entityManager!.enemyComponent(for: actor)
         actorEnemy?.enemyAIState = .wait
         let actorSprite = entityManager!.spriteComponent(for: actor)

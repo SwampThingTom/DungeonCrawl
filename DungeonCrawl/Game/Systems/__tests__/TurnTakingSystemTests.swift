@@ -243,7 +243,7 @@ class TurnTakingSystemTests: XCTestCase {
     }
     
     func mockEnemyComponent() -> EnemyComponent {
-        return EnemyComponent(enemyType: .ghost)
+        return EnemyComponent(enemyType: .ghast)
     }
     
     func mockInventoryComponent(gold: Int) -> InventoryComponent {

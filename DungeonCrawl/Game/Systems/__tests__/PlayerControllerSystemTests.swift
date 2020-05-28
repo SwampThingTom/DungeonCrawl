@@ -47,7 +47,7 @@ class PlayerControllerSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
-        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 15, y: 5))
+        entityFactory.createEnemy(enemyType: .ghast, cell: GridCell(x: 15, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         
@@ -63,7 +63,7 @@ class PlayerControllerSystemTests: XCTestCase {
         let entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)
         let player = entityFactory.createPlayer(cell: GridCell(x: 11, y: 5))
-        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 12, y: 5))
+        entityFactory.createEnemy(enemyType: .ghast, cell: GridCell(x: 12, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
         let sut = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
         

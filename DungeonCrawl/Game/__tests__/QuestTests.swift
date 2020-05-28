@@ -33,7 +33,7 @@ class QuestTests: XCTestCase {
         let entityFactory = EntityFactory(entityManager: entityManager)
         let sut = Quest()
         let player = entityFactory.createPlayer(cell: GridCell(x: 0, y: 0))
-        entityFactory.createEnemy(enemyType: .ghost, cell: GridCell(x: 5, y: 5))
+        entityFactory.createEnemy(enemyType: .ghast, cell: GridCell(x: 5, y: 5))
         let level = mockGameLevel(entityManager: entityManager, player: player)
         
         // Act

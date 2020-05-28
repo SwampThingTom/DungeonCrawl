@@ -83,8 +83,8 @@ class EntityFactory {
     
     private func combatComponent(for enemyType: EnemyType) -> CombatComponent {
         switch enemyType {
-        case .ghost:
             return CombatComponent(attackBonus: 0, armorClass: 12, damageDie: D3(), maxHitPoints: 5)
+        case .ghast:
         }
     }
     

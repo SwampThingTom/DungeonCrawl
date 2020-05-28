@@ -26,13 +26,13 @@ enum EnemyAIState: Equatable {
 }
 
 enum EnemyType: Equatable {
-    case ghost
+    case ghast
 }
 
 extension EnemyType: CustomStringConvertible {
     var description: String {
         switch self {
-        case .ghost: return "ghost"
+        case .ghast: return "ghast"
         }
     }
 }

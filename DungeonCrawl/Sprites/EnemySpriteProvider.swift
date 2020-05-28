@@ -21,7 +21,7 @@ class EnemySpriteProvider: EnemySpriteProviding {
     
     private func textureName(for enemyType: EnemyType) -> String {
         switch enemyType {
-        case .ghost:
+        case .ghast:
             return "Ghost"
         }
     }

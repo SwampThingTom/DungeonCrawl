@@ -93,7 +93,7 @@ class DungeonDecorator: DungeonDecorating {
         let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
         let cell = findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
         decoratedCells.insert(cell)
-        let enemy = EnemyModel(enemyType: .ghost, cell: cell)
+        let enemy = EnemyModel(enemyType: .ghast, cell: cell)
         return [enemy]
     }
     
