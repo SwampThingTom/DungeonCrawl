@@ -12,6 +12,9 @@ class OccupiedCells {
     
     private var occupiedCells = Set<GridCell>()
     
+    var count: Int { occupiedCells.count }
+    var isEmpty: Bool { occupiedCells.isEmpty }
+    
     /// Indicates whether a cell is occupied.
     func isOccupied(cell: GridCell) -> Bool {
         return occupiedCells.contains(cell)

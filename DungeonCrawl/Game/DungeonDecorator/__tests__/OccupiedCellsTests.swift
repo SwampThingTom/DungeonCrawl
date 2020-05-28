@@ -21,6 +21,8 @@ class OccupiedCellsTests: XCTestCase {
         
         // Assert
         XCTAssertFalse(isOccupied)
+        XCTAssert(sut.isEmpty)
+        XCTAssertEqual(sut.count, 0)
     }
     
     func testOccupied() throws {
@@ -34,6 +36,8 @@ class OccupiedCellsTests: XCTestCase {
         // Assert
         XCTAssert(isOccupied)
         XCTAssertFalse(sut.isOccupied(cell: GridCell(x: 5, y: 5)))
+        XCTAssertFalse(sut.isEmpty)
+        XCTAssertEqual(sut.count, 1)
     }
     
     func testFindEmptyCell() throws {

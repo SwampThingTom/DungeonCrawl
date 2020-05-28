@@ -18,10 +18,12 @@
 		E21F13FB247FCEDC00616779 /* EnemyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F13FA247FCEDC00616779 /* EnemyPicker.swift */; };
 		E21F13FE247FE6EC00616779 /* EnemyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F13FD247FE6EC00616779 /* EnemyType.swift */; };
 		E21F1401247FE77600616779 /* EnemyPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F1400247FE77600616779 /* EnemyPickerTests.swift */; };
+		E21F1404247FED7400616779 /* EnemyPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F1403247FED7400616779 /* EnemyPlacer.swift */; };
 		E21F1406247FF10D00616779 /* OccupiedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F1405247FF10D00616779 /* OccupiedCells.swift */; };
 		E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */; };
 		E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */; };
 		E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */; };
+		E222E80A248006230060EB63 /* EnemyPlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E809248006230060EB63 /* EnemyPlacerTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -147,10 +149,12 @@
 		E21F13FA247FCEDC00616779 /* EnemyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPicker.swift; sourceTree = "<group>"; };
 		E21F13FD247FE6EC00616779 /* EnemyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyType.swift; sourceTree = "<group>"; };
 		E21F1400247FE77600616779 /* EnemyPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPickerTests.swift; sourceTree = "<group>"; };
+		E21F1403247FED7400616779 /* EnemyPlacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPlacer.swift; sourceTree = "<group>"; };
 		E21F1405247FF10D00616779 /* OccupiedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupiedCells.swift; sourceTree = "<group>"; };
 		E2203DF0247D4C6500677706 /* EntityFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactoryTests.swift; sourceTree = "<group>"; };
 		E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponentTests.swift; sourceTree = "<group>"; };
 		E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupiedCellsTests.swift; sourceTree = "<group>"; };
+		E222E809248006230060EB63 /* EnemyPlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPlacerTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				E222E806247FF5960060EB63 /* __tests__ */,
 				E2980F2F246867D6000BA2AC /* DungeonDecorations.swift */,
 				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
+				E21F1403247FED7400616779 /* EnemyPlacer.swift */,
 				E21F1405247FF10D00616779 /* OccupiedCells.swift */,
 			);
 			path = DungeonDecorator;
@@ -340,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
+				E222E809248006230060EB63 /* EnemyPlacerTests.swift */,
 				E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */,
 			);
 			path = __tests__;
@@ -955,6 +961,7 @@
 				E29F72FD2471D749008C7719 /* SpriteComponent.swift in Sources */,
 				E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */,
 				E29DFBF824781B9A00E4E5B0 /* GridCell+Math.swift in Sources */,
+				E21F1404247FED7400616779 /* EnemyPlacer.swift in Sources */,
 				E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */,
 				E292EA1F245F04AA002A0F31 /* RegionConnector.swift in Sources */,
 				E2980F3224687CB5000BA2AC /* EnemySprite.swift in Sources */,
@@ -1012,6 +1019,7 @@
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
 				E29F72EA2470A568008C7719 /* EnemyControllerSystemTests.swift in Sources */,
 				E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */,
+				E222E80A248006230060EB63 /* EnemyPlacerTests.swift in Sources */,
 				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
 				E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */,
 				E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */,
