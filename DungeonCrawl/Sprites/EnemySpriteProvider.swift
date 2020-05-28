@@ -22,7 +22,17 @@ class EnemySpriteProvider: EnemySpriteProviding {
     private func textureName(for enemyType: EnemyType) -> String {
         switch enemyType {
         case .ghast:
+            return "Zombie"
+        case .giantBat:
+            return "Bat"
+        case .giantSpider:
+            return "Spider"
+        case .jellyCube:
+            return "Ooze"
+        case .shadow:
             return "Ghost"
+        case .skeleton:
+            return "Skeleton"
         }
     }
 }

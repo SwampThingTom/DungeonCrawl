@@ -27,12 +27,22 @@ enum EnemyAIState: Equatable {
 
 enum EnemyType: Equatable {
     case ghast
+    case giantBat
+    case giantSpider
+    case jellyCube
+    case shadow
+    case skeleton
 }
 
 extension EnemyType: CustomStringConvertible {
     var description: String {
         switch self {
         case .ghast: return "ghast"
+        case .giantBat: return "giant bat"
+        case .giantSpider: return "giant spider"
+        case .jellyCube: return "jelly cube"
+        case .shadow: return "shadow"
+        case .skeleton: return "skeleton"
         }
     }
 }
