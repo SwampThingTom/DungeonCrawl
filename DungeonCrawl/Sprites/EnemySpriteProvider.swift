@@ -15,9 +15,14 @@ protocol EnemySpriteProviding {
 class EnemySpriteProvider: EnemySpriteProviding {
     
     func sprite(for enemyType: EnemyType, spriteName: String) -> SKSpriteNode? {
+        let textureName = self.textureName(for: enemyType)
+        return EnemySprite(spriteName: spriteName, textureName: textureName)
+    }
+    
+    private func textureName(for enemyType: EnemyType) -> String {
         switch enemyType {
         case .ghost:
-            return GhostSprite(spriteName: spriteName)
+            return "Ghost"
         }
     }
 }

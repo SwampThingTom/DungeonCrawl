@@ -1,5 +1,5 @@
 //
-//  Ghost.swift
+//  EnemySprite.swift
 //  DungeonCrawl
 //
 //  Created by Thomas Aylesworth on 5/10/20.
@@ -8,11 +8,11 @@
 
 import SpriteKit
 
-enum GhostActionKeys {
+enum EnemyActionKeys {
     static let animation = "animation"
 }
 
-class GhostSprite: SKSpriteNode, Animatable {
+class EnemySprite: SKSpriteNode, Animatable {
     
     var heading = Direction.south {
         didSet { texture = standingTexture[heading] }
@@ -20,13 +20,12 @@ class GhostSprite: SKSpriteNode, Animatable {
     var animations = [Direction: SKAction]()
     var standingTexture = [Direction: SKTexture]()
     
-    init(spriteName: String) {
-        let textureName = "Ghost"
+    init(spriteName: String, textureName: String) {
         let texture = SKTexture(imageNamed: "\(textureName)_North_01")
         super.init(texture: texture, color: .white, size: texture.size())
         createAnimations(textureName: textureName)
         name = spriteName
-        zPosition = 50
+        zPosition = 40
         userData = ["isEnemy": true]
     }
     
