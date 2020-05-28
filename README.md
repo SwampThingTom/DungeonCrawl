@@ -21,7 +21,12 @@ A simple Roguelike to experiment with procedural dungeon generation.
   * potions (healing, poison, etc.)
   * treasure
 * Monsters
-  * tbd
+    * Jelly Cube
+    * Giant Bat
+    * Skeleton
+    * Shadow
+    * Giant Spider
+    * Ghast
 * Traps
   * tbd
 

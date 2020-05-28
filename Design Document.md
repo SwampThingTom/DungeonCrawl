@@ -124,3 +124,34 @@ Otherwise they aren't identified until they player uses them or uses a spell, sc
 * Monster alert level
   * The longer you stay on a level and the more monsters you see, the more they seek you out
   * Alternative to hunger?
+
+### Possible Monster Types by Challenge Rating
+
+* CR 1/8 (25 xp)
+  * **Jelly Cube** (ooze)
+  * Giant Rat
+  * Kobold
+  * Poisonous Snake
+* CR 1/4 (50 xp)
+  * **Giant Bat** (bat)
+  * **Skeleton** (skeleton)
+  * Drow
+  * Giant Snake
+  * Goblin
+  * Zombie
+* CR 1/2 (100 xp)
+  * **Shadow** (ghost)
+  * Hobgoblin
+  * Lizardfolk
+  * Orc
+* CR 1 (200 xp)
+  * **Giant Spider** (spider)
+  * Bugbear
+  * Ghoul
+  * Scarecrow
+  * Spectre
+* CR 2 (450 xp)
+  * **Ghast** (zombie)
+  * Centaur
+  * Gelatinous Cube
+  * Ogre
