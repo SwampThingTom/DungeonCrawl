@@ -25,28 +25,6 @@ enum EnemyAIState: Equatable {
     case walk
 }
 
-enum EnemyType: Equatable {
-    case ghast
-    case giantBat
-    case giantSpider
-    case jellyCube
-    case shadow
-    case skeleton
-}
-
-extension EnemyType: CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .ghast: return "ghast"
-        case .giantBat: return "giant bat"
-        case .giantSpider: return "giant spider"
-        case .jellyCube: return "jelly cube"
-        case .shadow: return "shadow"
-        case .skeleton: return "skeleton"
-        }
-    }
-}
-
 extension EntityManager {
     func enemyComponent(for entity: Entity) -> EnemyComponent? {
         return component(of: EnemyComponent.self, for: entity) as? EnemyComponent
