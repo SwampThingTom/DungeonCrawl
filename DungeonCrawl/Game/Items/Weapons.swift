@@ -56,49 +56,49 @@ let simpleMeleeWeapons: [ItemPickerOdds] = [
 func createClub() -> Item {
     return ItemBuilder(name: "club")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D4()))
+        .with(weapon: WeaponModel(damageDice: D4()))
         .build()
 }
 
 func createMace() -> Item {
     return ItemBuilder(name: "mace")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D6()))
+        .with(weapon: WeaponModel(damageDice: D6()))
         .build()
 }
 
 func createDagger() -> Item {
     return ItemBuilder(name: "dagger")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D4()))
+        .with(weapon: WeaponModel(damageDice: D4()))
         .build()
 }
 
 func createSpear() -> Item {
     return ItemBuilder(name: "spear")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D6()))
+        .with(weapon: WeaponModel(damageDice: D6()))
         .build()
 }
 
 func createSickle() -> Item {
     return ItemBuilder(name: "sickle")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D4()))
+        .with(weapon: WeaponModel(damageDice: D4()))
         .build()
 }
 
 func createShortSword() -> Item {
     return ItemBuilder(name: "short sword")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D6()))
+        .with(weapon: WeaponModel(damageDice: D6()))
         .build()
 }
 
 func createHandAxe() -> Item {
     return ItemBuilder(name: "hand axe")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D6()))
+        .with(weapon: WeaponModel(damageDice: D6()))
         .build()
 }
 
@@ -117,7 +117,7 @@ let martialMeleeWeapons: [ItemPickerOdds] = [
 func createFlail() -> Item {
     return ItemBuilder(name: "flail")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D8()))
+        .with(weapon: WeaponModel(damageDice: D8()))
         .build()
 }
 
@@ -125,34 +125,34 @@ func createMaul() -> Item {
     return ItemBuilder(name: "maul")
         .with(equipmentSlot: .weapon)
         // LATER: Should be 2d6. Need a way to represent multiple damage dice.
-        .with(weapon: WeaponModel(damageDie: D12()))
+        .with(weapon: WeaponModel(damageDice: D12()))
         .build()
 }
 
 func createLongSword() -> Item {
     return ItemBuilder(name: "long sword")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D8()))
+        .with(weapon: WeaponModel(damageDice: D8()))
         .build()
 }
 
 func createPike() -> Item {
     return ItemBuilder(name: "pike")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D10()))
+        .with(weapon: WeaponModel(damageDice: D10()))
         .build()
 }
 
 func createBattleAxe() -> Item {
     return ItemBuilder(name: "battle axe")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D8()))
+        .with(weapon: WeaponModel(damageDice: D8()))
         .build()
 }
 
 func createGreatAxe() -> Item {
     return ItemBuilder(name: "great axe")
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: D12()))
+        .with(weapon: WeaponModel(damageDice: D12()))
         .build()
 }

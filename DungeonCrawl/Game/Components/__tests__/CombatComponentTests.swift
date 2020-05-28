@@ -25,8 +25,8 @@ class CombatComponentTests: XCTestCase {
     func testArmorClass_noItems() throws {
         // Arrange
         let entity = entityManager?.createEntity()
-        let damageDie = MockDie(nextRoll: 10)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -41,8 +41,8 @@ class CombatComponentTests: XCTestCase {
         let entity = entityManager?.createEntity()
         let inventory = InventoryComponent()
         entity?.add(component: inventory)
-        let damageDie = MockDie(nextRoll: 10)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -63,8 +63,8 @@ class CombatComponentTests: XCTestCase {
         inventory.items.append(armor)
         inventory.equip(itemComponent: armor)
         
-        let damageDie = MockDie(nextRoll: 10)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -77,8 +77,8 @@ class CombatComponentTests: XCTestCase {
     func testWeaponDamage_noItems() throws {
         // Arrange
         let entity = entityManager?.createEntity()
-        let damageDie = MockDie(nextRoll: 3)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -93,8 +93,8 @@ class CombatComponentTests: XCTestCase {
         let entity = entityManager?.createEntity()
         let inventory = InventoryComponent()
         entity?.add(component: inventory)
-        let damageDie = MockDie(nextRoll: 3)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -111,12 +111,12 @@ class CombatComponentTests: XCTestCase {
         let inventory = InventoryComponent()
         entity?.add(component: inventory)
         
-        let weapon = ItemComponent(item: mockWeapon(damageDie: MockDie(nextRoll: 10)))
+        let weapon = ItemComponent(item: mockWeapon(damageDice: MockDie(nextRoll: 10)))
         inventory.items.append(weapon)
         inventory.equip(itemComponent: weapon)
         
-        let damageDie = MockDie(nextRoll: 3)
-        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDie: damageDie, maxHitPoints: 10)
+        let damageDice = MockDie(nextRoll: 3)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
         entity?.add(component: sut)
         
         // Act
@@ -134,9 +134,9 @@ func mockArmor(bonus: Int, name: String = "MockArmor") -> Item {
         .build()
 }
 
-func mockWeapon(damageDie: DieRolling, name: String = "Mock Weapon") -> Item {
+func mockWeapon(damageDice: DieRolling, name: String = "Mock Weapon") -> Item {
     return ItemBuilder(name: name)
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDie: damageDie))
+        .with(weapon: WeaponModel(damageDice: damageDice))
         .build()
 }

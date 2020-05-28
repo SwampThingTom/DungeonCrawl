@@ -9,12 +9,12 @@
 import Foundation
 
 struct WeaponModel {
-    let damageDie: DieRolling
+    let damageDice: DieRolling
 }
 
 extension WeaponModel: Equatable {
     
     static func == (lhs: WeaponModel, rhs: WeaponModel) -> Bool {
-        return lhs.damageDie.sides == rhs.damageDie.sides
+        return lhs.damageDice.sides == rhs.damageDice.sides
     }
 }

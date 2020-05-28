@@ -30,8 +30,8 @@ class CombatComponent: Component {
     }
     
     var weaponDamage: Int {
-        let damageDie = equippedWeapon?.damageDie ?? baseDamageDie
-        return damageDie.roll()
+        let damageDice = equippedWeapon?.damageDice ?? baseDamageDie
+        return damageDice.roll()
     }
     
     private var equippedWeapon: WeaponModel? {
@@ -45,10 +45,10 @@ class CombatComponent: Component {
         return hitPoints <= 0
     }
     
-    init(attackBonus: Int, armorClass: Int, damageDie: DieRolling, maxHitPoints: Int) {
+    init(attackBonus: Int, armorClass: Int, damageDice: DieRolling, maxHitPoints: Int) {
         self.baseAttackBonus = attackBonus
         self.baseArmorClass = armorClass
-        self.baseDamageDie = damageDie
+        self.baseDamageDie = damageDice
         self.maxHitPoints = maxHitPoints
         self.hitPoints = maxHitPoints
     }

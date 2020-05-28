@@ -37,7 +37,7 @@ class DungeonSceneInventoryTests: XCTestCase {
         // Arrange
         let items = [
             itemComponent(item: mockArmor(bonus: 2, name: "Leather")),
-            itemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
+            itemComponent(item: mockWeapon(damageDice: D3(), name: "Dagger")),
             itemComponent(item: Item(name: "Junk")),
         ]
         let inventoryComponent = InventoryComponent()
@@ -65,8 +65,8 @@ class DungeonSceneInventoryTests: XCTestCase {
         // Arrange
         let items = [
             itemComponent(item: mockArmor(bonus: 2, name: "Leather")),
-            itemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
-            itemComponent(item: mockWeapon(damageDie: D3(), name: "Dagger")),
+            itemComponent(item: mockWeapon(damageDice: D3(), name: "Dagger")),
+            itemComponent(item: mockWeapon(damageDice: D3(), name: "Dagger")),
             itemComponent(item: Item(name: "Junk")),
         ]
         let inventoryComponent = InventoryComponent()

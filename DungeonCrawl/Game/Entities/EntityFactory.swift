@@ -22,7 +22,7 @@ class EntityFactory {
         let spriteComponent = SpriteComponent(spriteName: "player", displayName: "player", cell: cell)
         entityManager.add(component: spriteComponent, to: entity)
         
-        let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damageDie: D3(), maxHitPoints: 10)
+        let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damageDice: D3(), maxHitPoints: 10)
         entityManager.add(component: combatComponent, to: entity)
         
         let inventoryComponent = InventoryComponent()
@@ -83,9 +83,9 @@ class EntityFactory {
     
     private func combatComponent(for enemyType: EnemyType) -> CombatComponent {
         switch enemyType {
-            return CombatComponent(attackBonus: 0, armorClass: 12, damageDie: D3(), maxHitPoints: 5)
         case .ghast:
         }
+            return CombatComponent(attackBonus: 0, armorClass: 12, damageDice: D3(), maxHitPoints: 5)
     }
     
     private func spriteComponent(for item: ItemModel, uniqueID: UInt) -> SpriteComponent {
