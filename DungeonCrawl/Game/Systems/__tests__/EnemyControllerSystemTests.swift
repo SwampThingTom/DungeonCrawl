@@ -208,7 +208,7 @@ class EnemyControllerSystemTests: XCTestCase {
     }
 }
 
-private class MockChance: ChanceDetermining {
+class MockChance: ChanceDetermining {
     
     var mockEventHappens = false
     

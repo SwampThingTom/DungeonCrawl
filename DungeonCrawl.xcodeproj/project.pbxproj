@@ -24,6 +24,8 @@
 		E2203DF3247D51AD00677706 /* InventoryComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */; };
 		E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */; };
 		E222E80A248006230060EB63 /* EnemyPlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E809248006230060EB63 /* EnemyPlacerTests.swift */; };
+		E222E80C248038C40060EB63 /* TreasurePlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E80B248038C40060EB63 /* TreasurePlacer.swift */; };
+		E222E80E248073CD0060EB63 /* TreasurePlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E80D248073CD0060EB63 /* TreasurePlacerTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -155,6 +157,8 @@
 		E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponentTests.swift; sourceTree = "<group>"; };
 		E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupiedCellsTests.swift; sourceTree = "<group>"; };
 		E222E809248006230060EB63 /* EnemyPlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPlacerTests.swift; sourceTree = "<group>"; };
+		E222E80B248038C40060EB63 /* TreasurePlacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasurePlacer.swift; sourceTree = "<group>"; };
+		E222E80D248073CD0060EB63 /* TreasurePlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasurePlacerTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 				E2C98AE124631030005C11AD /* DungeonDecorator.swift */,
 				E21F1403247FED7400616779 /* EnemyPlacer.swift */,
 				E21F1405247FF10D00616779 /* OccupiedCells.swift */,
+				E222E80B248038C40060EB63 /* TreasurePlacer.swift */,
 			);
 			path = DungeonDecorator;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				E2C98AE524631052005C11AD /* DungeonDecoratorTests.swift */,
 				E222E809248006230060EB63 /* EnemyPlacerTests.swift */,
 				E222E807247FF5C50060EB63 /* OccupiedCellsTests.swift */,
+				E222E80D248073CD0060EB63 /* TreasurePlacerTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -957,6 +963,7 @@
 				E29DFC0124786F8E00E4E5B0 /* HUDView.swift in Sources */,
 				E2C8D08C245BB295005EE3D8 /* GridMap.swift in Sources */,
 				E2980F3424687E16000BA2AC /* EnemySpriteProvider.swift in Sources */,
+				E222E80C248038C40060EB63 /* TreasurePlacer.swift in Sources */,
 				E29F730A2472AFB4008C7719 /* System.swift in Sources */,
 				E29F72FD2471D749008C7719 /* SpriteComponent.swift in Sources */,
 				E216F5D024670F2E00844BF8 /* CGFloat+Extensions.swift in Sources */,
@@ -1023,6 +1030,7 @@
 				E29F72EF2470B650008C7719 /* FixedSizeQueueTests.swift in Sources */,
 				E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */,
 				E222E808247FF5C50060EB63 /* OccupiedCellsTests.swift in Sources */,
+				E222E80E248073CD0060EB63 /* TreasurePlacerTests.swift in Sources */,
 				E2C98AE624631052005C11AD /* DungeonDecoratorTests.swift in Sources */,
 				E21F1401247FE77600616779 /* EnemyPickerTests.swift in Sources */,
 				E2E2BDC4246ED069009DE525 /* GameTests.swift in Sources */,
