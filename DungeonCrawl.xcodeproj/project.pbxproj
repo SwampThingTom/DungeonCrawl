@@ -28,6 +28,7 @@
 		E222E80E248073CD0060EB63 /* TreasurePlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E80D248073CD0060EB63 /* TreasurePlacerTests.swift */; };
 		E222E8102480999D0060EB63 /* ItemPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E80F2480999D0060EB63 /* ItemPlacer.swift */; };
 		E222E81224809BEB0060EB63 /* ItemPlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E81124809BEB0060EB63 /* ItemPlacerTests.swift */; };
+		E222E8142481C6030060EB63 /* Potions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E8132481C6030060EB63 /* Potions.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -161,6 +162,7 @@
 		E222E80D248073CD0060EB63 /* TreasurePlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasurePlacerTests.swift; sourceTree = "<group>"; };
 		E222E80F2480999D0060EB63 /* ItemPlacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPlacer.swift; sourceTree = "<group>"; };
 		E222E81124809BEB0060EB63 /* ItemPlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPlacerTests.swift; sourceTree = "<group>"; };
+		E222E8132481C6030060EB63 /* Potions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Potions.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				E29DFC0724788CEC00E4E5B0 /* Item.swift */,
 				E29DFC092478920100E4E5B0 /* ItemBuilder.swift */,
 				E2FFA6EA247E9655007ED938 /* ItemPicker.swift */,
+				E222E8132481C6030060EB63 /* Potions.swift */,
 				E2FFA6E6247E864F007ED938 /* Weapons.swift */,
 			);
 			path = Items;
@@ -925,6 +928,7 @@
 				E2B2A2192457C157000ED955 /* DungeonGenerator.swift in Sources */,
 				E2E4E82F246439AA00F5EA93 /* CGVector+Extensions.swift in Sources */,
 				E2E2BDD4246F63E0009DE525 /* CombatSystem.swift in Sources */,
+				E222E8142481C6030060EB63 /* Potions.swift in Sources */,
 				E29F72FF2471D9CA008C7719 /* EntityFactory.swift in Sources */,
 				E2B2A1E42457BCE4000ED955 /* GameScene.swift in Sources */,
 				E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */,

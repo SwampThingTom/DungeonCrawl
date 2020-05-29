@@ -13,6 +13,12 @@ enum EquipmentSlot: Equatable {
     case weapon
 }
 
+enum PotionType: Equatable {
+    case heal
+    case armorBonus
+    case attackBonus
+}
+
 struct Item {
     var name: String
     
@@ -25,11 +31,14 @@ struct Item {
     /// The slot where this item can be equipped or `nil` if not equippable.
     var equipmentSlot: EquipmentSlot?
     
-    /// The armor bonus provided when this item is equipped.
+    /// The armor bonus provided by this item.
     var armorBonus: Int?
     
     /// The damage this item does on a successful attack.
     var damageDice: DieRolling?
+    
+    /// The type of potion.
+    var potion: PotionType?
 }
 
 extension Item: CustomStringConvertible {

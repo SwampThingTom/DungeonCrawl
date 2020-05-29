@@ -16,6 +16,7 @@ class ItemBuilder {
     private var equipmentSlot: EquipmentSlot?
     private var armorBonus: Int?
     private var damageDice: DieRolling?
+    private var potion: PotionType?
     
     init(name: String) {
         self.name = name
@@ -42,13 +43,19 @@ class ItemBuilder {
         return self
     }
     
+    func with(potion: PotionType) -> ItemBuilder {
+        self.potion = potion
+        return self
+    }
+    
     func build() -> Item {
         return Item(name: name,
                     isTreasure: isTreasure,
                     value: value,
                     equipmentSlot: equipmentSlot,
                     armorBonus: armorBonus,
-                    damageDice: damageDice)
+                    damageDice: damageDice,
+                    potion: potion)
     }
 }
 

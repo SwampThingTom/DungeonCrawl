@@ -45,6 +45,8 @@ private func randomItem() -> Item? {
         return Weapons().random()
     case 2:
         return Armor().random()
+    case 3...6:
+        return Potions().random()
     default:
         return nil
     }
