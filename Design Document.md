@@ -14,7 +14,7 @@ Each turn the player can do one of the following:
 * pick up an item
 * use an item
 * search
-* rest(?)
+* rest
 
 Dungeons are dark so the player can only see 1-3 spaces away. Using a torch increases that distance. 
 (Does torch require player to not use a shield?)
@@ -117,6 +117,76 @@ Initially the player will have a quest giver that provides the next quest; gives
 Magical items have to be identified to know what they are.
 Some sort of hint system should provide clues to the attentive player.
 Otherwise they aren't identified until they player uses them or uses a spell, scroll, or NPC to identify them.
+
+### Potions
+
+See  https://www.5esrd.com/gamemastering/magic-items/potions-oils/ for more ideas.
+
+Also https://www.d20srd.org/srd/magicItems/potionsAndOils.htm.
+
+#### Beneficial
+
+* **Cure Light Wounds**
+* **Mage Armor (ac bonus)**
+* **Oil of Sharpness / Magic Weapon** (combat bonus)
+* Shield of Faith +2 (defense bonus)
+
+* Bull's Strength
+* Cat's Grace
+* Cure Moderate Wounds
+* Darkvision (?)
+* Delay Poison
+* Fox's Cunning
+* Invisibility
+* Shield of Faith +3
+
+Higher Level
+* Shield of Faith +4
+* Cure Serious Wounds
+* Haste
+* Heroism (hp bonus)
+* Neutralize Poison
+
+Others(?)
+* Resistance
+* Detect Monsters (Clairvoyance?)
+* Detect Magic
+
+#### Detrimental
+
+* Poison
+* Weakness
+* Slow
+* Attract Monsters
+* Hallucination (?)
+
+### Scrolls
+
+See https://www.d20srd.org/srd/magicItems/scrolls.htm for more ideas.
+
+Level 0
+* Cure Light Wounds
+* Disrupt Undead
+* Light
+* Resistance (+1 to saves)
+
+Level 1
+* Cause Fear
+* Detect (secret doors, traps, etc)
+* Enchant (weapon / armor)
+* Entangle
+* Identify
+* Magic missile
+* Shield
+* Sleep
+
+Level 2
+* Blindness
+* Bull's Strength
+* Cat's Grace
+* Cure Moderate Wounds
+* Fox's Cunning
+* Invisibility (?)
 
 ## Monsters
 
