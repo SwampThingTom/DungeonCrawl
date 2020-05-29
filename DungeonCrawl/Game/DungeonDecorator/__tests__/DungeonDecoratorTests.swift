@@ -15,12 +15,21 @@ class DungeonDecoratorTests: XCTestCase {
     func testDecorate() throws {
         // Arrange
         let dungeon = DungeonModel(map: fiveRegionMap(), rooms: threeRooms())
+        
+        let treasurePlacer = MockTreasurePlacer()
+        treasurePlacer.mockedTreasure = [
+            ItemModel(item: createTreasure(worth: 25), cell: GridCell(x: 1, y: 10)),
+            ItemModel(item: createTreasure(worth: 20), cell: GridCell(x: 9, y: 5)),
+            ItemModel(item: createTreasure(worth: 35), cell: GridCell(x: 15, y: 7))
+        ]
+        
         let enemyPlacer = MockEnemyPlacer()
         enemyPlacer.mockedEnemies = [
             EnemyModel(enemyType: .jellyCube, cell: GridCell(x: 14, y: 8)),
             EnemyModel(enemyType: .giantBat, cell: GridCell(x: 8, y: 4))
         ]
-        let sut = DungeonDecorator(enemyPlacer: enemyPlacer)
+        
+        let sut = DungeonDecorator(treasurePlacer: treasurePlacer, enemyPlacer: enemyPlacer)
         
         // Act
         let decorations = sut.decorate(dungeon: dungeon)
@@ -29,9 +38,7 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 2)
-        // LATER: How should we verify decorations are being created?
-        // XCTAssertGreaterThanOrEqual(decorations.items.count, 1)  // One sword + random treasure
-        XCTAssertFalse(decorationsOverlap(decorations, map: dungeon.map))
+        XCTAssertGreaterThanOrEqual(decorations.items.count, 3)
     }
     
     func testDecorate_noRooms() throws {
@@ -47,6 +54,15 @@ class DungeonDecoratorTests: XCTestCase {
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 0)
         XCTAssertEqual(decorations.items.count, 0)
+    }
+}
+
+class MockTreasurePlacer: TreasurePlacing {
+    
+    var mockedTreasure = [ItemModel]()
+    
+    func placeTreasure(in dungeon: DungeonModel, occupiedCells: OccupiedCells) -> [ItemModel] {
+        return mockedTreasure
     }
 }
 
