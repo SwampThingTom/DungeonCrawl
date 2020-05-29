@@ -71,8 +71,8 @@ func inventoryEquipAction(itemIsEquipped: Bool,
 }
 
 private func itemDescription(_ item: Item) -> String {
-    if let armor = item.armor {
-        let baseArmorClass = 10 + armor.armorBonus
+    if let armorBonus = item.armorBonus {
+        let baseArmorClass = 10 + armorBonus
         return "Armor: \(item.name) (\(baseArmorClass))"
     }
     if let weapon = item.weapon {

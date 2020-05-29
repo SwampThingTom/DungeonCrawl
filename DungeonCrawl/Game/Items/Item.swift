@@ -25,7 +25,9 @@ struct Item: Equatable {
     /// The slot where this item can be equipped or `nil` if not equippable.
     var equipmentSlot: EquipmentSlot?
     
-    var armor: ArmorModel?
+    /// The armor bonus provided when this item is equipped.
+    var armorBonus: Int?
+    
     var weapon: WeaponModel?
 }
 

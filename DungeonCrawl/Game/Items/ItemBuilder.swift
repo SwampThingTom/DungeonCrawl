@@ -14,7 +14,7 @@ class ItemBuilder {
     private var isTreasure: Bool = false
     private var value: Int = 0
     private var equipmentSlot: EquipmentSlot?
-    private var armor: ArmorModel?
+    private var armorBonus: Int?
     private var weapon: WeaponModel?
     
     init(name: String) {
@@ -32,8 +32,8 @@ class ItemBuilder {
         return self
     }
     
-    func with(armor: ArmorModel) -> ItemBuilder {
-        self.armor = armor
+    func with(armorBonus: Int) -> ItemBuilder {
+        self.armorBonus = armorBonus
         return self
     }
     
@@ -47,7 +47,7 @@ class ItemBuilder {
                     isTreasure: isTreasure,
                     value: value,
                     equipmentSlot: equipmentSlot,
-                    armor: armor,
+                    armorBonus: armorBonus,
                     weapon: weapon)
     }
 }

@@ -127,10 +127,10 @@ class CombatComponentTests: XCTestCase {
     }
 }
 
-func mockArmor(bonus: Int, name: String = "MockArmor") -> Item {
+func mockArmor(bonus: Int, name: String = "Mock Armor") -> Item {
     return ItemBuilder(name: name)
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: bonus))
+        .with(armorBonus: bonus)
         .build()
 }
 

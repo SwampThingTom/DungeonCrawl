@@ -43,62 +43,62 @@ let armor: [ItemPickerOdds] = [
 func createLeatherArmor() -> Item {
     return ItemBuilder(name: "leather")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 1))
+        .with(armorBonus: 1)
         .build()
 }
 
 func createStuddedLeatherArmor() -> Item {
     return ItemBuilder(name: "studded leather")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 2))
+        .with(armorBonus: 2)
         .build()
 }
 
 func createChainShirt() -> Item {
     return ItemBuilder(name: "chain shirt")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 3))
+        .with(armorBonus: 3)
         .build()
 }
 
 func createScaleMail() -> Item {
     return ItemBuilder(name: "scale mail")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 4))
+        .with(armorBonus: 4)
         .build()
 }
 
 func createBreastPlate() -> Item {
     return ItemBuilder(name: "breast plate")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 5))
+        .with(armorBonus: 5)
         .build()
 }
 
 func createChainMail() -> Item {
     return ItemBuilder(name: "chain mail")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 6))
+        .with(armorBonus: 6)
         .build()
 }
 
 func createBandedMail() -> Item {
     return ItemBuilder(name: "banded mail")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 6))
+        .with(armorBonus: 6)
         .build()
 }
 
 func createSplintMail() -> Item {
     return ItemBuilder(name: "splint mail")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 7))
+        .with(armorBonus: 7)
         .build()
 }
 
 func createPlateMail() -> Item {
     return ItemBuilder(name: "plate mail")
         .with(equipmentSlot: .armor)
-        .with(armor: ArmorModel(armorBonus: 8))
+        .with(armorBonus: 8)
         .build()
 }
