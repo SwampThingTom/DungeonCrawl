@@ -23,13 +23,20 @@ class DungeonDecoratorTests: XCTestCase {
             ItemModel(item: createTreasure(worth: 35), cell: GridCell(x: 15, y: 7))
         ]
         
+        let itemPlacer = MockItemsPlacer()
+        itemPlacer.mockedItems = [
+            ItemModel(item: Item(name: "Item"), cell: GridCell(x: 4, y: 11))
+        ]
+        
         let enemyPlacer = MockEnemyPlacer()
         enemyPlacer.mockedEnemies = [
             EnemyModel(enemyType: .jellyCube, cell: GridCell(x: 14, y: 8)),
             EnemyModel(enemyType: .giantBat, cell: GridCell(x: 8, y: 4))
         ]
         
-        let sut = DungeonDecorator(treasurePlacer: treasurePlacer, enemyPlacer: enemyPlacer)
+        let sut = DungeonDecorator(treasurePlacer: treasurePlacer,
+                                   itemPlacer: itemPlacer,
+                                   enemyPlacer: enemyPlacer)
         
         // Act
         let decorations = sut.decorate(dungeon: dungeon)
@@ -38,7 +45,7 @@ class DungeonDecoratorTests: XCTestCase {
         let tileAtStartCell = dungeon.map.tile(at: decorations.playerStartCell)
         XCTAssertEqual(tileAtStartCell, .floor)
         XCTAssertEqual(decorations.enemies.count, 2)
-        XCTAssertGreaterThanOrEqual(decorations.items.count, 3)
+        XCTAssertGreaterThanOrEqual(decorations.items.count, 4)
     }
     
     func testDecorate_noRooms() throws {
@@ -63,6 +70,15 @@ class MockTreasurePlacer: TreasurePlacing {
     
     func placeTreasure(in dungeon: DungeonModel, occupiedCells: OccupiedCells) -> [ItemModel] {
         return mockedTreasure
+    }
+}
+
+class MockItemsPlacer: ItemPlacing {
+    
+    var mockedItems = [ItemModel]()
+    
+    func placeItems(in dungeon: DungeonModel, occupiedCells: OccupiedCells) -> [ItemModel] {
+        return mockedItems
     }
 }
 

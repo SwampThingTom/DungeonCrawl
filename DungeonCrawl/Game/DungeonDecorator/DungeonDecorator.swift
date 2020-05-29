@@ -19,14 +19,17 @@ class DungeonDecorator: DungeonDecorating {
     
     private let enemyPlacer: EnemyPlacing
     private let treasurePlacer: TreasurePlacing
-
+    private let itemPlacer: ItemPlacing
+    
     init(randomNumberGenerator: RandomNumberGenerator = SystemRandomNumberGenerator(),
          chance: ChanceDetermining? = nil,
          treasurePlacer: TreasurePlacing? = nil,
+         itemPlacer: ItemPlacing? = nil,
          enemyPlacer: EnemyPlacing? = nil) {
         self.randomNumberGenerator = AnyRandomNumberGenerator(randomNumberGenerator)
         self.chance = chance ?? Chance(randomNumberGenerator: randomNumberGenerator)
         self.treasurePlacer = treasurePlacer ?? TreasurePlacer(randomNumberGenerator: randomNumberGenerator)
+        self.itemPlacer = itemPlacer ?? ItemPlacer(randomNumberGenerator: randomNumberGenerator)
         self.enemyPlacer = enemyPlacer ?? EnemyPlacer(randomNumberGenerator: randomNumberGenerator)
     }
     
@@ -36,7 +39,7 @@ class DungeonDecorator: DungeonDecorating {
             fatalError("Unable to place player in dungeon")
         }
         let treasure = treasurePlacer.placeTreasure(in: dungeon, occupiedCells: occupiedCells)
-        let items = placeItems(in: dungeon, occupiedCells: occupiedCells)
+        let items = itemPlacer.placeItems(in: dungeon, occupiedCells: occupiedCells)
         let enemies = enemyPlacer.placeEnemies(in: dungeon,
                                                occupiedCells: occupiedCells,
                                                maxChallengeRating: 0.25)
@@ -56,30 +59,6 @@ class DungeonDecorator: DungeonDecorating {
             }
         }
         return nil
-    }
-    
-    private func placeItems(in dungeon: DungeonModel, occupiedCells: OccupiedCells) -> [ItemModel] {
-        guard dungeon.rooms.count > 0 else { return [] }
-        let items: [ItemModel] = (1...dungeon.rooms.count).compactMap { _ in
-            // LATER: When more items are available from randomItem(), only have a 1 in 3 chance of an item per room
-            let room = dungeon.rooms.randomElement(using: &randomNumberGenerator)!
-            let cell = occupiedCells.findEmptyCell { room.bounds.randomCell(using: &randomNumberGenerator) }
-            occupiedCells.occupy(cell: cell)
-            guard let item = randomItem() else { return nil }
-            return ItemModel(item: item, cell: cell)
-        }
-        return items
-    }
-    
-    private func randomItem() -> Item? {
-        switch D20().roll() {
-        case 1:
-            return Weapons().random()
-        case 2:
-            return Armor().random()
-        default:
-            return nil
-        }
     }
 }
 
