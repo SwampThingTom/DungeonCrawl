@@ -75,8 +75,8 @@ private func itemDescription(_ item: Item) -> String {
         let baseArmorClass = 10 + armorBonus
         return "Armor: \(item.name) (\(baseArmorClass))"
     }
-    if let weapon = item.weapon {
-        return "Weapon: \(item.name) (\(weapon.damageDice))"
+    if let damageDice = item.damageDice {
+        return "Weapon: \(item.name) (\(damageDice))"
     }
     return "Other: \(item.name)"
 }

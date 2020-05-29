@@ -15,7 +15,7 @@ class ItemBuilder {
     private var value: Int = 0
     private var equipmentSlot: EquipmentSlot?
     private var armorBonus: Int?
-    private var weapon: WeaponModel?
+    private var damageDice: DieRolling?
     
     init(name: String) {
         self.name = name
@@ -37,8 +37,8 @@ class ItemBuilder {
         return self
     }
     
-    func with(weapon: WeaponModel) -> ItemBuilder {
-        self.weapon = weapon
+    func with(damageDice: DieRolling) -> ItemBuilder {
+        self.damageDice = damageDice
         return self
     }
     
@@ -48,7 +48,7 @@ class ItemBuilder {
                     value: value,
                     equipmentSlot: equipmentSlot,
                     armorBonus: armorBonus,
-                    weapon: weapon)
+                    damageDice: damageDice)
     }
 }
 

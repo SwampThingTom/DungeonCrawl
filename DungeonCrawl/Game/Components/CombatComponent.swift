@@ -34,9 +34,9 @@ class CombatComponent: Component {
         return damageDice.roll()
     }
     
-    private var equippedWeapon: WeaponModel? {
+    private var equippedWeapon: Item? {
         guard let items = entity?.inventoryComponent() else { return nil }
-        return items.equippedItem(for: .weapon)?.item.weapon as WeaponModel?
+        return items.equippedItem(for: .weapon)?.item
     }
     
     var hitPoints: Int

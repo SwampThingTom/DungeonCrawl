@@ -137,6 +137,6 @@ func mockArmor(bonus: Int, name: String = "Mock Armor") -> Item {
 func mockWeapon(damageDice: DieRolling, name: String = "Mock Weapon") -> Item {
     return ItemBuilder(name: name)
         .with(equipmentSlot: .weapon)
-        .with(weapon: WeaponModel(damageDice: damageDice))
+        .with(damageDice: damageDice)
         .build()
 }
