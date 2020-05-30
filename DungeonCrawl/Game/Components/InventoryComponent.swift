@@ -12,6 +12,15 @@ class InventoryComponent: Component {
     
     var gold: Int = 0
     var items = [ItemComponent]()
+    
+    func add(item: ItemComponent) {
+        items.append(item)
+    }
+    
+    func remove(item: ItemComponent) {
+        items = items.filter { $0 != item }
+    }
+    
     private var equipped = [EquipmentSlot: ItemComponent]()
     
     /// Toggles whether an item is equipped.

@@ -21,7 +21,44 @@ class InventoryComponentTests: XCTestCase {
     override func tearDown() {
         entityManager = nil
     }
-
+    
+    func testAddItem() throws {
+        // Arrange
+        let item = ItemComponent(item: mockArmor(bonus: 2))
+        let sut = InventoryComponent()
+        
+        // Act
+        sut.add(item: item)
+        
+        // Assert
+        XCTAssertEqual(sut.items.first, item)
+    }
+    
+    func testRemoveItem() throws {
+        // Arrange
+        let item = ItemComponent(item: mockArmor(bonus: 2))
+        let sut = InventoryComponent()
+        sut.add(item: item)
+        
+        // Act
+        sut.remove(item: item)
+        
+        // Assert
+        XCTAssert(sut.items.isEmpty)
+    }
+    
+    func testRemoveItem_notInInventory() throws {
+        // Arrange
+        let item = ItemComponent(item: mockArmor(bonus: 2))
+        let sut = InventoryComponent()
+        
+        // Act
+        sut.remove(item: item)
+        
+        // Assert
+        XCTAssert(sut.items.isEmpty)
+    }
+    
     func testEquip() throws {
         // Arrange
         let item = ItemComponent(item: mockArmor(bonus: 2))
