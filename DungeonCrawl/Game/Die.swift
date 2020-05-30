@@ -44,12 +44,33 @@ class Dice: DieRolling, CustomStringConvertible {
         return die.sides
     }
     
-    var description: String { return "\(numberOfDice)\(die)+\(modifier)"}
+    var description: String {
+        let numberOfDiceDescription = numberOfDice > 1 ? "\(numberOfDice)" : ""
+        return "\(numberOfDiceDescription)\(die)\(modifierDescription)"
+    }
+    
+    private var modifierDescription: String {
+        if self.modifier > 0 {
+            return "+\(self.modifier)"
+        }
+        if self.modifier < 0 {
+            return "\(self.modifier)"
+        }
+        return ""
+    }
     
     init(die: DieRolling, numberOfDice: Int = 1, modifier: Int = 0) {
         self.die = die
         self.numberOfDice = numberOfDice
         self.modifier = modifier
+    }
+    
+    convenience init(die: DieRolling, plus modifier: Int) {
+        guard let dice = die as? Dice else {
+            self.init(die: die, modifier: modifier)
+            return
+        }
+        self.init(die: dice, numberOfDice: dice.numberOfDice, modifier: dice.modifier + modifier)
     }
     
     func roll() -> Int {
