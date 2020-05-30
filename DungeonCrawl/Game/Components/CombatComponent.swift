@@ -52,6 +52,11 @@ class CombatComponent: Component {
         self.maxHitPoints = maxHitPoints
         self.hitPoints = maxHitPoints
     }
+    
+    func heal(damage: Int) {
+        assert(damage>=0, "heal() should only be used to restore hit points")
+        hitPoints = min(hitPoints + damage, maxHitPoints)
+    }
 }
 
 extension EntityManager {

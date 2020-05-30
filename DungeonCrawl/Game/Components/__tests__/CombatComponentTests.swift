@@ -125,6 +125,36 @@ class CombatComponentTests: XCTestCase {
         // Assert
         XCTAssertEqual(damage, 10)
     }
+    
+    func testHeal() throws {
+        // Arrange
+        let entity = entityManager?.createEntity()
+        let damageDice = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
+        entity?.add(component: sut)
+        sut.hitPoints = 1
+        
+        // Act
+        sut.heal(damage: 3)
+        
+        // Assert
+        XCTAssertEqual(sut.hitPoints, 4)
+    }
+    
+    func testHeal_max() throws {
+        // Arrange
+        let entity = entityManager?.createEntity()
+        let damageDice = MockDie(nextRoll: 10)
+        let sut = CombatComponent(attackBonus: 10, armorClass: 10, damageDice: damageDice, maxHitPoints: 10)
+        entity?.add(component: sut)
+        sut.hitPoints = 1
+        
+        // Act
+        sut.heal(damage: 13)
+        
+        // Assert
+        XCTAssertEqual(sut.hitPoints, 10)
+    }
 }
 
 func mockArmor(bonus: Int, name: String = "Mock Armor") -> Item {
