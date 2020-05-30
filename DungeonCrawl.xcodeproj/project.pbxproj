@@ -126,6 +126,7 @@
 		E2E4E83524661DD400F5EA93 /* DungeonTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */; };
 		E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE472247B630B0043255E /* ItemComponent.swift */; };
 		E2ED60992482A79B0019267D /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED60982482A79B0019267D /* ItemTests.swift */; };
+		E2ED609B2482B3D80019267D /* ItemBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED609A2482B3D80019267D /* ItemBuilderTests.swift */; };
 		E2FFA6E7247E864F007ED938 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E6247E864F007ED938 /* Weapons.swift */; };
 		E2FFA6E9247E94BF007ED938 /* Armor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E8247E94BF007ED938 /* Armor.swift */; };
 		E2FFA6EB247E9655007ED938 /* ItemPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6EA247E9655007ED938 /* ItemPicker.swift */; };
@@ -267,6 +268,7 @@
 		E2E4E83424661DD400F5EA93 /* DungeonTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonTurnState.swift; sourceTree = "<group>"; };
 		E2EAE472247B630B0043255E /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
 		E2ED60982482A79B0019267D /* ItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
+		E2ED609A2482B3D80019267D /* ItemBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilderTests.swift; sourceTree = "<group>"; };
 		E2FFA6E6247E864F007ED938 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		E2FFA6E8247E94BF007ED938 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 		E2FFA6EA247E9655007ED938 /* ItemPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPicker.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 		E2FFA6EC247E9B0D007ED938 /* __tests__ */ = {
 			isa = PBXGroup;
 			children = (
+				E2ED609A2482B3D80019267D /* ItemBuilderTests.swift */,
 				E2FFA6ED247E9B1D007ED938 /* ItemPickerTests.swift */,
 				E2ED60982482A79B0019267D /* ItemTests.swift */,
 			);
@@ -1016,6 +1019,7 @@
 			files = (
 				E292EA15245DD6BA002A0F31 /* MazeGeneratorTests.swift in Sources */,
 				E227B55524735A9400115B09 /* EntityTests.swift in Sources */,
+				E2ED609B2482B3D80019267D /* ItemBuilderTests.swift in Sources */,
 				E292EA21245F0525002A0F31 /* RegionConnectorTests.swift in Sources */,
 				E216F5D2246711AD00844BF8 /* CGFloat+ExtensionsTests.swift in Sources */,
 				E2FFA6EE247E9B1D007ED938 /* ItemPickerTests.swift in Sources */,
