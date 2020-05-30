@@ -20,6 +20,9 @@ enum PotionType: Equatable {
 }
 
 struct Item {
+    
+    /// Basic name of the item.
+    /// Use `description` for a more complete description of the item.
     var name: String
     
     /// Indicates the item is treasure. When picked up, it adds to the player's gold.
@@ -28,14 +31,40 @@ struct Item {
     /// The base value of the item.
     var value: Int = 0
     
+    /// Enchantment modifiers for the item.
+    /// This is used solely to modify the description of the item. The actual enchantment
+    /// bonuses should be added to the specific things they modify. For example, an
+    /// enchantment that affects armor bonus should be added to `additionalArmorBonus`.
+    var enchantments = [Int]()
+    
     /// The slot where this item can be equipped or `nil` if not equippable.
     var equipmentSlot: EquipmentSlot?
     
-    /// The armor bonus provided by this item.
-    var armorBonus: Int?
+    /// The base armor bonus for the item.
+    var baseArmorBonus: Int?
+    
+    /// Additional armor bonus for the item.
+    var additionalArmorBonus: Int?
+    
+    /// The combined armor bonus for the item.
+    var armorBonus: Int? {
+        guard let baseArmorBonus = baseArmorBonus else { return nil }
+        return baseArmorBonus + (additionalArmorBonus ?? 0)
+    }
+    
+    /// The base damage this item does on a successful attack.
+    var baseDamageDice: DieRolling?
+    
+    /// Additional damage bonus for the item.
+    var additionalDamageBonus: Int?
     
     /// The damage this item does on a successful attack.
-    var damageDice: DieRolling?
+    var damageDice: Dice? {
+        guard let die = baseDamageDice else { return nil }
+        let dice = (die as? Dice) ?? Dice(die: die)
+        guard let additionalDamageBonus = additionalDamageBonus else { return dice }
+        return Dice(die: dice, plus: additionalDamageBonus)
+    }
     
     /// The type of potion.
     var potion: PotionType?
@@ -44,7 +73,14 @@ struct Item {
 extension Item: CustomStringConvertible {
     
     var description: String {
-        return isTreasure ? "\(name) worth \(value) gold pieces" : name
+        if isTreasure {
+            return "\(name) worth \(value) gold pieces"
+        }
+        let postfix = enchantments.reduce("") { (result, enchantment) in
+            guard enchantment != 0 else { return result }
+            return enchantment > 0 ? "+\(enchantment)" : "\(enchantment)"
+        }
+        return name + postfix
     }
 }
 

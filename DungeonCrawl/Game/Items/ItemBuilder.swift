@@ -53,8 +53,8 @@ class ItemBuilder {
                     isTreasure: isTreasure,
                     value: value,
                     equipmentSlot: equipmentSlot,
-                    armorBonus: armorBonus,
-                    damageDice: damageDice,
+                    baseArmorBonus: armorBonus,
+                    baseDamageDice: damageDice,
                     potion: potion)
     }
 }

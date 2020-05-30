@@ -34,7 +34,7 @@ class Die: DieRolling, CustomStringConvertible {
     }
 }
 
-class Dice: DieRolling, CustomStringConvertible {
+class Dice: DieRolling {
     
     let die: DieRolling
     let numberOfDice: Int
@@ -42,21 +42,6 @@ class Dice: DieRolling, CustomStringConvertible {
     
     var sides: Int {
         return die.sides
-    }
-    
-    var description: String {
-        let numberOfDiceDescription = numberOfDice > 1 ? "\(numberOfDice)" : ""
-        return "\(numberOfDiceDescription)\(die)\(modifierDescription)"
-    }
-    
-    private var modifierDescription: String {
-        if self.modifier > 0 {
-            return "+\(self.modifier)"
-        }
-        if self.modifier < 0 {
-            return "\(self.modifier)"
-        }
-        return ""
     }
     
     init(die: DieRolling, numberOfDice: Int = 1, modifier: Int = 0) {
@@ -77,6 +62,31 @@ class Dice: DieRolling, CustomStringConvertible {
         return modifier + (1...numberOfDice).reduce(0) { (sum, _) in
             sum + die.roll()
         }
+    }
+}
+
+extension Dice: CustomStringConvertible {
+    var description: String {
+        let numberOfDiceDescription = numberOfDice > 1 ? "\(numberOfDice)" : ""
+        return "\(numberOfDiceDescription)\(die)\(modifierDescription)"
+    }
+        
+    private var modifierDescription: String {
+        if self.modifier > 0 {
+            return "+\(self.modifier)"
+        }
+        if self.modifier < 0 {
+            return "\(self.modifier)"
+        }
+        return ""
+    }
+}
+
+extension Dice: Equatable {
+    static func == (lhs: Dice, rhs: Dice) -> Bool {
+        return lhs.sides == rhs.sides
+            && lhs.numberOfDice == rhs.numberOfDice
+            && lhs.modifier == rhs.modifier
     }
 }
 
