@@ -127,6 +127,7 @@
 		E2EAE473247B630B0043255E /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE472247B630B0043255E /* ItemComponent.swift */; };
 		E2ED60992482A79B0019267D /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED60982482A79B0019267D /* ItemTests.swift */; };
 		E2ED609B2482B3D80019267D /* ItemBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED609A2482B3D80019267D /* ItemBuilderTests.swift */; };
+		E2ED609D2482BCA70019267D /* ItemComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED609C2482BCA70019267D /* ItemComponentTests.swift */; };
 		E2FFA6E7247E864F007ED938 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E6247E864F007ED938 /* Weapons.swift */; };
 		E2FFA6E9247E94BF007ED938 /* Armor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6E8247E94BF007ED938 /* Armor.swift */; };
 		E2FFA6EB247E9655007ED938 /* ItemPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFA6EA247E9655007ED938 /* ItemPicker.swift */; };
@@ -269,6 +270,7 @@
 		E2EAE472247B630B0043255E /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
 		E2ED60982482A79B0019267D /* ItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
 		E2ED609A2482B3D80019267D /* ItemBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBuilderTests.swift; sourceTree = "<group>"; };
+		E2ED609C2482BCA70019267D /* ItemComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponentTests.swift; sourceTree = "<group>"; };
 		E2FFA6E6247E864F007ED938 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		E2FFA6E8247E94BF007ED938 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 		E2FFA6EA247E9655007ED938 /* ItemPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPicker.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			children = (
 				E29DFC0F2478AE6800E4E5B0 /* CombatComponentTests.swift */,
 				E2203DF2247D51AD00677706 /* InventoryComponentTests.swift */,
+				E2ED609C2482BCA70019267D /* ItemComponentTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -1043,6 +1046,7 @@
 				E292EA23245F06D8002A0F31 /* GridMap+Equatable.swift in Sources */,
 				E216F5D62467214000844BF8 /* DirectionGridPointTests.swift in Sources */,
 				E222E81224809BEB0060EB63 /* ItemPlacerTests.swift in Sources */,
+				E2ED609D2482BCA70019267D /* ItemComponentTests.swift in Sources */,
 				E29F72EA2470A568008C7719 /* EnemyControllerSystemTests.swift in Sources */,
 				E2203DF1247D4C6500677706 /* EntityFactoryTests.swift in Sources */,
 				E222E80A248006230060EB63 /* EnemyPlacerTests.swift in Sources */,

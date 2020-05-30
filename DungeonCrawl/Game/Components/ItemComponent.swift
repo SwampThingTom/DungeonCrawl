@@ -15,6 +15,18 @@ class ItemComponent: Component {
     init(item: Item) {
         self.item = item
     }
+    
+    func enchant(armorBonus: Int) {
+        item = ItemBuilder(item: item)
+            .with(enchantedArmorBonus: armorBonus)
+            .build()
+    }
+    
+    func enchant(damageBonus: Int) {
+        item = ItemBuilder(item: item)
+            .with(enchantedDamageBonus: damageBonus)
+            .build()
+    }
 }
 
 extension EntityManager {
