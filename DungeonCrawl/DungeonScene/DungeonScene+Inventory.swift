@@ -36,6 +36,7 @@ extension DungeonScene: DismissibleViewControllerDelegate {
         guard let inventory = game.level.player.inventoryComponent() else { fatalError("Inventory not found.") }
         if let potionItem = itemComponent(for: itemID), potionItem.item.potion != nil {
             game.potionSystem.use(potionItem: potionItem, on: game.level.player, from: inventory)
+            self.updateHUD()
         }
         return inventoryViewModel(for: inventory)
     }
