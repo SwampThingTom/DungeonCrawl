@@ -11,7 +11,10 @@ import Foundation
 protocol PotionUsing {
     
     /// Applies the effect of a potion to a target.
-    func use(potion: PotionType, on target: Entity)
+    /// - Parameter potionItem: The item component for the potion.
+    /// - Parameter target: The potion's target.
+    /// - Parameter inventory: The inventory containing the potion, or `nil` if not in an inventory.
+    func use(potionItem: ItemComponent, on target: Entity, from inventory: InventoryComponent?)
 }
 
 /// Manages the use of potions.
@@ -21,7 +24,8 @@ class PotionSystem: System, PotionUsing {
         super.init(entityManager: entityManager)
     }
     
-    func use(potion: PotionType, on target: Entity) {
+    func use(potionItem: ItemComponent, on target: Entity, from inventory: InventoryComponent? = nil) {
+        guard let potion = potionItem.item.potion else { fatalError("Can only use a potion") }
         switch potion {
         case .heal:
             applyHeal(to: target)
@@ -30,6 +34,7 @@ class PotionSystem: System, PotionUsing {
         case .attackBonus:
             enchantWeapon(for: target)
         }
+        inventory?.remove(item: potionItem)
     }
     
     private func applyHeal(to target: Entity) {
