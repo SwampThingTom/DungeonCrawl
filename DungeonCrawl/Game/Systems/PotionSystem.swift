@@ -44,10 +44,14 @@ class PotionSystem: System, PotionUsing {
     }
     
     private func enchantArmor(for target: Entity) {
-        // LATER: Enchant armor
+        guard let inventory = target.inventoryComponent() else { return }
+        guard let equippedArmor = inventory.equippedItem(for: .armor) else { return }
+        equippedArmor.enchant(armorBonus: 1)
     }
     
     private func enchantWeapon(for target: Entity) {
-        // LATER: Enchant weapon
+        guard let inventory = target.inventoryComponent() else { return }
+        guard let equippedArmor = inventory.equippedItem(for: .weapon) else { return }
+        equippedArmor.enchant(damageBonus: 1)
     }
 }
