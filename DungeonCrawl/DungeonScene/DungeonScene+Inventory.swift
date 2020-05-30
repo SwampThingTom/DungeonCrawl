@@ -13,7 +13,7 @@ extension DungeonScene: DismissibleViewControllerDelegate {
     func presentInventoryView() {
         guard let inventory = game.level.player.inventoryComponent() else { return }
         let inventoryViewController = InventoryViewController()
-        inventoryViewController.inventory = inventoryViewModel(for: inventory, equipHandler: toggleEquip(itemID:))
+        inventoryViewController.inventory = inventoryViewModel(for: inventory)
         inventoryViewController.dismissingDelegate = self
         let viewController = UINavigationController(rootViewController: inventoryViewController)
         rootViewController?.present(viewController, animated: true)
@@ -29,7 +29,15 @@ extension DungeonScene: DismissibleViewControllerDelegate {
             inventory.equip(itemComponent: itemComponent)
             self.updateHUD()
         }
-        return inventoryViewModel(for: inventory, equipHandler: toggleEquip(itemID:))
+        return inventoryViewModel(for: inventory)
+    }
+    
+    func usePotion(itemID: UInt) -> InventoryViewModel {
+        guard let inventory = game.level.player.inventoryComponent() else { fatalError("Inventory not found.") }
+        if let potion = itemComponent(for: itemID)?.item.potion {
+            game.potionSystem.use(potion: potion, on: game.level.player)
+        }
+        return inventoryViewModel(for: inventory)
     }
     
     private func itemComponent(for itemID: UInt) -> ItemComponent? {
@@ -37,10 +45,17 @@ extension DungeonScene: DismissibleViewControllerDelegate {
         guard let item = items.first(where: { $0.entityId == itemID }) else { return nil }
         return item.itemComponent()
     }
+    
+    private func inventoryViewModel(for inventoryComponent: InventoryComponent) -> InventoryViewModel {
+        return DungeonCrawl.inventoryViewModel(for: inventoryComponent,
+                                               equipHandler: toggleEquip(itemID:),
+                                               usePotionHandler: usePotion(itemID:))
+    }
 }
 
 func inventoryViewModel(for inventoryComponent: InventoryComponent,
-                        equipHandler: @escaping InventoryViewModel.ActionHandler) -> InventoryViewModel {
+                        equipHandler: @escaping InventoryViewModel.ActionHandler,
+                        usePotionHandler: @escaping InventoryViewModel.ActionHandler) -> InventoryViewModel {
     
     let items: [InventoryViewModel.ItemViewModel] = inventoryComponent.items.map {
         guard let itemID = $0.entity?.entityId else { fatalError("Missing entity ID for this item.") }
@@ -55,7 +70,12 @@ func inventoryViewModel(for inventoryComponent: InventoryComponent,
             let equipAction = inventoryEquipAction(itemIsEquipped: isEquipped, handler: equipHandler)
             actions.append(equipAction)
         }
-
+        
+        if item.potion != nil {
+            let usePotionAction = inventoryUsePotionAction(handler: usePotionHandler)
+            actions.append(usePotionAction)
+        }
+        
         return InventoryViewModel.ItemViewModel(
             itemID: itemID,
             name: description,
@@ -68,6 +88,10 @@ func inventoryEquipAction(itemIsEquipped: Bool,
                           handler: @escaping InventoryViewModel.ActionHandler) -> InventoryViewModel.Action {
     let actionName = itemIsEquipped ? "Unequip" : "Equip"
     return InventoryViewModel.Action(name: actionName, handler: handler)
+}
+
+func inventoryUsePotionAction(handler: @escaping InventoryViewModel.ActionHandler) -> InventoryViewModel.Action {
+    return InventoryViewModel.Action(name: "Use", handler: handler)
 }
 
 private func itemDescription(_ item: Item) -> String {

@@ -15,6 +15,7 @@ class Game {
     
     var combatSystem: CombatProviding
     var enemyControllerSystem: EnemyControlling
+    var potionSystem: PotionUsing
     var playerControllerSystem: PlayerControlling
     var turnTakingSystem: TurnTaking
     
@@ -53,6 +54,7 @@ class Game {
         combatSystem = CombatSystem(entityManager: entityManager)
         enemyControllerSystem = EnemyControllerSystem(entityManager: entityManager, gameLevel: level)
         playerControllerSystem = PlayerControllerSystem(entityManager: entityManager, gameLevel: level)
+        potionSystem = PotionSystem(entityManager: entityManager)
         turnTakingSystem = TurnTakingSystem(entityManager: entityManager, gameLevel: level, combatSystem: combatSystem)
     }
     

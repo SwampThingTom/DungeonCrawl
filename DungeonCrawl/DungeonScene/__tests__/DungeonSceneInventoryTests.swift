@@ -27,7 +27,9 @@ class DungeonSceneInventoryTests: XCTestCase {
         let inventoryComponent = InventoryComponent()
         
         // Act
-        let sut = inventoryViewModel(for: inventoryComponent, equipHandler: mockActionHandler)
+        let sut = inventoryViewModel(for: inventoryComponent,
+                                     equipHandler: mockActionHandler,
+                                     usePotionHandler: mockActionHandler)
         
         // Assert
         XCTAssertEqual(sut.items.count, 0)
@@ -44,8 +46,9 @@ class DungeonSceneInventoryTests: XCTestCase {
         inventoryComponent.items.append(contentsOf: items)
         
         // Act
-        let sut = inventoryViewModel(for: inventoryComponent, equipHandler: mockActionHandler)
-        
+        let sut = inventoryViewModel(for: inventoryComponent,
+                                     equipHandler: mockActionHandler,
+                                     usePotionHandler: mockActionHandler)
         // Assert
         XCTAssertEqual(sut.items.count, 3)
         
@@ -75,8 +78,9 @@ class DungeonSceneInventoryTests: XCTestCase {
         inventoryComponent.equip(itemComponent: items[1])
 
         // Act
-        let sut = inventoryViewModel(for: inventoryComponent, equipHandler: mockActionHandler)
-
+        let sut = inventoryViewModel(for: inventoryComponent,
+                                     equipHandler: mockActionHandler,
+                                     usePotionHandler: mockActionHandler)
         // Assert
         XCTAssertEqual(sut.items.count, 4)
         XCTAssertEqual(sut.items[0].name, "Armor: Leather (12) (equipped)")
