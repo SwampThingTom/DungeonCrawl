@@ -31,7 +31,7 @@ class PotionSystem: System, PotionUsing {
             applyHeal(to: target)
         case .armorBonus:
             enchantArmor(for: target)
-        case .attackBonus:
+        case .damageBonus:
             enchantWeapon(for: target)
         }
         inventory?.remove(item: potionItem)

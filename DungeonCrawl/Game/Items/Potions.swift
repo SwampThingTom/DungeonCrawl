@@ -48,6 +48,6 @@ func createEnhanceArmorPotion() -> Item {
 
 func createEnhanceWeaponPotion() -> Item {
     return ItemBuilder(name: "Oil of Sharpness")
-        .with(potion: .attackBonus)
+        .with(potion: .damageBonus)
         .build()
 }

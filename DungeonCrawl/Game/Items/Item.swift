@@ -16,7 +16,7 @@ enum EquipmentSlot: Equatable {
 enum PotionType: Equatable {
     case heal
     case armorBonus
-    case attackBonus
+    case damageBonus
 }
 
 struct Item {
