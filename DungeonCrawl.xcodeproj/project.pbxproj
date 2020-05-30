@@ -29,6 +29,8 @@
 		E222E8102480999D0060EB63 /* ItemPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E80F2480999D0060EB63 /* ItemPlacer.swift */; };
 		E222E81224809BEB0060EB63 /* ItemPlacerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E81124809BEB0060EB63 /* ItemPlacerTests.swift */; };
 		E222E8142481C6030060EB63 /* Potions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E8132481C6030060EB63 /* Potions.swift */; };
+		E222E8162481EC550060EB63 /* PotionSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E8152481EC550060EB63 /* PotionSystem.swift */; };
+		E222E8182481F5B60060EB63 /* PotionSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222E8172481F5B60060EB63 /* PotionSystemTests.swift */; };
 		E2251F992479ACCC00D2C3E1 /* ObjectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */; };
 		E2251F9D247A17A800D2C3E1 /* MockDungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */; };
 		E2251FA2247AB5C000D2C3E1 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */; };
@@ -163,6 +165,8 @@
 		E222E80F2480999D0060EB63 /* ItemPlacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPlacer.swift; sourceTree = "<group>"; };
 		E222E81124809BEB0060EB63 /* ItemPlacerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPlacerTests.swift; sourceTree = "<group>"; };
 		E222E8132481C6030060EB63 /* Potions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Potions.swift; sourceTree = "<group>"; };
+		E222E8152481EC550060EB63 /* PotionSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotionSystem.swift; sourceTree = "<group>"; };
+		E222E8172481F5B60060EB63 /* PotionSystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotionSystemTests.swift; sourceTree = "<group>"; };
 		E2251F982479ACCC00D2C3E1 /* ObjectSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSprite.swift; sourceTree = "<group>"; };
 		E2251F9B247A179200D2C3E1 /* MockDungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDungeonBuilder.swift; sourceTree = "<group>"; };
 		E2251FA1247AB5C000D2C3E1 /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 				E2E2BDD3246F63E0009DE525 /* CombatSystem.swift */,
 				E29F73062471F471008C7719 /* EnemyControllerSystem.swift */,
 				E227B55A247413F300115B09 /* PlayerControllerSystem.swift */,
+				E222E8152481EC550060EB63 /* PotionSystem.swift */,
 				E29F72E524709666008C7719 /* TurnTakingSystem.swift */,
 			);
 			path = Systems;
@@ -738,6 +743,7 @@
 				E29F72E92470A568008C7719 /* EnemyControllerSystemTests.swift */,
 				E227B55C2474922400115B09 /* PlayerControllerSystemTests.swift */,
 				E2E2BDD1246F5B72009DE525 /* TurnTakingSystemTests.swift */,
+				E222E8172481F5B60060EB63 /* PotionSystemTests.swift */,
 			);
 			path = __tests__;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 				E2E4E82A2464345100F5EA93 /* CGPoint+Extensions.swift in Sources */,
 				E2251FA4247ACD6900D2C3E1 /* DungeonScene+Inventory.swift in Sources */,
 				E29DFBFD2478558800E4E5B0 /* Chance.swift in Sources */,
+				E222E8162481EC550060EB63 /* PotionSystem.swift in Sources */,
 				E2E2BDCC246F49E5009DE525 /* DungeonScene+Animation.swift in Sources */,
 				E29F72E624709666008C7719 /* TurnTakingSystem.swift in Sources */,
 				E2AD164424677B03003A9197 /* Animatable.swift in Sources */,
@@ -1019,6 +1026,7 @@
 				E29DFBF52476E2EB00E4E5B0 /* PathfinderTests.swift in Sources */,
 				E292EA11245D9737002A0F31 /* RoomGeneratorTests.swift in Sources */,
 				E21F13F9247F5A0400616779 /* DieTests.swift in Sources */,
+				E222E8182481F5B60060EB63 /* PotionSystemTests.swift in Sources */,
 				E2E2BDD2246F5B72009DE525 /* TurnTakingSystemTests.swift in Sources */,
 				E2E4E83124643A1A00F5EA93 /* CGVector+ExtensionsTests.swift in Sources */,
 				E29F72F924719F18008C7719 /* EntityManagerTests.swift in Sources */,
