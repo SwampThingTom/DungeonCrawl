@@ -27,7 +27,7 @@ class TurnTakingSystemTests: XCTestCase {
     
     func testDoTurnAction_move() throws {
         // Arrange
-        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actor = mockEntity(spriteComponent: actorSprite)
         let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
         let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
@@ -41,9 +41,29 @@ class TurnTakingSystemTests: XCTestCase {
         XCTAssertEqual(actorSprite.cell, GridCell(x: 4, y: 5))
     }
     
+    func testDoTurnAction_move_cellOccupied() throws {
+        // Arrange
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5), occupiesCell: true)
+        let actor = mockEntity(spriteComponent: actorSprite)
+        
+        let otherSprite = mockSpriteComponent(spriteName: "Other", cell: GridCell(x: 4, y: 5), occupiesCell: true)
+        _ = mockEntity(spriteComponent: otherSprite)
+        
+        let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
+        let sut = TurnTakingSystem(entityManager: entityManager!, gameLevel: gameLevel, combatSystem: MockCombat())
+        let action = TurnAction.move(to: GridCell(x: 4, y: 5), direction: .west)
+        
+        // Act
+        let animation = sut.doTurnAction(action, for: actor, actorSprite: actorSprite)
+        
+        // Assert
+        XCTAssertNil(animation)
+        XCTAssertEqual(actorSprite.cell, GridCell(x: 5, y: 5))
+    }
+
     func testDoTurnAction_move_pickUpTreasure() throws {
         // Arrange
-        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actor = mockEntity(spriteComponent: actorSprite)
         let actorInventory = mockInventoryComponent(gold: 10)
         actor.add(component: actorInventory)
@@ -63,7 +83,7 @@ class TurnTakingSystemTests: XCTestCase {
     
     func testDoTurnAction_move_pickUpItem() throws {
         // Arrange
-        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "TestActor", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actor = mockEntity(spriteComponent: actorSprite)
         let actorInventory = mockInventoryComponent(gold: 10)
         actor.add(component: actorInventory)
@@ -87,14 +107,14 @@ class TurnTakingSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
         _ = mockEntity(spriteComponent: targetSprite,
                        combatComponent: targetCombat,
                        enemyComponent: targetEnemy)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
@@ -114,14 +134,14 @@ class TurnTakingSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = nil
         
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
         _ = mockEntity(spriteComponent: targetSprite,
                        combatComponent: targetCombat,
                        enemyComponent: targetEnemy)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
@@ -141,11 +161,11 @@ class TurnTakingSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetCombat = mockCombatComponent()
         let target = mockEntity(spriteComponent: targetSprite, combatComponent: targetCombat)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actorCombat = mockCombatComponent()
         let actorEnemy = mockEnemyComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat, enemyComponent: actorEnemy)
@@ -164,14 +184,14 @@ class TurnTakingSystemTests: XCTestCase {
     
     func testDoTurnAction_attack_attackerNotCombatant() throws {
         // Arrange
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
         _ = mockEntity(spriteComponent: targetSprite,
                        combatComponent: targetCombat,
                        enemyComponent: targetEnemy)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actor = mockEntity(spriteComponent: actorSprite)
         
         let gameLevel = mockGameLevel(entityManager: entityManager!, player: actor)
@@ -189,14 +209,14 @@ class TurnTakingSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetCombat = mockCombatComponent()
         let targetEnemy = mockEnemyComponent()
         _ = mockEntity(spriteComponent: targetSprite,
                        combatComponent: targetCombat,
                        enemyComponent: targetEnemy)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
@@ -215,11 +235,11 @@ class TurnTakingSystemTests: XCTestCase {
         let mockCombat = MockCombat()
         mockCombat.mockAttackDamage = 3
         
-        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4))
+        let targetSprite = mockSpriteComponent(spriteName: "Defender", cell: GridCell(x: 5, y: 4), occupiesCell: true)
         let targetEnemy = mockEnemyComponent()
         _ = mockEntity(spriteComponent: targetSprite, enemyComponent: targetEnemy)
         
-        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5))
+        let actorSprite = mockSpriteComponent(spriteName: "Attacker", cell: GridCell(x: 5, y: 5), occupiesCell: true)
         let actorCombat = mockCombatComponent()
         let actor = mockEntity(spriteComponent: actorSprite, combatComponent: actorCombat)
         
@@ -233,8 +253,8 @@ class TurnTakingSystemTests: XCTestCase {
         XCTAssertNil(animation)
     }
     
-    func mockSpriteComponent(spriteName: String, cell: GridCell) -> SpriteComponent {
-        return SpriteComponent(spriteName: spriteName, displayName: spriteName, cell: cell)
+    func mockSpriteComponent(spriteName: String, cell: GridCell, occupiesCell: Bool) -> SpriteComponent {
+        return SpriteComponent(spriteName: spriteName, displayName: spriteName, cell: cell, occupiesCell: occupiesCell)
     }
     
     func mockCombatComponent() -> CombatComponent {
@@ -268,7 +288,7 @@ class TurnTakingSystemTests: XCTestCase {
     
     func mockItemEntity(item: Item, cell: GridCell) -> Entity {
         let entity = entityManager!.createEntity()
-        let spriteComponent = mockSpriteComponent(spriteName: "gold", cell: cell)
+        let spriteComponent = mockSpriteComponent(spriteName: "gold", cell: cell, occupiesCell: false)
         entity.add(component: spriteComponent)
         let itemComponent = ItemComponent(item: item)
         entity.add(component: itemComponent)

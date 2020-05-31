@@ -19,7 +19,10 @@ class EntityFactory {
     func createPlayer(cell: GridCell) -> Entity {
         let entity = entityManager.createEntity()
         
-        let spriteComponent = SpriteComponent(spriteName: "player", displayName: "player", cell: cell)
+        let spriteComponent = SpriteComponent(spriteName: "player",
+                                              displayName: "player",
+                                              cell: cell,
+                                              occupiesCell: true)
         entityManager.add(component: spriteComponent, to: entity)
         
         let combatComponent = CombatComponent(attackBonus: 0, armorClass: 10, damageDice: D3(), maxHitPoints: 10)
@@ -78,7 +81,7 @@ class EntityFactory {
     private func spriteComponent(for enemyType: EnemyType, cell: GridCell, uniqueID: UInt) -> SpriteComponent {
         let spriteName = "\(enemyType)_\(uniqueID)"
         let displayName = "\(enemyType)"
-        return SpriteComponent(spriteName: spriteName, displayName: displayName, cell: cell)
+        return SpriteComponent(spriteName: spriteName, displayName: displayName, cell: cell, occupiesCell: true)
     }
     
     // Resources for monster stats:
@@ -118,6 +121,9 @@ class EntityFactory {
     
     private func spriteComponent(for item: ItemModel, uniqueID: UInt) -> SpriteComponent {
         let spriteName = "\(item.item.name)_\(uniqueID)"
-        return SpriteComponent(spriteName: spriteName, displayName: item.item.name, cell: item.cell)
+        return SpriteComponent(spriteName: spriteName,
+                               displayName: item.item.name,
+                               cell: item.cell,
+                               occupiesCell: false)
     }
 }

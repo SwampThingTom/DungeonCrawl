@@ -112,14 +112,22 @@ class TurnTakingSystem: System, TurnTaking {
     // MARK: move
     
     private func move(actor: Entity, to cell: GridCell, heading: Direction) -> Bool {
-        guard let actorSprite = actor.spriteComponent() else {
-            return false
-        }
+        guard let actorSprite = actor.spriteComponent() else { return false }
+        guard !cellIsOccupied(cell) else { return false }
         actorSprite.cell = cell
         if let inventory = actor.inventoryComponent() {
             pickUpItems(at: cell, for: actor, inventory: inventory)
         }
         return true
+    }
+    
+    private func cellIsOccupied(_ cell: GridCell) -> Bool {
+        let sprites = gameLevel.entityManager.components(of: SpriteComponent.self)
+        let spriteInCell = sprites.first {
+            guard let sprite = $0 as? SpriteComponent else { return false }
+            return sprite.occupiesCell && sprite.cell == cell
+        }
+        return spriteInCell != nil
     }
     
     private func pickUpItems(at cell: GridCell, for actor: Entity, inventory: InventoryComponent) {

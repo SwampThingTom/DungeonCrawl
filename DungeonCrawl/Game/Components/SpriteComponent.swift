@@ -19,10 +19,14 @@ class SpriteComponent: Component {
     /// Location on map.
     var cell: GridCell
     
-    init(spriteName: String, displayName: String, cell: GridCell) {
+    /// True if other sprites with `occupiesCell` can not be in the same cell as this sprite.
+    let occupiesCell: Bool
+    
+    init(spriteName: String, displayName: String, cell: GridCell, occupiesCell: Bool) {
         self.spriteName = spriteName
         self.displayName = displayName
         self.cell = cell
+        self.occupiesCell = occupiesCell
     }
 }
 
