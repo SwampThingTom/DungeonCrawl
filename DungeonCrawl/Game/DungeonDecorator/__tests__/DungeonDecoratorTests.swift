@@ -92,30 +92,3 @@ class MockEnemyPlacer: EnemyPlacing {
         return mockedEnemies
     }
 }
-
-/// Returns true if any of the dungeon decorations are on an obstacle cell
-/// or are on the same cell as another decoration.
-private func decorationsOverlap(_ decorations: DungeonDecorations, map: GridMap) -> Bool {
-    var occupiedCells = Set<GridCell>()
-    
-    let cellIsOccupied: (GridCell) -> Bool = {
-        guard !occupiedCells.contains($0) else { return true }
-        guard let tile = map.tile(at: $0), !tile.isObstacle else { return true }
-        return false
-    }
-    
-    guard !cellIsOccupied(decorations.playerStartCell) else { return true }
-    occupiedCells.insert(decorations.playerStartCell)
-    
-    for enemy in decorations.enemies {
-        guard !cellIsOccupied(enemy.cell) else { return true }
-        occupiedCells.insert(enemy.cell)
-    }
-    
-    for object in decorations.items {
-        guard !cellIsOccupied(object.cell) else { return true }
-        occupiedCells.insert(object.cell)
-    }
-    
-    return false
-}
