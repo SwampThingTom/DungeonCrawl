@@ -3,11 +3,11 @@
 ## Known Bugs
 
 1. Crash on device
-2. Enemy sprites can overlap
 
 ## Enhancements
 
 1. Use line-of-site for enemy detection of player
+2. Randomly select player's start cell
 
 ## Increments
 
@@ -25,6 +25,14 @@
 ### Heal When Resting
 
 1. Heal when resting
+
+### Limit Visibility
+
+1. Only show a few cells around player
+
+### Spawn Enemies
+
+1. Add more enemies the longer a player stays on a level
 
 ### Player Leveling
 
