@@ -124,8 +124,7 @@ func createFlail() -> Item {
 func createMaul() -> Item {
     return ItemBuilder(name: "maul")
         .with(equipmentSlot: .weapon)
-        // LATER: Should be 2d6. Need a way to represent multiple damage dice.
-        .with(damageDice: D12())
+        .with(damageDice: Dice(die: D6(), numberOfDice: 2))
         .build()
 }
 
