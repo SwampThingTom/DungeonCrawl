@@ -2,8 +2,6 @@
 
 ## Known Bugs
 
-1. Crash on device
-
 ## Enhancements
 
 1. Use line-of-site for enemy detection of player
