@@ -44,15 +44,31 @@ class DirectionGridPointTests: XCTestCase {
             (expected: Direction.east,
              from: origin,
              to: CGPoint(x: 120, y: 10)),
+            (expected: Direction.east,
+             from: origin,
+             to: CGPoint(x: 120, y: 0)),
             (expected: Direction.north,
              from: origin,
              to: CGPoint(x: -10, y: -120)),
+            (expected: Direction.north,
+             from: origin,
+             to: CGPoint(x: 0, y: -120)),
             (expected: Direction.west,
              from: origin,
              to: CGPoint(x: -120, y: 10)),
+            (expected: Direction.west,
+             from: origin,
+             to: CGPoint(x: -10, y: 0)),
             (expected: Direction.south,
              from: origin,
-             to: CGPoint(x: -10, y: 120))
+             to: CGPoint(x: -10, y: 120)),
+            (expected: Direction.south,
+             from: origin,
+             to: CGPoint(x: 0, y: 120)),
+            // LATER: Should comparing the same point to itself return nil?
+            (expected: Direction.east,
+             from: origin,
+             to: origin),
         ]
         
         tests.forEach { (expected, from, to) in

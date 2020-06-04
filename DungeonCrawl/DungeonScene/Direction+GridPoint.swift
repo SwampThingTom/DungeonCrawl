@@ -22,7 +22,7 @@ extension Direction {
             return .east
         case 45 ..< 135:
             return .south
-        case 135 ..< 180, -180 ..< -135:
+        case 135 ... 180, -180 ..< -135:
             return .west
         case -135 ..< -45:
             return .north
