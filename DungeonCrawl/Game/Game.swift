@@ -33,7 +33,7 @@ class Game {
          quest: QuestStatusProviding) {
         
         let dungeonModel = dungeonGenerator.generate(size: dungeonSize)
-        let decorations = dungeonDecorator.decorate(dungeon: dungeonModel)
+        let decorations = dungeonDecorator.decorate(dungeon: dungeonModel, questItem: nil)
         
         entityManager = EntityManager()
         let entityFactory = EntityFactory(entityManager: entityManager)

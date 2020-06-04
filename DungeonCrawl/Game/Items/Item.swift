@@ -28,6 +28,9 @@ struct Item {
     /// Indicates the item is treasure. When picked up, it adds to the player's gold.
     var isTreasure: Bool = false
     
+    /// Indicates the item is part of a quest.
+    var isQuestItem: Bool = false
+    
     /// The base value of the item.
     var value: Int = 0
     

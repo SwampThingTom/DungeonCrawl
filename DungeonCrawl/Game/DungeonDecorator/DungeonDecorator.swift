@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DungeonDecorating {
-    func decorate(dungeon: DungeonModel) -> DungeonDecorations
+    func decorate(dungeon: DungeonModel, questItem: Item?) -> DungeonDecorations
 }
 
 class DungeonDecorator: DungeonDecorating {
@@ -33,19 +33,22 @@ class DungeonDecorator: DungeonDecorating {
         self.enemyPlacer = enemyPlacer ?? EnemyPlacer(randomNumberGenerator: randomNumberGenerator)
     }
     
-    func decorate(dungeon: DungeonModel) -> DungeonDecorations {
+    func decorate(dungeon: DungeonModel, questItem: Item? = nil) -> DungeonDecorations {
         let occupiedCells = OccupiedCells()
         guard let playerStartCell = playerStartCell(in: dungeon, occupiedCells: occupiedCells) else {
             fatalError("Unable to place player in dungeon")
         }
+        let questItemModel = self.questItemModel(questItem, in: dungeon, occupiedCells: occupiedCells)
+        let questItems = questItemModel != nil ? [questItemModel!] : []
         let treasure = treasurePlacer.placeTreasure(in: dungeon, occupiedCells: occupiedCells)
         let items = itemPlacer.placeItems(in: dungeon, occupiedCells: occupiedCells)
         let enemies = enemyPlacer.placeEnemies(in: dungeon,
                                                occupiedCells: occupiedCells,
                                                maxChallengeRating: 0.25)
+        let allItems = items + treasure + questItems
         return DungeonDecorations(playerStartCell: playerStartCell,
                                   enemies: enemies,
-                                  items: items + treasure)
+                                  items: allItems)
     }
 
     private func playerStartCell(in dungeon: DungeonModel, occupiedCells: OccupiedCells) -> GridCell? {
@@ -55,6 +58,22 @@ class DungeonDecorator: DungeonDecorating {
                 if dungeon.map.tile(at: cell) == .floor {
                     occupiedCells.occupy(cell: cell)
                     return cell
+                }
+            }
+        }
+        return nil
+    }
+    
+    private func questItemModel(_ questItem: Item?,
+                                in dungeon: DungeonModel,
+                                occupiedCells: OccupiedCells) -> ItemModel? {
+        guard let questItem = questItem else { return nil }
+        for x in stride(from: dungeon.map.size.width, to: 0, by: -1) {
+            for y in stride(from: dungeon.map.size.height, to: 0, by: -1) {
+                let cell = GridCell(x: x, y: y)
+                if dungeon.map.tile(at: cell) == .floor && !occupiedCells.isOccupied(cell: cell) {
+                    occupiedCells.occupy(cell: cell)
+                    return ItemModel(item: questItem, cell: cell)
                 }
             }
         }

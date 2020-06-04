@@ -25,7 +25,7 @@ class MockDungeonDecorator: DungeonDecorating {
     
     var mockDecorations: DungeonDecorations?
     
-    func decorate(dungeon: DungeonModel) -> DungeonDecorations {
+    func decorate(dungeon: DungeonModel, questItem: Item?) -> DungeonDecorations {
         return mockDecorations!
     }
 }

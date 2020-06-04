@@ -12,6 +12,7 @@ class ItemBuilder {
     
     private let name: String
     private var isTreasure: Bool = false
+    private var isQuestItem: Bool = false
     private var value: Int = 0
     private var enchantments = [Int]()
     private var equipmentSlot: EquipmentSlot?
@@ -40,6 +41,11 @@ class ItemBuilder {
     func with(gold: Int) -> ItemBuilder {
         self.isTreasure = true
         self.value = gold
+        return self
+    }
+    
+    func withQuestItem() -> ItemBuilder {
+        self.isQuestItem = true
         return self
     }
     
@@ -88,6 +94,7 @@ class ItemBuilder {
     func build() -> Item {
         return Item(name: name,
                     isTreasure: isTreasure,
+                    isQuestItem: isQuestItem,
                     value: value,
                     enchantments: enchantments,
                     equipmentSlot: equipmentSlot,
