@@ -9,16 +9,10 @@
 
 ## Increments
 
-### Quest for Item
-
-1. Add a quest item
-2. Add quest type that succeeds when item found
-3. Change starting quest to look for item
-4. Show amount of treasure found when quest complete
-
 ### Multiple Dungeon Levels
 
 1. Ability to go down to next level
+2. Specify to which level quest applies
 
 ### Heal When Resting
 
