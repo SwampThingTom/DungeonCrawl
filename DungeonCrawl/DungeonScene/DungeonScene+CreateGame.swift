@@ -14,7 +14,8 @@ extension DungeonScene {
         let dungeonGenerator = DungeonGenerator(roomAttempts: 9)
         let dungeonDecorator = DungeonDecorator()
         let dungeonSize = GridSize(width: 75, height: 25)
-        let quest = QuestKillAllEnemies()
+        let questItem = ItemBuilder.init(name: "Treasure of Mot").withQuestItem().build()
+        let quest = QuestFindItem(item: questItem)
         let game = Game(dungeonGenerator: dungeonGenerator,
                         dungeonDecorator: dungeonDecorator,
                         dungeonSize: dungeonSize,

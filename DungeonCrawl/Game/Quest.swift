@@ -10,10 +10,13 @@ import Foundation
 
 protocol QuestStatusProviding {
     
+    var item: Item? { get }
     func isComplete(gameLevel: DungeonLevel) -> Bool
 }
 
 class QuestKillAllEnemies: QuestStatusProviding {
+    
+    let item: Item? = nil
     
     func isComplete(gameLevel: DungeonLevel) -> Bool {
         return gameLevel.actors.count == 0
@@ -22,7 +25,7 @@ class QuestKillAllEnemies: QuestStatusProviding {
 
 class QuestFindItem: QuestStatusProviding {
     
-    let item: Item
+    let item: Item?
     
     init(item: Item) {
         self.item = item
