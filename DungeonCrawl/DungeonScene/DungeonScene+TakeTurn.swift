@@ -51,9 +51,16 @@ extension DungeonScene {
     }
     
     func showPlayerWon() {
-        showAlert(message: "You have completed the quest!") {
+        showAlert(message: playerWonMessage) {
             self.startNewGame()
         }
+    }
+    
+    var playerWonMessage: String {
+        guard let gold = game.level.player.inventoryComponent()?.gold else {
+            return "You have completed the quest!"
+        }
+        return "You have completed the quest!\nYou found \(gold) gold pieces."
     }
     
     func showPlayerDied() {
